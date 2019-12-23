@@ -7462,8 +7462,5 @@ public class autoquad {
 				AQ_NAV_STATUS_FAILSAFE        = 0x80000000;  //System is in failsafe recovery mode
 	}
 	
-	enum MAV_DATA_STREAM {
-		MAV_DATA_STREAM_PROPULSION;  //Motor/ESC telemetry data.
-	}
 	
 }
