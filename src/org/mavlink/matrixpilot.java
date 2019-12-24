@@ -382,7 +382,7 @@ public class matrixpilot {
 				float rollspeed;//Roll angular speed
 				float pitchspeed;//Pitch angular speed
 				float yawspeed;//Yaw angular speed
-				@I_() @__(4) float repr_offset_q;//in hover mode and equal to [0.7071, 0, 0.7071, 0] in fixed wing mode.
+				@__(-4) float repr_offset_q;//in hover mode and equal to [0.7071, 0, 0.7071, 0] in fixed wing mode.
 			}
 			
 			/**
@@ -1366,13 +1366,13 @@ public class matrixpilot {
 				 z_global, roll, pitch, yaw; first six entries are the first ROW, next five entries are the second ROW,
 				 etc.). If unknown, assign NaN value to first element in the array
 				 */
-				@I_() @__(21) float covariance;
+				@__(-21) float covariance;
 				/**
 				 Estimate reset counter. This should be incremented when the estimate resets in any of the dimensions (position,
 				 velocity, attitude, angular speed). This is designed to be used when e.g an external SLAM system detects
 				 a loop-closure and the estimate jumps
 				 */
-				@I_           byte  reset_counter;
+				@I_      byte  reset_counter;
 			}
 			
 			/**
@@ -1391,13 +1391,13 @@ public class matrixpilot {
 				 pitch, yaw; first six entries are the first ROW, next five entries are the second ROW, etc.). If unknown,
 				 assign NaN value to first element in the array
 				 */
-				@I_() @__(21) float covariance;
+				@__(-21) float covariance;
 				/**
 				 Estimate reset counter. This should be incremented when the estimate resets in any of the dimensions (position,
 				 velocity, attitude, angular speed). This is designed to be used when e.g an external SLAM system detects
 				 a loop-closure and the estimate jumps
 				 */
-				@I_           byte  reset_counter;
+				@I_      byte  reset_counter;
 			}
 			
 			/**
@@ -1412,13 +1412,13 @@ public class matrixpilot {
 				 Row-major representation of 3x3 linear velocity covariance matrix (states: vx, vy, vz; 1st three entries
 				 - 1st row, etc.). If unknown, assign NaN value to first element in the array
 				 */
-				@I_() @__(9) float covariance;
+				@__(-9) float covariance;
 				/**
 				 Estimate reset counter. This should be incremented when the estimate resets in any of the dimensions (position,
 				 velocity, attitude, angular speed). This is designed to be used when e.g an external SLAM system detects
 				 a loop-closure and the estimate jumps
 				 */
-				@I_          byte  reset_counter;
+				@I_     byte  reset_counter;
 			}
 			
 			/**
@@ -1437,7 +1437,7 @@ public class matrixpilot {
 				 pitch, yaw; first six entries are the first ROW, next five entries are the second ROW, etc.). If unknown,
 				 assign NaN value to first element in the array
 				 */
-				@I_() @__(21) float covariance;
+				@__(-21) float covariance;
 			}
 			
 			/**
@@ -1955,23 +1955,23 @@ public class matrixpilot {
 				 ROTATION_PITCH_180, forward-facing: ROTATION_NONE, left-facing: ROTATION_YAW_90, right-facing: ROTATION_YAW_27
 				 */
 				MAV_SENSOR_ORIENTATION orientation;
-				@I           byte  covariance;//Measurement variance. Max standard deviation is 6cm. 255 if unknown.
+				@I      byte  covariance;//Measurement variance. Max standard deviation is 6cm. 255 if unknown.
 				/**
 				 Horizontal Field of View (angle) where the distance measurement is valid and the field of view is known.
 				 Otherwise this is set to 0
 				 */
-				@I_()        float horizontal_fov;
+				@I_()   float horizontal_fov;
 				/**
 				 Vertical Field of View (angle) where the distance measurement is valid and the field of view is known.
 				 Otherwise this is set to 0
 				 */
-				@I_()        float vertical_fov;
+				@I_()   float vertical_fov;
 				/**
 				 Quaternion of the sensor orientation in vehicle body frame (w, x, y, z order, zero-rotation is 1, 0, 0,
 				 0). Zero-rotation is along the vehicle body x-axis. This field is required if the orientation is set
 				 to MAV_SENSOR_ROTATION_CUSTOM. Set it to 0 if invalid.
 				 */
-				@I_() @__(4) float quaternion;
+				@__(-4) float quaternion;
 			}
 			
 			/**
@@ -2045,7 +2045,7 @@ public class matrixpilot {
 				 roll, pitch, yaw; first six entries are the first ROW, next five entries are the second ROW, etc.). If
 				 unknown, assign NaN value to first element in the array
 				 */
-				@I_() @__(21) float covariance;
+				@__(-21) float covariance;
 			}
 			
 			/**
@@ -2265,7 +2265,7 @@ public class matrixpilot {
 				 UID if provided by hardware (supersedes the uid field. If this is non-zero, use this field, otherwise
 				 use uid
 				 */
-				@I_ @__(18) byte  uid2;
+				@I @__(-18) byte  uid2;
 			}
 			
 			/**
@@ -2284,10 +2284,10 @@ public class matrixpilot {
 				float     distance;//Distance to the target from the vehicle
 				float     size_x;//Size of target along x-axis
 				float     size_y;//Size of target along y-axis
-				@I_()        float x;//X Position of the landing target in MAV_FRAME
-				@I_()        float y;//Y Position of the landing target in MAV_FRAME
-				@I_()        float z;//Z Position of the landing target in MAV_FRAME
-				@I_() @__(4) float q;//Quaternion of landing target orientation (w, x, y, z order, zero-rotation is 1, 0, 0, 0)
+				@I_()   float x;//X Position of the landing target in MAV_FRAME
+				@I_()   float y;//Y Position of the landing target in MAV_FRAME
+				@I_()   float z;//Z Position of the landing target in MAV_FRAME
+				@__(-4) float q;//Quaternion of landing target orientation (w, x, y, z order, zero-rotation is 1, 0, 0, 0)
 				LANDING_TARGET_TYPE type;//Type of landing target
 				/**
 				 Boolean indicating whether the position fields (x, y, z, q, type) contain valid target position information
@@ -3303,10 +3303,10 @@ public class matrixpilot {
 				 Timestamp (UNIX Epoch time or time since system boot). The receiving end can infer timestamp format (since
 				 1.1.1970 or since system boot) by checking for the magnitude the number
 				 */
-				@I            long   time_usec;
-				@__(10)       String name;//Name, for human-friendly display in a Ground Control Station
-				@I            short  array_id;//Unique ID used to discriminate between arrays
-				@I_() @__(58) float  data;//data
+				@I       long   time_usec;
+				@__(10)  String name;//Name, for human-friendly display in a Ground Control Station
+				@I       short  array_id;//Unique ID used to discriminate between arrays
+				@__(-58) float  data;//data
 			}
 			
 			/**
