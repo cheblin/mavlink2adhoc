@@ -382,7 +382,7 @@ public class standard {
 				float rollspeed;//Roll angular speed
 				float pitchspeed;//Pitch angular speed
 				float yawspeed;//Yaw angular speed
-				@__(-4) float repr_offset_q;//in hover mode and equal to [0.7071, 0, 0.7071, 0] in fixed wing mode.
+				@__(+4) float repr_offset_q;//in hover mode and equal to [0.7071, 0, 0.7071, 0] in fixed wing mode.
 			}
 			
 			/**
@@ -1366,7 +1366,7 @@ public class standard {
 				 z_global, roll, pitch, yaw; first six entries are the first ROW, next five entries are the second ROW,
 				 etc.). If unknown, assign NaN value to first element in the array
 				 */
-				@__(-21) float covariance;
+				@__(+21) float covariance;
 				/**
 				 Estimate reset counter. This should be incremented when the estimate resets in any of the dimensions (position,
 				 velocity, attitude, angular speed). This is designed to be used when e.g an external SLAM system detects
@@ -1391,7 +1391,7 @@ public class standard {
 				 pitch, yaw; first six entries are the first ROW, next five entries are the second ROW, etc.). If unknown,
 				 assign NaN value to first element in the array
 				 */
-				@__(-21) float covariance;
+				@__(+21) float covariance;
 				/**
 				 Estimate reset counter. This should be incremented when the estimate resets in any of the dimensions (position,
 				 velocity, attitude, angular speed). This is designed to be used when e.g an external SLAM system detects
@@ -1412,7 +1412,7 @@ public class standard {
 				 Row-major representation of 3x3 linear velocity covariance matrix (states: vx, vy, vz; 1st three entries
 				 - 1st row, etc.). If unknown, assign NaN value to first element in the array
 				 */
-				@__(-9) float covariance;
+				@__(+9) float covariance;
 				/**
 				 Estimate reset counter. This should be incremented when the estimate resets in any of the dimensions (position,
 				 velocity, attitude, angular speed). This is designed to be used when e.g an external SLAM system detects
@@ -1437,7 +1437,7 @@ public class standard {
 				 pitch, yaw; first six entries are the first ROW, next five entries are the second ROW, etc.). If unknown,
 				 assign NaN value to first element in the array
 				 */
-				@__(-21) float covariance;
+				@__(+21) float covariance;
 			}
 			
 			/**
@@ -1971,7 +1971,7 @@ public class standard {
 				 0). Zero-rotation is along the vehicle body x-axis. This field is required if the orientation is set
 				 to MAV_SENSOR_ROTATION_CUSTOM. Set it to 0 if invalid.
 				 */
-				@__(-4) float quaternion;
+				@__(+4) float quaternion;
 			}
 			
 			/**
@@ -2045,7 +2045,7 @@ public class standard {
 				 roll, pitch, yaw; first six entries are the first ROW, next five entries are the second ROW, etc.). If
 				 unknown, assign NaN value to first element in the array
 				 */
-				@__(-21) float covariance;
+				@__(+21) float covariance;
 			}
 			
 			/**
@@ -2265,7 +2265,7 @@ public class standard {
 				 UID if provided by hardware (supersedes the uid field. If this is non-zero, use this field, otherwise
 				 use uid
 				 */
-				@I @__(-18) byte  uid2;
+				@I @__(+18) byte  uid2;
 			}
 			
 			/**
@@ -2287,7 +2287,7 @@ public class standard {
 				@I_()   float x;//X Position of the landing target in MAV_FRAME
 				@I_()   float y;//Y Position of the landing target in MAV_FRAME
 				@I_()   float z;//Z Position of the landing target in MAV_FRAME
-				@__(-4) float q;//Quaternion of landing target orientation (w, x, y, z order, zero-rotation is 1, 0, 0, 0)
+				@__(+4) float q;//Quaternion of landing target orientation (w, x, y, z order, zero-rotation is 1, 0, 0, 0)
 				LANDING_TARGET_TYPE type;//Type of landing target
 				/**
 				 Boolean indicating whether the position fields (x, y, z, q, type) contain valid target position information
@@ -3306,7 +3306,7 @@ public class standard {
 				@I       long   time_usec;
 				@__(10)  String name;//Name, for human-friendly display in a Ground Control Station
 				@I       short  array_id;//Unique ID used to discriminate between arrays
-				@__(-58) float  data;//data
+				@__(+58) float  data;//data
 			}
 			
 			/**
