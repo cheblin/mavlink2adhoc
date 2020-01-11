@@ -2,7 +2,7 @@ package org.mavlink;
 
 import org.unirail.AdHoc.*;
 
-public class ASLUAV {
+public interface ASLUAV {
 	public static class CommunicationChannel extends AdvProtocol implements GroundControl.CommunicationInterface, MicroAirVehicle.CommunicationInterface {}
 	
 	public static class GroundControl implements InKT, InCS {
