@@ -2,7 +2,7 @@ package org.mavlink;
 
 import org.unirail.AdHoc.*;
 
-public class ardupilotmega {
+public interface ardupilotmega {
 	public static class CommunicationChannel extends StdProtocol implements GroundControl.CommunicationInterface, MicroAirVehicle.CommunicationInterface {}
 	
 	public static class GroundControl implements InKT, InCS {
