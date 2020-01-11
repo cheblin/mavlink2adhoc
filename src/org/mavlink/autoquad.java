@@ -3,9 +3,9 @@ package org.mavlink;
 import org.unirail.AdHoc.*;
 
 public interface autoquad {
-	public static class CommunicationChannel extends StdProtocol implements GroundControl.CommunicationInterface, MicroAirVehicle.CommunicationInterface {}
+	class CommunicationChannel extends StdProtocol implements GroundControl.CommunicationInterface, MicroAirVehicle.CommunicationInterface {}
 	
-	public static class GroundControl implements InKT, InCS {
+	class GroundControl implements InKT, InCS {
 		public interface CommunicationInterface extends GroundControlHandledPacks, CommonPacks {}
 		
 		public interface GroundControlHandledPacks {
@@ -15,7 +15,7 @@ public interface autoquad {
 			 this system appropriately (e.g. by laying out the user interface based on the autopilot). This microservice
 			 is documented at https://mavlink.io/en/services/heartbeat.htm
 			 */
-			@id(0) public static class HEARTBEAT {
+			@id(0) class HEARTBEAT {
 				/**
 				 Vehicle or component type. For a flight controller component the vehicle type (quadrotor, helicopter,
 				 etc.). For other components the component type (e.g. camera, gimbal, etc.). This should be used in preference
@@ -41,7 +41,7 @@ public interface autoquad {
 			 first move from active to critical to allow manual intervention and then move to emergency after a certain
 			 timeout
 			 */
-			@id(1) public static class SYS_STATUS {
+			@id(1) class SYS_STATUS {
 				/**
 				 Bitmap showing which onboard controllers and sensors are present. Value of 0: not present. Value of 1:
 				 present
@@ -80,7 +80,7 @@ public interface autoquad {
 			/**
 			 The system time is the time of the master clock, typically the computer clock of the main onboard computer
 			 */
-			@id(2) public static class SYSTEM_TIME {
+			@id(2) class SYSTEM_TIME {
 				@I long time_unix_usec;//Timestamp (UNIX epoch time).
 				@I int  time_boot_ms;//Timestamp (time since system boot).
 			}
@@ -89,7 +89,7 @@ public interface autoquad {
 			 A ping message either requesting or responding to a ping. This allows to measure the system latencies,
 			 including serial port, radio modem and UDP connections. The ping microservice is documented at https://mavlink.io/en/services/ping.htm
 			 */
-			@id(4) public static class PING {
+			@id(4) class PING {
 				/**
 				 Timestamp (UNIX Epoch time or time since system boot). The receiving end can infer timestamp format (since
 				 1.1.1970 or since system boot) by checking for the magnitude the number
@@ -111,7 +111,7 @@ public interface autoquad {
 			/**
 			 Request to control this MAV
 			 */
-			@id(5) public static class CHANGE_OPERATOR_CONTROL {
+			@id(5) class CHANGE_OPERATOR_CONTROL {
 				@I      byte   target_system;//System the GCS requests control for
 				@I      byte   control_request;//0: request control of this MAV, 1: Release control of this MAV
 				/**
@@ -130,7 +130,7 @@ public interface autoquad {
 			/**
 			 Accept / deny control of this MAV
 			 */
-			@id(6) public static class CHANGE_OPERATOR_CONTROL_ACK {
+			@id(6) class CHANGE_OPERATOR_CONTROL_ACK {
 				@I byte gcs_system_id;//ID of the GCS this message
 				@I byte control_request;//0: request control of this MAV, 1: Release control of this MAV
 				/**
@@ -144,14 +144,14 @@ public interface autoquad {
 			 Emit an encrypted signature / key identifying this system. PLEASE NOTE: This protocol has been kept simple,
 			 so transmitting the key requires an encrypted channel for true safety
 			 */
-			@id(7) public static class AUTH_KEY {
+			@id(7) class AUTH_KEY {
 				@__(32) String key;//key
 			}
 			
 			/**
 			 Status generated in each node in the communication chain and injected into MAVLink stream.
 			 */
-			@id(8) public static class LINK_NODE_STATUS {
+			@id(8) class LINK_NODE_STATUS {
 				@I long  timestamp;//Timestamp (time since system boot).
 				@I byte  tx_buf;//Remaining free transmit buffer space
 				@I byte  rx_buf;//Remaining free receive buffer space
@@ -169,7 +169,7 @@ public interface autoquad {
 			 Set the system mode, as defined by enum MAV_MODE. There is no target component id as the mode is by definition
 			 for the overall aircraft, not only for one component
 			 */
-			@id(11) public static class SET_MODE {
+			@id(11) class SET_MODE {
 				@I byte target_system;//The system setting the mode
 				MAV_MODE base_mode;//The new base mode.
 				@I int custom_mode;//The new autopilot-specific mode. This field can be ignored by an autopilot.
@@ -181,7 +181,7 @@ public interface autoquad {
 			 different autopilots. See also https://mavlink.io/en/services/parameter.html for a full documentation
 			 of QGroundControl and IMU code
 			 */
-			@id(20) public static class PARAM_REQUEST_READ {
+			@id(20) class PARAM_REQUEST_READ {
 				@I      byte   target_system;//System ID
 				@I      byte   target_component;//Component ID
 				/**
@@ -197,7 +197,7 @@ public interface autoquad {
 			 Request all parameters of this component. After this request, all parameters are emitted. The parameter
 			 microservice is documented at https://mavlink.io/en/services/parameter.htm
 			 */
-			@id(21) public static class PARAM_REQUEST_LIST {
+			@id(21) class PARAM_REQUEST_LIST {
 				@I byte target_system;//System ID
 				@I byte target_component;//Component ID
 			}
@@ -207,7 +207,7 @@ public interface autoquad {
 			 the recipient to keep track of received parameters and allows him to re-request missing parameters after
 			 a loss or timeout. The parameter microservice is documented at https://mavlink.io/en/services/parameter.htm
 			 */
-			@id(22) public static class PARAM_VALUE {
+			@id(22) class PARAM_VALUE {
 				/**
 				 Onboard parameter id, terminated by NULL if the length is less than 16 human-readable chars and WITHOUT
 				 null termination (NULL) byte if the length is exactly 16 chars - applications have to provide 16+1 bytes
@@ -227,7 +227,7 @@ public interface autoquad {
 			 did not receive a PARAM_VALUE message within its timeout time, it should re-send the PARAM_SET message.
 			 The parameter microservice is documented at https://mavlink.io/en/services/parameter.htm
 			 */
-			@id(23) public static class PARAM_SET {
+			@id(23) class PARAM_SET {
 				@I      byte   target_system;//System ID
 				@I      byte   target_component;//Component ID
 				/**
@@ -244,7 +244,7 @@ public interface autoquad {
 			 The global position, as returned by the Global Positioning System (GPS). This is
 			 NOT the global position estimate of the system, but rather a RAW sensor value. See message GLOBAL_POSITION for the global position estimate.
 			 */
-			@id(24) public static class GPS_RAW_INT {
+			@id(24) class GPS_RAW_INT {
 				/**
 				 Timestamp (UNIX Epoch time or time since system boot). The receiving end can infer timestamp format (since
 				 1.1.1970 or since system boot) by checking for the magnitude the number
@@ -279,7 +279,7 @@ public interface autoquad {
 			 each satellite visible to the receiver. See message GLOBAL_POSITION for the global position estimate.
 			 This message can contain information for up to 20 satellites
 			 */
-			@id(25) public static class GPS_STATUS {
+			@id(25) class GPS_STATUS {
 				@I         byte satellites_visible;//Number of satellites visible
 				@I @__(20) byte satellite_prn;//Global satellite ID
 				@I @__(20) byte satellite_used;//0: Satellite not used, 1: used for localization
@@ -292,7 +292,7 @@ public interface autoquad {
 			 The RAW IMU readings for the usual 9DOF sensor setup. This message should contain the scaled values to
 			 the described unit
 			 */
-			@id(26) public static class SCALED_IMU {
+			@id(26) class SCALED_IMU {
 				@I int time_boot_ms;//Timestamp (time since system boot).
 				short xacc;//X acceleration
 				short yacc;//Y acceleration
@@ -310,7 +310,7 @@ public interface autoquad {
 			 The RAW IMU readings for a 9DOF sensor, which is identified by the id (default IMU1). This message should
 			 always contain the true raw values without any scaling to allow data capture and system debugging
 			 */
-			@id(27) public static class RAW_IMU {
+			@id(27) class RAW_IMU {
 				/**
 				 Timestamp (UNIX Epoch time or time since system boot). The receiving end can infer timestamp format (since
 				 1.1.1970 or since system boot) by checking for the magnitude the number
@@ -333,7 +333,7 @@ public interface autoquad {
 			 The RAW pressure readings for the typical setup of one absolute pressure and one differential pressure
 			 sensor. The sensor values should be the raw, UNSCALED ADC values
 			 */
-			@id(28) public static class RAW_PRESSURE {
+			@id(28) class RAW_PRESSURE {
 				/**
 				 Timestamp (UNIX Epoch time or time since system boot). The receiving end can infer timestamp format (since
 				 1.1.1970 or since system boot) by checking for the magnitude the number
@@ -349,7 +349,7 @@ public interface autoquad {
 			 The pressure readings for the typical setup of one absolute and differential pressure sensor. The units
 			 are as specified in each field
 			 */
-			@id(29) public static class SCALED_PRESSURE {
+			@id(29) class SCALED_PRESSURE {
 				@I int time_boot_ms;//Timestamp (time since system boot).
 				float press_abs;//Absolute pressure
 				float press_diff;//Differential pressure 1
@@ -359,7 +359,7 @@ public interface autoquad {
 			/**
 			 The attitude in the aeronautical frame (right-handed, Z-down, X-front, Y-right).
 			 */
-			@id(30) public static class ATTITUDE {
+			@id(30) class ATTITUDE {
 				@I int time_boot_ms;//Timestamp (time since system boot).
 				float roll;//Roll angle (-pi..+pi)
 				float pitch;//Pitch angle (-pi..+pi)
@@ -373,7 +373,7 @@ public interface autoquad {
 			 The attitude in the aeronautical frame (right-handed, Z-down, X-front, Y-right), expressed as quaternion.
 			 Quaternion order is w, x, y, z and a zero rotation would be expressed as (1 0 0 0)
 			 */
-			@id(31) public static class ATTITUDE_QUATERNION {
+			@id(31) class ATTITUDE_QUATERNION {
 				@I int time_boot_ms;//Timestamp (time since system boot).
 				float q1;//Quaternion component 1, w (1 in null-rotation)
 				float q2;//Quaternion component 2, x (0 in null-rotation)
@@ -389,7 +389,7 @@ public interface autoquad {
 			 The filtered local position (e.g. fused computer vision and accelerometers). Coordinate frame is right-handed,
 			 Z-axis down (aeronautical frame, NED / north-east-down convention
 			 */
-			@id(32) public static class LOCAL_POSITION_NED {
+			@id(32) class LOCAL_POSITION_NED {
 				@I int time_boot_ms;//Timestamp (time since system boot).
 				float x;//X Position
 				float y;//Y Position
@@ -403,7 +403,7 @@ public interface autoquad {
 			 The filtered global position (e.g. fused GPS and accelerometers). The position is in GPS-frame (right-handed, Z-up). It
 			 is designed as scaled integer message since the resolution of float is not sufficient.
 			 */
-			@id(33) public static class GLOBAL_POSITION_INT {
+			@id(33) class GLOBAL_POSITION_INT {
 				@I int time_boot_ms;//Timestamp (time since system boot).
 				int   lat;//Latitude, expressed
 				int   lon;//Longitude, expressed
@@ -419,7 +419,7 @@ public interface autoquad {
 			 The scaled values of the RC channels received: (-100%) -10000, (0%) 0, (100%) 10000. Channels that are
 			 inactive should be set to UINT16_MAX
 			 */
-			@id(34) public static class RC_CHANNELS_SCALED {
+			@id(34) class RC_CHANNELS_SCALED {
 				@I int  time_boot_ms;//Timestamp (time since system boot).
 				/**
 				 Servo output port (set of 8 outputs = 1 port). Flight stacks running on Pixhawk should use: 0 = MAIN,
@@ -442,7 +442,7 @@ public interface autoquad {
 			 0%, 2000 microseconds: 100%. A value of UINT16_MAX implies the channel is unused. Individual receivers/transmitters
 			 might violate this specification
 			 */
-			@id(35) public static class RC_CHANNELS_RAW {
+			@id(35) class RC_CHANNELS_RAW {
 				@I int   time_boot_ms;//Timestamp (time since system boot).
 				/**
 				 Servo output port (set of 8 outputs = 1 port). Flight stacks running on Pixhawk should use: 0 = MAIN,
@@ -465,7 +465,7 @@ public interface autoquad {
 			 use the RC_CHANNELS messages). The standard PPM modulation is as follows: 1000 microseconds: 0%, 2000
 			 microseconds: 100%
 			 */
-			@id(36) public static class SERVO_OUTPUT_RAW {
+			@id(36) class SERVO_OUTPUT_RAW {
 				/**
 				 Timestamp (UNIX Epoch time or time since system boot). The receiving end can infer timestamp format (since
 				 1.1.1970 or since system boot) by checking for the magnitude the number
@@ -498,7 +498,7 @@ public interface autoquad {
 			 Request a partial list of mission items from the system/component. https://mavlink.io/en/services/mission.html.
 			 If start and end index are the same, just send one waypoint
 			 */
-			@id(37) public static class MISSION_REQUEST_PARTIAL_LIST {
+			@id(37) class MISSION_REQUEST_PARTIAL_LIST {
 				@I byte target_system;//System ID
 				@I byte target_component;//Component ID
 				short            start_index;//Start index
@@ -511,7 +511,7 @@ public interface autoquad {
 			 be transmitted / updated. If the start index is NOT 0 and above the current list size, this request should
 			 be REJECTED
 			 */
-			@id(38) public static class MISSION_WRITE_PARTIAL_LIST {
+			@id(38) class MISSION_WRITE_PARTIAL_LIST {
 				@I byte target_system;//System ID
 				@I byte target_component;//Component ID
 				short            start_index;//Start index. Must be smaller / equal to the largest index of the current onboard list.
@@ -523,7 +523,7 @@ public interface autoquad {
 			 Message encoding a mission item. This message is emitted to announce
 			 the presence of a mission item and to set a mission item on the system. The mission item can be either in x, y, z meters (type: LOCAL) or x:lat, y:lon, z:altitude. Local frame is Z-down, right handed (NED), global frame is Z-up, right handed (ENU). See also https://mavlink.io/en/services/mission.html.
 			 */
-			@id(39) public static class MISSION_ITEM {
+			@id(39) class MISSION_ITEM {
 				@I byte  target_system;//System ID
 				@I byte  target_component;//Component ID
 				@I short seq;//Sequence
@@ -545,7 +545,7 @@ public interface autoquad {
 			 Request the information of the mission item with the sequence number seq. The response of the system to
 			 this message should be a MISSION_ITEM message. https://mavlink.io/en/services/mission.htm
 			 */
-			@id(40) public static class MISSION_REQUEST {
+			@id(40) class MISSION_REQUEST {
 				@I byte  target_system;//System ID
 				@I byte  target_component;//Component ID
 				@I short seq;//Sequence
@@ -556,7 +556,7 @@ public interface autoquad {
 			 Set the mission item with sequence number seq as current item. This means that the MAV will continue to
 			 this mission item on the shortest path (not following the mission items in-between)
 			 */
-			@id(41) public static class MISSION_SET_CURRENT {
+			@id(41) class MISSION_SET_CURRENT {
 				@I byte  target_system;//System ID
 				@I byte  target_component;//Component ID
 				@I short seq;//Sequence
@@ -566,14 +566,14 @@ public interface autoquad {
 			 Message that announces the sequence number of the current active mission item. The MAV will fly towards
 			 this mission item
 			 */
-			@id(42) public static class MISSION_CURRENT {
+			@id(42) class MISSION_CURRENT {
 				@I short seq;//Sequence
 			}
 			
 			/**
 			 Request the overall list of mission items from the system/component.
 			 */
-			@id(43) public static class MISSION_REQUEST_LIST {
+			@id(43) class MISSION_REQUEST_LIST {
 				@I byte target_system;//System ID
 				@I byte target_component;//Component ID
 				MAV_MISSION_TYPE mission_type;//Mission type.
@@ -583,7 +583,7 @@ public interface autoquad {
 			 This message is emitted as response to MISSION_REQUEST_LIST by the MAV and to initiate a write transaction.
 			 The GCS can then request the individual mission item based on the knowledge of the total number of waypoints
 			 */
-			@id(44) public static class MISSION_COUNT {
+			@id(44) class MISSION_COUNT {
 				@I byte  target_system;//System ID
 				@I byte  target_component;//Component ID
 				@I short count;//Number of mission items in the sequence
@@ -593,7 +593,7 @@ public interface autoquad {
 			/**
 			 Delete all mission items at once.
 			 */
-			@id(45) public static class MISSION_CLEAR_ALL {
+			@id(45) class MISSION_CLEAR_ALL {
 				@I byte target_system;//System ID
 				@I byte target_component;//Component ID
 				MAV_MISSION_TYPE mission_type;//Mission type.
@@ -603,7 +603,7 @@ public interface autoquad {
 			 A certain mission item has been reached. The system will either hold this position (or circle on the orbit)
 			 or (if the autocontinue on the WP was set) continue to the next waypoint
 			 */
-			@id(46) public static class MISSION_ITEM_REACHED {
+			@id(46) class MISSION_ITEM_REACHED {
 				@I short seq;//Sequence
 			}
 			
@@ -611,7 +611,7 @@ public interface autoquad {
 			 Acknowledgment message during waypoint handling. The type field states if this message is a positive ack
 			 (type=0) or if an error happened (type=non-zero)
 			 */
-			@id(47) public static class MISSION_ACK {
+			@id(47) class MISSION_ACK {
 				@I byte target_system;//System ID
 				@I byte target_component;//Component ID
 				MAV_MISSION_RESULT type;//Mission result.
@@ -624,7 +624,7 @@ public interface autoquad {
 			 and the global (GPS) coordinate frame, which may be necessary when (for example) indoor and outdoor settings
 			 are connected and the MAV should move from in- to outdoor
 			 */
-			@id(48) public static class SET_GPS_GLOBAL_ORIGIN {
+			@id(48) class SET_GPS_GLOBAL_ORIGIN {
 				@I byte target_system;//System ID
 				int latitude;//Latitude (WGS84)
 				int longitude;//Longitude (WGS84)
@@ -640,7 +640,7 @@ public interface autoquad {
 			 Publishes the GPS co-ordinates of the vehicle local origin (0,0,0) position. Emitted whenever a new GPS-Local
 			 position mapping is requested or set - e.g. following SET_GPS_GLOBAL_ORIGIN message
 			 */
-			@id(49) public static class GPS_GLOBAL_ORIGIN {
+			@id(49) class GPS_GLOBAL_ORIGIN {
 				int latitude;//Latitude (WGS84)
 				int longitude;//Longitude (WGS84)
 				int altitude;//Altitude (MSL). Positive for up.
@@ -654,7 +654,7 @@ public interface autoquad {
 			/**
 			 Bind a RC channel to a parameter. The parameter should change according to the RC channel value.
 			 */
-			@id(50) public static class PARAM_MAP_RC {
+			@id(50) class PARAM_MAP_RC {
 				@I      byte   target_system;//System ID
 				@I      byte   target_component;//Component ID
 				/**
@@ -691,7 +691,7 @@ public interface autoquad {
 			 Request the information of the mission item with the sequence number seq. The response of the system to
 			 this message should be a MISSION_ITEM_INT message. https://mavlink.io/en/services/mission.htm
 			 */
-			@id(51) public static class MISSION_REQUEST_INT {
+			@id(51) class MISSION_REQUEST_INT {
 				@I byte  target_system;//System ID
 				@I byte  target_component;//Component ID
 				@I short seq;//Sequence
@@ -702,7 +702,7 @@ public interface autoquad {
 			 A broadcast message to notify any ground station or SDK if a mission, geofence or safe points have changed
 			 on the vehicle
 			 */
-			@id(52) public static class MISSION_CHANGED {
+			@id(52) class MISSION_CHANGED {
 				short start_index;//Start index for partial mission change (-1 for all items).
 				/**
 				 End index of a partial mission change. -1 is a synonym for the last mission item (i.e. selects all items
@@ -719,7 +719,7 @@ public interface autoquad {
 			 the MAV which setpoints/waypoints to accept and which to reject. Safety areas are often enforced by national
 			 or competition regulations
 			 */
-			@id(54) public static class SAFETY_SET_ALLOWED_AREA {
+			@id(54) class SAFETY_SET_ALLOWED_AREA {
 				@I byte target_system;//System ID
 				@I byte target_component;//Component ID
 				/**
@@ -738,7 +738,7 @@ public interface autoquad {
 			/**
 			 Read out the safety zone the MAV currently assumes.
 			 */
-			@id(55) public static class SAFETY_ALLOWED_AREA {
+			@id(55) class SAFETY_ALLOWED_AREA {
 				/**
 				 Coordinate frame. Can be either global, GPS, right-handed with Z axis up or local, right handed, Z axis
 				 down
@@ -756,7 +756,7 @@ public interface autoquad {
 			 The attitude in the aeronautical frame (right-handed, Z-down, X-front, Y-right), expressed as quaternion.
 			 Quaternion order is w, x, y, z and a zero rotation would be expressed as (1 0 0 0)
 			 */
-			@id(61) public static class ATTITUDE_QUATERNION_COV {
+			@id(61) class ATTITUDE_QUATERNION_COV {
 				/**
 				 Timestamp (UNIX Epoch time or time since system boot). The receiving end can infer timestamp format (since
 				 1.1.1970 or since system boot) by checking for the magnitude the number
@@ -777,7 +777,7 @@ public interface autoquad {
 			/**
 			 The state of the fixed wing navigation and position controller.
 			 */
-			@id(62) public static class NAV_CONTROLLER_OUTPUT {
+			@id(62) class NAV_CONTROLLER_OUTPUT {
 				float nav_roll;//Current desired roll
 				float nav_pitch;//Current desired pitch
 				short nav_bearing;//Current desired heading
@@ -794,7 +794,7 @@ public interface autoquad {
 			 This message is intended for onboard networks / companion computers and higher-bandwidth links and optimized
 			 for accuracy and completeness. Please use the GLOBAL_POSITION_INT message for a minimal subset
 			 */
-			@id(63) public static class GLOBAL_POSITION_INT_COV {
+			@id(63) class GLOBAL_POSITION_INT_COV {
 				/**
 				 Timestamp (UNIX Epoch time or time since system boot). The receiving end can infer timestamp format (since
 				 1.1.1970 or since system boot) by checking for the magnitude the number
@@ -820,7 +820,7 @@ public interface autoquad {
 			 The filtered local position (e.g. fused computer vision and accelerometers). Coordinate frame is right-handed,
 			 Z-axis down (aeronautical frame, NED / north-east-down convention
 			 */
-			@id(64) public static class LOCAL_POSITION_NED_COV {
+			@id(64) class LOCAL_POSITION_NED_COV {
 				/**
 				 Timestamp (UNIX Epoch time or time since system boot). The receiving end can infer timestamp format (since
 				 1.1.1970 or since system boot) by checking for the magnitude the number
@@ -849,7 +849,7 @@ public interface autoquad {
 			 0%, 2000 microseconds: 100%.  A value of UINT16_MAX implies the channel is unused. Individual receivers/transmitters
 			 might violate this specification
 			 */
-			@id(65) public static class RC_CHANNELS {
+			@id(65) class RC_CHANNELS {
 				@I int   time_boot_ms;//Timestamp (time since system boot).
 				/**
 				 Total number of RC channels being received. This can be larger than 18, indicating that more channels
@@ -880,7 +880,7 @@ public interface autoquad {
 			/**
 			 Request a data stream.
 			 */
-			@id(66) public static class REQUEST_DATA_STREAM {
+			@id(66) class REQUEST_DATA_STREAM {
 				@I byte  target_system;//The target requested to send the message stream.
 				@I byte  target_component;//The target requested to send the message stream.
 				@I byte  req_stream_id;//The ID of the requested data stream
@@ -891,7 +891,7 @@ public interface autoquad {
 			/**
 			 Data stream status information.
 			 */
-			@id(67) public static class DATA_STREAM {
+			@id(67) class DATA_STREAM {
 				@I byte  stream_id;//The ID of the requested data stream
 				@I short message_rate;//The message rate
 				@I byte  on_off;//1 stream is enabled, 0 stream is stopped.
@@ -902,7 +902,7 @@ public interface autoquad {
 			 along with a joystick-like input device. Unused axes can be disabled an buttons are also transmit as
 			 boolean values of their
 			 */
-			@id(69) public static class MANUAL_CONTROL {
+			@id(69) class MANUAL_CONTROL {
 				@I byte target;//The system to be controlled.
 				/**
 				 X-axis, normalized to the range [-1000,1000]. A value of INT16_MAX indicates that this axis is invalid.
@@ -940,7 +940,7 @@ public interface autoquad {
 			 back to the RC radio. The standard PPM modulation is as follows: 1000 microseconds: 0%, 2000 microseconds:
 			 100%. Individual receivers/transmitters might violate this specification
 			 */
-			@id(70) public static class RC_CHANNELS_OVERRIDE {
+			@id(70) class RC_CHANNELS_OVERRIDE {
 				@I  byte  target_system;//System ID
 				@I  byte  target_component;//Component ID
 				@I  short chan1_raw;//RC channel 1 value. A value of UINT16_MAX means to ignore this field.
@@ -966,7 +966,7 @@ public interface autoquad {
 			/**
 			 ght handed (ENU). See also https://mavlink.io/en/services/mission.html.
 			 */
-			@id(73) public static class MISSION_ITEM_INT {
+			@id(73) class MISSION_ITEM_INT {
 				@I byte  target_system;//System ID
 				@I byte  target_component;//Component ID
 				/**
@@ -991,7 +991,7 @@ public interface autoquad {
 			/**
 			 Metrics typically displayed on a HUD for fixed wing aircraft.
 			 */
-			@id(74) public static class VFR_HUD {
+			@id(74) class VFR_HUD {
 				float airspeed;//Current indicated airspeed (IAS).
 				float groundspeed;//Current ground speed.
 				short heading;//Current heading in compass units (0-360, 0=north).
@@ -1004,7 +1004,7 @@ public interface autoquad {
 			 Message encoding a command with parameters as scaled integers. Scaling depends on the actual command value.
 			 The command microservice is documented at https://mavlink.io/en/services/command.htm
 			 */
-			@id(75) public static class COMMAND_INT {
+			@id(75) class COMMAND_INT {
 				@I byte target_system;//System ID
 				@I byte target_component;//Component ID
 				MAV_FRAME frame;//The coordinate system of the COMMAND.
@@ -1023,7 +1023,7 @@ public interface autoquad {
 			/**
 			 Send a command with up to seven parameters to the MAV. The command microservice is documented at https://mavlink.io/en/services/command.htm
 			 */
-			@id(76) public static class COMMAND_LONG {
+			@id(76) class COMMAND_LONG {
 				@I byte target_system;//System which should execute the command
 				@I byte target_component;//Component which should execute the command, 0 for all components
 				MAV_CMD command;//Command ID (of command to send).
@@ -1041,7 +1041,7 @@ public interface autoquad {
 			 Report status of a command. Includes feedback whether the command was executed. The command microservice
 			 is documented at https://mavlink.io/en/services/command.htm
 			 */
-			@id(77) public static class COMMAND_ACK {
+			@id(77) class COMMAND_ACK {
 				MAV_CMD    command;//Command ID (of acknowledged command).
 				MAV_RESULT result;//Result of command.
 				/**
@@ -1061,7 +1061,7 @@ public interface autoquad {
 			/**
 			 Setpoint in roll, pitch, yaw and thrust from the operator
 			 */
-			@id(81) public static class MANUAL_SETPOINT {
+			@id(81) class MANUAL_SETPOINT {
 				@I int time_boot_ms;//Timestamp (time since system boot).
 				float roll;//Desired roll rate
 				float pitch;//Desired pitch rate
@@ -1075,7 +1075,7 @@ public interface autoquad {
 			 Sets a desired vehicle attitude. Used by an external controller to command the vehicle (manual controller
 			 or other system)
 			 */
-			@id(82) public static class SET_ATTITUDE_TARGET {
+			@id(82) class SET_ATTITUDE_TARGET {
 				@I     int   time_boot_ms;//Timestamp (time since system boot).
 				@I     byte  target_system;//System ID
 				@I     byte  target_component;//Component ID
@@ -1095,7 +1095,7 @@ public interface autoquad {
 			 Reports the current commanded attitude of the vehicle as specified by the autopilot. This should match
 			 the commands sent in a SET_ATTITUDE_TARGET message if the vehicle is being controlled this way
 			 */
-			@id(83) public static class ATTITUDE_TARGET {
+			@id(83) class ATTITUDE_TARGET {
 				@I     int   time_boot_ms;//Timestamp (time since system boot).
 				/**
 				 Mappings: If any of these bits are set, the corresponding input should be ignored: bit 1: body roll rate,
@@ -1113,7 +1113,7 @@ public interface autoquad {
 			 Sets a desired vehicle position in a local north-east-down coordinate frame. Used by an external controller
 			 to command the vehicle (manual controller or other system)
 			 */
-			@id(84) public static class SET_POSITION_TARGET_LOCAL_NED {
+			@id(84) class SET_POSITION_TARGET_LOCAL_NED {
 				@I int  time_boot_ms;//Timestamp (time since system boot).
 				@I byte target_system;//System ID
 				@I byte target_component;//Component ID
@@ -1141,7 +1141,7 @@ public interface autoquad {
 			 This should match the commands sent in SET_POSITION_TARGET_LOCAL_NED if the vehicle is being controlled
 			 this way
 			 */
-			@id(85) public static class POSITION_TARGET_LOCAL_NED {
+			@id(85) class POSITION_TARGET_LOCAL_NED {
 				@I int time_boot_ms;//Timestamp (time since system boot).
 				/**
 				 Valid options are: MAV_FRAME_LOCAL_NED = 1, MAV_FRAME_LOCAL_OFFSET_NED = 7, MAV_FRAME_BODY_NED = 8, MAV_FRAME_BODY_OFFSET_NED
@@ -1166,7 +1166,7 @@ public interface autoquad {
 			 Sets a desired vehicle position, velocity, and/or acceleration in a global coordinate system (WGS84).
 			 Used by an external controller to command the vehicle (manual controller or other system)
 			 */
-			@id(86) public static class SET_POSITION_TARGET_GLOBAL_INT {
+			@id(86) class SET_POSITION_TARGET_GLOBAL_INT {
 				/**
 				 Timestamp (time since system boot). The rationale for the timestamp in the setpoint is to allow the system
 				 to compensate for the transport delay of the setpoint. This allows the system to compensate processing
@@ -1201,7 +1201,7 @@ public interface autoquad {
 		}
 		
 		public interface CommonPacks {
-			@id(87) public static class POSITION_TARGET_GLOBAL_INT {
+			@id(87) class POSITION_TARGET_GLOBAL_INT {
 				/**
 				 Timestamp (time since system boot). The rationale for the timestamp in the setpoint is to allow the system
 				 to compensate for the transport delay of the setpoint. This allows the system to compensate processing
@@ -1232,7 +1232,7 @@ public interface autoquad {
 			 frame in NED coordinates. Coordinate frame is right-handed, Z-axis down (aeronautical frame, NED / north-east-down
 			 convention
 			 */
-			@id(89) public static class LOCAL_POSITION_NED_SYSTEM_GLOBAL_OFFSET {
+			@id(89) class LOCAL_POSITION_NED_SYSTEM_GLOBAL_OFFSET {
 				@I int time_boot_ms;//Timestamp (time since system boot).
 				float x;//X Position
 				float y;//Y Position
@@ -1246,7 +1246,7 @@ public interface autoquad {
 			 Sent from simulation to autopilot. This packet is useful for high throughput applications such as hardware
 			 in the loop simulations
 			 */
-			@id(90) public static class HIL_STATE {
+			@id(90) class HIL_STATE {
 				/**
 				 Timestamp (UNIX Epoch time or time since system boot). The receiving end can infer timestamp format (since
 				 1.1.1970 or since system boot) by checking for the magnitude the number
@@ -1272,7 +1272,7 @@ public interface autoquad {
 			/**
 			 Sent from autopilot to simulation. Hardware in the loop control outputs
 			 */
-			@id(91) public static class HIL_CONTROLS {
+			@id(91) class HIL_CONTROLS {
 				/**
 				 Timestamp (UNIX Epoch time or time since system boot). The receiving end can infer timestamp format (since
 				 1.1.1970 or since system boot) by checking for the magnitude the number
@@ -1295,7 +1295,7 @@ public interface autoquad {
 			 is as follows: 1000 microseconds: 0%, 2000 microseconds: 100%. Individual receivers/transmitters might
 			 violate this specification
 			 */
-			@id(92) public static class HIL_RC_INPUTS_RAW {
+			@id(92) class HIL_RC_INPUTS_RAW {
 				/**
 				 Timestamp (UNIX Epoch time or time since system boot). The receiving end can infer timestamp format (since
 				 1.1.1970 or since system boot) by checking for the magnitude the number
@@ -1319,7 +1319,7 @@ public interface autoquad {
 			/**
 			 Sent from autopilot to simulation. Hardware in the loop control outputs (replacement for HIL_CONTROLS
 			 */
-			@id(93) public static class HIL_ACTUATOR_CONTROLS {
+			@id(93) class HIL_ACTUATOR_CONTROLS {
 				/**
 				 Timestamp (UNIX Epoch time or time since system boot). The receiving end can infer timestamp format (since
 				 1.1.1970 or since system boot) by checking for the magnitude the number
@@ -1333,7 +1333,7 @@ public interface autoquad {
 			/**
 			 Optical flow from a flow sensor (e.g. optical mouse sensor)
 			 */
-			@id(100) public static class OPTICAL_FLOW {
+			@id(100) class OPTICAL_FLOW {
 				/**
 				 Timestamp (UNIX Epoch time or time since system boot). The receiving end can infer timestamp format (since
 				 1.1.1970 or since system boot) by checking for the magnitude the number
@@ -1353,7 +1353,7 @@ public interface autoquad {
 			/**
 			 Global position/attitude estimate from a vision source.
 			 */
-			@id(101) public static class GLOBAL_VISION_POSITION_ESTIMATE {
+			@id(101) class GLOBAL_VISION_POSITION_ESTIMATE {
 				@I long usec;//Timestamp (UNIX time or since system boot)
 				float x;//Global X position
 				float y;//Global Y position
@@ -1378,7 +1378,7 @@ public interface autoquad {
 			/**
 			 Local position/attitude estimate from a vision source.
 			 */
-			@id(102) public static class VISION_POSITION_ESTIMATE {
+			@id(102) class VISION_POSITION_ESTIMATE {
 				@I long usec;//Timestamp (UNIX time or time since system boot)
 				float x;//Local X position
 				float y;//Local Y position
@@ -1403,7 +1403,7 @@ public interface autoquad {
 			/**
 			 Speed estimate from a vision source.
 			 */
-			@id(103) public static class VISION_SPEED_ESTIMATE {
+			@id(103) class VISION_SPEED_ESTIMATE {
 				@I long usec;//Timestamp (UNIX time or time since system boot)
 				float x;//Global X speed
 				float y;//Global Y speed
@@ -1424,7 +1424,7 @@ public interface autoquad {
 			/**
 			 Global position estimate from a Vicon motion system source.
 			 */
-			@id(104) public static class VICON_POSITION_ESTIMATE {
+			@id(104) class VICON_POSITION_ESTIMATE {
 				@I long usec;//Timestamp (UNIX time or time since system boot)
 				float x;//Global X position
 				float y;//Global Y position
@@ -1443,7 +1443,7 @@ public interface autoquad {
 			/**
 			 The IMU readings in SI units in NED body frame
 			 */
-			@id(105) public static class HIGHRES_IMU {
+			@id(105) class HIGHRES_IMU {
 				/**
 				 Timestamp (UNIX Epoch time or time since system boot). The receiving end can infer timestamp format (since
 				 1.1.1970 or since system boot) by checking for the magnitude the number
@@ -1469,7 +1469,7 @@ public interface autoquad {
 			/**
 			 Optical flow from an angular rate flow sensor (e.g. PX4FLOW or mouse sensor)
 			 */
-			@id(106) public static class OPTICAL_FLOW_RAD {
+			@id(106) class OPTICAL_FLOW_RAD {
 				/**
 				 Timestamp (UNIX Epoch time or time since system boot). The receiving end can infer timestamp format (since
 				 1.1.1970 or since system boot) by checking for the magnitude the number
@@ -1507,7 +1507,7 @@ public interface autoquad {
 			/**
 			 The IMU readings in SI units in NED body frame
 			 */
-			@id(107) public static class HIL_SENSOR {
+			@id(107) class HIL_SENSOR {
 				/**
 				 Timestamp (UNIX Epoch time or time since system boot). The receiving end can infer timestamp format (since
 				 1.1.1970 or since system boot) by checking for the magnitude the number
@@ -1536,7 +1536,7 @@ public interface autoquad {
 			/**
 			 Status of simulation environment, if used
 			 */
-			@id(108) public static class SIM_STATE {
+			@id(108) class SIM_STATE {
 				float q1;//True attitude quaternion component 1, w (1 in null-rotation)
 				float q2;//True attitude quaternion component 2, x (0 in null-rotation)
 				float q3;//True attitude quaternion component 3, y (0 in null-rotation)
@@ -1563,7 +1563,7 @@ public interface autoquad {
 			/**
 			 Status generated by radio and injected into MAVLink stream.
 			 */
-			@id(109) public static class RADIO_STATUS {
+			@id(109) class RADIO_STATUS {
 				/**
 				 Local (message sender) recieved signal strength indication in device-dependent units/scale. Values: [0-254],
 				 255: invalid/unknown
@@ -1592,7 +1592,7 @@ public interface autoquad {
 			/**
 			 File transfer message
 			 */
-			@id(110) public static class FILE_TRANSFER_PROTOCOL {
+			@id(110) class FILE_TRANSFER_PROTOCOL {
 				@I          byte target_network;//Network ID (0 for broadcast)
 				@I          byte target_system;//System ID (0 for broadcast)
 				@I          byte target_component;//Component ID (0 for broadcast)
@@ -1608,7 +1608,7 @@ public interface autoquad {
 			/**
 			 Time synchronization message.
 			 */
-			@id(111) public static class TIMESYNC {
+			@id(111) class TIMESYNC {
 				long tc1;//Time sync timestamp 1
 				long ts1;//Time sync timestamp 2
 			}
@@ -1616,7 +1616,7 @@ public interface autoquad {
 			/**
 			 Camera-IMU triggering and synchronisation message.
 			 */
-			@id(112) public static class CAMERA_TRIGGER {
+			@id(112) class CAMERA_TRIGGER {
 				/**
 				 Timestamp for image frame (UNIX Epoch time or time since system boot). The receiving end can infer timestamp
 				 format (since 1.1.1970 or since system boot) by checking for the magnitude the number
@@ -1629,7 +1629,7 @@ public interface autoquad {
 			 The global position, as returned by the Global Positioning System (GPS). This is
 			 NOT the global position estimate of the sytem, but rather a RAW sensor value. See message GLOBAL_POSITION for the global position estimate.
 			 */
-			@id(113) public static class HIL_GPS {
+			@id(113) class HIL_GPS {
 				/**
 				 Timestamp (UNIX Epoch time or time since system boot). The receiving end can infer timestamp format (since
 				 1.1.1970 or since system boot) by checking for the magnitude the number
@@ -1660,7 +1660,7 @@ public interface autoquad {
 			/**
 			 Simulated optical flow from a flow sensor (e.g. PX4FLOW or optical mouse sensor)
 			 */
-			@id(114) public static class HIL_OPTICAL_FLOW {
+			@id(114) class HIL_OPTICAL_FLOW {
 				/**
 				 Timestamp (UNIX Epoch time or time since system boot). The receiving end can infer timestamp format (since
 				 1.1.1970 or since system boot) by checking for the magnitude the number
@@ -1699,7 +1699,7 @@ public interface autoquad {
 			 Sent from simulation to autopilot, avoids in contrast to HIL_STATE singularities. This packet is useful
 			 for high throughput applications such as hardware in the loop simulations
 			 */
-			@id(115) public static class HIL_STATE_QUATERNION {
+			@id(115) class HIL_STATE_QUATERNION {
 				/**
 				 Timestamp (UNIX Epoch time or time since system boot). The receiving end can infer timestamp format (since
 				 1.1.1970 or since system boot) by checking for the magnitude the number
@@ -1726,7 +1726,7 @@ public interface autoquad {
 			 The RAW IMU readings for secondary 9DOF sensor setup. This message should contain the scaled values to
 			 the described unit
 			 */
-			@id(116) public static class SCALED_IMU2 {
+			@id(116) class SCALED_IMU2 {
 				@I int time_boot_ms;//Timestamp (time since system boot).
 				short xacc;//X acceleration
 				short yacc;//Y acceleration
@@ -1744,7 +1744,7 @@ public interface autoquad {
 			 Request a list of available logs. On some systems calling this may stop on-board logging until LOG_REQUEST_END
 			 is called
 			 */
-			@id(117) public static class LOG_REQUEST_LIST {
+			@id(117) class LOG_REQUEST_LIST {
 				@I byte  target_system;//System ID
 				@I byte  target_component;//Component ID
 				@I short start;//First log id (0 for first available)
@@ -1754,7 +1754,7 @@ public interface autoquad {
 			/**
 			 Reply to LOG_REQUEST_LIST
 			 */
-			@id(118) public static class LOG_ENTRY {
+			@id(118) class LOG_ENTRY {
 				@I short id;//Log id
 				@I short num_logs;//Total number of logs
 				@I short last_log_num;//High log number
@@ -1765,7 +1765,7 @@ public interface autoquad {
 			/**
 			 Request a chunk of a log
 			 */
-			@id(119) public static class LOG_REQUEST_DATA {
+			@id(119) class LOG_REQUEST_DATA {
 				@I byte  target_system;//System ID
 				@I byte  target_component;//Component ID
 				@I short id;//Log id (from LOG_ENTRY reply)
@@ -1776,7 +1776,7 @@ public interface autoquad {
 			/**
 			 Reply to LOG_REQUEST_DATA
 			 */
-			@id(120) public static class LOG_DATA {
+			@id(120) class LOG_DATA {
 				@I         short id;//Log id (from LOG_ENTRY reply)
 				@I         int   ofs;//Offset into the log
 				@I         byte  count;//Number of bytes (zero for end of log)
@@ -1786,7 +1786,7 @@ public interface autoquad {
 			/**
 			 Erase all logs
 			 */
-			@id(121) public static class LOG_ERASE {
+			@id(121) class LOG_ERASE {
 				@I byte target_system;//System ID
 				@I byte target_component;//Component ID
 			}
@@ -1794,7 +1794,7 @@ public interface autoquad {
 			/**
 			 Stop log transfer and resume normal logging
 			 */
-			@id(122) public static class LOG_REQUEST_END {
+			@id(122) class LOG_REQUEST_END {
 				@I byte target_system;//System ID
 				@I byte target_component;//Component ID
 			}
@@ -1802,7 +1802,7 @@ public interface autoquad {
 			/**
 			 Data for injecting into the onboard GPS (used for DGPS)
 			 */
-			@id(123) public static class GPS_INJECT_DATA {
+			@id(123) class GPS_INJECT_DATA {
 				@I          byte target_system;//System ID
 				@I          byte target_component;//Component ID
 				@I          byte len;//Data length
@@ -1812,7 +1812,7 @@ public interface autoquad {
 			/**
 			 Second GPS data.
 			 */
-			@id(124) public static class GPS2_RAW {
+			@id(124) class GPS2_RAW {
 				/**
 				 Timestamp (UNIX Epoch time or time since system boot). The receiving end can infer timestamp format (since
 				 1.1.1970 or since system boot) by checking for the magnitude the number
@@ -1838,7 +1838,7 @@ public interface autoquad {
 			/**
 			 Power supply status
 			 */
-			@id(125) public static class POWER_STATUS {
+			@id(125) class POWER_STATUS {
 				@I short Vcc;//5V rail voltage.
 				@I short Vservo;//Servo rail voltage.
 				MAV_POWER_STATUS flags;//Bitmap of power supply status flags.
@@ -1849,7 +1849,7 @@ public interface autoquad {
 			 telemetry radio. It is designed to make it possible to update the devices firmware via MAVLink messages
 			 or change the devices settings. A message with zero bytes can be used to change just the baudrate
 			 */
-			@id(126) public static class SERIAL_CONTROL {
+			@id(126) class SERIAL_CONTROL {
 				SERIAL_CONTROL_DEV  device;//Serial control device type.
 				SERIAL_CONTROL_FLAG flags;//Bitmap of serial control flags.
 				@I         short timeout;//Timeout for reply data
@@ -1861,7 +1861,7 @@ public interface autoquad {
 			/**
 			 RTK GPS data. Gives information on the relative baseline calculation the GPS is reporting
 			 */
-			@id(127) public static class GPS_RTK {
+			@id(127) class GPS_RTK {
 				@I int   time_last_baseline_ms;//Time since boot of last baseline message received.
 				@I byte  rtk_receiver_id;//Identification of connected RTK receiver.
 				@I short wn;//GPS Week Number of last baseline
@@ -1880,7 +1880,7 @@ public interface autoquad {
 			/**
 			 RTK GPS data. Gives information on the relative baseline calculation the GPS is reporting
 			 */
-			@id(128) public static class GPS2_RTK {
+			@id(128) class GPS2_RTK {
 				@I int   time_last_baseline_ms;//Time since boot of last baseline message received.
 				@I byte  rtk_receiver_id;//Identification of connected RTK receiver.
 				@I short wn;//GPS Week Number of last baseline
@@ -1900,7 +1900,7 @@ public interface autoquad {
 			 The RAW IMU readings for 3rd 9DOF sensor setup. This message should contain the scaled values to the described
 			 unit
 			 */
-			@id(129) public static class SCALED_IMU3 {
+			@id(129) class SCALED_IMU3 {
 				@I int time_boot_ms;//Timestamp (time since system boot).
 				short xacc;//X acceleration
 				short yacc;//Y acceleration
@@ -1918,7 +1918,7 @@ public interface autoquad {
 			 Handshake message to initiate, control and stop image streaming when using the Image Transmission Protocol:
 			 https://mavlink.io/en/services/image_transmission.html
 			 */
-			@id(130) public static class DATA_TRANSMISSION_HANDSHAKE {
+			@id(130) class DATA_TRANSMISSION_HANDSHAKE {
 				MAVLINK_DATA_STREAM_TYPE type;//Type of requested/acknowledged data.
 				@I int   size;//total data size (set on ACK only).
 				@I short width;//Width of a matrix or image.
@@ -1935,7 +1935,7 @@ public interface autoquad {
 			/**
 			 Data packet for images sent using the Image Transmission Protocol: https://mavlink.io/en/services/image_transmission.html
 			 */
-			@id(131) public static class ENCAPSULATED_DATA {
+			@id(131) class ENCAPSULATED_DATA {
 				@I          short seqnr;//sequence number (starting with 0 on every transmission)
 				@I @__(253) byte  data;//image data bytes
 			}
@@ -1943,7 +1943,7 @@ public interface autoquad {
 			/**
 			 Distance sensor information for an onboard rangefinder.
 			 */
-			@id(132) public static class DISTANCE_SENSOR {
+			@id(132) class DISTANCE_SENSOR {
 				@I int   time_boot_ms;//Timestamp (time since system boot).
 				@I short min_distance;//Minimum distance the sensor can measure
 				@I short max_distance;//Maximum distance the sensor can measure
@@ -1977,7 +1977,7 @@ public interface autoquad {
 			/**
 			 Request for terrain data and terrain status
 			 */
-			@id(133) public static class TERRAIN_REQUEST {
+			@id(133) class TERRAIN_REQUEST {
 				int lat;//Latitude of SW corner of first grid
 				int lon;//Longitude of SW corner of first grid
 				@I short grid_spacing;//Grid spacing
@@ -1987,7 +1987,7 @@ public interface autoquad {
 			/**
 			 Terrain data sent from GCS. The lat/lon and grid_spacing must be the same as a lat/lon from a TERRAIN_REQUES
 			 */
-			@id(134) public static class TERRAIN_DATA {
+			@id(134) class TERRAIN_DATA {
 				int lat;//Latitude of SW corner of first grid
 				int lon;//Longitude of SW corner of first grid
 				@I      short grid_spacing;//Grid spacing
@@ -1999,7 +1999,7 @@ public interface autoquad {
 			 Request that the vehicle report terrain height at the given location. Used by GCS to check if vehicle
 			 has all terrain data needed for a mission
 			 */
-			@id(135) public static class TERRAIN_CHECK {
+			@id(135) class TERRAIN_CHECK {
 				int lat;//Latitude
 				int lon;//Longitude
 			}
@@ -2007,7 +2007,7 @@ public interface autoquad {
 			/**
 			 Response from a TERRAIN_CHECK request
 			 */
-			@id(136) public static class TERRAIN_REPORT {
+			@id(136) class TERRAIN_REPORT {
 				int lat;//Latitude
 				int lon;//Longitude
 				@I short spacing;//grid spacing (zero if terrain at this location unavailable)
@@ -2020,7 +2020,7 @@ public interface autoquad {
 			/**
 			 Barometer readings for 2nd barometer
 			 */
-			@id(137) public static class SCALED_PRESSURE2 {
+			@id(137) class SCALED_PRESSURE2 {
 				@I int time_boot_ms;//Timestamp (time since system boot).
 				float press_abs;//Absolute pressure
 				float press_diff;//Differential pressure
@@ -2030,7 +2030,7 @@ public interface autoquad {
 			/**
 			 Motion capture attitude and position
 			 */
-			@id(138) public static class ATT_POS_MOCAP {
+			@id(138) class ATT_POS_MOCAP {
 				/**
 				 Timestamp (UNIX Epoch time or time since system boot). The receiving end can infer timestamp format (since
 				 1.1.1970 or since system boot) by checking for the magnitude the number
@@ -2051,7 +2051,7 @@ public interface autoquad {
 			/**
 			 Set the vehicle attitude and body angular rates.
 			 */
-			@id(139) public static class SET_ACTUATOR_CONTROL_TARGET {
+			@id(139) class SET_ACTUATOR_CONTROL_TARGET {
 				/**
 				 Timestamp (UNIX Epoch time or time since system boot). The receiving end can infer timestamp format (since
 				 1.1.1970 or since system boot) by checking for the magnitude the number
@@ -2076,7 +2076,7 @@ public interface autoquad {
 			/**
 			 Set the vehicle attitude and body angular rates.
 			 */
-			@id(140) public static class ACTUATOR_CONTROL_TARGET {
+			@id(140) class ACTUATOR_CONTROL_TARGET {
 				/**
 				 Timestamp (UNIX Epoch time or time since system boot). The receiving end can infer timestamp format (since
 				 1.1.1970 or since system boot) by checking for the magnitude the number
@@ -2099,7 +2099,7 @@ public interface autoquad {
 			/**
 			 The current system altitude.
 			 */
-			@id(141) public static class ALTITUDE {
+			@id(141) class ALTITUDE {
 				/**
 				 Timestamp (UNIX Epoch time or time since system boot). The receiving end can infer timestamp format (since
 				 1.1.1970 or since system boot) by checking for the magnitude the number
@@ -2141,7 +2141,7 @@ public interface autoquad {
 			/**
 			 The autopilot is requesting a resource (file, binary, other type of data)
 			 */
-			@id(142) public static class RESOURCE_REQUEST {
+			@id(142) class RESOURCE_REQUEST {
 				@I          byte request_id;//Request ID. This ID should be re-used when sending back URI contents
 				@I          byte uri_type;//The type of requested URI. 0 = a file via URL. 1 = a UAVCAN binary
 				/**
@@ -2160,7 +2160,7 @@ public interface autoquad {
 			/**
 			 Barometer readings for 3rd barometer
 			 */
-			@id(143) public static class SCALED_PRESSURE3 {
+			@id(143) class SCALED_PRESSURE3 {
 				@I int time_boot_ms;//Timestamp (time since system boot).
 				float press_abs;//Absolute pressure
 				float press_diff;//Differential pressure
@@ -2170,7 +2170,7 @@ public interface autoquad {
 			/**
 			 Current motion information from a designated system
 			 */
-			@id(144) public static class FOLLOW_TARGET {
+			@id(144) class FOLLOW_TARGET {
 				@I long timestamp;//Timestamp (time since system boot).
 				@I byte est_capabilities;//bit positions for tracker reporting capabilities (POS = 0, VEL = 1, ACCEL = 2, ATT + RATES = 3)
 				int   lat;//Latitude (WGS84)
@@ -2187,7 +2187,7 @@ public interface autoquad {
 			/**
 			 The smoothed, monotonic system state used to feed the control loops of the system.
 			 */
-			@id(146) public static class CONTROL_SYSTEM_STATE {
+			@id(146) class CONTROL_SYSTEM_STATE {
 				/**
 				 Timestamp (UNIX Epoch time or time since system boot). The receiving end can infer timestamp format (since
 				 1.1.1970 or since system boot) by checking for the magnitude the number
@@ -2215,7 +2215,7 @@ public interface autoquad {
 			 Battery information. Updates GCS with flight controller battery status. Use SMART_BATTERY_* messages instead
 			 for smart batteries
 			 */
-			@id(147) public static class BATTERY_STATUS {
+			@id(147) class BATTERY_STATUS {
 				@I byte id;//Battery ID
 				MAV_BATTERY_FUNCTION battery_function;//Function of the battery
 				MAV_BATTERY_TYPE     type;//Type (chemistry) of the battery
@@ -2237,7 +2237,7 @@ public interface autoquad {
 			 Version and capability of autopilot software. This should be emitted in response to a MAV_CMD_REQUEST_AUTOPILOT_CAPABILITIES
 			 command
 			 */
-			@id(148) public static class AUTOPILOT_VERSION {
+			@id(148) class AUTOPILOT_VERSION {
 				MAV_PROTOCOL_CAPABILITY capabilities;//Bitmap of capabilities
 				@I          int   flight_sw_version;//Firmware version number
 				@I          int   middleware_sw_version;//Middleware version number
@@ -2271,7 +2271,7 @@ public interface autoquad {
 			/**
 			 The location of a landing target. See: https://mavlink.io/en/services/landing_target.html
 			 */
-			@id(149) public static class LANDING_TARGET {
+			@id(149) class LANDING_TARGET {
 				/**
 				 Timestamp (UNIX Epoch time or time since system boot). The receiving end can infer timestamp format (since
 				 1.1.1970 or since system boot) by checking for the magnitude the number
@@ -2299,7 +2299,7 @@ public interface autoquad {
 			/**
 			 Status of geo-fencing. Sent in extended status stream when fencing enabled.
 			 */
-			@id(162) public static class FENCE_STATUS {
+			@id(162) class FENCE_STATUS {
 				@I byte  breach_status;//Breach status (0 if currently inside fence, 1 if outside).
 				@I short breach_count;//Number of fence breaches.
 				FENCE_BREACH breach_type;//Last breach type.
@@ -2317,7 +2317,7 @@ public interface autoquad {
 			 if an innovation test ratio greater than 1.0 is recorded. Notifications for values in the range between
 			 0.5 and 1.0 should be optional and controllable by the user
 			 */
-			@id(230) public static class ESTIMATOR_STATUS {
+			@id(230) class ESTIMATOR_STATUS {
 				/**
 				 Timestamp (UNIX Epoch time or time since system boot). The receiving end can infer timestamp format (since
 				 1.1.1970 or since system boot) by checking for the magnitude the number
@@ -2337,7 +2337,7 @@ public interface autoquad {
 			/**
 			 Wind covariance estimate from vehicle.
 			 */
-			@id(231) public static class WIND_COV {
+			@id(231) class WIND_COV {
 				/**
 				 Timestamp (UNIX Epoch time or time since system boot). The receiving end can infer timestamp format (since
 				 1.1.1970 or since system boot) by checking for the magnitude the number
@@ -2357,7 +2357,7 @@ public interface autoquad {
 			 GPS sensor input message.  This is a raw sensor value sent by the GPS. This is NOT the global position
 			 estimate of the system
 			 */
-			@id(232) public static class GPS_INPUT {
+			@id(232) class GPS_INPUT {
 				/**
 				 Timestamp (UNIX Epoch time or time since system boot). The receiving end can infer timestamp format (since
 				 1.1.1970 or since system boot) by checking for the magnitude the number
@@ -2386,7 +2386,7 @@ public interface autoquad {
 			/**
 			 RTCM message for injecting into the onboard GPS (used for DGPS)
 			 */
-			@id(233) public static class GPS_RTCM_DATA {
+			@id(233) class GPS_RTCM_DATA {
 				/**
 				 LSB: 1 means message is fragmented, next 2 bits are the fragment ID, the remaining 5 bits are used for
 				 the sequence ID. Messages are only to be flushed to the GPS when the entire message has been reconstructed
@@ -2404,7 +2404,7 @@ public interface autoquad {
 			/**
 			 Message appropriate for high latency connections like Iridium
 			 */
-			@id(234) public static class HIGH_LATENCY {
+			@id(234) class HIGH_LATENCY {
 				MAV_MODE_FLAG base_mode;//Bitmap of enabled system modes.
 				@I int custom_mode;//A bitfield for use for autopilot-specific flags.
 				MAV_LANDED_STATE landed_state;//The landed state. Is set to MAV_LANDED_STATE_UNDEFINED if landed state is unknown.
@@ -2438,7 +2438,7 @@ public interface autoquad {
 			/**
 			 Message appropriate for high latency connections like Iridium (version 2)
 			 */
-			@id(235) public static class HIGH_LATENCY2 {
+			@id(235) class HIGH_LATENCY2 {
 				@I int timestamp;//Timestamp (milliseconds since boot or Unix epoch)
 				MAV_TYPE      type;//Type of the MAV (quadrotor, helicopter, etc.)
 				MAV_AUTOPILOT autopilot;//Autopilot type / class. Use MAV_AUTOPILOT_INVALID for components that are not flight controllers.
@@ -2471,7 +2471,7 @@ public interface autoquad {
 			/**
 			 Vibration levels and accelerometer clipping
 			 */
-			@id(241) public static class VIBRATION {
+			@id(241) class VIBRATION {
 				/**
 				 Timestamp (UNIX Epoch time or time since system boot). The receiving end can infer timestamp format (since
 				 1.1.1970 or since system boot) by checking for the magnitude the number
@@ -2495,7 +2495,7 @@ public interface autoquad {
 			 the point to which the system should fly in normal flight mode and then perform a landing sequence along
 			 the vector
 			 */
-			@id(242) public static class HOME_POSITION {
+			@id(242) class HOME_POSITION {
 				int   latitude;//Latitude (WGS84)
 				int   longitude;//Longitude (WGS84)
 				int   altitude;//Altitude (MSL). Positive for up.
@@ -2543,7 +2543,7 @@ public interface autoquad {
 			 by the aircraft to adjust the approach. The approach 3D vector describes the point to which the system
 			 should fly in normal flight mode and then perform a landing sequence along the vector
 			 */
-			@id(243) public static class SET_HOME_POSITION {
+			@id(243) class SET_HOME_POSITION {
 				@I byte target_system;//System ID.
 				int   latitude;//Latitude (WGS84)
 				int   longitude;//Longitude (WGS84)
@@ -2590,11 +2590,11 @@ public interface autoquad {
 		}
 	}
 	
-	public static class MicroAirVehicle implements InC, InCPP {
+	class MicroAirVehicle implements InC, InCPP {
 		public interface CommunicationInterface extends MicroAirVehicleHandledPacks, GroundControl.CommonPacks {}
 		
 		public interface MicroAirVehicleHandledPacks {
-			@id(244) public static class MESSAGE_INTERVAL {
+			@id(244) class MESSAGE_INTERVAL {
 				@I short message_id;//The ID of the requested MAVLink message. v1.0 is limited to 254 messages.
 				int interval_us;//0 indicates the interval at which it is sent.
 			}
@@ -2602,7 +2602,7 @@ public interface autoquad {
 			/**
 			 Provides state for additional features
 			 */
-			@id(245) public static class EXTENDED_SYS_STATE {
+			@id(245) class EXTENDED_SYS_STATE {
 				MAV_VTOL_STATE   vtol_state;//The VTOL state if applicable. Is set to MAV_VTOL_STATE_UNDEFINED if UAV is not in VTOL configuration
 				MAV_LANDED_STATE landed_state;//The landed state. Is set to MAV_LANDED_STATE_UNDEFINED if landed state is unknown.
 			}
@@ -2610,7 +2610,7 @@ public interface autoquad {
 			/**
 			 The location and information of an ADSB vehicle
 			 */
-			@id(246) public static class ADSB_VEHICLE {
+			@id(246) class ADSB_VEHICLE {
 				@I int ICAO_address;//ICAO address
 				int                lat;//Latitude
 				int                lon;//Longitude
@@ -2629,7 +2629,7 @@ public interface autoquad {
 			/**
 			 Information about a potential collision
 			 */
-			@id(247) public static class COLLISION {
+			@id(247) class COLLISION {
 				MAV_COLLISION_SRC src;//Collision data source
 				@I int id;//Unique identifier, domain based on src field
 				MAV_COLLISION_ACTION       action;//Action that is being taken to avoid this collision
@@ -2642,7 +2642,7 @@ public interface autoquad {
 			/**
 			 Message implementing parts of the V2 payload specs in V1 frames for transitional support.
 			 */
-			@id(248) public static class V2_EXTENSION {
+			@id(248) class V2_EXTENSION {
 				@I          byte  target_network;//Network ID (0 for broadcast)
 				@I          byte  target_system;//System ID (0 for broadcast)
 				@I          byte  target_component;//Component ID (0 for broadcast)
@@ -2670,7 +2670,7 @@ public interface autoquad {
 			 Send raw controller memory. The use of this message is discouraged for normal packets, but a quite efficient
 			 way for testing new messages and getting experimental debug output
 			 */
-			@id(249) public static class MEMORY_VECT {
+			@id(249) class MEMORY_VECT {
 				@I      short address;//Starting address of the debug variables
 				@I      byte  ver;//Version code of the type variable. 0=unknown, type ignored and assumed int16_t. 1=as below
 				@I      byte  type;//Type code of the memory variables. for ver = 1: 0=16 x int16_t, 1=16 x uint16_t, 2=16 x Q15, 3=16 x 1Q1
@@ -2680,7 +2680,7 @@ public interface autoquad {
 			/**
 			 To debug something using a named 3D vector.
 			 */
-			@id(250) public static class DEBUG_VECT {
+			@id(250) class DEBUG_VECT {
 				@__(10) String name;//Name
 				/**
 				 Timestamp (UNIX Epoch time or time since system boot). The receiving end can infer timestamp format (since
@@ -2696,7 +2696,7 @@ public interface autoquad {
 			 Send a key-value pair as float. The use of this message is discouraged for normal packets, but a quite
 			 efficient way for testing new messages and getting experimental debug output
 			 */
-			@id(251) public static class NAMED_VALUE_FLOAT {
+			@id(251) class NAMED_VALUE_FLOAT {
 				@I      int    time_boot_ms;//Timestamp (time since system boot).
 				@__(10) String name;//Name of the debug variable
 				float value;//Floating point value
@@ -2706,7 +2706,7 @@ public interface autoquad {
 			 Send a key-value pair as integer. The use of this message is discouraged for normal packets, but a quite
 			 efficient way for testing new messages and getting experimental debug output
 			 */
-			@id(252) public static class NAMED_VALUE_INT {
+			@id(252) class NAMED_VALUE_INT {
 				@I      int    time_boot_ms;//Timestamp (time since system boot).
 				@__(10) String name;//Name of the debug variable
 				int value;//Signed integer value
@@ -2717,7 +2717,7 @@ public interface autoquad {
 			 They consume quite some bandwidth, so use only for important status and error messages. If implemented
 			 wisely, these messages are buffered on the MCU and sent only at a limited rate (e.g. 10 Hz)
 			 */
-			@id(253) public static class STATUSTEXT {
+			@id(253) class STATUSTEXT {
 				MAV_SEVERITY severity;//Severity of status. Relies on the definitions within RFC-5424.
 				@__(50) String text;//Status text message, without null termination character
 			}
@@ -2726,7 +2726,7 @@ public interface autoquad {
 			 Send a debug value. The index is used to discriminate between values. These values show up in the plot
 			 of QGroundControl as DEBUG N
 			 */
-			@id(254) public static class DEBUG {
+			@id(254) class DEBUG {
 				@I int  time_boot_ms;//Timestamp (time since system boot).
 				@I byte ind;//index of debug variable
 				float value;//DEBUG value
@@ -2736,7 +2736,7 @@ public interface autoquad {
 			 Setup a MAVLink2 signing key. If called with secret_key of all zero and zero initial_timestamp will disable
 			 signin
 			 */
-			@id(256) public static class SETUP_SIGNING {
+			@id(256) class SETUP_SIGNING {
 				@I         byte target_system;//system id of the target
 				@I         byte target_component;//component ID of the target
 				@I @__(32) byte secret_key;//signing key
@@ -2746,7 +2746,7 @@ public interface autoquad {
 			/**
 			 Report button state change.
 			 */
-			@id(257) public static class BUTTON_CHANGE {
+			@id(257) class BUTTON_CHANGE {
 				@I int  time_boot_ms;//Timestamp (time since system boot).
 				@I int  last_change_ms;//Time of last change of button state.
 				@I byte state;//Bitmap for state of buttons.
@@ -2755,7 +2755,7 @@ public interface autoquad {
 			/**
 			 Control vehicle tone generation (buzzer).
 			 */
-			@id(258) public static class PLAY_TUNE {
+			@id(258) class PLAY_TUNE {
 				@I       byte   target_system;//System ID
 				@I       byte   target_component;//Component ID
 				@__(30)  String tune;//tune in board specific format
@@ -2765,7 +2765,7 @@ public interface autoquad {
 			/**
 			 Information about a camera
 			 */
-			@id(259) public static class CAMERA_INFORMATION {
+			@id(259) class CAMERA_INFORMATION {
 				@I         int  time_boot_ms;//Timestamp (time since system boot).
 				@I @__(32) byte vendor_name;//Name of the camera vendor
 				@I @__(32) byte model_name;//Name of the camera model
@@ -2789,7 +2789,7 @@ public interface autoquad {
 			/**
 			 Settings of a camera, can be requested using MAV_CMD_REQUEST_CAMERA_SETTINGS.
 			 */
-			@id(260) public static class CAMERA_SETTINGS {
+			@id(260) class CAMERA_SETTINGS {
 				@I int time_boot_ms;//Timestamp (time since system boot).
 				CAMERA_MODE mode_id;//Camera mode
 				@I_() float zoomLevel;//Current zoom level (0.0 to 100.0, NaN if not known)
@@ -2800,7 +2800,7 @@ public interface autoquad {
 			 Information about a storage medium. This message is sent in response to a request and whenever the status
 			 of the storage changes (STORAGE_STATUS)
 			 */
-			@id(261) public static class STORAGE_INFORMATION {
+			@id(261) class STORAGE_INFORMATION {
 				@I int  time_boot_ms;//Timestamp (time since system boot).
 				@I byte storage_id;//Storage ID (1 for first, 2 for second, etc.)
 				@I byte storage_count;//Number of storage devices
@@ -2815,7 +2815,7 @@ public interface autoquad {
 			/**
 			 Information about the status of a capture.
 			 */
-			@id(262) public static class CAMERA_CAPTURE_STATUS {
+			@id(262) class CAMERA_CAPTURE_STATUS {
 				@I int  time_boot_ms;//Timestamp (time since system boot).
 				/**
 				 Current status of image capturing (0: idle, 1: capture in progress, 2: interval set but idle, 3: interval
@@ -2831,7 +2831,7 @@ public interface autoquad {
 			/**
 			 Information about a captured image
 			 */
-			@id(263) public static class CAMERA_IMAGE_CAPTURED {
+			@id(263) class CAMERA_IMAGE_CAPTURED {
 				@I int  time_boot_ms;//Timestamp (time since system boot).
 				@I long time_utc;//Timestamp (time since UNIX epoch) in UTC. 0 for unknown.
 				@I byte camera_id;//Camera ID (1 for first, 2 for second, etc.)
@@ -2848,7 +2848,7 @@ public interface autoquad {
 			/**
 			 Information about flight since last arming.
 			 */
-			@id(264) public static class FLIGHT_INFORMATION {
+			@id(264) class FLIGHT_INFORMATION {
 				@I int  time_boot_ms;//Timestamp (time since system boot).
 				@I long arming_time_utc;//Timestamp at arming (time since UNIX epoch) in UTC, 0 for unknown
 				@I long takeoff_time_utc;//Timestamp at takeoff (time since UNIX epoch) in UTC, 0 for unknown
@@ -2858,7 +2858,7 @@ public interface autoquad {
 			/**
 			 Orientation of a mount
 			 */
-			@id(265) public static class MOUNT_ORIENTATION {
+			@id(265) class MOUNT_ORIENTATION {
 				@I int time_boot_ms;//Timestamp (time since system boot).
 				float roll;//Roll in global frame (set to NaN for invalid).
 				float pitch;//Pitch in global frame (set to NaN for invalid).
@@ -2869,7 +2869,7 @@ public interface autoquad {
 			/**
 			 A message containing logged data (see also MAV_CMD_LOGGING_START)
 			 */
-			@id(266) public static class LOGGING_DATA {
+			@id(266) class LOGGING_DATA {
 				@I          byte  target_system;//system ID of the target
 				@I          byte  target_component;//component ID of the target
 				@I          short sequence;//sequence number (can wrap)
@@ -2885,7 +2885,7 @@ public interface autoquad {
 			/**
 			 A message containing logged data which requires a LOGGING_ACK to be sent back
 			 */
-			@id(267) public static class LOGGING_DATA_ACKED {
+			@id(267) class LOGGING_DATA_ACKED {
 				@I          byte  target_system;//system ID of the target
 				@I          byte  target_component;//component ID of the target
 				@I          short sequence;//sequence number (can wrap)
@@ -2901,7 +2901,7 @@ public interface autoquad {
 			/**
 			 An ack for a LOGGING_DATA_ACKED message
 			 */
-			@id(268) public static class LOGGING_ACK {
+			@id(268) class LOGGING_ACK {
 				@I byte  target_system;//system ID of the target
 				@I byte  target_component;//component ID of the target
 				@I short sequence;//sequence number (must match the one in LOGGING_DATA_ACKED)
@@ -2910,7 +2910,7 @@ public interface autoquad {
 			/**
 			 Information about video stream
 			 */
-			@id(269) public static class VIDEO_STREAM_INFORMATION {
+			@id(269) class VIDEO_STREAM_INFORMATION {
 				@I byte stream_id;//Video Stream ID (1 for first, 2 for second, etc.)
 				@I byte count;//Number of streams available.
 				VIDEO_STREAM_TYPE         type;//Type of stream.
@@ -2932,7 +2932,7 @@ public interface autoquad {
 			/**
 			 Information about the status of a video stream.
 			 */
-			@id(270) public static class VIDEO_STREAM_STATUS {
+			@id(270) class VIDEO_STREAM_STATUS {
 				@I byte stream_id;//Video Stream ID (1 for first, 2 for second, etc.)
 				VIDEO_STREAM_STATUS_FLAGS flags;//Bitmap of stream status flags
 				float                     framerate;//Frame rate
@@ -2946,7 +2946,7 @@ public interface autoquad {
 			/**
 			 Configure AP SSID and Password.
 			 */
-			@id(299) public static class WIFI_CONFIG_AP {
+			@id(299) class WIFI_CONFIG_AP {
 				@__(32) String ssid;//Name of Wi-Fi network (SSID). Leave it blank to leave it unchanged.
 				@__(64) String password;//Password. Leave it blank for an open AP.
 			}
@@ -2958,7 +2958,7 @@ public interface autoquad {
 			 should consider adding this into the default decoding state machine to allow the protocol core to respond
 			 directly
 			 */
-			@id(300) public static class PROTOCOL_VERSION {
+			@id(300) class PROTOCOL_VERSION {
 				@I        short version;//Currently active MAVLink version number * 100: v1.0 is 100, v2.0 is 200, etc.
 				@I        short min_version;//Minimum MAVLink version supported
 				@I        short max_version;//Maximum MAVLink version supported (set to the same value as version by default)
@@ -2969,7 +2969,7 @@ public interface autoquad {
 			/**
 			 The location and information of an AIS vessel
 			 */
-			@id(301) public static class AIS_VESSEL {
+			@id(301) class AIS_VESSEL {
 				@I int MMSI;//Mobile Marine Service Identifier, 9 decimal digits
 				int lat;//Latitude
 				int lon;//Longitude
@@ -2993,7 +2993,7 @@ public interface autoquad {
 			 General status information of an UAVCAN node. Please refer to the definition of the UAVCAN message "uavcan.protocol.NodeStatus"
 			 for the background information. The UAVCAN specification is available at http://uavcan.org
 			 */
-			@id(310) public static class UAVCAN_NODE_STATUS {
+			@id(310) class UAVCAN_NODE_STATUS {
 				/**
 				 Timestamp (UNIX Epoch time or time since system boot). The receiving end can infer timestamp format (since
 				 1.1.1970 or since system boot) by checking for the magnitude the number
@@ -3014,7 +3014,7 @@ public interface autoquad {
 			 is also not prohibited to emit this message unconditionally at a low frequency. The UAVCAN specification
 			 is available at http://uavcan.org
 			 */
-			@id(311) public static class UAVCAN_NODE_INFO {
+			@id(311) class UAVCAN_NODE_INFO {
 				/**
 				 Timestamp (UNIX Epoch time or time since system boot). The receiving end can infer timestamp format (since
 				 1.1.1970 or since system boot) by checking for the magnitude the number
@@ -3033,7 +3033,7 @@ public interface autoquad {
 			/**
 			 Request to read the value of a parameter with the either the param_id string id or param_index.
 			 */
-			@id(320) public static class PARAM_EXT_REQUEST_READ {
+			@id(320) class PARAM_EXT_REQUEST_READ {
 				@I      byte   target_system;//System ID
 				@I      byte   target_component;//Component ID
 				/**
@@ -3048,7 +3048,7 @@ public interface autoquad {
 			/**
 			 Request all parameters of this component. After this request, all parameters are emitted.
 			 */
-			@id(321) public static class PARAM_EXT_REQUEST_LIST {
+			@id(321) class PARAM_EXT_REQUEST_LIST {
 				@I byte target_system;//System ID
 				@I byte target_component;//Component ID
 			}
@@ -3058,7 +3058,7 @@ public interface autoquad {
 			 recipient to keep track of received parameters and allows them to re-request missing parameters after
 			 a loss or timeout
 			 */
-			@id(322) public static class PARAM_EXT_VALUE {
+			@id(322) class PARAM_EXT_VALUE {
 				/**
 				 Parameter id, terminated by NULL if the length is less than 16 human-readable chars and WITHOUT null termination
 				 (NULL) byte if the length is exactly 16 chars - applications have to provide 16+1 bytes storage if the
@@ -3077,7 +3077,7 @@ public interface autoquad {
 			 a PARAM_ACK_ACCEPTED response. If the current state is PARAM_ACK_IN_PROGRESS, you will accordingly receive
 			 a PARAM_ACK_IN_PROGRESS in response
 			 */
-			@id(323) public static class PARAM_EXT_SET {
+			@id(323) class PARAM_EXT_SET {
 				@I       byte   target_system;//System ID
 				@I       byte   target_component;//Component ID
 				/**
@@ -3093,7 +3093,7 @@ public interface autoquad {
 			/**
 			 Response from a PARAM_EXT_SET message.
 			 */
-			@id(324) public static class PARAM_EXT_ACK {
+			@id(324) class PARAM_EXT_ACK {
 				/**
 				 Parameter id, terminated by NULL if the length is less than 16 human-readable chars and WITHOUT null termination
 				 (NULL) byte if the length is exactly 16 chars - applications have to provide 16+1 bytes storage if the
@@ -3108,7 +3108,7 @@ public interface autoquad {
 			/**
 			 Obstacle distances in front of the sensor, starting from the left in increment degrees to the right
 			 */
-			@id(330) public static class OBSTACLE_DISTANCE {
+			@id(330) class OBSTACLE_DISTANCE {
 				/**
 				 Timestamp (UNIX Epoch time or time since system boot). The receiving end can infer timestamp format (since
 				 1.1.1970 or since system boot) by checking for the magnitude the number
@@ -3150,7 +3150,7 @@ public interface autoquad {
 			 Odometry message to communicate odometry information with an external interface. Fits ROS REP 147 standard
 			 for aerial vehicles (http://www.ros.org/reps/rep-0147.html)
 			 */
-			@id(331) public static class ODOMETRY {
+			@id(331) class ODOMETRY {
 				/**
 				 Timestamp (UNIX Epoch time or time since system boot). The receiving end can infer timestamp format (since
 				 1.1.1970 or since system boot) by checking for the magnitude the number
@@ -3192,7 +3192,7 @@ public interface autoquad {
 			/**
 			 Describe a trajectory using an array of up-to 5 waypoints in the local frame.
 			 */
-			@id(332) public static class TRAJECTORY_REPRESENTATION_WAYPOINTS {
+			@id(332) class TRAJECTORY_REPRESENTATION_WAYPOINTS {
 				/**
 				 Timestamp (UNIX Epoch time or time since system boot). The receiving end can infer timestamp format (since
 				 1.1.1970 or since system boot) by checking for the magnitude the number
@@ -3216,7 +3216,7 @@ public interface autoquad {
 			/**
 			 Describe a trajectory using an array of up-to 5 bezier points in the local frame.
 			 */
-			@id(333) public static class TRAJECTORY_REPRESENTATION_BEZIER {
+			@id(333) class TRAJECTORY_REPRESENTATION_BEZIER {
 				/**
 				 Timestamp (UNIX Epoch time or time since system boot). The receiving end can infer timestamp format (since
 				 1.1.1970 or since system boot) by checking for the magnitude the number
@@ -3233,7 +3233,7 @@ public interface autoquad {
 			/**
 			 Report current used cellular network status
 			 */
-			@id(334) public static class CELLULAR_STATUS {
+			@id(334) class CELLULAR_STATUS {
 				CELLULAR_NETWORK_STATUS_FLAG status;//Status bitmap
 				CELLULAR_NETWORK_RADIO_TYPE  type;//Cellular network radio type: gsm, cdma, lte...
 				@I byte  quality;//Cellular network RSSI/RSRP in dBm, absolute value
@@ -3246,7 +3246,7 @@ public interface autoquad {
 			/**
 			 Status of the Iridium SBD link.
 			 */
-			@id(335) public static class ISBD_LINK_STATUS {
+			@id(335) class ISBD_LINK_STATUS {
 				/**
 				 Timestamp (UNIX Epoch time or time since system boot). The receiving end can infer timestamp format (since
 				 1.1.1970 or since system boot) by checking for the magnitude the number
@@ -3272,7 +3272,7 @@ public interface autoquad {
 			/**
 			 The global position resulting from GPS and sensor fusion.
 			 */
-			@id(340) public static class UTM_GLOBAL_POSITION {
+			@id(340) class UTM_GLOBAL_POSITION {
 				@I         long time;//Time of applicability of position (microseconds since UNIX epoch).
 				@I @__(18) byte uas_id;//Unique UAS ID.
 				int   lat;//Latitude (WGS84)
@@ -3298,7 +3298,7 @@ public interface autoquad {
 			 name fields are used to discriminate between messages in code and in user interfaces (respectively).
 			 Do not use in production code
 			 */
-			@id(350) public static class DEBUG_FLOAT_ARRAY {
+			@id(350) class DEBUG_FLOAT_ARRAY {
 				/**
 				 Timestamp (UNIX Epoch time or time since system boot). The receiving end can infer timestamp format (since
 				 1.1.1970 or since system boot) by checking for the magnitude the number
@@ -3312,7 +3312,7 @@ public interface autoquad {
 			/**
 			 Vehicle status report that is sent out while orbit execution is in progress (see MAV_CMD_DO_ORBIT).
 			 */
-			@id(360) public static class ORBIT_EXECUTION_STATUS {
+			@id(360) class ORBIT_EXECUTION_STATUS {
 				/**
 				 Timestamp (UNIX Epoch time or time since system boot). The receiving end can infer timestamp format (since
 				 1.1.1970 or since system boot) by checking for the magnitude the number
@@ -3338,7 +3338,7 @@ public interface autoquad {
 			 used for status text, but we recommend that updates be kept concise. Note: The message is intended as
 			 a less restrictive replacement for STATUSTEXT
 			 */
-			@id(365) public static class STATUSTEXT_LONG {
+			@id(365) class STATUSTEXT_LONG {
 				MAV_SEVERITY severity;//Severity of status. Relies on the definitions within RFC-5424.
 				@__(254) String text;//Status text message, without null termination character.
 			}
@@ -3347,7 +3347,7 @@ public interface autoquad {
 			 Smart Battery information (static/infrequent update). Use for updates from: smart battery to flight stack,
 			 flight stack to GCS. Use instead of BATTERY_STATUS for smart batteries
 			 */
-			@id(370) public static class SMART_BATTERY_INFO {
+			@id(370) class SMART_BATTERY_INFO {
 				@I byte id;//Battery ID
 				int capacity_full_specification;//Capacity when full according to manufacturer, -1: field not provided.
 				int capacity_full;//Capacity when full (accounting for battery degradation), -1: field not provided.
@@ -3364,7 +3364,7 @@ public interface autoquad {
 			 Smart Battery information (dynamic). Use for updates from: smart battery to flight stack, flight stack
 			 to GCS. Use instead of BATTERY_STATUS for smart batteries
 			 */
-			@id(371) public static class SMART_BATTERY_STATUS {
+			@id(371) class SMART_BATTERY_STATUS {
 				@I short id;//Battery ID
 				short                   capacity_remaining;//Remaining battery energy. Values: [0-100], -1: field not provided.
 				/**
@@ -3392,7 +3392,7 @@ public interface autoquad {
 			 The raw values of the actuator outputs (e.g. on Pixhawk, from MAIN, AUX ports). This message supersedes
 			 SERVO_OUTPUT_RAW
 			 */
-			@id(375) public static class ACTUATOR_OUTPUT_STATUS {
+			@id(375) class ACTUATOR_OUTPUT_STATUS {
 				@I      long  time_usec;//Timestamp (since system boot).
 				@I      int   active;//Active outputs
 				@__(32) float actuator;//Servo / motor output array values. Zero values indicate unused channels.
@@ -3401,7 +3401,7 @@ public interface autoquad {
 			/**
 			 Time/duration estimates for various events and actions given the current vehicle state and position
 			 */
-			@id(380) public static class TIME_ESTIMATE_TO_TARGET {
+			@id(380) class TIME_ESTIMATE_TO_TARGET {
 				/**
 				 Estimated time to complete the vehicle's configured "safe return" action from its current position (e.g.
 				 RTL, Smart RTL, etc.). -1 indicates that the vehicle is landed, or that no time estimate available
@@ -3426,7 +3426,7 @@ public interface autoquad {
 			 not forbidden, but discouraged). The encoding of the data is usually extension specific, i.e. determined
 			 by the source, and is usually not documented as part of the MAVLink specification
 			 */
-			@id(385) public static class TUNNEL {
+			@id(385) class TUNNEL {
 				@I byte target_system;//System ID (can be 0 for broadcast, but this is discouraged)
 				@I byte target_component;//Component ID (can be 0 for broadcast, but this is discouraged)
 				/**
@@ -3447,7 +3447,7 @@ public interface autoquad {
 			/**
 			 Hardware status sent by an onboard computer.
 			 */
-			@id(390) public static class ONBOARD_COMPUTER_STATUS {
+			@id(390) class ONBOARD_COMPUTER_STATUS {
 				/**
 				 Timestamp (UNIX Epoch time or time since system boot). The receiving end can infer timestamp format (since
 				 1.1.1970 or since system boot) by checking for the magnitude the number
@@ -3501,7 +3501,7 @@ public interface autoquad {
 			 use AUTOPILOT_VERSION. Components including GCSes should consider supporting requests of this message
 			 via MAV_CMD_REQUEST_MESSAGE
 			 */
-			@id(395) public static class COMPONENT_INFORMATION {
+			@id(395) class COMPONENT_INFORMATION {
 				@I         int  time_boot_ms;//Timestamp (time since system boot).
 				@I @__(32) byte vendor_name;//Name of the component vendor
 				@I @__(32) byte model_name;//Name of the component model
@@ -3519,7 +3519,7 @@ public interface autoquad {
 			/**
 			 Play vehicle tone/tune (buzzer). Supersedes message PLAY_TUNE.
 			 */
-			@id(400) public static class PLAY_TUNE_V2 {
+			@id(400) class PLAY_TUNE_V2 {
 				@I byte target_system;//System ID
 				@I byte target_component;//Component ID
 				TUNE_FORMAT format;//Tune format
@@ -3529,7 +3529,7 @@ public interface autoquad {
 			/**
 			 Tune formats supported by vehicle. This should be emitted as response to MAV_CMD_REQUEST_MESSAGE.
 			 */
-			@id(401) public static class SUPPORTED_TUNES {
+			@id(401) class SUPPORTED_TUNES {
 				@I byte target_system;//System ID
 				@I byte target_component;//Component ID
 				TUNE_FORMAT format;//Bitfield of supported tune formats.
@@ -3538,7 +3538,7 @@ public interface autoquad {
 			/**
 			 Cumulative distance traveled for each reported wheel.
 			 */
-			@id(9000) public static class WHEEL_DISTANCE {
+			@id(9000) class WHEEL_DISTANCE {
 				@I      long   time_usec;//Timestamp (synced to UNIX time or since system boot).
 				@I      byte   count;//Number of wheels reported.
 				/**
@@ -3553,7 +3553,7 @@ public interface autoquad {
 			 Data for filling the OpenDroneID Basic ID message. This and the below messages are primarily meant for
 			 feeding data to/from an OpenDroneID implementation. E.g. https://github.com/opendroneid/opendroneid-core-
 			 */
-			@id(12900) public static class OPEN_DRONE_ID_BASIC_ID {
+			@id(12900) class OPEN_DRONE_ID_BASIC_ID {
 				MAV_ODID_ID_TYPE id_type;//Indicates the format for the uas_id field of this message.
 				MAV_ODID_UA_TYPE ua_type;//Indicates the type of UA (Unmanned Aircraft).
 				/**
@@ -3567,7 +3567,7 @@ public interface autoquad {
 			 Data for filling the OpenDroneID Location message. The float data types are 32-bit IEEE 754. The Location
 			 message provides the location, altitude, direction and speed of the aircraft
 			 */
-			@id(12901) public static class OPEN_DRONE_ID_LOCATION {
+			@id(12901) class OPEN_DRONE_ID_LOCATION {
 				MAV_ODID_STATUS status;//Indicates whether the Unmanned Aircraft is on the ground or in the air.
 				/**
 				 Direction over ground (not heading, but direction of movement) in degrees * 100: 0.0 - 359.99 degrees.
@@ -3613,7 +3613,7 @@ public interface autoquad {
 			 Length and TimeStamp are present and AuthData is only 17 bytes. For data page 1 through 4, PageCount,Length
 			 and TimeStamp are not present and the size of AuthData is 23 bytes
 			 */
-			@id(12902) public static class OPEN_DRONE_ID_AUTHENTICATION {
+			@id(12902) class OPEN_DRONE_ID_AUTHENTICATION {
 				MAV_ODID_AUTH_TYPE authentication_type;//Indicates the type of authentication.
 				@I         byte data_page;//Allowed range is 0 - 4.
 				@I         byte page_count;//This field is only present for page 0. Allowed range is 0 - 5.
@@ -3636,7 +3636,7 @@ public interface autoquad {
 			 information that could reduce the threat profile of a UA (Unmanned Aircraft) flying in a particular area
 			 or manner
 			 */
-			@id(12903) public static class OPEN_DRONE_ID_SELF_ID {
+			@id(12903) class OPEN_DRONE_ID_SELF_ID {
 				MAV_ODID_DESC_TYPE description_type;//Indicates the type of the description field.
 				/**
 				 Text description or numeric value expressed as ASCII characters. Shall be filled with nulls in the unused
@@ -3649,7 +3649,7 @@ public interface autoquad {
 			 Data for filling the OpenDroneID System message. The System Message contains general system information
 			 including the operator location and possible aircraft group information
 			 */
-			@id(12904) public static class OPEN_DRONE_ID_SYSTEM {
+			@id(12904) class OPEN_DRONE_ID_SYSTEM {
 				MAV_ODID_LOCATION_SRC flags;//Specifies the location source for the operator location.
 				int                   operator_latitude;//Latitude of the operator. If unknown: 0 deg (both Lat/Lon).
 				int                   operator_longitude;//Longitude of the operator. If unknown: 0 deg (both Lat/Lon).
@@ -3663,7 +3663,7 @@ public interface autoquad {
 			 Data for filling the OpenDroneID Operator ID message, which contains the CAA (Civil Aviation Authority)
 			 issued operator ID
 			 */
-			@id(12905) public static class OPEN_DRONE_ID_OPERATOR_ID {
+			@id(12905) class OPEN_DRONE_ID_OPERATOR_ID {
 				MAV_ODID_OPERATOR_ID_TYPE operator_id_type;//Indicates the type of the operator_id field.
 				/**
 				 Text description or numeric value expressed as ASCII characters. Shall be filled with nulls in the unused
@@ -3678,7 +3678,7 @@ public interface autoquad {
 			 format). Used e.g. when transmitting on Bluetooth 5.0 Long Range/Extended Advertising or on WiFi Neighbor
 			 Aware Networking
 			 */
-			@id(12915) public static class OPEN_DRONE_ID_MESSAGE_PACK {
+			@id(12915) class OPEN_DRONE_ID_MESSAGE_PACK {
 				/**
 				 This field must currently always be equal to 25 bytes, since all encoded OpenDroneID messages are specificed
 				 to have this length
@@ -3695,7 +3695,7 @@ public interface autoquad {
 			/**
 			 Sends up to 20 raw float values.
 			 */
-			@id(150) public static class AQ_TELEMETRY_F {
+			@id(150) class AQ_TELEMETRY_F {
 				@I short Index;//Index of message
 				float value1;//value1
 				float value2;//value2
@@ -3727,7 +3727,7 @@ public interface autoquad {
 			 // unsigned int errors :9; // Bad detects error count// - Data Version 3 -
 			 // unsigned int temp :9; // (Deg C + 32) * 4// unsigned int errCode : 3;
 			 */
-			@id(152) public static class AQ_ESC_TELEMETRY {
+			@id(152) class AQ_ESC_TELEMETRY {
 				@I        int   time_boot_ms;//Timestamp of the component clock since boot time in ms.
 				@I        byte  seq;//Sequence number of message (first set of 4 motors is #1, next 4 is #2, etc).
 				@I        byte  num_motors;//Total number of active ESCs/motors on the system.
@@ -7461,5 +7461,4 @@ public interface autoquad {
 				AQ_NAV_STATUS_RTH             = 0x40000000, //Automatic Return to Home is active
 				AQ_NAV_STATUS_FAILSAFE        = 0x80000000;  //System is in failsafe recovery mode
 	}
-	
 }
