@@ -10,8 +10,13 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.HashSet;
+import java.util.stream.Stream;
+
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 
 public class MavLink2AdHoc { //https://github.com/mavlink/mavlink/tree/master/message_definitions/v1.0
@@ -111,7 +116,7 @@ public class MavLink2AdHoc { //https://github.com/mavlink/mavlink/tree/master/me
 					//    to fully understand the message.
 					//
 					
-					sb1.append("class ").append(clean_name(attributes.getValue("name")));
+					sb1.append("interface ").append(clean_name(attributes.getValue("name")));
 					break;
 				case "field":
 					//-   field: Encodes one field of the message. The field value is its name/text
@@ -199,7 +204,7 @@ public class MavLink2AdHoc { //https://github.com/mavlink/mavlink/tree/master/me
 					
 					
 					String e = attributes.getValue("enum");
-					sb3.append(e == null ? datatype : e).append(" ").append(clean_name(attributes.getValue("name"))).append(";");
+					sb3.append(e == null ? datatype : e).append(" ").append(clean_name(attributes.getValue("name"))).append("();");
 					break;
 				case "enum":
 					//The main enum tags/fields are:
@@ -469,44 +474,48 @@ public class MavLink2AdHoc { //https://github.com/mavlink/mavlink/tree/master/me
 	public static void main(String[] args) {
 		
 		final MyHandler handler = new MyHandler();
-		File            dir     = new File(path = args[0]);
-		File[]          files   = dir.listFiles((dir1, name) -> name.endsWith(".xml"));
+		File            src     = new File(path = args[0]);
+		Path            dst     = Paths.get(System.getProperty("user.dir"));
+		
+		File[] files = src.listFiles((dir1, name) -> name.endsWith(".xml"));
 		if (files == null)
 		{
-			System.out.println("No files in the folder `" + dir + "` found.");
+			System.out.println("No files in the folder `" + src + "` found.");
 			try
 			{
 				System.in.read();
 			} catch (IOException ignored) {}
 			return;
 		}
-		
 		try
 		{
+			if (!Files.exists(dst.resolve("AdHoc"))) Files.createDirectories(dst.resolve("AdHoc"));
+			
 			for (File file : files)
 			{
+				System.out.println(file);
 				file_names.clear();
 				
 				
 				handler.parse(file);
 				
-				Files.write(Paths.get(file.getPath().replace(".xml", ".cs")),
+				Files.write(dst.resolve("AdHoc").resolve(file.getName().replace(".xml", ".cs")),
 				            (
 						            "using System;\nusing org.unirail.Meta;\n namespace org.mavlink {\n" +
 						            "public interface " + file.getName().replace(".xml", "") + "{\n " +
-						            "interface CommunicationChannel : GroundControl.CommunicationInterface, MicroAirVehicle.CommunicationInterface {}\n" +
-						            "class GroundControl :  InJAVA, InCS{\n"
-						            + "     public interface CommunicationInterface  { "
+						            "interface CommunicationChannel : Communication_Channel_Of <GroundControl.CommunicationInterface, MicroAirVehicle.CommunicationInterface > {}\n" +
+						            "struct GroundControl :  InJAVA, InCS, InTS{\n"
+						            + "     public interface CommunicationInterface : Communication_Interface { "
 						            + packs
 						            + (0 < MAV_CMD.length() ? MAV_CMD_description + "enum MAV_CMD {\n" + MAV_CMD + "\n}\n" : "")
 						            + (0 < root.length() ? "interface MAV_CMD_PARAMS {\n" + root + "\n}\n" : "")
 						            + SI_Unit
 						            + "}\n}\n"
-						            + "class MicroAirVehicle :  InCS, InCPP{\n"
-						            + "     public interface CommunicationInterface  {}\n"
+						            + "struct MicroAirVehicle : InCS, InTS, InCPP{\n"
+						            + "     public interface CommunicationInterface  : Communication_Interface  {}\n"
 						            + "}\n" +
 						            "\n}\n}\n"
-				            ).getBytes(StandardCharsets.UTF_8));
+				            ).getBytes(StandardCharsets.UTF_8), StandardOpenOption.CREATE);
 				
 				MAV_CMD.setLength(0);
 				root.setLength(0);
@@ -522,10 +531,7 @@ public class MavLink2AdHoc { //https://github.com/mavlink/mavlink/tree/master/me
 				MyHandler.text2.setLength(0);
 				MyHandler.text3.setLength(0);
 			}
-		} catch (Exception e)
-		{
-			e.printStackTrace();
-		}
+		} catch (Exception e) {e.printStackTrace();}
 	}
 	
 	static String clean_name(String name) {
@@ -774,10 +780,10 @@ public class MavLink2AdHoc { //https://github.com/mavlink/mavlink/tree/master/me
 		
 		return false;
 	}
-	
-	static final String SI_Unit = "interface SI_Unit\n" +
+	//SRC https: //github.com/ArduPilot/pymavlink/blob/master/generator/mavschema.xsd
+	static final String SI_Unit = "struct SI_Unit\n" +
 	                              "    {\n" +
-	                              "        interface time\n" +
+	                              "        struct time\n" +
 	                              "        {\n" +
 	                              "            const string s   = \"s\";   // seconds\n" +
 	                              "            const string ds  = \"ds\";  // deciseconds\n" +
@@ -788,7 +794,7 @@ public class MavLink2AdHoc { //https://github.com/mavlink/mavlink/tree/master/me
 	                              "            const string MHz = \"MHz\"; // Mega-Herz\n" +
 	                              "        }\n" +
 	                              "\n" +
-	                              "        interface distance\n" +
+	                              "        struct distance\n" +
 	                              "        {\n" +
 	                              "            const string km    = \"km\";    // kilometres\n" +
 	                              "            const string dam   = \"dam\";   // decametres\n" +
@@ -806,14 +812,14 @@ public class MavLink2AdHoc { //https://github.com/mavlink/mavlink/tree/master/me
 	                              "            const string mm_h  = \"mm/h\";  // millimetres per hour\n" +
 	                              "        }\n" +
 	                              "\n" +
-	                              "        interface temperature\n" +
+	                              "        struct temperature\n" +
 	                              "        {\n" +
 	                              "            const string K     = \"K\";     // Kelvin\n" +
 	                              "            const string degC  = \"degC\";  // degrees Celsius\n" +
 	                              "            const string cdegC = \"cdegC\"; // centi degrees Celsius\n" +
 	                              "        }\n" +
 	                              "\n" +
-	                              "        interface angle\n" +
+	                              "        struct angle\n" +
 	                              "        {\n" +
 	                              "            const string rad    = \"rad\";    // radians\n" +
 	                              "            const string rad_s  = \"rad/s\";  // radians per second\n" +
@@ -828,7 +834,7 @@ public class MavLink2AdHoc { //https://github.com/mavlink/mavlink/tree/master/me
 	                              "            const string rpm    = \"rpm\";    // rotations per minute\n" +
 	                              "        }\n" +
 	                              "\n" +
-	                              "        interface electricity\n" +
+	                              "        struct electricity\n" +
 	                              "        {\n" +
 	                              "            const string V   = \"V\";   // Volt\n" +
 	                              "            const string cV  = \"cV\";  // centi-Volt\n" +
@@ -839,35 +845,35 @@ public class MavLink2AdHoc { //https://github.com/mavlink/mavlink/tree/master/me
 	                              "            const string mAh = \"mAh\"; // milli-Ampere hour\n" +
 	                              "        }\n" +
 	                              "\n" +
-	                              "        interface magnetism\n" +
+	                              "        struct magnetism\n" +
 	                              "        {\n" +
 	                              "            const string mT     = \"mT\";     // milli-Tesla\n" +
 	                              "            const string gauss  = \"gauss\";  // Gauss\n" +
 	                              "            const string mgauss = \"mgauss\"; // milli-Gauss\n" +
 	                              "        }\n" +
 	                              "\n" +
-	                              "        interface energy\n" +
+	                              "        struct energy\n" +
 	                              "        {\n" +
 	                              "            const string hJ = \"hJ\"; // hecto-Joule\n" +
 	                              "        }\n" +
 	                              "\n" +
-	                              "        interface power\n" +
+	                              "        struct power\n" +
 	                              "        {\n" +
 	                              "            const string W = \"W\"; // Watt\n" +
 	                              "        }\n" +
 	                              "\n" +
-	                              "        interface force\n" +
+	                              "        struct force\n" +
 	                              "        {\n" +
 	                              "            const string mG = \"mG\"; // milli-G\n" +
 	                              "        }\n" +
 	                              "\n" +
-	                              "        interface mass\n" +
+	                              "        struct mass\n" +
 	                              "        {\n" +
 	                              "            const string g  = \"g\";  // grams\n" +
 	                              "            const string kg = \"kg\"; // kilograms\n" +
 	                              "        }\n" +
 	                              "\n" +
-	                              "        interface pressure\n" +
+	                              "        struct pressure\n" +
 	                              "        {\n" +
 	                              "            const string Pa   = \"Pa\";   // Pascal\n" +
 	                              "            const string hPa  = \"hPa\";  // hecto-Pascal\n" +
@@ -875,7 +881,7 @@ public class MavLink2AdHoc { //https://github.com/mavlink/mavlink/tree/master/me
 	                              "            const string mbar = \"mbar\"; // millibar\n" +
 	                              "        }\n" +
 	                              "\n" +
-	                              "        interface ratio\n" +
+	                              "        struct ratio\n" +
 	                              "        {\n" +
 	                              "            const string percent      = \"%\";   // percent\n" +
 	                              "            const string decipercent  = \"d%\";  // decipercent\n" +
@@ -884,7 +890,7 @@ public class MavLink2AdHoc { //https://github.com/mavlink/mavlink/tree/master/me
 	                              "            const string dBm          = \"dBm\"; // Deci-Bell-milliwatts\n" +
 	                              "        }\n" +
 	                              "\n" +
-	                              "        interface digital\n" +
+	                              "        struct digital\n" +
 	                              "        {\n" +
 	                              "            const string KiB     = \"KiB\";     // Kibibyte (1024 bytes)\n" +
 	                              "            const string KiB_s   = \"KiB/s\";   // Kibibyte (1024 bytes) per second\n" +
@@ -897,13 +903,13 @@ public class MavLink2AdHoc { //https://github.com/mavlink/mavlink/tree/master/me
 	                              "            const string dpix    = \"dpix\";    // decipixels\n" +
 	                              "        }\n" +
 	                              "\n" +
-	                              "        interface flow\n" +
+	                              "        struct flow\n" +
 	                              "        {\n" +
 	                              "            const string g_min    = \"g/min\";    // grams/minute\n" +
 	                              "            const string cm_3_min = \"cm^3/min\"; // cubic centimetres/minute\n" +
 	                              "        }\n" +
 	                              "\n" +
-	                              "        interface volume\n" +
+	                              "        struct volume\n" +
 	                              "        {\n" +
 	                              "            const string cm_3 = \"cm^3\"; // cubic centimetres\n" +
 	                              "        }\n" +
