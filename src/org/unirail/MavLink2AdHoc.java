@@ -13,7 +13,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
@@ -56,7 +59,8 @@ public class MavLink2AdHoc { //https://github.com/mavlink/mavlink/tree/master/me
 		}
 	}
 	
-	static StringBuffer MAV_CMD = new StringBuffer();
+	static       StringBuffer MAV_CMD    = new StringBuffer();
+	static final List<String> packs_list = new ArrayList<>();
 	
 	static class MyHandler extends DefaultHandler {
 		
@@ -115,8 +119,9 @@ public class MavLink2AdHoc { //https://github.com/mavlink/mavlink/tree/master/me
 					//    and in code comments. This should contain all information (and hyperlinks)
 					//    to fully understand the message.
 					//
-					
-					sb1.append("interface ").append(clean_name(attributes.getValue("name")));
+					String pack = clean_name(attributes.getValue("name"));
+					packs_list.add("_<" + pack + ">");
+					sb1.append("class ").append(pack);
 					break;
 				case "field":
 					//-   field: Encodes one field of the message. The field value is its name/text
@@ -204,7 +209,7 @@ public class MavLink2AdHoc { //https://github.com/mavlink/mavlink/tree/master/me
 					
 					
 					String e = attributes.getValue("enum");
-					sb3.append(e == null ? datatype : e).append(" ").append(clean_name(attributes.getValue("name"))).append("();");
+					sb3.append(e == null ? datatype : e).append(" ").append(clean_name(attributes.getValue("name"))).append(";");
 					break;
 				case "enum":
 					//The main enum tags/fields are:
@@ -268,7 +273,7 @@ public class MavLink2AdHoc { //https://github.com/mavlink/mavlink/tree/master/me
 					if (is_MAV_CMD)
 					{
 						entry.setLength(0);
-						entry.append("interface ").append(name).append("{\n");
+						entry.append("class ").append(name).append("{\n");
 					}
 					break;
 				
@@ -308,7 +313,7 @@ public class MavLink2AdHoc { //https://github.com/mavlink/mavlink/tree/master/me
 					//    where the value is 0 or NaN).
 					
 					
-					param.append("public interface param_").append(attributes.getValue("index")).append("{\n");
+					param.append("public class param_").append(attributes.getValue("index")).append("{\n");
 					String label = attributes.getValue("label");
 					if (label != null) param.append("public const string label = \"").append(label).append("\";\n");
 					String Enum = attributes.getValue("enum");
@@ -499,24 +504,43 @@ public class MavLink2AdHoc { //https://github.com/mavlink/mavlink/tree/master/me
 				
 				handler.parse(file);
 				
+				
 				Files.write(dst.resolve("AdHoc").resolve(file.getName().replace(".xml", ".cs")),
 				            (
 						            "using System;\nusing org.unirail.Meta;\n namespace org.mavlink {\n" +
 						            "public interface " + file.getName().replace(".xml", "") + "{\n " +
-						            "interface CommunicationChannel : Communication_Channel_Of <GroundControl.CommunicationInterface, MicroAirVehicle.CommunicationInterface > {}\n" +
-						            "struct GroundControl :  InJAVA, InCS, InTS{\n"
-						            + "     public interface CommunicationInterface : Communication_Interface { "
-						            + packs
-						            + (0 < MAV_CMD.length() ? MAV_CMD_description + "enum MAV_CMD {\n" + MAV_CMD + "\n}\n" : "")
-						            + (0 < root.length() ? "interface MAV_CMD_PARAMS {\n" + root + "\n}\n" : "")
-						            + SI_Unit
-						            + "}\n}\n"
-						            + "struct MicroAirVehicle : InCS, InTS, InCPP{\n"
-						            + "     public interface CommunicationInterface  : Communication_Interface  {}\n"
-						            + "}\n" +
+						            packs +
+						            SI_Unit +
+						            (0 < MAV_CMD.length() ? MAV_CMD_description + "enum MAV_CMD {\n" + MAV_CMD + "\n}\n" : "") +
+						            (0 < root.length() ? "class MAV_CMD_PARAMS {\n" + root + "\n}\n" : "") +
+						            "       /**\n" +
+						            "       <see cref = 'InTS'/>\n" +
+						            "       <see cref = 'InJAVA'/>\n" +
+						            "       <see cref = 'InCS'/>\n" +
+						            "       <see cref = 'InCPP'/>\n" +
+						            "       <see cref = 'InGO'/>\n" +
+						            "       <see cref = 'InRS'/>\n" +
+						            "       */\n" +
+						            "       struct GroundControl : Host{\n" +
+						            "           public interface ToMicroAirVehicle :" +
+						            packs_list.stream().distinct().sorted().collect(Collectors.joining(",\n                                               ")) +
+						            "           {}\n}\n" +
+						            "       /**\n" +
+						            "       <see cref = 'InTS'/>\n" +
+						            "       <see cref = 'InJAVA'/>\n" +
+						            "       <see cref = 'InCS'/>\n" +
+						            "       <see cref = 'InCPP'/>\n" +
+						            "       <see cref = 'InGO'/>\n" +
+						            "       <see cref = 'InRS'/>\n" +
+						            "       */\n" +
+						            "       struct MicroAirVehicle : Host {\n" +
+						            "           public interface ToGroundControl : GroundControl.ToMicroAirVehicle  {}\n" +
+						            "       }\n" +
+						            "\t\tinterface CommunicationChannel : Communication_Channel_Of <GroundControl.ToMicroAirVehicle, MicroAirVehicle.ToGroundControl > {}\n" +
 						            "\n}\n}\n"
-				            ).getBytes(StandardCharsets.UTF_8), StandardOpenOption.CREATE);
+				            ).getBytes(StandardCharsets.UTF_8), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
 				
+				packs_list.clear();
 				MAV_CMD.setLength(0);
 				root.setLength(0);
 				packs.setLength(0);
@@ -780,7 +804,7 @@ public class MavLink2AdHoc { //https://github.com/mavlink/mavlink/tree/master/me
 		
 		return false;
 	}
-	//SRC https: //github.com/ArduPilot/pymavlink/blob/master/generator/mavschema.xsd
+	//SRC https://github.com/ArduPilot/pymavlink/blob/master/generator/mavschema.xsd
 	static final String SI_Unit = "struct SI_Unit\n" +
 	                              "    {\n" +
 	                              "        struct time\n" +
