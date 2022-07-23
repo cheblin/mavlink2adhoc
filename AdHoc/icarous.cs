@@ -2,9 +2,7 @@ using System;
 using org.unirail.Meta;
  namespace org.mavlink {
 public interface icarous{
- interface CommunicationChannel : Communication_Channel_Of <GroundControl.CommunicationInterface, MicroAirVehicle.CommunicationInterface > {}
-struct GroundControl :  InJAVA, InCS, InTS{
-     public interface CommunicationInterface : Communication_Interface { enum ICAROUS_TRACK_BAND_TYPES{
+ enum ICAROUS_TRACK_BAND_TYPES{
 ICAROUS_TRACK_BAND_TYPE_NONE = 0, 
 ICAROUS_TRACK_BAND_TYPE_NEAR = 1, 
 ICAROUS_TRACK_BAND_TYPE_RECOVERY = 2, 
@@ -23,99 +21,99 @@ ICAROUS_FMS_STATE_LAND = 5,
 /**
 ICAROUS heartbeat
 */
-interface ICAROUS_HEARTBEAT{
+class ICAROUS_HEARTBEAT{
 
 /**
 See the FMS_STATE enum.
 */
-ICAROUS_FMS_STATE status();
+ICAROUS_FMS_STATE status;
 
 }
 
 /**
 Kinematic multi bands (track) output from Daidalus
 */
-interface ICAROUS_KINEMATIC_BANDS{
+class ICAROUS_KINEMATIC_BANDS{
 
 /**
 Number of track bands
 */
- sbyte  numBands();
+ sbyte  numBands;
 
 /**
 See the TRACK_BAND_TYPES enum.
 */
-ICAROUS_TRACK_BAND_TYPES type1();
+ICAROUS_TRACK_BAND_TYPES type1;
 
 /**
 min angle (degrees)
 */
- float  min1();
+ float  min1;
 
 /**
 max angle (degrees)
 */
- float  max1();
+ float  max1;
 
 /**
 See the TRACK_BAND_TYPES enum.
 */
-ICAROUS_TRACK_BAND_TYPES type2();
+ICAROUS_TRACK_BAND_TYPES type2;
 
 /**
 min angle (degrees)
 */
- float  min2();
+ float  min2;
 
 /**
 max angle (degrees)
 */
- float  max2();
+ float  max2;
 
 /**
 See the TRACK_BAND_TYPES enum.
 */
-ICAROUS_TRACK_BAND_TYPES type3();
+ICAROUS_TRACK_BAND_TYPES type3;
 
 /**
 min angle (degrees)
 */
- float  min3();
+ float  min3;
 
 /**
 max angle (degrees)
 */
- float  max3();
+ float  max3;
 
 /**
 See the TRACK_BAND_TYPES enum.
 */
-ICAROUS_TRACK_BAND_TYPES type4();
+ICAROUS_TRACK_BAND_TYPES type4;
 
 /**
 min angle (degrees)
 */
- float  min4();
+ float  min4;
 
 /**
 max angle (degrees)
 */
- float  max4();
+ float  max4;
 
 /**
 See the TRACK_BAND_TYPES enum.
 */
-ICAROUS_TRACK_BAND_TYPES type5();
+ICAROUS_TRACK_BAND_TYPES type5;
 
 /**
 min angle (degrees)
 */
- float  min5();
+ float  min5;
 
 /**
 max angle (degrees)
 */
- float  max5();
+ float  max5;
 
 }
 struct SI_Unit
@@ -250,11 +248,30 @@ struct SI_Unit
         {
             const string cm_3 = "cm^3"; // cubic centimetres
         }
-    }}
+    }       /**
+       <see cref = 'InTS'/>
+       <see cref = 'InJAVA'/>
+       <see cref = 'InCS'/>
+       <see cref = 'InCPP'/>
+       <see cref = 'InGO'/>
+       <see cref = 'InRS'/>
+       */
+       struct GroundControl : Host{
+           public interface ToMicroAirVehicle :_<ICAROUS_HEARTBEAT>,
+                                               _<ICAROUS_KINEMATIC_BANDS>           {}
 }
-struct MicroAirVehicle : InCS, InTS, InCPP{
-     public interface CommunicationInterface  : Communication_Interface  {}
-}
+       /**
+       <see cref = 'InTS'/>
+       <see cref = 'InJAVA'/>
+       <see cref = 'InCS'/>
+       <see cref = 'InCPP'/>
+       <see cref = 'InGO'/>
+       <see cref = 'InRS'/>
+       */
+       struct MicroAirVehicle : Host {
+           public interface ToGroundControl : GroundControl.ToMicroAirVehicle  {}
+       }
+		interface CommunicationChannel : Communication_Channel_Of <GroundControl.ToMicroAirVehicle, MicroAirVehicle.ToGroundControl > {}
 
 }
 }

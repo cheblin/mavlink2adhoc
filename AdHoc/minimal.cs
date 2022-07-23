@@ -2,9 +2,7 @@ using System;
 using org.unirail.Meta;
  namespace org.mavlink {
 public interface minimal{
- interface CommunicationChannel : Communication_Channel_Of <GroundControl.CommunicationInterface, MicroAirVehicle.CommunicationInterface > {}
-struct GroundControl :  InJAVA, InCS, InTS{
-     public interface CommunicationInterface : Communication_Interface { 
+ 
 /**
 Micro air vehicle / autopilot classes. This identifies the individual model.
 */
@@ -1262,39 +1260,39 @@ fields (along with the message component id), allow the receiving system to trea
 this system appropriately (e.g. by laying out the user interface based on the autopilot). This microservice
 is documented at https://mavlink.io/en/services/heartbeat.html
 */
-interface HEARTBEAT{
+class HEARTBEAT{
 
 /**
 Vehicle or component type. For a flight controller component the vehicle type (quadrotor, helicopter,
 etc.). For other components the component type (e.g. camera, gimbal, etc.). This should be used in preference
 to component id for identifying the component type.
 */
-MAV_TYPE Typ();
+MAV_TYPE Typ;
 
 /**
 Autopilot type / class. Use MAV_AUTOPILOT_INVALID for components that are not flight controllers.
 */
-MAV_AUTOPILOT autopilot();
+MAV_AUTOPILOT autopilot;
 
 /**
 System mode bitmap.
 */
-MAV_MODE_FLAG base_mode();
+MAV_MODE_FLAG base_mode;
 
 /**
 A bitfield for use for autopilot-specific flags
 */
- uint  custom_mode();
+ uint  custom_mode;
 
 /**
 System status flag.
 */
-MAV_STATE system_status();
+MAV_STATE system_status;
 
 /**
 MAVLink version, not writable by user, gets added by protocol because of magic data type: uint8_t_mavlink_version
 */
- sbyte  mavlink_version();
+ sbyte  mavlink_version;
 
 }
 
@@ -1305,32 +1303,32 @@ Every node should respond to a request for PROTOCOL_VERSION to enable the handsh
 should consider adding this into the default decoding state machine to allow the protocol core to respond
 directly.
 */
-interface PROTOCOL_VERSION{
+class PROTOCOL_VERSION{
 
 /**
 Currently active MAVLink version number * 100: v1.0 is 100, v2.0 is 200, etc.
 */
- ushort  version();
+ ushort  version;
 
 /**
 Minimum MAVLink version supported
 */
- ushort  min_version();
+ ushort  min_version;
 
 /**
 Maximum MAVLink version supported (set to the same value as version by default)
 */
- ushort  max_version();
+ ushort  max_version;
 
 /**
 The first 8 bytes (not characters printed in hex!) of the git hash.
 */
-[Dims( +8 )]  byte  spec_version_hash();
+[Dims( +8 )]  byte  spec_version_hash;
 
 /**
 The first 8 bytes (not characters printed in hex!) of the git hash.
 */
-[Dims( +8 )]  byte  library_version_hash();
+[Dims( +8 )]  byte  library_version_hash;
 
 }
 struct SI_Unit
@@ -1465,11 +1463,30 @@ struct SI_Unit
         {
             const string cm_3 = "cm^3"; // cubic centimetres
         }
-    }}
+    }       /**
+       <see cref = 'InTS'/>
+       <see cref = 'InJAVA'/>
+       <see cref = 'InCS'/>
+       <see cref = 'InCPP'/>
+       <see cref = 'InGO'/>
+       <see cref = 'InRS'/>
+       */
+       struct GroundControl : Host{
+           public interface ToMicroAirVehicle :_<HEARTBEAT>,
+                                               _<PROTOCOL_VERSION>           {}
 }
-struct MicroAirVehicle : InCS, InTS, InCPP{
-     public interface CommunicationInterface  : Communication_Interface  {}
-}
+       /**
+       <see cref = 'InTS'/>
+       <see cref = 'InJAVA'/>
+       <see cref = 'InCS'/>
+       <see cref = 'InCPP'/>
+       <see cref = 'InGO'/>
+       <see cref = 'InRS'/>
+       */
+       struct MicroAirVehicle : Host {
+           public interface ToGroundControl : GroundControl.ToMicroAirVehicle  {}
+       }
+		interface CommunicationChannel : Communication_Channel_Of <GroundControl.ToMicroAirVehicle, MicroAirVehicle.ToGroundControl > {}
 
 }
 }

@@ -2,123 +2,121 @@ using System;
 using org.unirail.Meta;
  namespace org.mavlink {
 public interface test{
- interface CommunicationChannel : Communication_Channel_Of <GroundControl.CommunicationInterface, MicroAirVehicle.CommunicationInterface > {}
-struct GroundControl :  InJAVA, InCS, InTS{
-     public interface CommunicationInterface : Communication_Interface { 
+ 
 /**
 Test all field types
 */
-interface TEST_TYPES{
+class TEST_TYPES{
 
 /**
 char
 */
- char  c();
+ char  c;
 
 /**
 string
 */
-string  s();
+string  s;
 
 /**
 uint8_t
 */
- byte  U();
+ byte  U;
 
 /**
 uint16_t
 */
- ushort  U1();
+ ushort  U1;
 
 /**
 uint32_t
 */
- uint  U3();
+ uint  U3;
 
 /**
 uint64_t
 */
- ulong  U6();
+ ulong  U6;
 
 /**
 int8_t
 */
- sbyte  s8();
+ sbyte  s8;
 
 /**
 int16_t
 */
- short  s16();
+ short  s16;
 
 /**
 int32_t
 */
- int  s32();
+ int  s32;
 
 /**
 int64_t
 */
- long  s64();
+ long  s64;
 
 /**
 float
 */
- float  f();
+ float  f;
 
 /**
 double
 */
- double  d();
+ double  d;
 
 /**
 uint8_t_array
 */
-[Dims( +3 )]  byte  u8_array();
+[Dims( +3 )]  byte  u8_array;
 
 /**
 uint16_t_array
 */
-[Dims( +3 )]  ushort  u16_array();
+[Dims( +3 )]  ushort  u16_array;
 
 /**
 uint32_t_array
 */
-[Dims( +3 )]  uint  u32_array();
+[Dims( +3 )]  uint  u32_array;
 
 /**
 uint64_t_array
 */
-[Dims( +3 )]  ulong  u64_array();
+[Dims( +3 )]  ulong  u64_array;
 
 /**
 int8_t_array
 */
-[Dims( +3 )]  sbyte  s8_array();
+[Dims( +3 )]  sbyte  s8_array;
 
 /**
 int16_t_array
 */
-[Dims( +3 )]  short  s16_array();
+[Dims( +3 )]  short  s16_array;
 
 /**
 int32_t_array
 */
-[Dims( +3 )]  int  s32_array();
+[Dims( +3 )]  int  s32_array;
 
 /**
 int64_t_array
 */
-[Dims( +3 )]  long  s64_array();
+[Dims( +3 )]  long  s64_array;
 
 /**
 float_array
 */
-[Dims( +3 )]  float  f_array();
+[Dims( +3 )]  float  f_array;
 
 /**
 double_array
 */
-[Dims( +3 )]  double  d_array();
+[Dims( +3 )]  double  d_array;
 
 }
 struct SI_Unit
@@ -253,11 +251,29 @@ struct SI_Unit
         {
             const string cm_3 = "cm^3"; // cubic centimetres
         }
-    }}
+    }       /**
+       <see cref = 'InTS'/>
+       <see cref = 'InJAVA'/>
+       <see cref = 'InCS'/>
+       <see cref = 'InCPP'/>
+       <see cref = 'InGO'/>
+       <see cref = 'InRS'/>
+       */
+       struct GroundControl : Host{
+           public interface ToMicroAirVehicle :_<TEST_TYPES>           {}
 }
-struct MicroAirVehicle : InCS, InTS, InCPP{
-     public interface CommunicationInterface  : Communication_Interface  {}
-}
+       /**
+       <see cref = 'InTS'/>
+       <see cref = 'InJAVA'/>
+       <see cref = 'InCS'/>
+       <see cref = 'InCPP'/>
+       <see cref = 'InGO'/>
+       <see cref = 'InRS'/>
+       */
+       struct MicroAirVehicle : Host {
+           public interface ToGroundControl : GroundControl.ToMicroAirVehicle  {}
+       }
+		interface CommunicationChannel : Communication_Channel_Of <GroundControl.ToMicroAirVehicle, MicroAirVehicle.ToGroundControl > {}
 
 }
 }
