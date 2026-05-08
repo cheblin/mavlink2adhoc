@@ -1,8 +1,13 @@
 using System;
 using org.unirail.Meta;
- namespace org.mavlink {
-public interface minimal{
- 
+
+namespace org.mavlink {
+
+    /**
+        <see cref = 'HEARTBEAT' id = '0'/>
+    */
+    public interface minimal {
+
 /**
 Micro air vehicle / autopilot classes. This identifies the individual model.
 */
@@ -218,34 +223,41 @@ Onboard companion controller
 MAV_TYPE_ONBOARD_CONTROLLER = 18, 
 
 /**
-Two-rotor VTOL using control surfaces in vertical operation in addition. Tailsitter.
+Two-rotor Tailsitter VTOL that additionally uses control surfaces in vertical operation. Note, value previously
+named MAV_TYPE_VTOL_DUOROTOR.
 */
-MAV_TYPE_VTOL_DUOROTOR = 19, 
+MAV_TYPE_VTOL_TAILSITTER_DUOROTOR = 19, 
 
 /**
-Quad-rotor VTOL using a V-shaped quad config in vertical operation. Tailsitter.
+Quad-rotor Tailsitter VTOL using a V-shaped quad config in vertical operation. Note: value previously
+named MAV_TYPE_VTOL_QUADROTOR.
 */
-MAV_TYPE_VTOL_QUADROTOR = 20, 
+MAV_TYPE_VTOL_TAILSITTER_QUADROTOR = 20, 
 
 /**
-Tiltrotor VTOL
+Tiltrotor VTOL. Fuselage and wings stay (nominally) horizontal in all flight phases. It able to tilt (some)
+rotors to provide thrust in cruise flight.
 */
 MAV_TYPE_VTOL_TILTROTOR = 21, 
 
 /**
-VTOL reserved 2
+VTOL with separate fixed rotors for hover and cruise flight. Fuselage and wings stay (nominally) horizontal
+in all flight phases.
 */
-MAV_TYPE_VTOL_RESERVED2 = 22, 
+MAV_TYPE_VTOL_FIXEDROTOR = 22, 
 
 /**
-VTOL reserved 3
+Tailsitter VTOL. Fuselage and wings orientation changes depending on flight phase: vertical for hover,
+horizontal for cruise. Use more specific VTOL MAV_TYPE_VTOL_TAILSITTER_DUOROTOR or MAV_TYPE_VTOL_TAILSITTER_QUADROTOR
+if appropriate.
 */
-MAV_TYPE_VTOL_RESERVED3 = 23, 
+MAV_TYPE_VTOL_TAILSITTER = 23, 
 
 /**
-VTOL reserved 4
+Tiltwing VTOL. Fuselage stays horizontal in all flight phases. The whole wing, along with any attached
+engine, can tilt between vertical and horizontal mode.
 */
-MAV_TYPE_VTOL_RESERVED4 = 24, 
+MAV_TYPE_VTOL_TILTWING = 24, 
 
 /**
 VTOL reserved 5
@@ -337,11 +349,51 @@ Winch
 */
 MAV_TYPE_WINCH = 42, 
 
+/**
+Generic multirotor that does not fit into a specific type or whose type is unknown
+*/
+MAV_TYPE_GENERIC_MULTIROTOR = 43, 
+
+/**
+Illuminator. An illuminator is a light source that is used for lighting up dark areas external to the
+system: e.g. a torch or searchlight (as opposed to a light source for illuminating the system itself,
+e.g. an indicator light).
+*/
+MAV_TYPE_ILLUMINATOR = 44, 
+
+/**
+Orbiter spacecraft. Includes satellites orbiting terrestrial and extra-terrestrial bodies. Follows NASA
+Spacecraft Classification.
+*/
+MAV_TYPE_SPACECRAFT_ORBITER = 45, 
+
+/**
+A generic four-legged ground vehicle (e.g., a robot dog).
+*/
+MAV_TYPE_GROUND_QUADRUPED = 46, 
+
+/**
+VTOL hybrid of helicopter and autogyro. It has a main rotor for lift and separate propellers for forward
+flight. The rotor must be powered for hover but can autorotate in cruise flight. See: https://en.wikipedia.org/wiki/Gyrodyne
+*/
+MAV_TYPE_VTOL_GYRODYNE = 47, 
+
+/**
+Gripper
+*/
+MAV_TYPE_GRIPPER = 48, 
+
+/**
+Radio
+*/
+MAV_TYPE_RADIO = 49, 
+
 }
 
 /**
-These flags encode the MAV mode.
+These flags encode the MAV mode, see MAV_MODE enum for useful combinations.
 */
+[Flags]
 enum MAV_MODE_FLAG{
 
 /**
@@ -386,7 +438,8 @@ not be used for stable implementations.
 MAV_MODE_FLAG_TEST_ENABLED = 2, 
 
 /**
-0b00000001 Reserved for future use.
+0b00000001 system-specific custom mode is enabled. When using this flag to enable a custom mode all other
+flags should be ignored.
 */
 MAV_MODE_FLAG_CUSTOM_MODE_ENABLED = 1, 
 
@@ -397,6 +450,7 @@ These values encode the bit positions of the decode position. These values can b
 of a flag bit by combining the base_mode variable with AND with the flag position value. The result will
 be either 0 or 1, depending on if the flag is set or not.
 */
+[Flags]
 enum MAV_MODE_FLAG_DECODE_POSITION{
 
 /**
@@ -468,13 +522,13 @@ System is active and might be already airborne. Motors are engaged.
 MAV_STATE_ACTIVE = 4, 
 
 /**
-System is in a non-normal flight mode. It can however still navigate.
+System is in a non-normal flight mode (failsafe). It can however still navigate.
 */
 MAV_STATE_CRITICAL = 5, 
 
 /**
-System is in a non-normal flight mode. It lost control over parts or over the whole airframe. It is in
-mayday and going down.
+System is in a non-normal flight mode (failsafe). It lost control over parts or over the whole airframe.
+It is in mayday and going down.
 */
 MAV_STATE_EMERGENCY = 6, 
 
@@ -484,16 +538,16 @@ System just initialized its power-down sequence, will shut down now.
 MAV_STATE_POWEROFF = 7, 
 
 /**
-System is terminating itself.
+System is terminating itself (failsafe or commanded).
 */
 MAV_STATE_FLIGHT_TERMINATION = 8, 
 
 }
 
 /**
-When creating new entries, components that can have multiple instances (e.g. cameras, servos etc.) should
-be allocated sequential values. An appropriate number of values should be left free after these components
-to allow the number of instances to be expanded.
+New code must not use component IDs to infer the component type, but instead check the MAV_TYPE in the
+HEARTBEAT message!
+      
 */
 enum MAV_COMPONENT{
 
@@ -989,6 +1043,21 @@ Camera #6.
 MAV_COMP_ID_CAMERA6 = 105, 
 
 /**
+Radio #1.
+*/
+MAV_COMP_ID_RADIO = 110, 
+
+/**
+Radio #2.
+*/
+MAV_COMP_ID_RADIO2 = 111, 
+
+/**
+Radio #3.
+*/
+MAV_COMP_ID_RADIO3 = 112, 
+
+/**
 Servo #1.
 */
 MAV_COMP_ID_SERVO1 = 140, 
@@ -1085,6 +1154,7 @@ MAV_COMP_ID_PERIPHERAL = 158,
 
 /**
 Gimbal ID for QX1.
+**DEPRECATED** since=2018-11 replaced_by=MAV_COMP_ID_GIMBAL: All gimbals should use MAV_COMP_ID_GIMBAL.
 */
 MAV_COMP_ID_QX1_GIMBAL = 159, 
 
@@ -1097,6 +1167,11 @@ MAV_COMP_ID_FLARM = 160,
 Parachute component.
 */
 MAV_COMP_ID_PARACHUTE = 161, 
+
+/**
+Winch component.
+*/
+MAV_COMP_ID_WINCH = 169, 
 
 /**
 Gimbal #2.
@@ -1248,7 +1323,13 @@ Component handling TUNNEL messages (e.g. vendor specific GUI of a component).
 MAV_COMP_ID_TUNNEL_NODE = 242, 
 
 /**
-Component for handling system messages (e.g. to ARM, takeoff, etc.).
+Illuminator
+*/
+MAV_COMP_ID_ILLUMINATOR = 243, 
+
+/**
+Deprecated, don't use. Component for handling system messages (e.g. to ARM, takeoff, etc.).
+**DEPRECATED** since=2018-11 replaced_by=MAV_COMP_ID_ALL: System control does not require a separate component ID. Instead, system commands should be sent with target_component=MAV_COMP_ID_ALL allowing the target component to use any appropriate component id.
 */
 MAV_COMP_ID_SYSTEM_CONTROL = 250, 
 
@@ -1292,43 +1373,7 @@ MAV_STATE system_status;
 /**
 MAVLink version, not writable by user, gets added by protocol because of magic data type: uint8_t_mavlink_version
 */
- sbyte  mavlink_version;
-
-}
-
-/**
-Version and capability of protocol version. This message can be requested with MAV_CMD_REQUEST_MESSAGE
-and is used as part of the handshaking to establish which MAVLink version should be used on the network.
-Every node should respond to a request for PROTOCOL_VERSION to enable the handshaking. Library implementers
-should consider adding this into the default decoding state machine to allow the protocol core to respond
-directly.
-*/
-class PROTOCOL_VERSION{
-
-/**
-Currently active MAVLink version number * 100: v1.0 is 100, v2.0 is 200, etc.
-*/
- ushort  version;
-
-/**
-Minimum MAVLink version supported
-*/
- ushort  min_version;
-
-/**
-Maximum MAVLink version supported (set to the same value as version by default)
-*/
- ushort  max_version;
-
-/**
-The first 8 bytes (not characters printed in hex!) of the git hash.
-*/
-[Dims( +8 )]  byte  spec_version_hash;
-
-/**
-The first 8 bytes (not characters printed in hex!) of the git hash.
-*/
-[Dims( +8 )]  byte  library_version_hash;
+ byte  mavlink_version;
 
 }
 struct SI_Unit
@@ -1463,30 +1508,29 @@ struct SI_Unit
         {
             const string cm_3 = "cm^3"; // cubic centimetres
         }
-    }       /**
-       <see cref = 'InTS'/>
-       <see cref = 'InJAVA'/>
-       <see cref = 'InCS'/>
-       <see cref = 'InCPP'/>
-       <see cref = 'InGO'/>
-       <see cref = 'InRS'/>
-       */
-       struct GroundControl : Host{
-           public interface ToMicroAirVehicle :_<HEARTBEAT>,
-                                               _<PROTOCOL_VERSION>           {}
-}
-       /**
-       <see cref = 'InTS'/>
-       <see cref = 'InJAVA'/>
-       <see cref = 'InCS'/>
-       <see cref = 'InCPP'/>
-       <see cref = 'InGO'/>
-       <see cref = 'InRS'/>
-       */
-       struct MicroAirVehicle : Host {
-           public interface ToGroundControl : GroundControl.ToMicroAirVehicle  {}
-       }
-		interface CommunicationChannel : Communication_Channel_Of <GroundControl.ToMicroAirVehicle, MicroAirVehicle.ToGroundControl > {}
+    }        /**
+        <see cref = 'InTS'/>
+        <see cref = 'InJAVA'/>
+        <see cref = 'InCS'/>
+        <see cref = 'InCPP'/>
+        <see cref = 'InGO'/>
+        <see cref = 'InRS'/>
+        */
+        struct GroundControl : Host { }
+        /**
+        <see cref = 'InTS'/>
+        <see cref = 'InJAVA'/>
+        <see cref = 'InCS'/>
+        <see cref = 'InCPP'/>
+        <see cref = 'InGO'/>
+        <see cref = 'InRS'/>
+        */
+        struct MicroAirVehicle : Host { }
 
-}
+        // Either side can send any MAVLink message — non-transitional, no Master.
+        interface CommunicationChannel : Connects<GroundControl, MicroAirVehicle> {
+            [_____lr_____<@minimal>]
+            struct Start { }
+        }
+    }
 }

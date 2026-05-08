@@ -4,11 +4,10 @@ using org.unirail.Meta;
 namespace org.mavlink {
 
     /**
-        <see cref = 'AUTOPILOT_VERSION' id = '148'/>
-        <see cref = 'GLOBAL_POSITION_INT' id = '33'/>
         <see cref = 'HEARTBEAT' id = '0'/>
+        <see cref = 'LOWEHEISER_GOV_EFI' id = '10151'/>
     */
-    public interface standard {
+    public interface loweheiser {
 
 /**
 Micro air vehicle / autopilot classes. This identifies the individual model.
@@ -1380,310 +1379,125 @@ MAVLink version, not writable by user, gets added by protocol because of magic d
 }
 
 /**
-Enum used to indicate true or false (also: success or failure, enabled or disabled, active or inactive).
+Composite EFI and Governor data from Loweheiser equipment.  This message is created by the EFI unit based
+on its own data and data received from a governor attached to that EFI unit.
 */
-[Flags]
-enum MAV_BOOL{
+class LOWEHEISER_GOV_EFI{
 
 /**
-False.
+Generator Battery voltage.
 */
-MAV_BOOL_FALSE = 0, 
+ float  volt_batt;
 
 /**
-True.
+Generator Battery current.
 */
-MAV_BOOL_TRUE = 1, 
-
-}
+ float  curr_batt;
 
 /**
-Bitmask of (optional) autopilot capabilities (64 bit). If a bit is set, the autopilot supports this capability.
+Current being produced by generator.
 */
-[Flags]
-enum MAV_PROTOCOL_CAPABILITY{
+ float  curr_gen;
 
 /**
-Autopilot supports the MISSION_ITEM float message type.
-          Note that MISSION_ITEM is deprecated,
-and autopilots should use MISSION_ITEM_INT instead.
+Load current being consumed by the UAV (sum of curr_gen and curr_batt)
 */
-MAV_PROTOCOL_CAPABILITY_MISSION_FLOAT = 1, 
+ float  curr_rot;
 
 /**
-Autopilot supports the new param float message type.
-**DEPRECATED** since=2022-03 replaced_by=MAV_PROTOCOL_CAPABILITY_PARAM_ENCODE_C_CAST
+Generator fuel remaining in litres.
 */
-MAV_PROTOCOL_CAPABILITY_PARAM_FLOAT = 2, 
+ float  fuel_level;
 
 /**
-Autopilot supports MISSION_ITEM_INT scaled integer message type.
-          Note that this flag must always
-be set if missions are supported, because missions must always use MISSION_ITEM_INT (rather than MISSION_ITEM,
-which is deprecated).
+Throttle Output.
 */
-MAV_PROTOCOL_CAPABILITY_MISSION_INT = 4, 
+ float  throttle;
 
 /**
-Autopilot supports COMMAND_INT scaled integer message type.
+Seconds this generator has run since it was rebooted.
 */
-MAV_PROTOCOL_CAPABILITY_COMMAND_INT = 8, 
+ uint  runtime;
 
 /**
-Parameter protocol uses byte-wise encoding of parameter values into param_value (float) fields: https://mavlink.io/en/services/parameter.html#parameter-encoding.
-
-         Note that either this flag or MAV_PROTOCOL_CAPABILITY_PARAM_ENCODE_C_CAST should be set if the
-parameter protocol is supported.
+Seconds until this generator requires maintenance.  A negative value indicates maintenance is past due.
 */
-MAV_PROTOCOL_CAPABILITY_PARAM_ENCODE_BYTEWISE = 16, 
+ int  until_maintenance;
 
 /**
-Autopilot supports the File Transfer Protocol v1: https://mavlink.io/en/services/ftp.html.
+The Temperature of the rectifier.
 */
-MAV_PROTOCOL_CAPABILITY_FTP = 32, 
+ float  rectifier_temp;
 
 /**
-Autopilot supports commanding attitude offboard.
+The temperature of the mechanical motor, fuel cell core or generator.
 */
-MAV_PROTOCOL_CAPABILITY_SET_ATTITUDE_TARGET = 64, 
+ float  generator_temp;
 
 /**
-Autopilot supports commanding position and velocity targets in local NED frame.
+EFI Supply Voltage.
 */
-MAV_PROTOCOL_CAPABILITY_SET_POSITION_TARGET_LOCAL_NED = 128, 
+ float  efi_batt;
 
 /**
-Autopilot supports commanding position and velocity targets in global scaled integers.
+Motor RPM.
 */
-MAV_PROTOCOL_CAPABILITY_SET_POSITION_TARGET_GLOBAL_INT = 256, 
+ float  efi_rpm;
 
 /**
-Autopilot supports terrain protocol / data handling.
+Injector pulse-width in milliseconds.
 */
-MAV_PROTOCOL_CAPABILITY_TERRAIN = 512, 
+ float  efi_pw;
 
 /**
-Reserved for future use.
+Fuel flow rate in litres/hour.
 */
-MAV_PROTOCOL_CAPABILITY_RESERVED3 = 1024, 
+ float  efi_fuel_flow;
 
 /**
-Autopilot supports the MAV_CMD_DO_FLIGHTTERMINATION command (flight termination).
+Fuel consumed.
 */
-MAV_PROTOCOL_CAPABILITY_FLIGHT_TERMINATION = 2048, 
+ float  efi_fuel_consumed;
 
 /**
-Autopilot supports onboard compass calibration.
+Atmospheric pressure.
 */
-MAV_PROTOCOL_CAPABILITY_COMPASS_CALIBRATION = 4096, 
+ float  efi_baro;
 
 /**
-Autopilot supports MAVLink version 2.
+Manifold Air Temperature.
 */
-MAV_PROTOCOL_CAPABILITY_MAVLINK2 = 8192, 
+ float  efi_mat;
 
 /**
-Autopilot supports mission fence protocol.
+Cylinder Head Temperature.
 */
-MAV_PROTOCOL_CAPABILITY_MISSION_FENCE = 16384, 
+ float  efi_clt;
 
 /**
-Autopilot supports mission rally point protocol.
+Throttle Position.
 */
-MAV_PROTOCOL_CAPABILITY_MISSION_RALLY = 32768, 
+ float  efi_tps;
 
 /**
-Reserved for future use.
+Exhaust gas temperature.
 */
-MAV_PROTOCOL_CAPABILITY_RESERVED2 = 65536, 
+ float  efi_exhaust_gas_temperature;
 
 /**
-Parameter protocol uses C-cast of parameter values to set the param_value (float) fields: https://mavlink.io/en/services/parameter.html#parameter-encoding.
-
-         Note that either this flag or MAV_PROTOCOL_CAPABILITY_PARAM_ENCODE_BYTEWISE should be set if
-the parameter protocol is supported.
+EFI index.
 */
-MAV_PROTOCOL_CAPABILITY_PARAM_ENCODE_C_CAST = 131072, 
+ byte  efi_index;
 
 /**
-This component implements/is a gimbal manager. This means the GIMBAL_MANAGER_INFORMATION, and other messages
-can be requested.
-        
+Generator status.
 */
-MAV_PROTOCOL_CAPABILITY_COMPONENT_IMPLEMENTS_GIMBAL_MANAGER = 262144, 
+ ushort  generator_status;
 
 /**
-Component supports locking control to a particular GCS independent of its system (via MAV_CMD_REQUEST_OPERATOR_CONTROL).
-**WIP**
+EFI status.
 */
-MAV_PROTOCOL_CAPABILITY_COMPONENT_ACCEPTS_GCS_CONTROL = 524288, 
-
-/**
-Autopilot has a connected gripper. MAVLink Grippers would set MAV_TYPE_GRIPPER instead.
-**WIP**
-*/
-MAV_PROTOCOL_CAPABILITY_GRIPPER = 1048576, 
-
-}
-
-/**
-These values define the type of firmware release.  These values indicate the first version or release
-of this type.  For example the first alpha release would be 64, the second would be 65.
-*/
-enum FIRMWARE_VERSION_TYPE{
-
-/**
-development release
-*/
-FIRMWARE_VERSION_TYPE_DEV = 0, 
-
-/**
-alpha release
-*/
-FIRMWARE_VERSION_TYPE_ALPHA = 64, 
-
-/**
-beta release
-*/
-FIRMWARE_VERSION_TYPE_BETA = 128, 
-
-/**
-release candidate
-*/
-FIRMWARE_VERSION_TYPE_RC = 192, 
-
-/**
-official stable release
-*/
-FIRMWARE_VERSION_TYPE_OFFICIAL = 255, 
-
-}
-
-/**
-The filtered global position (e.g. fused GPS and accelerometers). The position is in GPS-frame (right-handed,
-Z-up). It is designed as scaled integer message since the resolution of float is not sufficient.
-*/
-class GLOBAL_POSITION_INT{
-
-/**
-Timestamp (time since system boot).
-*/
- uint  time_boot_ms;
-
-/**
-Latitude, expressed
-*/
- int  lat;
-
-/**
-Longitude, expressed
-*/
- int  lon;
-
-/**
-Altitude (MSL). Note that virtually all GPS modules provide both WGS84 and MSL.
-*/
- int  alt;
-
-/**
-Altitude above home
-*/
- int  relative_alt;
-
-/**
-Ground X Speed (Latitude, positive north)
-*/
- short  vx;
-
-/**
-Ground Y Speed (Longitude, positive east)
-*/
- short  vy;
-
-/**
-Ground Z Speed (Altitude, positive down)
-*/
- short  vz;
-
-/**
-Vehicle heading (yaw angle), 0.0..359.99 degrees. If unknown, set to: UINT16_MAX
-*/
- ushort  hdg;
-
-}
-
-/**
-Version and capability of autopilot software. This should be emitted in response to a request with MAV_CMD_REQUEST_MESSAGE.
-*/
-class AUTOPILOT_VERSION{
-
-/**
-Bitmap of capabilities
-*/
-MAV_PROTOCOL_CAPABILITY capabilities;
-
-/**
-Firmware version number.
-        The field must be encoded as 4 bytes, where each byte (shown from MSB
-to LSB) is part of a semantic version: (major) (minor) (patch) (FIRMWARE_VERSION_TYPE).
-*/
- uint  flight_sw_version;
-
-/**
-Middleware version number
-*/
- uint  middleware_sw_version;
-
-/**
-Operating system version number
-*/
- uint  os_sw_version;
-
-/**
-HW / board version (last 8 bits should be silicon ID, if any). The first 16 bits of this field specify
-a board type from an enumeration stored at https://github.com/PX4/PX4-Bootloader/blob/master/board_types.txt
-and with extensive additions at https://github.com/ArduPilot/ardupilot/blob/master/Tools/AP_Bootloader/board_types.txt
-*/
- uint  board_version;
-
-/**
-Custom version field, commonly the first 8 bytes of the git hash. This is not an unique identifier, but
-should allow to identify the commit using the main version number even for very large code bases.
-*/
-[D(8)]  byte [] flight_custom_version;
-
-/**
-Custom version field, commonly the first 8 bytes of the git hash. This is not an unique identifier, but
-should allow to identify the commit using the main version number even for very large code bases.
-*/
-[D(8)]  byte [] middleware_custom_version;
-
-/**
-Custom version field, commonly the first 8 bytes of the git hash. This is not an unique identifier, but
-should allow to identify the commit using the main version number even for very large code bases.
-*/
-[D(8)]  byte [] os_custom_version;
-
-/**
-ID of the board vendor
-*/
- ushort  vendor_id;
-
-/**
-ID of the product
-*/
- ushort  product_id;
-
-/**
-UID if provided by hardware (see uid2)
-*/
- ulong  uid;
-
-/**
-UID if provided by hardware (supersedes the uid field. If this is non-zero, use this field, otherwise
-use uid)
-*/
-[D(18)]  byte [] uid2;
+ ushort  efi_status;
 
 }
 struct SI_Unit
@@ -1818,7 +1632,51 @@ struct SI_Unit
         {
             const string cm_3 = "cm^3"; // cubic centimetres
         }
-    }        /**
+    }enum MAV_CMD {
+
+/**
+Set Loweheiser desired states
+*/
+MAV_CMD_LOWEHEISER_SET_STATE = 10151, 
+
+}
+struct MAV_CMD_PARAMS {
+struct MAV_CMD_LOWEHEISER_SET_STATE{
+public struct param_1{
+ public const string description = @"EFI Index";
+
+}
+public struct param_2{
+ public const string description = @"Desired Engine/EFI State (0: Power Off, 1:Running)";
+
+}
+public struct param_3{
+ public const string description = @"Desired Governor State (0:manual throttle, 1:Governed throttle)";
+
+}
+public struct param_4{
+ public const string description = @"Manual throttle level, 0% - 100%";
+
+}
+public struct param_5{
+ public const string description = @"Electronic Start up (0:Off, 1:On)";
+
+}
+public struct param_6{
+ public const string description = @"Empty";
+
+}
+public struct param_7{
+ public const string description = @"Empty";
+
+}
+
+ public const string description = @"Set Loweheiser desired states";
+
+}
+
+}
+        /**
         <see cref = 'InTS'/>
         <see cref = 'InJAVA'/>
         <see cref = 'InCS'/>
@@ -1839,7 +1697,7 @@ struct SI_Unit
 
         // Either side can send any MAVLink message — non-transitional, no Master.
         interface CommunicationChannel : Connects<GroundControl, MicroAirVehicle> {
-            [_____lr_____<@standard>]
+            [_____lr_____<@loweheiser>]
             struct Start { }
         }
     }

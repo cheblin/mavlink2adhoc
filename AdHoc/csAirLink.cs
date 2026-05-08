@@ -4,124 +4,51 @@ using org.unirail.Meta;
 namespace org.mavlink {
 
     /**
-        <see cref = 'TEST_TYPES' id = '17000'/>
+        <see cref = 'AIRLINK_AUTH' id = '52000'/>
+        <see cref = 'AIRLINK_AUTH_RESPONSE' id = '52001'/>
     */
-    public interface test {
+    public interface csAirLink {
+[Flags]
+enum AIRLINK_AUTH_RESPONSE_TYPE{
 
 /**
-Test all field types
+Login or password error
 */
-class TEST_TYPES{
+AIRLINK_ERROR_LOGIN_OR_PASS = 0, 
 
 /**
-char
+Auth successful
 */
- char  c;
+AIRLINK_AUTH_OK = 1, 
+
+}
 
 /**
-string
+Authorization package
 */
-[D(+10)] string  s;
+class AIRLINK_AUTH{
 
 /**
-uint8_t
+Login
 */
- byte  U;
+[D(+50)] string  login;
 
 /**
-uint16_t
+Password
 */
- ushort  U1;
+[D(+50)] string  password;
+
+}
 
 /**
-uint32_t
+Response to the authorization request
 */
- uint  U3;
+class AIRLINK_AUTH_RESPONSE{
 
 /**
-uint64_t
+Response type
 */
- ulong  U6;
-
-/**
-int8_t
-*/
- sbyte  s8;
-
-/**
-int16_t
-*/
- short  s16;
-
-/**
-int32_t
-*/
- int  s32;
-
-/**
-int64_t
-*/
- long  s64;
-
-/**
-float
-*/
- float  f;
-
-/**
-double
-*/
- double  d;
-
-/**
-uint8_t_array
-*/
-[D(3)]  byte [] u8_array;
-
-/**
-uint16_t_array
-*/
-[D(3)]  ushort [] u16_array;
-
-/**
-uint32_t_array
-*/
-[D(3)]  uint [] u32_array;
-
-/**
-uint64_t_array
-*/
-[D(3)]  ulong [] u64_array;
-
-/**
-int8_t_array
-*/
-[D(3)]  sbyte [] s8_array;
-
-/**
-int16_t_array
-*/
-[D(3)]  short [] s16_array;
-
-/**
-int32_t_array
-*/
-[D(3)]  int [] s32_array;
-
-/**
-int64_t_array
-*/
-[D(3)]  long [] s64_array;
-
-/**
-float_array
-*/
-[D(3)]  float [] f_array;
-
-/**
-double_array
-*/
-[D(3)]  double [] d_array;
+AIRLINK_AUTH_RESPONSE_TYPE resp_type;
 
 }
 struct SI_Unit
@@ -277,7 +204,7 @@ struct SI_Unit
 
         // Either side can send any MAVLink message — non-transitional, no Master.
         interface CommunicationChannel : Connects<GroundControl, MicroAirVehicle> {
-            [_____lr_____<@test>]
+            [_____lr_____<@csAirLink>]
             struct Start { }
         }
     }

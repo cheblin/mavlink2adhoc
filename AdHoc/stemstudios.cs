@@ -10,10 +10,6 @@ namespace org.mavlink {
         <see cref = 'AIRSPEED' id = '295'/>
         <see cref = 'AIS_VESSEL' id = '301'/>
         <see cref = 'ALTITUDE' id = '141'/>
-        <see cref = 'ASLCTRL_DATA' id = '8004'/>
-        <see cref = 'ASLCTRL_DEBUG' id = '8005'/>
-        <see cref = 'ASLUAV_STATUS' id = '8006'/>
-        <see cref = 'ASL_OBCTRL' id = '8008'/>
         <see cref = 'ATTITUDE' id = '30'/>
         <see cref = 'ATTITUDE_QUATERNION' id = '31'/>
         <see cref = 'ATTITUDE_QUATERNION_COV' id = '61'/>
@@ -47,9 +43,7 @@ namespace org.mavlink {
         <see cref = 'COMMAND_ACK' id = '77'/>
         <see cref = 'COMMAND_CANCEL' id = '80'/>
         <see cref = 'COMMAND_INT' id = '75'/>
-        <see cref = 'COMMAND_INT_STAMPED' id = '223'/>
         <see cref = 'COMMAND_LONG' id = '76'/>
-        <see cref = 'COMMAND_LONG_STAMPED' id = '224'/>
         <see cref = 'COMPONENT_INFORMATION' id = '395'/>
         <see cref = 'COMPONENT_INFORMATION_BASIC' id = '396'/>
         <see cref = 'COMPONENT_METADATA' id = '397'/>
@@ -63,7 +57,6 @@ namespace org.mavlink {
         <see cref = 'DEBUG_VECT' id = '250'/>
         <see cref = 'DISTANCE_SENSOR' id = '132'/>
         <see cref = 'EFI_STATUS' id = '225'/>
-        <see cref = 'EKF_EXT' id = '8007'/>
         <see cref = 'ENCAPSULATED_DATA' id = '131'/>
         <see cref = 'ESC_INFO' id = '290'/>
         <see cref = 'ESC_STATUS' id = '291'/>
@@ -76,7 +69,6 @@ namespace org.mavlink {
         <see cref = 'FLIGHT_INFORMATION' id = '264'/>
         <see cref = 'FOLLOW_TARGET' id = '144'/>
         <see cref = 'FUEL_STATUS' id = '371'/>
-        <see cref = 'FW_SOARING_DATA' id = '8011'/>
         <see cref = 'GENERATOR_STATUS' id = '373'/>
         <see cref = 'GIMBAL_DEVICE_ATTITUDE_STATUS' id = '285'/>
         <see cref = 'GIMBAL_DEVICE_INFORMATION' id = '283'/>
@@ -99,7 +91,6 @@ namespace org.mavlink {
         <see cref = 'GPS_RTCM_DATA' id = '233'/>
         <see cref = 'GPS_RTK' id = '127'/>
         <see cref = 'GPS_STATUS' id = '25'/>
-        <see cref = 'GSM_LINK_STATUS' id = '8014'/>
         <see cref = 'HEARTBEAT' id = '0'/>
         <see cref = 'HIGHRES_IMU' id = '105'/>
         <see cref = 'HIGH_LATENCY' id = '234'/>
@@ -117,6 +108,8 @@ namespace org.mavlink {
         <see cref = 'ILLUMINATOR_STATUS' id = '440'/>
         <see cref = 'ISBD_LINK_STATUS' id = '335'/>
         <see cref = 'LANDING_TARGET' id = '149'/>
+        <see cref = 'LED_STRIP_CONFIG' id = '52600'/>
+        <see cref = 'LED_STRIP_STATE' id = '52601'/>
         <see cref = 'LINK_NODE_STATUS' id = '8'/>
         <see cref = 'LOCAL_POSITION_NED' id = '32'/>
         <see cref = 'LOCAL_POSITION_NED_COV' id = '64'/>
@@ -200,20 +193,12 @@ namespace org.mavlink {
         <see cref = 'RESPONSE_EVENT_ERROR' id = '413'/>
         <see cref = 'SAFETY_ALLOWED_AREA' id = '55'/>
         <see cref = 'SAFETY_SET_ALLOWED_AREA' id = '54'/>
-        <see cref = 'SATCOM_LINK_STATUS' id = '8015'/>
         <see cref = 'SCALED_IMU' id = '26'/>
         <see cref = 'SCALED_IMU2' id = '116'/>
         <see cref = 'SCALED_IMU3' id = '129'/>
         <see cref = 'SCALED_PRESSURE' id = '29'/>
         <see cref = 'SCALED_PRESSURE2' id = '137'/>
         <see cref = 'SCALED_PRESSURE3' id = '143'/>
-        <see cref = 'SENSORPOD_STATUS' id = '8012'/>
-        <see cref = 'SENSOR_AIRFLOW_ANGLES' id = '8016'/>
-        <see cref = 'SENS_ATMOS' id = '8009'/>
-        <see cref = 'SENS_BATMON' id = '8010'/>
-        <see cref = 'SENS_MPPT' id = '8003'/>
-        <see cref = 'SENS_POWER' id = '8002'/>
-        <see cref = 'SENS_POWER_BOARD' id = '8013'/>
         <see cref = 'SERIAL_CONTROL' id = '126'/>
         <see cref = 'SERVO_OUTPUT_RAW' id = '36'/>
         <see cref = 'SETUP_SIGNING' id = '256'/>
@@ -256,7 +241,7 @@ namespace org.mavlink {
         <see cref = 'WINCH_STATUS' id = '9005'/>
         <see cref = 'WIND_COV' id = '231'/>
     */
-    public interface ASLUAV {
+    public interface stemstudios {
 
 /**
 Micro air vehicle / autopilot classes. This identifies the individual model.
@@ -20035,1021 +20020,108 @@ Humidity
  ushort  humidity;
 
 }
-enum GSM_LINK_TYPE{
 
 /**
-no service
+- Turn all LEDs off (clear).
+      
 */
-GSM_LINK_TYPE_NONE = 0, 
+enum LED_CONFIG_MODE{
 
 /**
-link type unknown
+Set all LEDs in the target strip to the first color in our colors array.
 */
-GSM_LINK_TYPE_UNKNOWN = 1, 
+LED_CONFIG_MODE_ALL = 0, 
 
 /**
-2G (GSM/GRPS/EDGE) link
+Set up to 8 consecutive LEDs, starting from the given index, to the colors provided in the colors array.
 */
-GSM_LINK_TYPE_2G = 2, 
+LED_CONFIG_MODE_INDEX = 1, 
 
 /**
-3G link (WCDMA/HSDPA/HSPA) 
+Set all LEDs in target strip to change color according to the flight mode.
 */
-GSM_LINK_TYPE_3G = 3, 
+LED_CONFIG_MODE_FOLLOW_FLIGHT_MODE = 2, 
 
 /**
-4G link (LTE)
+Set all LEDs in the target strip to black (turn off).
 */
-GSM_LINK_TYPE_4G = 4, 
-
-}
-[Flags]
-enum GSM_MODEM_TYPE{
-
-/**
-not specified
-*/
-GSM_MODEM_TYPE_UNKNOWN = 0, 
-
-/**
-HUAWEI LTE USB Stick E3372
-*/
-GSM_MODEM_TYPE_HUAWEI_E3372 = 1, 
+LED_CONFIG_MODE_CLEAR = 3, 
 
 }
 
 /**
-Message encoding a command with parameters as scaled integers and additional metadata. Scaling depends
-on the actual command value.
+The colors field is an array of up to 8 colors, each represented as a 32-bit integer in the format 0xWWRRGGBB
+
+        where WW is white, RR is the intensity of the red color channel, GG is green, and BB is blue.
 */
-class COMMAND_INT_STAMPED{
+class LED_STRIP_CONFIG{
 
 /**
-UTC time, seconds elapsed since 01.01.1970
-*/
- uint  utc_time;
-
-/**
-Microseconds elapsed since vehicle boot
-*/
- ulong  vehicle_timestamp;
-
-/**
-System ID
+System ID.
 */
  byte  target_system;
 
 /**
-Component ID
+Component ID (Normally 134 for an LED Strip Controller).
 */
  byte  target_component;
 
 /**
-The coordinate system of the COMMAND, as defined by MAV_FRAME enum
+How to configure LEDs.
 */
-MAV_FRAME frame;
+LED_CONFIG_MODE mode;
 
 /**
-The scheduled action for the mission item, as defined by MAV_CMD enum
+Set LEDs starting from this index.
 */
-MAV_CMD command;
+ byte  index;
 
 /**
-false:0, true:1
+The number of LEDs to set (up to 8).
 */
- byte  current;
+ byte  length;
 
 /**
-autocontinue to next wp
+Which strip to configure. UINT8_MAX for all strips.
 */
- byte  autocontinue;
+ byte  id;
 
 /**
-PARAM1, see MAV_CMD enum
+Array of 32-bit color values (0xWWRRGGBB).
 */
- float  param1;
-
-/**
-PARAM2, see MAV_CMD enum
-*/
- float  param2;
-
-/**
-PARAM3, see MAV_CMD enum
-*/
- float  param3;
-
-/**
-PARAM4, see MAV_CMD enum
-*/
- float  param4;
-
-/**
-PARAM5 / local: x position in meters * 1e4, global: latitude in degrees * 10^7
-*/
- int  x;
-
-/**
-PARAM6 / local: y position in meters * 1e4, global: longitude in degrees * 10^7
-*/
- int  y;
-
-/**
-PARAM7 / z position: global: altitude in meters (MSL, WGS84, AGL or relative to home - depending on frame).
-*/
- float  z;
+[D(8)]  uint [] colors;
 
 }
 
 /**
-Send a command with up to seven parameters to the MAV and additional metadata
+Current LED State. Can be emitted by LED Strip Controller.
 */
-class COMMAND_LONG_STAMPED{
+class LED_STRIP_STATE{
 
 /**
-UTC time, seconds elapsed since 01.01.1970
+How many LEDs are being reported in this message.
 */
- uint  utc_time;
+ byte  length;
 
 /**
-Microseconds elapsed since vehicle boot
+Index of first LED being reported.
 */
- ulong  vehicle_timestamp;
+ byte  index;
 
 /**
-System which should execute the command
+Which strip is being reported.
 */
- byte  target_system;
+ byte  id;
 
 /**
-Component which should execute the command, 0 for all components
+Are the LED colors changing according to the flight mode (1) or not (0).
 */
- byte  target_component;
+ byte  following_flight_mode;
 
 /**
-Command ID, as defined by MAV_CMD enum.
+Array of 32-bit color values (0xWWRRGGBB).
 */
-MAV_CMD command;
-
-/**
-0: First transmission of this command. 1-255: Confirmation transmissions (e.g. for kill command)
-*/
- byte  confirmation;
-
-/**
-Parameter 1, as defined by MAV_CMD enum.
-*/
- float  param1;
-
-/**
-Parameter 2, as defined by MAV_CMD enum.
-*/
- float  param2;
-
-/**
-Parameter 3, as defined by MAV_CMD enum.
-*/
- float  param3;
-
-/**
-Parameter 4, as defined by MAV_CMD enum.
-*/
- float  param4;
-
-/**
-Parameter 5, as defined by MAV_CMD enum.
-*/
- float  param5;
-
-/**
-Parameter 6, as defined by MAV_CMD enum.
-*/
- float  param6;
-
-/**
-Parameter 7, as defined by MAV_CMD enum.
-*/
- float  param7;
-
-}
-
-/**
-Voltage and current sensor data
-*/
-class SENS_POWER{
-
-/**
-Power board voltage sensor reading
-*/
- float  adc121_vspb_volt;
-
-/**
-Power board current sensor reading
-*/
- float  adc121_cspb_amp;
-
-/**
-Board current sensor 1 reading
-*/
- float  adc121_cs1_amp;
-
-/**
-Board current sensor 2 reading
-*/
- float  adc121_cs2_amp;
-
-}
-
-/**
-Maximum Power Point Tracker (MPPT) sensor data for solar module power performance tracking
-*/
-class SENS_MPPT{
-
-/**
-MPPT last timestamp 
-*/
- ulong  mppt_timestamp;
-
-/**
-MPPT1 voltage 
-*/
- float  mppt1_volt;
-
-/**
-MPPT1 current 
-*/
- float  mppt1_amp;
-
-/**
-MPPT1 pwm 
-*/
- ushort  mppt1_pwm;
-
-/**
-MPPT1 status 
-*/
- byte  mppt1_status;
-
-/**
-MPPT2 voltage 
-*/
- float  mppt2_volt;
-
-/**
-MPPT2 current 
-*/
- float  mppt2_amp;
-
-/**
-MPPT2 pwm 
-*/
- ushort  mppt2_pwm;
-
-/**
-MPPT2 status 
-*/
- byte  mppt2_status;
-
-/**
-MPPT3 voltage 
-*/
- float  mppt3_volt;
-
-/**
-MPPT3 current 
-*/
- float  mppt3_amp;
-
-/**
-MPPT3 pwm 
-*/
- ushort  mppt3_pwm;
-
-/**
-MPPT3 status 
-*/
- byte  mppt3_status;
-
-}
-
-/**
-ASL-fixed-wing controller data
-*/
-class ASLCTRL_DATA{
-
-/**
-Timestamp
-*/
- ulong  timestamp;
-
-/**
-ASLCTRL control-mode (manual, stabilized, auto, etc...)
-*/
- byte  aslctrl_mode;
-
-/**
-See sourcecode for a description of these values... 
-*/
- float  h;
- float  hRef;
- float  hRef_t;
-
-/**
-Pitch angle
-*/
- float  PitchAngle;
-
-/**
-Pitch angle reference
-*/
- float  PitchAngleRef;
- float  q;
- float  qRef;
- float  uElev;
- float  uThrot;
- float  uThrot2;
- float  nZ;
-
-/**
-Airspeed reference
-*/
- float  AirspeedRef;
- byte  SpoilersEngaged;
-
-/**
-Yaw angle
-*/
- float  YawAngle;
-
-/**
-Yaw angle reference
-*/
- float  YawAngleRef;
-
-/**
-Roll angle
-*/
- float  RollAngle;
-
-/**
-Roll angle reference
-*/
- float  RollAngleRef;
- float  p;
- float  pRef;
- float  r;
- float  rRef;
- float  uAil;
- float  uRud;
-
-}
-
-/**
-ASL-fixed-wing controller debug data
-*/
-class ASLCTRL_DEBUG{
-
-/**
-Debug data
-*/
- uint  i32_1;
-
-/**
-Debug data
-*/
- byte  i8_1;
-
-/**
-Debug data
-*/
- byte  i8_2;
-
-/**
-Debug data 
-*/
- float  f_1;
-
-/**
-Debug data
-*/
- float  f_2;
-
-/**
-Debug data
-*/
- float  f_3;
-
-/**
-Debug data
-*/
- float  f_4;
-
-/**
-Debug data
-*/
- float  f_5;
-
-/**
-Debug data
-*/
- float  f_6;
-
-/**
-Debug data
-*/
- float  f_7;
-
-/**
-Debug data
-*/
- float  f_8;
-
-}
-
-/**
-Extended state information for ASLUAVs
-*/
-class ASLUAV_STATUS{
-
-/**
-Status of the position-indicator LEDs
-*/
- byte  LED_status;
-
-/**
-Status of the IRIDIUM satellite communication system
-*/
- byte  SATCOM_status;
-
-/**
-Status vector for up to 8 servos
-*/
-[D(8)]  byte [] Servo_status;
-
-/**
-Motor RPM 
-*/
- float  Motor_rpm;
-
-}
-
-/**
-Extended EKF state estimates for ASLUAVs
-*/
-class EKF_EXT{
-
-/**
-Time since system start
-*/
- ulong  timestamp;
-
-/**
-Magnitude of wind velocity (in lateral inertial plane)
-*/
- float  Windspeed;
-
-/**
-Wind heading angle from North
-*/
- float  WindDir;
-
-/**
-Z (Down) component of inertial wind velocity
-*/
- float  WindZ;
-
-/**
-Magnitude of air velocity
-*/
- float  Airspeed;
-
-/**
-Sideslip angle
-*/
- float  beta;
-
-/**
-Angle of attack
-*/
- float  alpha;
-
-}
-
-/**
-Off-board controls/commands for ASLUAVs
-*/
-class ASL_OBCTRL{
-
-/**
-Time since system start
-*/
- ulong  timestamp;
-
-/**
-Elevator command [~]
-*/
- float  uElev;
-
-/**
-Throttle command [~]
-*/
- float  uThrot;
-
-/**
-Throttle 2 command [~]
-*/
- float  uThrot2;
-
-/**
-Left aileron command [~]
-*/
- float  uAilL;
-
-/**
-Right aileron command [~]
-*/
- float  uAilR;
-
-/**
-Rudder command [~]
-*/
- float  uRud;
-
-/**
-Off-board computer status
-*/
- byte  obctrl_status;
-
-}
-
-/**
-Atmospheric sensors (temperature, humidity, ...) 
-*/
-class SENS_ATMOS{
-
-/**
-Time since system boot
-*/
- ulong  timestamp;
-
-/**
-Ambient temperature
-*/
- float  TempAmbient;
-
-/**
-Relative humidity
-*/
- float  Humidity;
-
-}
-
-/**
-Battery pack monitoring data for Li-Ion batteries
-*/
-class SENS_BATMON{
-
-/**
-Time since system start
-*/
- ulong  batmon_timestamp;
-
-/**
-Battery pack temperature
-*/
- float  temperature;
-
-/**
-Battery pack voltage
-*/
- ushort  voltage;
-
-/**
-Battery pack current
-*/
- short  current;
-
-/**
-Battery pack state-of-charge
-*/
- byte  SoC;
-
-/**
-Battery monitor status report bits in Hex
-*/
- ushort  batterystatus;
-
-/**
-Battery monitor serial number in Hex
-*/
- ushort  serialnumber;
-
-/**
-Battery monitor safetystatus report bits in Hex
-*/
- uint  safetystatus;
-
-/**
-Battery monitor operation status report bits in Hex
-*/
- uint  operationstatus;
-
-/**
-Battery pack cell 1 voltage
-*/
- ushort  cellvoltage1;
-
-/**
-Battery pack cell 2 voltage
-*/
- ushort  cellvoltage2;
-
-/**
-Battery pack cell 3 voltage
-*/
- ushort  cellvoltage3;
-
-/**
-Battery pack cell 4 voltage
-*/
- ushort  cellvoltage4;
-
-/**
-Battery pack cell 5 voltage
-*/
- ushort  cellvoltage5;
-
-/**
-Battery pack cell 6 voltage
-*/
- ushort  cellvoltage6;
-
-}
-
-/**
-Fixed-wing soaring (i.e. thermal seeking) data
-*/
-class FW_SOARING_DATA{
-
-/**
-Timestamp
-*/
- ulong  timestamp;
-
-/**
-Timestamp since last mode change
-*/
- ulong  timestampModeChanged;
-
-/**
-Thermal core updraft strength
-*/
- float  xW;
-
-/**
-Thermal radius
-*/
- float  xR;
-
-/**
-Thermal center latitude
-*/
- float  xLat;
-
-/**
-Thermal center longitude
-*/
- float  xLon;
-
-/**
-Variance W
-*/
- float  VarW;
-
-/**
-Variance R
-*/
- float  VarR;
-
-/**
-Variance Lat
-*/
- float  VarLat;
-
-/**
-Variance Lon 
-*/
- float  VarLon;
-
-/**
-Suggested loiter radius
-*/
- float  LoiterRadius;
-
-/**
-Suggested loiter direction
-*/
- float  LoiterDirection;
-
-/**
-Distance to soar point
-*/
- float  DistToSoarPoint;
-
-/**
-Expected sink rate at current airspeed, roll and throttle
-*/
- float  vSinkExp;
-
-/**
-Measurement / updraft speed at current/local airplane position
-*/
- float  z1_LocalUpdraftSpeed;
-
-/**
-Measurement / roll angle tracking error
-*/
- float  z2_DeltaRoll;
-
-/**
-Expected measurement 1
-*/
- float  z1_exp;
-
-/**
-Expected measurement 2
-*/
- float  z2_exp;
-
-/**
-Thermal drift (from estimator prediction step only)
-*/
- float  ThermalGSNorth;
-
-/**
-Thermal drift (from estimator prediction step only)
-*/
- float  ThermalGSEast;
-
-/**
-Total specific energy change (filtered)
-*/
- float  TSE_dot;
-
-/**
-Debug variable 1
-*/
- float  DebugVar1;
-
-/**
-Debug variable 2
-*/
- float  DebugVar2;
-
-/**
-Control Mode [-]
-*/
- byte  ControlMode;
-
-/**
-Data valid [-]
-*/
- byte  valid;
-
-}
-
-/**
-Monitoring of sensorpod status
-*/
-class SENSORPOD_STATUS{
-
-/**
-Timestamp in linuxtime (since 1.1.1970)
-*/
- ulong  timestamp;
-
-/**
-Rate of ROS topic 1
-*/
- byte  visensor_rate_1;
-
-/**
-Rate of ROS topic 2
-*/
- byte  visensor_rate_2;
-
-/**
-Rate of ROS topic 3
-*/
- byte  visensor_rate_3;
-
-/**
-Rate of ROS topic 4
-*/
- byte  visensor_rate_4;
-
-/**
-Number of recording nodes
-*/
- byte  recording_nodes_count;
-
-/**
-Temperature of sensorpod CPU in
-*/
- byte  cpu_temp;
-
-/**
-Free space available in recordings directory in [Gb] * 1e2
-*/
- ushort  free_space;
-
-}
-
-/**
-Monitoring of power board status
-*/
-class SENS_POWER_BOARD{
-
-/**
-Timestamp
-*/
- ulong  timestamp;
-
-/**
-Power board status register
-*/
- byte  pwr_brd_status;
-
-/**
-Power board leds status
-*/
- byte  pwr_brd_led_status;
-
-/**
-Power board system voltage
-*/
- float  pwr_brd_system_volt;
-
-/**
-Power board servo voltage
-*/
- float  pwr_brd_servo_volt;
-
-/**
-Power board digital voltage
-*/
- float  pwr_brd_digital_volt;
-
-/**
-Power board left motor current sensor
-*/
- float  pwr_brd_mot_l_amp;
-
-/**
-Power board right motor current sensor
-*/
- float  pwr_brd_mot_r_amp;
-
-/**
-Power board analog current sensor
-*/
- float  pwr_brd_analog_amp;
-
-/**
-Power board digital current sensor
-*/
- float  pwr_brd_digital_amp;
-
-/**
-Power board extension current sensor
-*/
- float  pwr_brd_ext_amp;
-
-/**
-Power board aux current sensor
-*/
- float  pwr_brd_aux_amp;
-
-}
-
-/**
-Status of GSM modem (connected to onboard computer)
-*/
-class GSM_LINK_STATUS{
-
-/**
-Timestamp (of OBC)
-*/
- ulong  timestamp;
-
-/**
-GSM modem used
-*/
-GSM_MODEM_TYPE gsm_modem_type;
-
-/**
-GSM link type
-*/
-GSM_LINK_TYPE gsm_link_type;
-
-/**
-RSSI as reported by modem (unconverted)
-*/
- byte  rssi;
-
-/**
-RSRP (LTE) or RSCP (WCDMA) as reported by modem (unconverted)
-*/
- byte  rsrp_rscp;
-
-/**
-SINR (LTE) or ECIO (WCDMA) as reported by modem (unconverted)
-*/
- byte  sinr_ecio;
-
-/**
-RSRQ (LTE only) as reported by modem (unconverted)
-*/
- byte  rsrq;
-
-}
-
-/**
-Status of the SatCom link
-*/
-class SATCOM_LINK_STATUS{
-
-/**
-Timestamp
-*/
- ulong  timestamp;
-
-/**
-Timestamp of the last successful sbd session
-*/
- ulong  last_heartbeat;
-
-/**
-Number of failed sessions
-*/
- ushort  failed_sessions;
-
-/**
-Number of successful sessions
-*/
- ushort  successful_sessions;
-
-/**
-Signal quality
-*/
- byte  signal_quality;
-
-/**
-Ring call pending
-*/
- byte  ring_pending;
-
-/**
-Transmission session pending
-*/
- byte  tx_session_pending;
-
-/**
-Receiving session pending
-*/
- byte  rx_session_pending;
-
-}
-
-/**
-Calibrated airflow angle measurements
-*/
-class SENSOR_AIRFLOW_ANGLES{
-
-/**
-Timestamp
-*/
- ulong  timestamp;
-
-/**
-Angle of attack
-*/
- float  angleofattack;
-
-/**
-Angle of attack measurement valid
-*/
- byte  angleofattack_valid;
-
-/**
-Sideslip angle
-*/
- float  sideslip;
-
-/**
-Sideslip angle measurement valid
-*/
- byte  sideslip_valid;
+[D(8)]  uint [] colors;
 
 }
 struct SI_Unit
@@ -22165,16 +21237,6 @@ Request forwarding of CAN packets from the given CAN bus to this component via t
 Frames are sent using CAN_FRAME and CANFD_FRAME messages
 */
 MAV_CMD_CAN_FORWARD = 32000, 
-
-/**
-Mission command to reset Maximum Power Point Tracker (MPPT)
-*/
-MAV_CMD_RESET_MPPT = 40001, 
-
-/**
-Mission command to perform a power cycle on payload
-*/
-MAV_CMD_PAYLOAD_CONTROL = 40002, 
 
 }
 struct MAV_CMD_PARAMS {
@@ -28281,72 +27343,6 @@ public struct param_7{
 Frames are sent using CAN_FRAME and CANFD_FRAME messages";
 
 }
-struct MAV_CMD_RESET_MPPT{
-public struct param_1{
- public const string description = @"MPPT number";
-
-}
-public struct param_2{
- public const string description = @"Empty";
-
-}
-public struct param_3{
- public const string description = @"Empty";
-
-}
-public struct param_4{
- public const string description = @"Empty";
-
-}
-public struct param_5{
- public const string description = @"Empty";
-
-}
-public struct param_6{
- public const string description = @"Empty";
-
-}
-public struct param_7{
- public const string description = @"Empty";
-
-}
-
- public const string description = @"Mission command to reset Maximum Power Point Tracker (MPPT)";
-
-}
-struct MAV_CMD_PAYLOAD_CONTROL{
-public struct param_1{
- public const string description = @"Complete power cycle";
-
-}
-public struct param_2{
- public const string description = @"VISensor power cycle";
-
-}
-public struct param_3{
- public const string description = @"Empty";
-
-}
-public struct param_4{
- public const string description = @"Empty";
-
-}
-public struct param_5{
- public const string description = @"Empty";
-
-}
-public struct param_6{
- public const string description = @"Empty";
-
-}
-public struct param_7{
- public const string description = @"Empty";
-
-}
-
- public const string description = @"Mission command to perform a power cycle on payload";
-
-}
 
 }
         /**
@@ -28370,7 +27366,7 @@ public struct param_7{
 
         // Either side can send any MAVLink message — non-transitional, no Master.
         interface CommunicationChannel : Connects<GroundControl, MicroAirVehicle> {
-            [_____lr_____<@ASLUAV>]
+            [_____lr_____<@stemstudios>]
             struct Start { }
         }
     }

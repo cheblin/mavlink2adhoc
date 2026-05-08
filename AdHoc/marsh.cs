@@ -10,10 +10,6 @@ namespace org.mavlink {
         <see cref = 'AIRSPEED' id = '295'/>
         <see cref = 'AIS_VESSEL' id = '301'/>
         <see cref = 'ALTITUDE' id = '141'/>
-        <see cref = 'ASLCTRL_DATA' id = '8004'/>
-        <see cref = 'ASLCTRL_DEBUG' id = '8005'/>
-        <see cref = 'ASLUAV_STATUS' id = '8006'/>
-        <see cref = 'ASL_OBCTRL' id = '8008'/>
         <see cref = 'ATTITUDE' id = '30'/>
         <see cref = 'ATTITUDE_QUATERNION' id = '31'/>
         <see cref = 'ATTITUDE_QUATERNION_COV' id = '61'/>
@@ -47,12 +43,11 @@ namespace org.mavlink {
         <see cref = 'COMMAND_ACK' id = '77'/>
         <see cref = 'COMMAND_CANCEL' id = '80'/>
         <see cref = 'COMMAND_INT' id = '75'/>
-        <see cref = 'COMMAND_INT_STAMPED' id = '223'/>
         <see cref = 'COMMAND_LONG' id = '76'/>
-        <see cref = 'COMMAND_LONG_STAMPED' id = '224'/>
         <see cref = 'COMPONENT_INFORMATION' id = '395'/>
         <see cref = 'COMPONENT_INFORMATION_BASIC' id = '396'/>
         <see cref = 'COMPONENT_METADATA' id = '397'/>
+        <see cref = 'CONTROL_LOADING_AXIS' id = '52501'/>
         <see cref = 'CONTROL_SYSTEM_STATE' id = '146'/>
         <see cref = 'CURRENT_EVENT_SEQUENCE' id = '411'/>
         <see cref = 'CURRENT_MODE' id = '436'/>
@@ -63,20 +58,19 @@ namespace org.mavlink {
         <see cref = 'DEBUG_VECT' id = '250'/>
         <see cref = 'DISTANCE_SENSOR' id = '132'/>
         <see cref = 'EFI_STATUS' id = '225'/>
-        <see cref = 'EKF_EXT' id = '8007'/>
         <see cref = 'ENCAPSULATED_DATA' id = '131'/>
         <see cref = 'ESC_INFO' id = '290'/>
         <see cref = 'ESC_STATUS' id = '291'/>
         <see cref = 'ESTIMATOR_STATUS' id = '230'/>
         <see cref = 'EVENT' id = '410'/>
         <see cref = 'EXTENDED_SYS_STATE' id = '245'/>
+        <see cref = 'EYE_TRACKING_DATA' id = '52505'/>
         <see cref = 'FENCE_STATUS' id = '162'/>
         <see cref = 'FIGURE_EIGHT_EXECUTION_STATUS' id = '361'/>
         <see cref = 'FILE_TRANSFER_PROTOCOL' id = '110'/>
         <see cref = 'FLIGHT_INFORMATION' id = '264'/>
         <see cref = 'FOLLOW_TARGET' id = '144'/>
         <see cref = 'FUEL_STATUS' id = '371'/>
-        <see cref = 'FW_SOARING_DATA' id = '8011'/>
         <see cref = 'GENERATOR_STATUS' id = '373'/>
         <see cref = 'GIMBAL_DEVICE_ATTITUDE_STATUS' id = '285'/>
         <see cref = 'GIMBAL_DEVICE_INFORMATION' id = '283'/>
@@ -99,7 +93,6 @@ namespace org.mavlink {
         <see cref = 'GPS_RTCM_DATA' id = '233'/>
         <see cref = 'GPS_RTK' id = '127'/>
         <see cref = 'GPS_STATUS' id = '25'/>
-        <see cref = 'GSM_LINK_STATUS' id = '8014'/>
         <see cref = 'HEARTBEAT' id = '0'/>
         <see cref = 'HIGHRES_IMU' id = '105'/>
         <see cref = 'HIGH_LATENCY' id = '234'/>
@@ -148,6 +141,8 @@ namespace org.mavlink {
         <see cref = 'MISSION_REQUEST_PARTIAL_LIST' id = '37'/>
         <see cref = 'MISSION_SET_CURRENT' id = '41'/>
         <see cref = 'MISSION_WRITE_PARTIAL_LIST' id = '38'/>
+        <see cref = 'MOTION_CUE_EXTRA' id = '52504'/>
+        <see cref = 'MOTION_PLATFORM_STATE' id = '52502'/>
         <see cref = 'MOUNT_ORIENTATION' id = '265'/>
         <see cref = 'NAMED_VALUE_FLOAT' id = '251'/>
         <see cref = 'NAMED_VALUE_INT' id = '252'/>
@@ -198,22 +193,15 @@ namespace org.mavlink {
         <see cref = 'REQUEST_EVENT' id = '412'/>
         <see cref = 'RESOURCE_REQUEST' id = '142'/>
         <see cref = 'RESPONSE_EVENT_ERROR' id = '413'/>
+        <see cref = 'REXROTH_MOTION_PLATFORM' id = '52503'/>
         <see cref = 'SAFETY_ALLOWED_AREA' id = '55'/>
         <see cref = 'SAFETY_SET_ALLOWED_AREA' id = '54'/>
-        <see cref = 'SATCOM_LINK_STATUS' id = '8015'/>
         <see cref = 'SCALED_IMU' id = '26'/>
         <see cref = 'SCALED_IMU2' id = '116'/>
         <see cref = 'SCALED_IMU3' id = '129'/>
         <see cref = 'SCALED_PRESSURE' id = '29'/>
         <see cref = 'SCALED_PRESSURE2' id = '137'/>
         <see cref = 'SCALED_PRESSURE3' id = '143'/>
-        <see cref = 'SENSORPOD_STATUS' id = '8012'/>
-        <see cref = 'SENSOR_AIRFLOW_ANGLES' id = '8016'/>
-        <see cref = 'SENS_ATMOS' id = '8009'/>
-        <see cref = 'SENS_BATMON' id = '8010'/>
-        <see cref = 'SENS_MPPT' id = '8003'/>
-        <see cref = 'SENS_POWER' id = '8002'/>
-        <see cref = 'SENS_POWER_BOARD' id = '8013'/>
         <see cref = 'SERIAL_CONTROL' id = '126'/>
         <see cref = 'SERVO_OUTPUT_RAW' id = '36'/>
         <see cref = 'SETUP_SIGNING' id = '256'/>
@@ -256,7 +244,7 @@ namespace org.mavlink {
         <see cref = 'WINCH_STATUS' id = '9005'/>
         <see cref = 'WIND_COV' id = '231'/>
     */
-    public interface ASLUAV {
+    public interface marsh {
 
 /**
 Micro air vehicle / autopilot classes. This identifies the individual model.
@@ -20035,1021 +20023,611 @@ Humidity
  ushort  humidity;
 
 }
-enum GSM_LINK_TYPE{
 
 /**
-no service
+Component types for different nodes of the simulator network (flight model, controls, visualisation etc.).
+Components will always receive messages from the Manager relevant for their type. Only the first component
+in a network with a given system ID and type will have its messages forwarded by the Manager, all other
+ones will only be treated as output (will be shadowed). This enum is an extension of MAV_TYPE documented
+at https://mavlink.io/en/messages/minimal.html#MAV_TYPE
 */
-GSM_LINK_TYPE_NONE = 0, 
+enum MARSH_TYPE{
 
 /**
-link type unknown
+The simulation manager responsible for routing packets between different nodes. Typically MARSH Manager,
+see https://marsh-sim.github.io/manager.html
 */
-GSM_LINK_TYPE_UNKNOWN = 1, 
+MARSH_TYPE_MANAGER = 100, 
 
 /**
-2G (GSM/GRPS/EDGE) link
+Component simulating flight dynamics of the aircraft.
 */
-GSM_LINK_TYPE_2G = 2, 
+MARSH_TYPE_FLIGHT_MODEL = 101, 
 
 /**
-3G link (WCDMA/HSDPA/HSPA) 
+Component providing pilot control inputs.
 */
-GSM_LINK_TYPE_3G = 3, 
+MARSH_TYPE_CONTROLS = 102, 
 
 /**
-4G link (LTE)
+Component showing the visual situation to the pilot.
 */
-GSM_LINK_TYPE_4G = 4, 
+MARSH_TYPE_VISUALISATION = 103, 
+
+/**
+Component implementing pilot instrument panel.
+*/
+MARSH_TYPE_INSTRUMENTS = 104, 
+
+/**
+Component that moves the entire cockpit for motion cueing.
+*/
+MARSH_TYPE_MOTION_PLATFORM = 105, 
+
+/**
+Component for in-seat motion cueing.
+*/
+MARSH_TYPE_GSEAT = 106, 
+
+/**
+Component providing gaze data of pilot eyes.
+*/
+MARSH_TYPE_EYE_TRACKER = 107, 
+
+/**
+Component measuring and actuating forces on pilot control inputs.
+*/
+MARSH_TYPE_CONTROL_LOADING = 108, 
+
+/**
+Component providing vibrations for system identification, road rumble, gusts, etc.
+*/
+MARSH_TYPE_VIBRATION_SOURCE = 109, 
+
+/**
+Component providing target for the pilot to follow like controls positions, aircraft state, ILS path etc.
+*/
+MARSH_TYPE_PILOT_TARGET = 110, 
+
+/**
+Principal component controlling the main scenario of a given test, (unlike lower level MARSH_TYPE_PILOT_TARGET
+or MARSH_TYPE_MANAGER for overall communication).
+*/
+MARSH_TYPE_EXPERIMENT_DIRECTOR = 111, 
 
 }
+
+/**
+These values are MARSH-specific modes intended to be sent in custom_mode field of HEARTBEAT message.
+
+       Prefer defining values in the most significant byte (between 2^24 and 2^31) to leave the lower
+three bytes to contain a message id
+**WIP**
+*/
 [Flags]
-enum GSM_MODEM_TYPE{
+enum MARSH_MODE_FLAGS{
 
 /**
-not specified
+Request Manager to only send one specific message, advised for very resource limited nodes or with control
+flow limitations like Simulink.
+          That message id should be in the lower three bytes of the mode,
+which can be done by adding it to the flags.
 */
-GSM_MODEM_TYPE_UNKNOWN = 0, 
+MARSH_MODE_SINGLE_MESSAGE = 0x1000000, 
 
 /**
-HUAWEI LTE USB Stick E3372
+Request Manager to send every message going out to any of the clients.
 */
-GSM_MODEM_TYPE_HUAWEI_E3372 = 1, 
+MARSH_MODE_ALL_MESSAGES = 0x2000000, 
 
 }
 
 /**
-Message encoding a command with parameters as scaled integers and additional metadata. Scaling depends
-on the actual command value.
+Specific axis of pilot control inputs, with order corresponding to x, y, z, r fields in MANUAL_CONTROL
+message.
 */
-class COMMAND_INT_STAMPED{
+enum CONTROL_AXIS{
 
 /**
-UTC time, seconds elapsed since 01.01.1970
+Roll axis, with positive values corresponding to stick right movement, causing the vehicle to roll right.
+For helicopters this is lateral cyclic.
 */
- uint  utc_time;
+CONTROL_AXIS_ROLL = 0, 
 
 /**
-Microseconds elapsed since vehicle boot
+Pitch axis, with positive values corresponding to stick forward movement, causing the vehicle to move
+nose down. For helicopters this is longitudinal cyclic.
 */
- ulong  vehicle_timestamp;
+CONTROL_AXIS_PITCH = 1, 
 
 /**
-System ID
+Main thrust, with positive values corresponding to going faster and higher. For helicopters this is collective.
 */
- byte  target_system;
+CONTROL_AXIS_THRUST = 2, 
 
 /**
-Component ID
+Yaw axis, with positive values corresponding to pushing right pedal, causing the vehicle to face right
+direction. For helicopters this is tail collective.
 */
- byte  target_component;
+CONTROL_AXIS_YAW = 3, 
+
+}
 
 /**
-The coordinate system of the COMMAND, as defined by MAV_FRAME enum
+Usage of MANUAL_SETPOINT message, sent in mode_switch field.
 */
-MAV_FRAME frame;
+[Flags]
+enum MARSH_MANUAL_SETPOINT_MODE{
 
 /**
-The scheduled action for the mission item, as defined by MAV_CMD enum
+Values for target inceptors positions that the pilot should follow.
 */
-MAV_CMD command;
+MARSH_MANUAL_SETPOINT_MODE_TARGET = 0, 
 
 /**
-false:0, true:1
+Values for inceptors trim positions, the exact meaning depends on the flight model.
 */
- byte  current;
+MARSH_MANUAL_SETPOINT_MODE_TRIM = 1, 
+
+}
 
 /**
-autocontinue to next wp
+Mode of a motion platform system.
 */
- byte  autocontinue;
+enum MOTION_PLATFORM_MODE{
 
 /**
-PARAM1, see MAV_CMD enum
+Mode information is unsupported on this device.
 */
- float  param1;
+MOTION_PLATFORM_MODE_UNKNOWN = 0, 
 
 /**
-PARAM2, see MAV_CMD enum
+Mode is currently not available, but may be in different condition.
 */
- float  param2;
+MOTION_PLATFORM_MODE_UNINITIALIZED = 1, 
 
 /**
-PARAM3, see MAV_CMD enum
+Platform actuators are turned off, but control system is responsive.
 */
- float  param3;
+MOTION_PLATFORM_MODE_OFF = 2, 
 
 /**
-PARAM4, see MAV_CMD enum
+Platform is in the lowest position and/or locked, appropriate for personnel entry.
 */
- float  param4;
+MOTION_PLATFORM_MODE_SETTLED = 3, 
 
 /**
-PARAM5 / local: x position in meters * 1e4, global: latitude in degrees * 10^7
+Platform is in a neutral reference position, not accepting movement commands.
 */
- int  x;
+MOTION_PLATFORM_MODE_NEUTRAL = 4, 
 
 /**
-PARAM6 / local: y position in meters * 1e4, global: longitude in degrees * 10^7
+Platform is stopped in any position, not accepting movement commands.
 */
- int  y;
+MOTION_PLATFORM_MODE_FROZEN = 5, 
 
 /**
-PARAM7 / z position: global: altitude in meters (MSL, WGS84, AGL or relative to home - depending on frame).
+Platform is in any position, accepting movement commands.
+*/
+MOTION_PLATFORM_MODE_ENGAGED = 6, 
+
+}
+
+/**
+General error state of a motion platform system.
+*/
+enum MOTION_PLATFORM_HEALTH{
+
+/**
+System is operating correctly.
+*/
+MOTION_PLATFORM_HEALTH_OK = 0, 
+
+/**
+There is at least one warning present, but operation can be continued.
+*/
+MOTION_PLATFORM_HEALTH_WARNING = 1, 
+
+/**
+There is a failure or misconfiguration that requires operator's attention for correct operation.
+*/
+MOTION_PLATFORM_HEALTH_ERROR = 2, 
+
+/**
+There is a major failure that requires immediate operator action to maintain safety.
+*/
+MOTION_PLATFORM_HEALTH_CRITICAL = 3, 
+
+}
+
+/**
+Send data about a control axis from a control loading system. This is the primary message for logging
+data from MARSH_TYPE_CONTROL_LOADING.
+**WIP**
+*/
+class CONTROL_LOADING_AXIS{
+
+/**
+Timestamp (time since system boot).
+*/
+ uint  time_boot_ms;
+
+/**
+Control axis on which the measurements were taken.
+*/
+CONTROL_AXIS axis;
+
+/**
+Axis position
+*/
+ float  position;
+
+/**
+Axis velocity
+*/
+ float  velocity;
+
+/**
+Force applied in the pilot in the direction of movement axis (not gripping force), measured at the position
+of pilot's third finger (ring). Unit N (Newton), currently not part of mavschema.xsd
+*/
+ float  force;
+
+}
+
+/**
+State report for motion platform used for moving the cockpit with the pilot for motion cueing. This is
+the primary message for MARSH_TYPE_MOTION_PLATFORM.
+**WIP**
+*/
+class MOTION_PLATFORM_STATE{
+
+/**
+Timestamp (time since system boot).
+*/
+ uint  time_boot_ms;
+
+/**
+Generic system health (error and warning) status.
+*/
+MOTION_PLATFORM_HEALTH health;
+
+/**
+Generic system operating mode.
+*/
+MOTION_PLATFORM_MODE mode;
+
+/**
+X axis (surge) position, positive forward.
+*/
+ float  x;
+
+/**
+Y axis (sway) position, positive right.
+*/
+ float  y;
+
+/**
+Z axis (heave) position, positive down.
 */
  float  z;
 
-}
+/**
+Roll position, positive right.
+*/
+ float  roll;
 
 /**
-Send a command with up to seven parameters to the MAV and additional metadata
+Pitch position, positive nose up.
 */
-class COMMAND_LONG_STAMPED{
+ float  pitch;
 
 /**
-UTC time, seconds elapsed since 01.01.1970
+Yaw position, positive right.
 */
- uint  utc_time;
+ float  yaw;
 
 /**
-Microseconds elapsed since vehicle boot
+X axis (surge) velocity, positive forward.
 */
- ulong  vehicle_timestamp;
+ float  vel_x;
 
 /**
-System which should execute the command
+Y axis (sway) velocity, positive right.
 */
- byte  target_system;
+ float  vel_y;
 
 /**
-Component which should execute the command, 0 for all components
+Z axis (heave) velocity, positive down.
 */
- byte  target_component;
+ float  vel_z;
 
 /**
-Command ID, as defined by MAV_CMD enum.
+Roll velocity, positive right.
 */
-MAV_CMD command;
+ float  vel_roll;
 
 /**
-0: First transmission of this command. 1-255: Confirmation transmissions (e.g. for kill command)
+Pitch velocity, positive nose up.
 */
- byte  confirmation;
+ float  vel_pitch;
 
 /**
-Parameter 1, as defined by MAV_CMD enum.
+Yaw velocity, positive right.
 */
- float  param1;
+ float  vel_yaw;
 
 /**
-Parameter 2, as defined by MAV_CMD enum.
+X axis (surge) acceleration, positive forward.
 */
- float  param2;
+ float  acc_x;
 
 /**
-Parameter 3, as defined by MAV_CMD enum.
+Y axis (sway) acceleration, positive right.
 */
- float  param3;
+ float  acc_y;
 
 /**
-Parameter 4, as defined by MAV_CMD enum.
+Z axis (heave) acceleration, positive down.
 */
- float  param4;
+ float  acc_z;
 
 /**
-Parameter 5, as defined by MAV_CMD enum.
+Roll acceleration, positive right. Unit rad/s/s, currently not part of mavschema.xsd
 */
- float  param5;
+ float  acc_roll;
 
 /**
-Parameter 6, as defined by MAV_CMD enum.
+Pitch acceleration, positive nose up. Unit rad/s/s, currently not part of mavschema.xsd
 */
- float  param6;
+ float  acc_pitch;
 
 /**
-Parameter 7, as defined by MAV_CMD enum.
+Yaw acceleration, positive right. Unit rad/s/s, currently not part of mavschema.xsd
 */
- float  param7;
-
-}
-
-/**
-Voltage and current sensor data
-*/
-class SENS_POWER{
-
-/**
-Power board voltage sensor reading
-*/
- float  adc121_vspb_volt;
-
-/**
-Power board current sensor reading
-*/
- float  adc121_cspb_amp;
-
-/**
-Board current sensor 1 reading
-*/
- float  adc121_cs1_amp;
-
-/**
-Board current sensor 2 reading
-*/
- float  adc121_cs2_amp;
+ float  acc_yaw;
 
 }
 
 /**
-Maximum Power Point Tracker (MPPT) sensor data for solar module power performance tracking
+State report specific for eMotion Motion System by Bosch Rexroth B.V. Values applicable to motion platforms
+in general are sent in MOTION_PLATFORM_STATE with the same timestamp. Actuators are numbered in a clockwise
+direction when looking from above, starting from the front right. Actuator position is 0 when actuator
+is in mid-stroke.
+**WIP**
 */
-class SENS_MPPT{
+class REXROTH_MOTION_PLATFORM{
 
 /**
-MPPT last timestamp 
+Timestamp (time since system boot).
 */
- ulong  mppt_timestamp;
+ uint  time_boot_ms;
 
 /**
-MPPT1 voltage 
+Number of message as sent by the Motion System.
 */
- float  mppt1_volt;
+ uint  frame_count;
 
 /**
-MPPT1 current 
+Motion Status variable as sent by the system.
 */
- float  mppt1_amp;
+ uint  motion_status;
 
 /**
-MPPT1 pwm 
+Error code extracted from motion status.
 */
- ushort  mppt1_pwm;
+ byte  error_code;
 
 /**
-MPPT1 status 
+Current actuator 1 position.
 */
- byte  mppt1_status;
+ float  actuator1;
 
 /**
-MPPT2 voltage 
+Current actuator 2 position.
 */
- float  mppt2_volt;
+ float  actuator2;
 
 /**
-MPPT2 current 
+Current actuator 3 position.
 */
- float  mppt2_amp;
+ float  actuator3;
 
 /**
-MPPT2 pwm 
+Current actuator 4 position.
 */
- ushort  mppt2_pwm;
+ float  actuator4;
 
 /**
-MPPT2 status 
+Current actuator 5 position.
 */
- byte  mppt2_status;
+ float  actuator5;
 
 /**
-MPPT3 voltage 
+Current actuator 6 position.
 */
- float  mppt3_volt;
+ float  actuator6;
 
 /**
-MPPT3 current 
+X axis (surge) platform setpoint, positive forward.
 */
- float  mppt3_amp;
+ float  platform_setpoint_x;
 
 /**
-MPPT3 pwm 
+Y axis (sway) platform setpoint, positive right.
 */
- ushort  mppt3_pwm;
+ float  platform_setpoint_y;
 
 /**
-MPPT3 status 
+Z axis (heave) platform setpoint, positive down.
 */
- byte  mppt3_status;
-
-}
+ float  platform_setpoint_z;
 
 /**
-ASL-fixed-wing controller data
+Roll platform setpoint, positive right.
 */
-class ASLCTRL_DATA{
+ float  platform_setpoint_roll;
 
 /**
-Timestamp
+Pitch platform setpoint, positive nose up.
 */
- ulong  timestamp;
+ float  platform_setpoint_pitch;
 
 /**
-ASLCTRL control-mode (manual, stabilized, auto, etc...)
+Yaw platform setpoint, positive right.
 */
- byte  aslctrl_mode;
+ float  platform_setpoint_yaw;
 
 /**
-See sourcecode for a description of these values... 
+X axis (surge) special effect setpoint, positive forward.
 */
- float  h;
- float  hRef;
- float  hRef_t;
+ float  effect_setpoint_x;
 
 /**
-Pitch angle
+Y axis (sway) special effect setpoint, positive right.
 */
- float  PitchAngle;
+ float  effect_setpoint_y;
 
 /**
-Pitch angle reference
+Z axis (heave) special effect setpoint, positive down.
 */
- float  PitchAngleRef;
- float  q;
- float  qRef;
- float  uElev;
- float  uThrot;
- float  uThrot2;
- float  nZ;
+ float  effect_setpoint_z;
 
 /**
-Airspeed reference
+Roll special effect setpoint, positive right.
 */
- float  AirspeedRef;
- byte  SpoilersEngaged;
+ float  effect_setpoint_roll;
 
 /**
-Yaw angle
+Pitch special effect setpoint, positive nose up.
 */
- float  YawAngle;
+ float  effect_setpoint_pitch;
 
 /**
-Yaw angle reference
+Yaw special effect setpoint, positive right.
 */
- float  YawAngleRef;
-
-/**
-Roll angle
-*/
- float  RollAngle;
-
-/**
-Roll angle reference
-*/
- float  RollAngleRef;
- float  p;
- float  pRef;
- float  r;
- float  rRef;
- float  uAil;
- float  uRud;
+ float  effect_setpoint_yaw;
 
 }
 
 /**
-ASL-fixed-wing controller debug data
+These values are an extra cue that should be added to accelerations and rotations etc. resulting from
+aircraft state, with the resulting cue being the sum of the latest aircraft and extra values. An example
+use case would be a cockpit shaker.
 */
-class ASLCTRL_DEBUG{
+class MOTION_CUE_EXTRA{
 
 /**
-Debug data
+Timestamp (time since system boot).
 */
- uint  i32_1;
+ uint  time_boot_ms;
 
 /**
-Debug data
+Roll velocity, positive right.
 */
- byte  i8_1;
+ float  vel_roll;
 
 /**
-Debug data
+Pitch velocity, positive nose up.
 */
- byte  i8_2;
+ float  vel_pitch;
 
 /**
-Debug data 
+Yaw velocity, positive right.
 */
- float  f_1;
+ float  vel_yaw;
 
 /**
-Debug data
+X axis (surge) acceleration, positive forward.
 */
- float  f_2;
+ float  acc_x;
 
 /**
-Debug data
+Y axis (sway) acceleration, positive right.
 */
- float  f_3;
+ float  acc_y;
 
 /**
-Debug data
+Z axis (heave) acceleration, positive down.
 */
- float  f_4;
-
-/**
-Debug data
-*/
- float  f_5;
-
-/**
-Debug data
-*/
- float  f_6;
-
-/**
-Debug data
-*/
- float  f_7;
-
-/**
-Debug data
-*/
- float  f_8;
+ float  acc_z;
 
 }
 
 /**
-Extended state information for ASLUAVs
+Data for tracking of pilot eye gaze. This is the primary message for MARSH_TYPE_EYE_TRACKER.
+**WIP**
 */
-class ASLUAV_STATUS{
+class EYE_TRACKING_DATA{
 
 /**
-Status of the position-indicator LEDs
+Timestamp (time since system boot).
 */
- byte  LED_status;
+ ulong  time_usec;
 
 /**
-Status of the IRIDIUM satellite communication system
+Sensor ID, used for identifying the device and/or person tracked. Set to zero if unknown/unused.
 */
- byte  SATCOM_status;
+ byte  sensor_id;
 
 /**
-Status vector for up to 8 servos
+X axis of gaze origin point, NaN if unknown. The reference system depends on specific application.
 */
-[D(8)]  byte [] Servo_status;
+ float  gaze_origin_x;
 
 /**
-Motor RPM 
+Y axis of gaze origin point, NaN if unknown. The reference system depends on specific application.
 */
- float  Motor_rpm;
+ float  gaze_origin_y;
 
-}
-
-/**
-Extended EKF state estimates for ASLUAVs
-*/
-class EKF_EXT{
-
-/**
-Time since system start
-*/
- ulong  timestamp;
-
-/**
-Magnitude of wind velocity (in lateral inertial plane)
-*/
- float  Windspeed;
-
-/**
-Wind heading angle from North
-*/
- float  WindDir;
-
-/**
-Z (Down) component of inertial wind velocity
-*/
- float  WindZ;
-
-/**
-Magnitude of air velocity
-*/
- float  Airspeed;
-
-/**
-Sideslip angle
-*/
- float  beta;
-
-/**
-Angle of attack
-*/
- float  alpha;
-
-}
-
-/**
-Off-board controls/commands for ASLUAVs
-*/
-class ASL_OBCTRL{
-
-/**
-Time since system start
-*/
- ulong  timestamp;
-
-/**
-Elevator command [~]
-*/
- float  uElev;
-
-/**
-Throttle command [~]
-*/
- float  uThrot;
-
-/**
-Throttle 2 command [~]
-*/
- float  uThrot2;
-
-/**
-Left aileron command [~]
-*/
- float  uAilL;
-
-/**
-Right aileron command [~]
-*/
- float  uAilR;
-
-/**
-Rudder command [~]
-*/
- float  uRud;
-
-/**
-Off-board computer status
-*/
- byte  obctrl_status;
-
-}
-
-/**
-Atmospheric sensors (temperature, humidity, ...) 
-*/
-class SENS_ATMOS{
-
-/**
-Time since system boot
-*/
- ulong  timestamp;
-
-/**
-Ambient temperature
-*/
- float  TempAmbient;
-
-/**
-Relative humidity
-*/
- float  Humidity;
-
-}
-
-/**
-Battery pack monitoring data for Li-Ion batteries
-*/
-class SENS_BATMON{
-
-/**
-Time since system start
-*/
- ulong  batmon_timestamp;
-
-/**
-Battery pack temperature
-*/
- float  temperature;
-
-/**
-Battery pack voltage
-*/
- ushort  voltage;
-
-/**
-Battery pack current
-*/
- short  current;
-
-/**
-Battery pack state-of-charge
-*/
- byte  SoC;
-
-/**
-Battery monitor status report bits in Hex
-*/
- ushort  batterystatus;
-
-/**
-Battery monitor serial number in Hex
-*/
- ushort  serialnumber;
-
-/**
-Battery monitor safetystatus report bits in Hex
-*/
- uint  safetystatus;
-
-/**
-Battery monitor operation status report bits in Hex
-*/
- uint  operationstatus;
-
-/**
-Battery pack cell 1 voltage
-*/
- ushort  cellvoltage1;
-
-/**
-Battery pack cell 2 voltage
-*/
- ushort  cellvoltage2;
-
-/**
-Battery pack cell 3 voltage
-*/
- ushort  cellvoltage3;
-
-/**
-Battery pack cell 4 voltage
-*/
- ushort  cellvoltage4;
-
-/**
-Battery pack cell 5 voltage
-*/
- ushort  cellvoltage5;
-
-/**
-Battery pack cell 6 voltage
-*/
- ushort  cellvoltage6;
-
-}
-
-/**
-Fixed-wing soaring (i.e. thermal seeking) data
-*/
-class FW_SOARING_DATA{
-
-/**
-Timestamp
-*/
- ulong  timestamp;
-
-/**
-Timestamp since last mode change
-*/
- ulong  timestampModeChanged;
-
-/**
-Thermal core updraft strength
-*/
- float  xW;
-
-/**
-Thermal radius
-*/
- float  xR;
-
-/**
-Thermal center latitude
-*/
- float  xLat;
-
-/**
-Thermal center longitude
-*/
- float  xLon;
-
-/**
-Variance W
-*/
- float  VarW;
-
-/**
-Variance R
-*/
- float  VarR;
-
-/**
-Variance Lat
-*/
- float  VarLat;
-
-/**
-Variance Lon 
-*/
- float  VarLon;
-
-/**
-Suggested loiter radius
-*/
- float  LoiterRadius;
-
-/**
-Suggested loiter direction
-*/
- float  LoiterDirection;
-
-/**
-Distance to soar point
-*/
- float  DistToSoarPoint;
-
-/**
-Expected sink rate at current airspeed, roll and throttle
-*/
- float  vSinkExp;
-
-/**
-Measurement / updraft speed at current/local airplane position
-*/
- float  z1_LocalUpdraftSpeed;
-
-/**
-Measurement / roll angle tracking error
-*/
- float  z2_DeltaRoll;
-
-/**
-Expected measurement 1
-*/
- float  z1_exp;
-
-/**
-Expected measurement 2
-*/
- float  z2_exp;
-
-/**
-Thermal drift (from estimator prediction step only)
-*/
- float  ThermalGSNorth;
-
-/**
-Thermal drift (from estimator prediction step only)
-*/
- float  ThermalGSEast;
-
-/**
-Total specific energy change (filtered)
-*/
- float  TSE_dot;
-
-/**
-Debug variable 1
-*/
- float  DebugVar1;
-
-/**
-Debug variable 2
-*/
- float  DebugVar2;
-
-/**
-Control Mode [-]
-*/
- byte  ControlMode;
-
-/**
-Data valid [-]
-*/
- byte  valid;
-
-}
-
-/**
-Monitoring of sensorpod status
-*/
-class SENSORPOD_STATUS{
-
-/**
-Timestamp in linuxtime (since 1.1.1970)
-*/
- ulong  timestamp;
-
-/**
-Rate of ROS topic 1
-*/
- byte  visensor_rate_1;
-
-/**
-Rate of ROS topic 2
-*/
- byte  visensor_rate_2;
-
-/**
-Rate of ROS topic 3
-*/
- byte  visensor_rate_3;
-
-/**
-Rate of ROS topic 4
-*/
- byte  visensor_rate_4;
-
-/**
-Number of recording nodes
-*/
- byte  recording_nodes_count;
-
-/**
-Temperature of sensorpod CPU in
-*/
- byte  cpu_temp;
-
-/**
-Free space available in recordings directory in [Gb] * 1e2
-*/
- ushort  free_space;
-
-}
-
-/**
-Monitoring of power board status
-*/
-class SENS_POWER_BOARD{
-
-/**
-Timestamp
-*/
- ulong  timestamp;
-
-/**
-Power board status register
-*/
- byte  pwr_brd_status;
-
-/**
-Power board leds status
-*/
- byte  pwr_brd_led_status;
-
-/**
-Power board system voltage
-*/
- float  pwr_brd_system_volt;
-
-/**
-Power board servo voltage
-*/
- float  pwr_brd_servo_volt;
-
-/**
-Power board digital voltage
-*/
- float  pwr_brd_digital_volt;
-
-/**
-Power board left motor current sensor
-*/
- float  pwr_brd_mot_l_amp;
-
-/**
-Power board right motor current sensor
-*/
- float  pwr_brd_mot_r_amp;
-
-/**
-Power board analog current sensor
-*/
- float  pwr_brd_analog_amp;
-
-/**
-Power board digital current sensor
-*/
- float  pwr_brd_digital_amp;
-
-/**
-Power board extension current sensor
-*/
- float  pwr_brd_ext_amp;
-
-/**
-Power board aux current sensor
-*/
- float  pwr_brd_aux_amp;
-
-}
-
-/**
-Status of GSM modem (connected to onboard computer)
-*/
-class GSM_LINK_STATUS{
-
-/**
-Timestamp (of OBC)
-*/
- ulong  timestamp;
-
-/**
-GSM modem used
-*/
-GSM_MODEM_TYPE gsm_modem_type;
-
-/**
-GSM link type
-*/
-GSM_LINK_TYPE gsm_link_type;
-
-/**
-RSSI as reported by modem (unconverted)
-*/
- byte  rssi;
-
-/**
-RSRP (LTE) or RSCP (WCDMA) as reported by modem (unconverted)
-*/
- byte  rsrp_rscp;
-
-/**
-SINR (LTE) or ECIO (WCDMA) as reported by modem (unconverted)
-*/
- byte  sinr_ecio;
-
-/**
-RSRQ (LTE only) as reported by modem (unconverted)
-*/
- byte  rsrq;
-
-}
-
-/**
-Status of the SatCom link
-*/
-class SATCOM_LINK_STATUS{
-
-/**
-Timestamp
-*/
- ulong  timestamp;
-
-/**
-Timestamp of the last successful sbd session
-*/
- ulong  last_heartbeat;
-
 /**
-Number of failed sessions
+Z axis of gaze origin point, NaN if unknown. The reference system depends on specific application.
 */
- ushort  failed_sessions;
+ float  gaze_origin_z;
 
 /**
-Number of successful sessions
+X axis of gaze direction vector, expected to be normalized to unit magnitude, NaN if unknown. The reference
+system should match origin point.
 */
- ushort  successful_sessions;
+ float  gaze_direction_x;
 
 /**
-Signal quality
+Y axis of gaze direction vector, expected to be normalized to unit magnitude, NaN if unknown. The reference
+system should match origin point.
 */
- byte  signal_quality;
-
-/**
-Ring call pending
-*/
- byte  ring_pending;
-
-/**
-Transmission session pending
-*/
- byte  tx_session_pending;
-
-/**
-Receiving session pending
-*/
- byte  rx_session_pending;
-
-}
+ float  gaze_direction_y;
 
 /**
-Calibrated airflow angle measurements
+Z axis of gaze direction vector, expected to be normalized to unit magnitude, NaN if unknown. The reference
+system should match origin point.
 */
-class SENSOR_AIRFLOW_ANGLES{
+ float  gaze_direction_z;
 
 /**
-Timestamp
+Gaze focal point on video feed x value (normalized 0..1, 0 is left, 1 is right), NaN if unknown
 */
- ulong  timestamp;
+ float  video_gaze_x;
 
 /**
-Angle of attack
+Gaze focal point on video feed y value (normalized 0..1, 0 is top, 1 is bottom), NaN if unknown
 */
- float  angleofattack;
+ float  video_gaze_y;
 
 /**
-Angle of attack measurement valid
+Identifier of surface for 2D gaze point, or an identified region when surface point is invalid. Set to
+zero if unknown/unused.
 */
- byte  angleofattack_valid;
+ byte  surface_id;
 
 /**
-Sideslip angle
+Gaze focal point on surface x value (normalized 0..1, 0 is left, 1 is right), NaN if unknown
 */
- float  sideslip;
+ float  surface_gaze_x;
 
 /**
-Sideslip angle measurement valid
+Gaze focal point on surface y value (normalized 0..1, 0 is top, 1 is bottom), NaN if unknown
 */
- byte  sideslip_valid;
+ float  surface_gaze_y;
 
 }
 struct SI_Unit
@@ -22165,16 +21743,6 @@ Request forwarding of CAN packets from the given CAN bus to this component via t
 Frames are sent using CAN_FRAME and CANFD_FRAME messages
 */
 MAV_CMD_CAN_FORWARD = 32000, 
-
-/**
-Mission command to reset Maximum Power Point Tracker (MPPT)
-*/
-MAV_CMD_RESET_MPPT = 40001, 
-
-/**
-Mission command to perform a power cycle on payload
-*/
-MAV_CMD_PAYLOAD_CONTROL = 40002, 
 
 }
 struct MAV_CMD_PARAMS {
@@ -28281,72 +27849,6 @@ public struct param_7{
 Frames are sent using CAN_FRAME and CANFD_FRAME messages";
 
 }
-struct MAV_CMD_RESET_MPPT{
-public struct param_1{
- public const string description = @"MPPT number";
-
-}
-public struct param_2{
- public const string description = @"Empty";
-
-}
-public struct param_3{
- public const string description = @"Empty";
-
-}
-public struct param_4{
- public const string description = @"Empty";
-
-}
-public struct param_5{
- public const string description = @"Empty";
-
-}
-public struct param_6{
- public const string description = @"Empty";
-
-}
-public struct param_7{
- public const string description = @"Empty";
-
-}
-
- public const string description = @"Mission command to reset Maximum Power Point Tracker (MPPT)";
-
-}
-struct MAV_CMD_PAYLOAD_CONTROL{
-public struct param_1{
- public const string description = @"Complete power cycle";
-
-}
-public struct param_2{
- public const string description = @"VISensor power cycle";
-
-}
-public struct param_3{
- public const string description = @"Empty";
-
-}
-public struct param_4{
- public const string description = @"Empty";
-
-}
-public struct param_5{
- public const string description = @"Empty";
-
-}
-public struct param_6{
- public const string description = @"Empty";
-
-}
-public struct param_7{
- public const string description = @"Empty";
-
-}
-
- public const string description = @"Mission command to perform a power cycle on payload";
-
-}
 
 }
         /**
@@ -28370,7 +27872,7 @@ public struct param_7{
 
         // Either side can send any MAVLink message — non-transitional, no Master.
         interface CommunicationChannel : Connects<GroundControl, MicroAirVehicle> {
-            [_____lr_____<@ASLUAV>]
+            [_____lr_____<@marsh>]
             struct Start { }
         }
     }

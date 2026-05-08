@@ -1,8 +1,250 @@
 using System;
 using org.unirail.Meta;
- namespace org.mavlink {
-public interface AVSSUAS{
- 
+
+namespace org.mavlink {
+
+    /**
+        <see cref = 'ACTUATOR_CONTROL_TARGET' id = '140'/>
+        <see cref = 'ACTUATOR_OUTPUT_STATUS' id = '375'/>
+        <see cref = 'ADSB_VEHICLE' id = '246'/>
+        <see cref = 'AIRSPEED' id = '295'/>
+        <see cref = 'AIS_VESSEL' id = '301'/>
+        <see cref = 'ALTITUDE' id = '141'/>
+        <see cref = 'ATTITUDE' id = '30'/>
+        <see cref = 'ATTITUDE_QUATERNION' id = '31'/>
+        <see cref = 'ATTITUDE_QUATERNION_COV' id = '61'/>
+        <see cref = 'ATTITUDE_TARGET' id = '83'/>
+        <see cref = 'ATT_POS_MOCAP' id = '138'/>
+        <see cref = 'AUTH_KEY' id = '7'/>
+        <see cref = 'AUTOPILOT_STATE_FOR_GIMBAL_DEVICE' id = '286'/>
+        <see cref = 'AUTOPILOT_VERSION' id = '148'/>
+        <see cref = 'AVAILABLE_MODES' id = '435'/>
+        <see cref = 'AVAILABLE_MODES_MONITOR' id = '437'/>
+        <see cref = 'AVSS_DRONE_IMU' id = '60052'/>
+        <see cref = 'AVSS_DRONE_OPERATION_MODE' id = '60053'/>
+        <see cref = 'AVSS_DRONE_POSITION' id = '60051'/>
+        <see cref = 'AVSS_PRS_SYS_STATUS' id = '60050'/>
+        <see cref = 'BATTERY_INFO' id = '372'/>
+        <see cref = 'BATTERY_STATUS' id = '147'/>
+        <see cref = 'BUTTON_CHANGE' id = '257'/>
+        <see cref = 'CAMERA_CAPTURE_STATUS' id = '262'/>
+        <see cref = 'CAMERA_FOV_STATUS' id = '271'/>
+        <see cref = 'CAMERA_IMAGE_CAPTURED' id = '263'/>
+        <see cref = 'CAMERA_INFORMATION' id = '259'/>
+        <see cref = 'CAMERA_SETTINGS' id = '260'/>
+        <see cref = 'CAMERA_THERMAL_RANGE' id = '277'/>
+        <see cref = 'CAMERA_TRACKING_GEO_STATUS' id = '276'/>
+        <see cref = 'CAMERA_TRACKING_IMAGE_STATUS' id = '275'/>
+        <see cref = 'CAMERA_TRIGGER' id = '112'/>
+        <see cref = 'CANFD_FRAME' id = '387'/>
+        <see cref = 'CAN_FILTER_MODIFY' id = '388'/>
+        <see cref = 'CAN_FRAME' id = '386'/>
+        <see cref = 'CELLULAR_CONFIG' id = '336'/>
+        <see cref = 'CELLULAR_STATUS' id = '334'/>
+        <see cref = 'CHANGE_OPERATOR_CONTROL' id = '5'/>
+        <see cref = 'CHANGE_OPERATOR_CONTROL_ACK' id = '6'/>
+        <see cref = 'COLLISION' id = '247'/>
+        <see cref = 'COMMAND_ACK' id = '77'/>
+        <see cref = 'COMMAND_CANCEL' id = '80'/>
+        <see cref = 'COMMAND_INT' id = '75'/>
+        <see cref = 'COMMAND_LONG' id = '76'/>
+        <see cref = 'COMPONENT_INFORMATION' id = '395'/>
+        <see cref = 'COMPONENT_INFORMATION_BASIC' id = '396'/>
+        <see cref = 'COMPONENT_METADATA' id = '397'/>
+        <see cref = 'CONTROL_SYSTEM_STATE' id = '146'/>
+        <see cref = 'CURRENT_EVENT_SEQUENCE' id = '411'/>
+        <see cref = 'CURRENT_MODE' id = '436'/>
+        <see cref = 'DATA_STREAM' id = '67'/>
+        <see cref = 'DATA_TRANSMISSION_HANDSHAKE' id = '130'/>
+        <see cref = 'DEBUG' id = '254'/>
+        <see cref = 'DEBUG_FLOAT_ARRAY' id = '350'/>
+        <see cref = 'DEBUG_VECT' id = '250'/>
+        <see cref = 'DISTANCE_SENSOR' id = '132'/>
+        <see cref = 'EFI_STATUS' id = '225'/>
+        <see cref = 'ENCAPSULATED_DATA' id = '131'/>
+        <see cref = 'ESC_INFO' id = '290'/>
+        <see cref = 'ESC_STATUS' id = '291'/>
+        <see cref = 'ESTIMATOR_STATUS' id = '230'/>
+        <see cref = 'EVENT' id = '410'/>
+        <see cref = 'EXTENDED_SYS_STATE' id = '245'/>
+        <see cref = 'FENCE_STATUS' id = '162'/>
+        <see cref = 'FIGURE_EIGHT_EXECUTION_STATUS' id = '361'/>
+        <see cref = 'FILE_TRANSFER_PROTOCOL' id = '110'/>
+        <see cref = 'FLIGHT_INFORMATION' id = '264'/>
+        <see cref = 'FOLLOW_TARGET' id = '144'/>
+        <see cref = 'FUEL_STATUS' id = '371'/>
+        <see cref = 'GENERATOR_STATUS' id = '373'/>
+        <see cref = 'GIMBAL_DEVICE_ATTITUDE_STATUS' id = '285'/>
+        <see cref = 'GIMBAL_DEVICE_INFORMATION' id = '283'/>
+        <see cref = 'GIMBAL_DEVICE_SET_ATTITUDE' id = '284'/>
+        <see cref = 'GIMBAL_MANAGER_INFORMATION' id = '280'/>
+        <see cref = 'GIMBAL_MANAGER_SET_ATTITUDE' id = '282'/>
+        <see cref = 'GIMBAL_MANAGER_SET_MANUAL_CONTROL' id = '288'/>
+        <see cref = 'GIMBAL_MANAGER_SET_PITCHYAW' id = '287'/>
+        <see cref = 'GIMBAL_MANAGER_STATUS' id = '281'/>
+        <see cref = 'GLOBAL_POSITION_INT' id = '33'/>
+        <see cref = 'GLOBAL_POSITION_INT_COV' id = '63'/>
+        <see cref = 'GLOBAL_POSITION_SENSOR' id = '296'/>
+        <see cref = 'GLOBAL_VISION_POSITION_ESTIMATE' id = '101'/>
+        <see cref = 'GPS2_RAW' id = '124'/>
+        <see cref = 'GPS2_RTK' id = '128'/>
+        <see cref = 'GPS_GLOBAL_ORIGIN' id = '49'/>
+        <see cref = 'GPS_INJECT_DATA' id = '123'/>
+        <see cref = 'GPS_INPUT' id = '232'/>
+        <see cref = 'GPS_RAW_INT' id = '24'/>
+        <see cref = 'GPS_RTCM_DATA' id = '233'/>
+        <see cref = 'GPS_RTK' id = '127'/>
+        <see cref = 'GPS_STATUS' id = '25'/>
+        <see cref = 'HEARTBEAT' id = '0'/>
+        <see cref = 'HIGHRES_IMU' id = '105'/>
+        <see cref = 'HIGH_LATENCY' id = '234'/>
+        <see cref = 'HIGH_LATENCY2' id = '235'/>
+        <see cref = 'HIL_ACTUATOR_CONTROLS' id = '93'/>
+        <see cref = 'HIL_CONTROLS' id = '91'/>
+        <see cref = 'HIL_GPS' id = '113'/>
+        <see cref = 'HIL_OPTICAL_FLOW' id = '114'/>
+        <see cref = 'HIL_RC_INPUTS_RAW' id = '92'/>
+        <see cref = 'HIL_SENSOR' id = '107'/>
+        <see cref = 'HIL_STATE' id = '90'/>
+        <see cref = 'HIL_STATE_QUATERNION' id = '115'/>
+        <see cref = 'HOME_POSITION' id = '242'/>
+        <see cref = 'HYGROMETER_SENSOR' id = '12920'/>
+        <see cref = 'ILLUMINATOR_STATUS' id = '440'/>
+        <see cref = 'ISBD_LINK_STATUS' id = '335'/>
+        <see cref = 'LANDING_TARGET' id = '149'/>
+        <see cref = 'LINK_NODE_STATUS' id = '8'/>
+        <see cref = 'LOCAL_POSITION_NED' id = '32'/>
+        <see cref = 'LOCAL_POSITION_NED_COV' id = '64'/>
+        <see cref = 'LOCAL_POSITION_NED_SYSTEM_GLOBAL_OFFSET' id = '89'/>
+        <see cref = 'LOGGING_ACK' id = '268'/>
+        <see cref = 'LOGGING_DATA' id = '266'/>
+        <see cref = 'LOGGING_DATA_ACKED' id = '267'/>
+        <see cref = 'LOG_DATA' id = '120'/>
+        <see cref = 'LOG_ENTRY' id = '118'/>
+        <see cref = 'LOG_ERASE' id = '121'/>
+        <see cref = 'LOG_REQUEST_DATA' id = '119'/>
+        <see cref = 'LOG_REQUEST_END' id = '122'/>
+        <see cref = 'LOG_REQUEST_LIST' id = '117'/>
+        <see cref = 'MAG_CAL_REPORT' id = '192'/>
+        <see cref = 'MANUAL_CONTROL' id = '69'/>
+        <see cref = 'MANUAL_SETPOINT' id = '81'/>
+        <see cref = 'MEMORY_VECT' id = '249'/>
+        <see cref = 'MESSAGE_INTERVAL' id = '244'/>
+        <see cref = 'MISSION_ACK' id = '47'/>
+        <see cref = 'MISSION_CLEAR_ALL' id = '45'/>
+        <see cref = 'MISSION_COUNT' id = '44'/>
+        <see cref = 'MISSION_CURRENT' id = '42'/>
+        <see cref = 'MISSION_ITEM' id = '39'/>
+        <see cref = 'MISSION_ITEM_INT' id = '73'/>
+        <see cref = 'MISSION_ITEM_REACHED' id = '46'/>
+        <see cref = 'MISSION_REQUEST' id = '40'/>
+        <see cref = 'MISSION_REQUEST_INT' id = '51'/>
+        <see cref = 'MISSION_REQUEST_LIST' id = '43'/>
+        <see cref = 'MISSION_REQUEST_PARTIAL_LIST' id = '37'/>
+        <see cref = 'MISSION_SET_CURRENT' id = '41'/>
+        <see cref = 'MISSION_WRITE_PARTIAL_LIST' id = '38'/>
+        <see cref = 'MOUNT_ORIENTATION' id = '265'/>
+        <see cref = 'NAMED_VALUE_FLOAT' id = '251'/>
+        <see cref = 'NAMED_VALUE_INT' id = '252'/>
+        <see cref = 'NAV_CONTROLLER_OUTPUT' id = '62'/>
+        <see cref = 'OBSTACLE_DISTANCE' id = '330'/>
+        <see cref = 'ODOMETRY' id = '331'/>
+        <see cref = 'ONBOARD_COMPUTER_STATUS' id = '390'/>
+        <see cref = 'OPEN_DRONE_ID_ARM_STATUS' id = '12918'/>
+        <see cref = 'OPEN_DRONE_ID_AUTHENTICATION' id = '12902'/>
+        <see cref = 'OPEN_DRONE_ID_BASIC_ID' id = '12900'/>
+        <see cref = 'OPEN_DRONE_ID_LOCATION' id = '12901'/>
+        <see cref = 'OPEN_DRONE_ID_MESSAGE_PACK' id = '12915'/>
+        <see cref = 'OPEN_DRONE_ID_OPERATOR_ID' id = '12905'/>
+        <see cref = 'OPEN_DRONE_ID_SELF_ID' id = '12903'/>
+        <see cref = 'OPEN_DRONE_ID_SYSTEM' id = '12904'/>
+        <see cref = 'OPEN_DRONE_ID_SYSTEM_UPDATE' id = '12919'/>
+        <see cref = 'OPTICAL_FLOW' id = '100'/>
+        <see cref = 'OPTICAL_FLOW_RAD' id = '106'/>
+        <see cref = 'ORBIT_EXECUTION_STATUS' id = '360'/>
+        <see cref = 'PARAM_ERROR' id = '345'/>
+        <see cref = 'PARAM_EXT_ACK' id = '324'/>
+        <see cref = 'PARAM_EXT_REQUEST_LIST' id = '321'/>
+        <see cref = 'PARAM_EXT_REQUEST_READ' id = '320'/>
+        <see cref = 'PARAM_EXT_SET' id = '323'/>
+        <see cref = 'PARAM_EXT_VALUE' id = '322'/>
+        <see cref = 'PARAM_MAP_RC' id = '50'/>
+        <see cref = 'PARAM_REQUEST_LIST' id = '21'/>
+        <see cref = 'PARAM_REQUEST_READ' id = '20'/>
+        <see cref = 'PARAM_SET' id = '23'/>
+        <see cref = 'PARAM_VALUE' id = '22'/>
+        <see cref = 'PING' id = '4'/>
+        <see cref = 'PLAY_TUNE' id = '258'/>
+        <see cref = 'PLAY_TUNE_V2' id = '400'/>
+        <see cref = 'POSITION_TARGET_GLOBAL_INT' id = '87'/>
+        <see cref = 'POSITION_TARGET_LOCAL_NED' id = '85'/>
+        <see cref = 'POWER_STATUS' id = '125'/>
+        <see cref = 'PROTOCOL_VERSION' id = '300'/>
+        <see cref = 'RADIO_STATUS' id = '109'/>
+        <see cref = 'RAW_IMU' id = '27'/>
+        <see cref = 'RAW_PRESSURE' id = '28'/>
+        <see cref = 'RAW_RPM' id = '339'/>
+        <see cref = 'RC_CHANNELS' id = '65'/>
+        <see cref = 'RC_CHANNELS_OVERRIDE' id = '70'/>
+        <see cref = 'RC_CHANNELS_RAW' id = '35'/>
+        <see cref = 'RC_CHANNELS_SCALED' id = '34'/>
+        <see cref = 'RELAY_STATUS' id = '376'/>
+        <see cref = 'REQUEST_DATA_STREAM' id = '66'/>
+        <see cref = 'REQUEST_EVENT' id = '412'/>
+        <see cref = 'RESOURCE_REQUEST' id = '142'/>
+        <see cref = 'RESPONSE_EVENT_ERROR' id = '413'/>
+        <see cref = 'SAFETY_ALLOWED_AREA' id = '55'/>
+        <see cref = 'SAFETY_SET_ALLOWED_AREA' id = '54'/>
+        <see cref = 'SCALED_IMU' id = '26'/>
+        <see cref = 'SCALED_IMU2' id = '116'/>
+        <see cref = 'SCALED_IMU3' id = '129'/>
+        <see cref = 'SCALED_PRESSURE' id = '29'/>
+        <see cref = 'SCALED_PRESSURE2' id = '137'/>
+        <see cref = 'SCALED_PRESSURE3' id = '143'/>
+        <see cref = 'SERIAL_CONTROL' id = '126'/>
+        <see cref = 'SERVO_OUTPUT_RAW' id = '36'/>
+        <see cref = 'SETUP_SIGNING' id = '256'/>
+        <see cref = 'SET_ACTUATOR_CONTROL_TARGET' id = '139'/>
+        <see cref = 'SET_ATTITUDE_TARGET' id = '82'/>
+        <see cref = 'SET_GPS_GLOBAL_ORIGIN' id = '48'/>
+        <see cref = 'SET_HOME_POSITION' id = '243'/>
+        <see cref = 'SET_MODE' id = '11'/>
+        <see cref = 'SET_POSITION_TARGET_GLOBAL_INT' id = '86'/>
+        <see cref = 'SET_POSITION_TARGET_LOCAL_NED' id = '84'/>
+        <see cref = 'SIM_STATE' id = '108'/>
+        <see cref = 'SMART_BATTERY_INFO' id = '370'/>
+        <see cref = 'STATUSTEXT' id = '253'/>
+        <see cref = 'STORAGE_INFORMATION' id = '261'/>
+        <see cref = 'SUPPORTED_TUNES' id = '401'/>
+        <see cref = 'SYSTEM_TIME' id = '2'/>
+        <see cref = 'SYS_STATUS' id = '1'/>
+        <see cref = 'TERRAIN_CHECK' id = '135'/>
+        <see cref = 'TERRAIN_DATA' id = '134'/>
+        <see cref = 'TERRAIN_REPORT' id = '136'/>
+        <see cref = 'TERRAIN_REQUEST' id = '133'/>
+        <see cref = 'TIMESYNC' id = '111'/>
+        <see cref = 'TIME_ESTIMATE_TO_TARGET' id = '380'/>
+        <see cref = 'TRAJECTORY_REPRESENTATION_BEZIER' id = '333'/>
+        <see cref = 'TRAJECTORY_REPRESENTATION_WAYPOINTS' id = '332'/>
+        <see cref = 'TUNNEL' id = '385'/>
+        <see cref = 'UAVCAN_NODE_INFO' id = '311'/>
+        <see cref = 'UAVCAN_NODE_STATUS' id = '310'/>
+        <see cref = 'UTM_GLOBAL_POSITION' id = '340'/>
+        <see cref = 'V2_EXTENSION' id = '248'/>
+        <see cref = 'VFR_HUD' id = '74'/>
+        <see cref = 'VIBRATION' id = '241'/>
+        <see cref = 'VICON_POSITION_ESTIMATE' id = '104'/>
+        <see cref = 'VIDEO_STREAM_INFORMATION' id = '269'/>
+        <see cref = 'VIDEO_STREAM_STATUS' id = '270'/>
+        <see cref = 'VISION_POSITION_ESTIMATE' id = '102'/>
+        <see cref = 'VISION_SPEED_ESTIMATE' id = '103'/>
+        <see cref = 'WHEEL_DISTANCE' id = '9000'/>
+        <see cref = 'WIFI_CONFIG_AP' id = '299'/>
+        <see cref = 'WINCH_STATUS' id = '9005'/>
+        <see cref = 'WIND_COV' id = '231'/>
+    */
+    public interface AVSSUAS {
+
 /**
 Micro air vehicle / autopilot classes. This identifies the individual model.
 */
@@ -218,34 +460,41 @@ Onboard companion controller
 MAV_TYPE_ONBOARD_CONTROLLER = 18, 
 
 /**
-Two-rotor VTOL using control surfaces in vertical operation in addition. Tailsitter.
+Two-rotor Tailsitter VTOL that additionally uses control surfaces in vertical operation. Note, value previously
+named MAV_TYPE_VTOL_DUOROTOR.
 */
-MAV_TYPE_VTOL_DUOROTOR = 19, 
+MAV_TYPE_VTOL_TAILSITTER_DUOROTOR = 19, 
 
 /**
-Quad-rotor VTOL using a V-shaped quad config in vertical operation. Tailsitter.
+Quad-rotor Tailsitter VTOL using a V-shaped quad config in vertical operation. Note: value previously
+named MAV_TYPE_VTOL_QUADROTOR.
 */
-MAV_TYPE_VTOL_QUADROTOR = 20, 
+MAV_TYPE_VTOL_TAILSITTER_QUADROTOR = 20, 
 
 /**
-Tiltrotor VTOL
+Tiltrotor VTOL. Fuselage and wings stay (nominally) horizontal in all flight phases. It able to tilt (some)
+rotors to provide thrust in cruise flight.
 */
 MAV_TYPE_VTOL_TILTROTOR = 21, 
 
 /**
-VTOL reserved 2
+VTOL with separate fixed rotors for hover and cruise flight. Fuselage and wings stay (nominally) horizontal
+in all flight phases.
 */
-MAV_TYPE_VTOL_RESERVED2 = 22, 
+MAV_TYPE_VTOL_FIXEDROTOR = 22, 
 
 /**
-VTOL reserved 3
+Tailsitter VTOL. Fuselage and wings orientation changes depending on flight phase: vertical for hover,
+horizontal for cruise. Use more specific VTOL MAV_TYPE_VTOL_TAILSITTER_DUOROTOR or MAV_TYPE_VTOL_TAILSITTER_QUADROTOR
+if appropriate.
 */
-MAV_TYPE_VTOL_RESERVED3 = 23, 
+MAV_TYPE_VTOL_TAILSITTER = 23, 
 
 /**
-VTOL reserved 4
+Tiltwing VTOL. Fuselage stays horizontal in all flight phases. The whole wing, along with any attached
+engine, can tilt between vertical and horizontal mode.
 */
-MAV_TYPE_VTOL_RESERVED4 = 24, 
+MAV_TYPE_VTOL_TILTWING = 24, 
 
 /**
 VTOL reserved 5
@@ -337,11 +586,51 @@ Winch
 */
 MAV_TYPE_WINCH = 42, 
 
+/**
+Generic multirotor that does not fit into a specific type or whose type is unknown
+*/
+MAV_TYPE_GENERIC_MULTIROTOR = 43, 
+
+/**
+Illuminator. An illuminator is a light source that is used for lighting up dark areas external to the
+system: e.g. a torch or searchlight (as opposed to a light source for illuminating the system itself,
+e.g. an indicator light).
+*/
+MAV_TYPE_ILLUMINATOR = 44, 
+
+/**
+Orbiter spacecraft. Includes satellites orbiting terrestrial and extra-terrestrial bodies. Follows NASA
+Spacecraft Classification.
+*/
+MAV_TYPE_SPACECRAFT_ORBITER = 45, 
+
+/**
+A generic four-legged ground vehicle (e.g., a robot dog).
+*/
+MAV_TYPE_GROUND_QUADRUPED = 46, 
+
+/**
+VTOL hybrid of helicopter and autogyro. It has a main rotor for lift and separate propellers for forward
+flight. The rotor must be powered for hover but can autorotate in cruise flight. See: https://en.wikipedia.org/wiki/Gyrodyne
+*/
+MAV_TYPE_VTOL_GYRODYNE = 47, 
+
+/**
+Gripper
+*/
+MAV_TYPE_GRIPPER = 48, 
+
+/**
+Radio
+*/
+MAV_TYPE_RADIO = 49, 
+
 }
 
 /**
-These flags encode the MAV mode.
+These flags encode the MAV mode, see MAV_MODE enum for useful combinations.
 */
+[Flags]
 enum MAV_MODE_FLAG{
 
 /**
@@ -386,7 +675,8 @@ not be used for stable implementations.
 MAV_MODE_FLAG_TEST_ENABLED = 2, 
 
 /**
-0b00000001 Reserved for future use.
+0b00000001 system-specific custom mode is enabled. When using this flag to enable a custom mode all other
+flags should be ignored.
 */
 MAV_MODE_FLAG_CUSTOM_MODE_ENABLED = 1, 
 
@@ -397,6 +687,7 @@ These values encode the bit positions of the decode position. These values can b
 of a flag bit by combining the base_mode variable with AND with the flag position value. The result will
 be either 0 or 1, depending on if the flag is set or not.
 */
+[Flags]
 enum MAV_MODE_FLAG_DECODE_POSITION{
 
 /**
@@ -468,13 +759,13 @@ System is active and might be already airborne. Motors are engaged.
 MAV_STATE_ACTIVE = 4, 
 
 /**
-System is in a non-normal flight mode. It can however still navigate.
+System is in a non-normal flight mode (failsafe). It can however still navigate.
 */
 MAV_STATE_CRITICAL = 5, 
 
 /**
-System is in a non-normal flight mode. It lost control over parts or over the whole airframe. It is in
-mayday and going down.
+System is in a non-normal flight mode (failsafe). It lost control over parts or over the whole airframe.
+It is in mayday and going down.
 */
 MAV_STATE_EMERGENCY = 6, 
 
@@ -484,16 +775,16 @@ System just initialized its power-down sequence, will shut down now.
 MAV_STATE_POWEROFF = 7, 
 
 /**
-System is terminating itself.
+System is terminating itself (failsafe or commanded).
 */
 MAV_STATE_FLIGHT_TERMINATION = 8, 
 
 }
 
 /**
-When creating new entries, components that can have multiple instances (e.g. cameras, servos etc.) should
-be allocated sequential values. An appropriate number of values should be left free after these components
-to allow the number of instances to be expanded.
+New code must not use component IDs to infer the component type, but instead check the MAV_TYPE in the
+HEARTBEAT message!
+      
 */
 enum MAV_COMPONENT{
 
@@ -989,6 +1280,21 @@ Camera #6.
 MAV_COMP_ID_CAMERA6 = 105, 
 
 /**
+Radio #1.
+*/
+MAV_COMP_ID_RADIO = 110, 
+
+/**
+Radio #2.
+*/
+MAV_COMP_ID_RADIO2 = 111, 
+
+/**
+Radio #3.
+*/
+MAV_COMP_ID_RADIO3 = 112, 
+
+/**
 Servo #1.
 */
 MAV_COMP_ID_SERVO1 = 140, 
@@ -1085,6 +1391,7 @@ MAV_COMP_ID_PERIPHERAL = 158,
 
 /**
 Gimbal ID for QX1.
+**DEPRECATED** since=2018-11 replaced_by=MAV_COMP_ID_GIMBAL: All gimbals should use MAV_COMP_ID_GIMBAL.
 */
 MAV_COMP_ID_QX1_GIMBAL = 159, 
 
@@ -1097,6 +1404,11 @@ MAV_COMP_ID_FLARM = 160,
 Parachute component.
 */
 MAV_COMP_ID_PARACHUTE = 161, 
+
+/**
+Winch component.
+*/
+MAV_COMP_ID_WINCH = 169, 
 
 /**
 Gimbal #2.
@@ -1248,7 +1560,13 @@ Component handling TUNNEL messages (e.g. vendor specific GUI of a component).
 MAV_COMP_ID_TUNNEL_NODE = 242, 
 
 /**
-Component for handling system messages (e.g. to ARM, takeoff, etc.).
+Illuminator
+*/
+MAV_COMP_ID_ILLUMINATOR = 243, 
+
+/**
+Deprecated, don't use. Component for handling system messages (e.g. to ARM, takeoff, etc.).
+**DEPRECATED** since=2018-11 replaced_by=MAV_COMP_ID_ALL: System control does not require a separate component ID. Instead, system commands should be sent with target_component=MAV_COMP_ID_ALL allowing the target component to use any appropriate component id.
 */
 MAV_COMP_ID_SYSTEM_CONTROL = 250, 
 
@@ -1292,43 +1610,154 @@ MAV_STATE system_status;
 /**
 MAVLink version, not writable by user, gets added by protocol because of magic data type: uint8_t_mavlink_version
 */
- sbyte  mavlink_version;
+ byte  mavlink_version;
 
 }
 
 /**
-Version and capability of protocol version. This message can be requested with MAV_CMD_REQUEST_MESSAGE
-and is used as part of the handshaking to establish which MAVLink version should be used on the network.
-Every node should respond to a request for PROTOCOL_VERSION to enable the handshaking. Library implementers
-should consider adding this into the default decoding state machine to allow the protocol core to respond
-directly.
+Enum used to indicate true or false (also: success or failure, enabled or disabled, active or inactive).
 */
-class PROTOCOL_VERSION{
+[Flags]
+enum MAV_BOOL{
 
 /**
-Currently active MAVLink version number * 100: v1.0 is 100, v2.0 is 200, etc.
+False.
 */
- ushort  version;
+MAV_BOOL_FALSE = 0, 
 
 /**
-Minimum MAVLink version supported
+True.
 */
- ushort  min_version;
+MAV_BOOL_TRUE = 1, 
+
+}
 
 /**
-Maximum MAVLink version supported (set to the same value as version by default)
+Bitmask of (optional) autopilot capabilities (64 bit). If a bit is set, the autopilot supports this capability.
 */
- ushort  max_version;
+[Flags]
+enum MAV_PROTOCOL_CAPABILITY{
 
 /**
-The first 8 bytes (not characters printed in hex!) of the git hash.
+Autopilot supports the MISSION_ITEM float message type.
+          Note that MISSION_ITEM is deprecated,
+and autopilots should use MISSION_ITEM_INT instead.
 */
-[Dims( +8 )]  byte  spec_version_hash;
+MAV_PROTOCOL_CAPABILITY_MISSION_FLOAT = 1, 
 
 /**
-The first 8 bytes (not characters printed in hex!) of the git hash.
+Autopilot supports the new param float message type.
+**DEPRECATED** since=2022-03 replaced_by=MAV_PROTOCOL_CAPABILITY_PARAM_ENCODE_C_CAST
 */
-[Dims( +8 )]  byte  library_version_hash;
+MAV_PROTOCOL_CAPABILITY_PARAM_FLOAT = 2, 
+
+/**
+Autopilot supports MISSION_ITEM_INT scaled integer message type.
+          Note that this flag must always
+be set if missions are supported, because missions must always use MISSION_ITEM_INT (rather than MISSION_ITEM,
+which is deprecated).
+*/
+MAV_PROTOCOL_CAPABILITY_MISSION_INT = 4, 
+
+/**
+Autopilot supports COMMAND_INT scaled integer message type.
+*/
+MAV_PROTOCOL_CAPABILITY_COMMAND_INT = 8, 
+
+/**
+Parameter protocol uses byte-wise encoding of parameter values into param_value (float) fields: https://mavlink.io/en/services/parameter.html#parameter-encoding.
+
+         Note that either this flag or MAV_PROTOCOL_CAPABILITY_PARAM_ENCODE_C_CAST should be set if the
+parameter protocol is supported.
+*/
+MAV_PROTOCOL_CAPABILITY_PARAM_ENCODE_BYTEWISE = 16, 
+
+/**
+Autopilot supports the File Transfer Protocol v1: https://mavlink.io/en/services/ftp.html.
+*/
+MAV_PROTOCOL_CAPABILITY_FTP = 32, 
+
+/**
+Autopilot supports commanding attitude offboard.
+*/
+MAV_PROTOCOL_CAPABILITY_SET_ATTITUDE_TARGET = 64, 
+
+/**
+Autopilot supports commanding position and velocity targets in local NED frame.
+*/
+MAV_PROTOCOL_CAPABILITY_SET_POSITION_TARGET_LOCAL_NED = 128, 
+
+/**
+Autopilot supports commanding position and velocity targets in global scaled integers.
+*/
+MAV_PROTOCOL_CAPABILITY_SET_POSITION_TARGET_GLOBAL_INT = 256, 
+
+/**
+Autopilot supports terrain protocol / data handling.
+*/
+MAV_PROTOCOL_CAPABILITY_TERRAIN = 512, 
+
+/**
+Reserved for future use.
+*/
+MAV_PROTOCOL_CAPABILITY_RESERVED3 = 1024, 
+
+/**
+Autopilot supports the MAV_CMD_DO_FLIGHTTERMINATION command (flight termination).
+*/
+MAV_PROTOCOL_CAPABILITY_FLIGHT_TERMINATION = 2048, 
+
+/**
+Autopilot supports onboard compass calibration.
+*/
+MAV_PROTOCOL_CAPABILITY_COMPASS_CALIBRATION = 4096, 
+
+/**
+Autopilot supports MAVLink version 2.
+*/
+MAV_PROTOCOL_CAPABILITY_MAVLINK2 = 8192, 
+
+/**
+Autopilot supports mission fence protocol.
+*/
+MAV_PROTOCOL_CAPABILITY_MISSION_FENCE = 16384, 
+
+/**
+Autopilot supports mission rally point protocol.
+*/
+MAV_PROTOCOL_CAPABILITY_MISSION_RALLY = 32768, 
+
+/**
+Reserved for future use.
+*/
+MAV_PROTOCOL_CAPABILITY_RESERVED2 = 65536, 
+
+/**
+Parameter protocol uses C-cast of parameter values to set the param_value (float) fields: https://mavlink.io/en/services/parameter.html#parameter-encoding.
+
+         Note that either this flag or MAV_PROTOCOL_CAPABILITY_PARAM_ENCODE_BYTEWISE should be set if
+the parameter protocol is supported.
+*/
+MAV_PROTOCOL_CAPABILITY_PARAM_ENCODE_C_CAST = 131072, 
+
+/**
+This component implements/is a gimbal manager. This means the GIMBAL_MANAGER_INFORMATION, and other messages
+can be requested.
+        
+*/
+MAV_PROTOCOL_CAPABILITY_COMPONENT_IMPLEMENTS_GIMBAL_MANAGER = 262144, 
+
+/**
+Component supports locking control to a particular GCS independent of its system (via MAV_CMD_REQUEST_OPERATOR_CONTROL).
+**WIP**
+*/
+MAV_PROTOCOL_CAPABILITY_COMPONENT_ACCEPTS_GCS_CONTROL = 524288, 
+
+/**
+Autopilot has a connected gripper. MAVLink Grippers would set MAV_TYPE_GRIPPER instead.
+**WIP**
+*/
+MAV_PROTOCOL_CAPABILITY_GRIPPER = 1048576, 
 
 }
 
@@ -1366,8 +1795,137 @@ FIRMWARE_VERSION_TYPE_OFFICIAL = 255,
 }
 
 /**
-Flags to report failure cases over the high latency telemtry.
+The filtered global position (e.g. fused GPS and accelerometers). The position is in GPS-frame (right-handed,
+Z-up). It is designed as scaled integer message since the resolution of float is not sufficient.
 */
+class GLOBAL_POSITION_INT{
+
+/**
+Timestamp (time since system boot).
+*/
+ uint  time_boot_ms;
+
+/**
+Latitude, expressed
+*/
+ int  lat;
+
+/**
+Longitude, expressed
+*/
+ int  lon;
+
+/**
+Altitude (MSL). Note that virtually all GPS modules provide both WGS84 and MSL.
+*/
+ int  alt;
+
+/**
+Altitude above home
+*/
+ int  relative_alt;
+
+/**
+Ground X Speed (Latitude, positive north)
+*/
+ short  vx;
+
+/**
+Ground Y Speed (Longitude, positive east)
+*/
+ short  vy;
+
+/**
+Ground Z Speed (Altitude, positive down)
+*/
+ short  vz;
+
+/**
+Vehicle heading (yaw angle), 0.0..359.99 degrees. If unknown, set to: UINT16_MAX
+*/
+ ushort  hdg;
+
+}
+
+/**
+Version and capability of autopilot software. This should be emitted in response to a request with MAV_CMD_REQUEST_MESSAGE.
+*/
+class AUTOPILOT_VERSION{
+
+/**
+Bitmap of capabilities
+*/
+MAV_PROTOCOL_CAPABILITY capabilities;
+
+/**
+Firmware version number.
+        The field must be encoded as 4 bytes, where each byte (shown from MSB
+to LSB) is part of a semantic version: (major) (minor) (patch) (FIRMWARE_VERSION_TYPE).
+*/
+ uint  flight_sw_version;
+
+/**
+Middleware version number
+*/
+ uint  middleware_sw_version;
+
+/**
+Operating system version number
+*/
+ uint  os_sw_version;
+
+/**
+HW / board version (last 8 bits should be silicon ID, if any). The first 16 bits of this field specify
+a board type from an enumeration stored at https://github.com/PX4/PX4-Bootloader/blob/master/board_types.txt
+and with extensive additions at https://github.com/ArduPilot/ardupilot/blob/master/Tools/AP_Bootloader/board_types.txt
+*/
+ uint  board_version;
+
+/**
+Custom version field, commonly the first 8 bytes of the git hash. This is not an unique identifier, but
+should allow to identify the commit using the main version number even for very large code bases.
+*/
+[D(8)]  byte [] flight_custom_version;
+
+/**
+Custom version field, commonly the first 8 bytes of the git hash. This is not an unique identifier, but
+should allow to identify the commit using the main version number even for very large code bases.
+*/
+[D(8)]  byte [] middleware_custom_version;
+
+/**
+Custom version field, commonly the first 8 bytes of the git hash. This is not an unique identifier, but
+should allow to identify the commit using the main version number even for very large code bases.
+*/
+[D(8)]  byte [] os_custom_version;
+
+/**
+ID of the board vendor
+*/
+ ushort  vendor_id;
+
+/**
+ID of the product
+*/
+ ushort  product_id;
+
+/**
+UID if provided by hardware (see uid2)
+*/
+ ulong  uid;
+
+/**
+UID if provided by hardware (supersedes the uid field. If this is non-zero, use this field, otherwise
+use uid)
+*/
+[D(18)]  byte [] uid2;
+
+}
+
+/**
+Flags to report failure cases over the high latency telemetry.
+*/
+[Flags]
 enum HL_FAILURE_FLAG{
 
 /**
@@ -1411,7 +1969,7 @@ Battery failure/critical low battery.
 HL_FAILURE_FLAG_BATTERY = 128, 
 
 /**
-RC receiver failure/no rc connection.
+RC receiver failure/no RC connection.
 */
 HL_FAILURE_FLAG_RC_RECEIVER = 256, 
 
@@ -1470,10 +2028,9 @@ MAV_GOTO_HOLD_AT_SPECIFIED_POSITION = 3,
 }
 
 /**
-These defines are predefined OR-combined mode flags. There is no need to use values from this enum, but
-it
-               simplifies the use of the mode flags. Note that manual input is enabled in all modes
-as a safety override.
+Predefined OR-combined MAV_MODE_FLAG values. These can simplify using the flags when setting modes. Note
+that manual input is enabled in all modes as a safety override.
+**DEPRECATED** since=2025-02 replaced_by=MAV_MODE_FLAG: Using MAV_MODE to set modes is less predictable than using standard modes (MAV_STANDARD_MODE) or custom modes (MAV_MODE_FLAG_CUSTOM_MODE_ENABLED).
 */
 enum MAV_MODE{
 
@@ -1483,54 +2040,62 @@ System is not ready to fly, booting, calibrating, etc. No flag is set.
 MAV_MODE_PREFLIGHT = 0, 
 
 /**
-System is allowed to be active, under assisted RC control.
+System is allowed to be active, under assisted RC control (MAV_MODE_FLAG_SAFETY_ARMED, MAV_MODE_FLAG_STABILIZE_ENABLED)
 */
 MAV_MODE_STABILIZE_DISARMED = 80, 
 
 /**
-System is allowed to be active, under assisted RC control.
+System is allowed to be active, under assisted RC control (MAV_MODE_FLAG_SAFETY_ARMED, MAV_MODE_FLAG_MANUAL_INPUT_ENABLED,
+MAV_MODE_FLAG_STABILIZE_ENABLED)
 */
 MAV_MODE_STABILIZE_ARMED = 208, 
 
 /**
-System is allowed to be active, under manual (RC) control, no stabilization
+System is allowed to be active, under manual (RC) control, no stabilization (MAV_MODE_FLAG_MANUAL_INPUT_ENABLED)
 */
 MAV_MODE_MANUAL_DISARMED = 64, 
 
 /**
-System is allowed to be active, under manual (RC) control, no stabilization
+System is allowed to be active, under manual (RC) control, no stabilization (MAV_MODE_FLAG_SAFETY_ARMED,
+MAV_MODE_FLAG_MANUAL_INPUT_ENABLED)
 */
 MAV_MODE_MANUAL_ARMED = 192, 
 
 /**
-System is allowed to be active, under autonomous control, manual setpoint
+System is allowed to be active, under autonomous control, manual setpoint (MAV_MODE_FLAG_SAFETY_ARMED,
+MAV_MODE_FLAG_STABILIZE_ENABLED, MAV_MODE_FLAG_GUIDED_ENABLED)
 */
 MAV_MODE_GUIDED_DISARMED = 88, 
 
 /**
-System is allowed to be active, under autonomous control, manual setpoint
+System is allowed to be active, under autonomous control, manual setpoint (MAV_MODE_FLAG_SAFETY_ARMED,
+MAV_MODE_FLAG_MANUAL_INPUT_ENABLED, MAV_MODE_FLAG_STABILIZE_ENABLED, MAV_MODE_FLAG_GUIDED_ENABLED)
 */
 MAV_MODE_GUIDED_ARMED = 216, 
 
 /**
 System is allowed to be active, under autonomous control and navigation (the trajectory is decided onboard
-and not pre-programmed by waypoints)
+and not pre-programmed by waypoints). (MAV_MODE_FLAG_SAFETY_ARMED, MAV_MODE_FLAG_STABILIZE_ENABLED, MAV_MODE_FLAG_GUIDED_ENABLED,
+MAV_MODE_FLAG_AUTO_ENABLED).
 */
 MAV_MODE_AUTO_DISARMED = 92, 
 
 /**
 System is allowed to be active, under autonomous control and navigation (the trajectory is decided onboard
-and not pre-programmed by waypoints)
+and not pre-programmed by waypoints). (MAV_MODE_FLAG_SAFETY_ARMED, MAV_MODE_FLAG_MANUAL_INPUT_ENABLED,
+MAV_MODE_FLAG_STABILIZE_ENABLED, MAV_MODE_FLAG_GUIDED_ENABLED,MAV_MODE_FLAG_AUTO_ENABLED).
 */
 MAV_MODE_AUTO_ARMED = 220, 
 
 /**
 UNDEFINED mode. This solely depends on the autopilot - use with caution, intended for developers only.
+(MAV_MODE_FLAG_MANUAL_INPUT_ENABLED, MAV_MODE_FLAG_TEST_ENABLED).
 */
 MAV_MODE_TEST_DISARMED = 66, 
 
 /**
-UNDEFINED mode. This solely depends on the autopilot - use with caution, intended for developers only.
+UNDEFINED mode. This solely depends on the autopilot - use with caution, intended for developers only
+(MAV_MODE_FLAG_SAFETY_ARMED, MAV_MODE_FLAG_MANUAL_INPUT_ENABLED, MAV_MODE_FLAG_TEST_ENABLED)
 */
 MAV_MODE_TEST_ARMED = 194, 
 
@@ -1539,6 +2104,7 @@ MAV_MODE_TEST_ARMED = 194,
 /**
 These encode the sensors whose status is sent as part of the SYS_STATUS message.
 */
+[Flags]
 enum MAV_SYS_STATUS_SENSOR:long{
 
 /**
@@ -1622,7 +2188,7 @@ MAV_SYS_STATUS_SENSOR_XY_POSITION_CONTROL = 16384,
 MAV_SYS_STATUS_SENSOR_MOTOR_OUTPUTS = 32768, 
 
 /**
-0x10000 rc receiver
+0x10000 RC receiver
 */
 MAV_SYS_STATUS_SENSOR_RC_RECEIVER = 65536, 
 
@@ -1707,6 +2273,7 @@ MAV_SYS_STATUS_EXTENSION_USED = 2147483648,
 /**
 These encode the sensors whose status is sent as part of the SYS_STATUS message in the extended fields.
 */
+[Flags]
 enum MAV_SYS_STATUS_SENSOR_EXTENDED{
 
 /**
@@ -1714,18 +2281,23 @@ enum MAV_SYS_STATUS_SENSOR_EXTENDED{
 */
 MAV_SYS_STATUS_RECOVERY_SYSTEM = 1, 
 
+/**
+0x02 Leak detection
+*/
+MAV_SYS_STATUS_SENSOR_LEAK = 2, 
+
 }
 
 /**
-Some deprecated frames do not follow these conventions (e.g. MAV_FRAME_BODY_NED and MAV_FRAME_BODY_OFFSET_NED).
+- "OFFSET": Deprecated synonym for "BODY" (origin travels with the vehicle). Not to be used for new frames.
 
 
+     Some deprecated frames do not follow these conventions (e.g. MAV_FRAME_BODY_NED and MAV_FRAME_BODY_OFFSET_NED).
 */
 enum MAV_FRAME{
 
 /**
-Global (WGS84) coordinate frame + MSL altitude. First value / x: latitude, second value / y: longitude,
-third value / z: positive altitude over mean sea level (MSL).
+Global (WGS84) coordinate frame + altitude relative to mean sea level (MSL).
 */
 MAV_FRAME_GLOBAL = 0, 
 
@@ -1740,8 +2312,8 @@ NOT a coordinate frame, indicates a mission command.
 MAV_FRAME_MISSION = 2, 
 
 /**
-Global (WGS84) coordinate frame + altitude relative to the home position. First value / x: latitude, second
-value / y: longitude, third value / z: positive altitude with 0 being at the altitude of the home location.
+Global (WGS84) coordinate frame + altitude relative to the home position.
+        
 */
 MAV_FRAME_GLOBAL_RELATIVE_ALT = 3, 
 
@@ -1751,15 +2323,12 @@ ENU local tangent frame (x: East, y: North, z: Up) with origin fixed relative to
 MAV_FRAME_LOCAL_ENU = 4, 
 
 /**
-Global (WGS84) coordinate frame (scaled) + MSL altitude. First value / x: latitude in degrees*1E7, second
-value / y: longitude in degrees*1E7, third value / z: positive altitude over mean sea level (MSL).
+Global (WGS84) coordinate frame (scaled) + altitude relative to mean sea level (MSL).
 */
 MAV_FRAME_GLOBAL_INT = 5, 
 
 /**
-Global (WGS84) coordinate frame (scaled) + altitude relative to the home position. First value / x: latitude
-in degrees*1E7, second value / y: longitude in degrees*1E7, third value / z: positive altitude with 0
-being at the altitude of the home location.
+Global (WGS84) coordinate frame (scaled) + altitude relative to the home position. 
 */
 MAV_FRAME_GLOBAL_RELATIVE_ALT_INT = 6, 
 
@@ -1770,7 +2339,7 @@ MAV_FRAME_LOCAL_OFFSET_NED = 7,
 
 /**
 Same as MAV_FRAME_LOCAL_NED when used to represent position values. Same as MAV_FRAME_BODY_FRD when used
-with velocity/accelaration values.
+with velocity/acceleration values.
 */
 MAV_FRAME_BODY_NED = 8, 
 
@@ -1780,63 +2349,66 @@ This is the same as MAV_FRAME_BODY_FRD.
 MAV_FRAME_BODY_OFFSET_NED = 9, 
 
 /**
-Global (WGS84) coordinate frame with AGL altitude (at the waypoint coordinate). First value / x: latitude
-in degrees, second value / y: longitude in degrees, third value / z: positive altitude in meters with
-0 being at ground level in terrain model.
+Global (WGS84) coordinate frame with AGL altitude (altitude at ground level).
 */
 MAV_FRAME_GLOBAL_TERRAIN_ALT = 10, 
 
 /**
-Global (WGS84) coordinate frame (scaled) with AGL altitude (at the waypoint coordinate). First value /
-x: latitude in degrees*1E7, second value / y: longitude in degrees*1E7, third value / z: positive altitude
-in meters with 0 being at ground level in terrain model.
+Global (WGS84) coordinate frame (scaled) with AGL altitude (altitude at ground level).
 */
 MAV_FRAME_GLOBAL_TERRAIN_ALT_INT = 11, 
 
 /**
-FRD local tangent frame (x: Forward, y: Right, z: Down) with origin that travels with vehicle. The forward
-axis is aligned to the front of the vehicle in the horizontal plane.
+FRD local frame aligned to the vehicle's attitude (x: Forward, y: Right, z: Down) with an origin that
+travels with vehicle.
 */
 MAV_FRAME_BODY_FRD = 12, 
 
 /**
 MAV_FRAME_BODY_FLU - Body fixed frame of reference, Z-up (x: Forward, y: Left, z: Up).
+**DEPRECATED** since=2019-04 replaced_by=
 */
 MAV_FRAME_RESERVED_13 = 13, 
 
 /**
 MAV_FRAME_MOCAP_NED - Odometry local coordinate frame of data given by a motion capture system, Z-down
 (x: North, y: East, z: Down).
+**DEPRECATED** since=2019-04 replaced_by=MAV_FRAME_LOCAL_FRD
 */
 MAV_FRAME_RESERVED_14 = 14, 
 
 /**
 MAV_FRAME_MOCAP_ENU - Odometry local coordinate frame of data given by a motion capture system, Z-up (x:
 East, y: North, z: Up).
+**DEPRECATED** since=2019-04 replaced_by=MAV_FRAME_LOCAL_FLU
 */
 MAV_FRAME_RESERVED_15 = 15, 
 
 /**
 MAV_FRAME_VISION_NED - Odometry local coordinate frame of data given by a vision estimation system, Z-down
 (x: North, y: East, z: Down).
+**DEPRECATED** since=2019-04 replaced_by=MAV_FRAME_LOCAL_FRD
 */
 MAV_FRAME_RESERVED_16 = 16, 
 
 /**
 MAV_FRAME_VISION_ENU - Odometry local coordinate frame of data given by a vision estimation system, Z-up
 (x: East, y: North, z: Up).
+**DEPRECATED** since=2019-04 replaced_by=MAV_FRAME_LOCAL_FLU
 */
 MAV_FRAME_RESERVED_17 = 17, 
 
 /**
 MAV_FRAME_ESTIM_NED - Odometry local coordinate frame of data given by an estimator running onboard the
 vehicle, Z-down (x: North, y: East, z: Down).
+**DEPRECATED** since=2019-04 replaced_by=MAV_FRAME_LOCAL_FRD
 */
 MAV_FRAME_RESERVED_18 = 18, 
 
 /**
 MAV_FRAME_ESTIM_ENU - Odometry local coordinate frame of data given by an estimator running onboard the
 vehicle, Z-up (x: East, y: North, z: Up).
+**DEPRECATED** since=2019-04 replaced_by=MAV_FRAME_LOCAL_FLU
 */
 MAV_FRAME_RESERVED_19 = 19, 
 
@@ -1860,55 +2432,6 @@ MAVLINK_DATA_STREAM_IMG_RAW8U = 2,
 MAVLINK_DATA_STREAM_IMG_RAW32U = 3, 
 MAVLINK_DATA_STREAM_IMG_PGM = 4, 
 MAVLINK_DATA_STREAM_IMG_PNG = 5, 
-
-}
-
-/**
-Actions following geofence breach.
-*/
-enum FENCE_ACTION{
-
-/**
-Disable fenced mode. If used in a plan this would mean the next fence is disabled.
-*/
-FENCE_ACTION_NONE = 0, 
-
-/**
-Fly to geofence MAV_CMD_NAV_FENCE_RETURN_POINT in GUIDED mode. Note: This action is only supported by
-ArduPlane, and may not be supported in all versions.
-*/
-FENCE_ACTION_GUIDED = 1, 
-
-/**
-Report fence breach, but don't take action
-*/
-FENCE_ACTION_REPORT = 2, 
-
-/**
-Fly to geofence MAV_CMD_NAV_FENCE_RETURN_POINT with manual throttle control in GUIDED mode. Note: This
-action is only supported by ArduPlane, and may not be supported in all versions.
-*/
-FENCE_ACTION_GUIDED_THR_PASS = 3, 
-
-/**
-Return/RTL mode.
-*/
-FENCE_ACTION_RTL = 4, 
-
-/**
-Hold at current location.
-*/
-FENCE_ACTION_HOLD = 5, 
-
-/**
-Termination failsafe. Motors are shut down (some flight stacks may trigger other failsafe actions).
-*/
-FENCE_ACTION_TERMINATE = 6, 
-
-/**
-Land at current location.
-*/
-FENCE_ACTION_LAND = 7, 
 
 }
 enum FENCE_BREACH{
@@ -1938,6 +2461,7 @@ FENCE_BREACH_BOUNDARY = 3,
 /**
 Actions being taken to mitigate/prevent fence breach
 */
+[Flags]
 enum FENCE_MITIGATE{
 
 /**
@@ -1958,12 +2482,43 @@ FENCE_MITIGATE_VEL_LIMIT = 2,
 }
 
 /**
+If none are set, the flight stack will ignore the field and enable/disable its default set of fences (usually
+all of them).
+      
+*/
+[Flags]
+enum FENCE_TYPE{
+
+/**
+Maximum altitude fence
+*/
+FENCE_TYPE_ALT_MAX = 1, 
+
+/**
+Circle fence
+*/
+FENCE_TYPE_CIRCLE = 2, 
+
+/**
+Polygon fence
+*/
+FENCE_TYPE_POLYGON = 4, 
+
+/**
+Minimum altitude fence
+*/
+FENCE_TYPE_ALT_MIN = 8, 
+
+}
+
+/**
 Enumeration of possible mount operation modes. This message is used by obsolete/deprecated gimbal messages.
+**DEPRECATED** since=2020-01 replaced_by=GIMBAL_MANAGER_FLAGS
 */
 enum MAV_MOUNT_MODE{
 
 /**
-Load and keep safe position (Roll,Pitch,Yaw) from permant memory and stop stabilization
+Load and keep safe position (Roll,Pitch,Yaw) from permanent memory and stop stabilization
 */
 MAV_MOUNT_MODE_RETRACT = 0, 
 
@@ -1993,24 +2548,25 @@ Gimbal tracks system with specified system ID
 MAV_MOUNT_MODE_SYSID_TARGET = 5, 
 
 /**
-Gimbal tracks home location
+Gimbal tracks home position
 */
 MAV_MOUNT_MODE_HOME_LOCATION = 6, 
 
 }
 
 /**
-Gimbal device (low level) capability flags (bitmap)
+Gimbal device (low level) capability flags (bitmap).
 */
+[Flags]
 enum GIMBAL_DEVICE_CAP_FLAGS{
 
 /**
-Gimbal device supports a retracted position
+Gimbal device supports a retracted position.
 */
 GIMBAL_DEVICE_CAP_FLAGS_HAS_RETRACT = 1, 
 
 /**
-Gimbal device supports a horizontal, forward looking position, stabilized
+Gimbal device supports a horizontal, forward looking position, stabilized.
 */
 GIMBAL_DEVICE_CAP_FLAGS_HAS_NEUTRAL = 2, 
 
@@ -2020,12 +2576,12 @@ Gimbal device supports rotating around roll axis.
 GIMBAL_DEVICE_CAP_FLAGS_HAS_ROLL_AXIS = 4, 
 
 /**
-Gimbal device supports to follow a roll angle relative to the vehicle
+Gimbal device supports to follow a roll angle relative to the vehicle.
 */
 GIMBAL_DEVICE_CAP_FLAGS_HAS_ROLL_FOLLOW = 8, 
 
 /**
-Gimbal device supports locking to an roll angle (generally that's the default with roll stabilized)
+Gimbal device supports locking to a roll angle (generally that's the default with roll stabilized).
 */
 GIMBAL_DEVICE_CAP_FLAGS_HAS_ROLL_LOCK = 16, 
 
@@ -2035,12 +2591,12 @@ Gimbal device supports rotating around pitch axis.
 GIMBAL_DEVICE_CAP_FLAGS_HAS_PITCH_AXIS = 32, 
 
 /**
-Gimbal device supports to follow a pitch angle relative to the vehicle
+Gimbal device supports to follow a pitch angle relative to the vehicle.
 */
 GIMBAL_DEVICE_CAP_FLAGS_HAS_PITCH_FOLLOW = 64, 
 
 /**
-Gimbal device supports locking to an pitch angle (generally that's the default with pitch stabilized)
+Gimbal device supports locking to a pitch angle (generally that's the default with pitch stabilized).
 */
 GIMBAL_DEVICE_CAP_FLAGS_HAS_PITCH_LOCK = 128, 
 
@@ -2050,27 +2606,51 @@ Gimbal device supports rotating around yaw axis.
 GIMBAL_DEVICE_CAP_FLAGS_HAS_YAW_AXIS = 256, 
 
 /**
-Gimbal device supports to follow a yaw angle relative to the vehicle (generally that's the default)
+Gimbal device supports to follow a yaw angle relative to the vehicle (generally that's the default).
 */
 GIMBAL_DEVICE_CAP_FLAGS_HAS_YAW_FOLLOW = 512, 
 
 /**
-Gimbal device supports locking to an absolute heading (often this is an option available)
+Gimbal device supports locking to an absolute heading, i.e., yaw angle relative to North (earth frame,
+often this is an option available).
 */
 GIMBAL_DEVICE_CAP_FLAGS_HAS_YAW_LOCK = 1024, 
 
 /**
-Gimbal device supports yawing/panning infinetely (e.g. using slip disk).
+Gimbal device supports yawing/panning infinitely (e.g. using slip disk).
 */
 GIMBAL_DEVICE_CAP_FLAGS_SUPPORTS_INFINITE_YAW = 2048, 
+
+/**
+Gimbal device supports yaw angles and angular velocities relative to North (earth frame). This usually
+requires support by an autopilot via AUTOPILOT_STATE_FOR_GIMBAL_DEVICE. Support can go on and off during
+runtime, which is reported by the flag GIMBAL_DEVICE_FLAGS_CAN_ACCEPT_YAW_IN_EARTH_FRAME.
+*/
+GIMBAL_DEVICE_CAP_FLAGS_SUPPORTS_YAW_IN_EARTH_FRAME = 4096, 
+
+/**
+Gimbal device supports radio control inputs as an alternative input for controlling the gimbal orientation.
+*/
+GIMBAL_DEVICE_CAP_FLAGS_HAS_RC_INPUTS = 8192, 
+
+/**
+Gimbal device supports to point to a local position.
+*/
+GIMBAL_DEVICE_CAP_FLAGS_CAN_POINT_LOCATION_LOCAL = 65536, 
+
+/**
+Gimbal device supports to point to a global latitude, longitude, altitude position.
+*/
+GIMBAL_DEVICE_CAP_FLAGS_CAN_POINT_LOCATION_GLOBAL = 131072, 
 
 }
 
 /**
-Gimbal manager high level capability flags (bitmap). The first 16 bits are identical to the GIMBAL_DEVICE_CAP_FLAGS.
+Gimbal manager high level capability flags (bitmap). The flags are identical to the GIMBAL_DEVICE_CAP_FLAGS.
 However, the gimbal manager does not need to copy the flags from the gimbal but can also enhance the
 capabilities and thus add flags.
 */
+[Flags]
 enum GIMBAL_MANAGER_CAP_FLAGS{
 
 /**
@@ -2134,12 +2714,22 @@ Based on GIMBAL_DEVICE_CAP_FLAGS_SUPPORTS_INFINITE_YAW.
 GIMBAL_MANAGER_CAP_FLAGS_SUPPORTS_INFINITE_YAW = 2048, 
 
 /**
-Gimbal manager supports to point to a local position.
+Based on GIMBAL_DEVICE_CAP_FLAGS_SUPPORTS_YAW_IN_EARTH_FRAME.
+*/
+GIMBAL_MANAGER_CAP_FLAGS_SUPPORTS_YAW_IN_EARTH_FRAME = 4096, 
+
+/**
+Based on GIMBAL_DEVICE_CAP_FLAGS_HAS_RC_INPUTS.
+*/
+GIMBAL_MANAGER_CAP_FLAGS_HAS_RC_INPUTS = 8192, 
+
+/**
+Based on GIMBAL_DEVICE_CAP_FLAGS_CAN_POINT_LOCATION_LOCAL.
 */
 GIMBAL_MANAGER_CAP_FLAGS_CAN_POINT_LOCATION_LOCAL = 65536, 
 
 /**
-Gimbal manager supports to point to a global latitude, longitude, altitude position.
+Based on GIMBAL_DEVICE_CAP_FLAGS_CAN_POINT_LOCATION_GLOBAL.
 */
 GIMBAL_MANAGER_CAP_FLAGS_CAN_POINT_LOCATION_GLOBAL = 131072, 
 
@@ -2148,75 +2738,134 @@ GIMBAL_MANAGER_CAP_FLAGS_CAN_POINT_LOCATION_GLOBAL = 131072,
 /**
 Flags for gimbal device (lower level) operation.
 */
+[Flags]
 enum GIMBAL_DEVICE_FLAGS{
 
 /**
-Set to retracted safe position (no stabilization), takes presedence over all other flags.
+Set to retracted safe position (no stabilization), takes precedence over all other flags.
 */
 GIMBAL_DEVICE_FLAGS_RETRACT = 1, 
 
 /**
 Set to neutral/default position, taking precedence over all other flags except RETRACT. Neutral is commonly
-forward-facing and horizontal (pitch=yaw=0) but may be any orientation.
+forward-facing and horizontal (roll=pitch=yaw=0) but may be any orientation.
 */
 GIMBAL_DEVICE_FLAGS_NEUTRAL = 2, 
 
 /**
-Lock roll angle to absolute angle relative to horizon (not relative to drone). This is generally the default
-with a stabilizing gimbal.
+Lock roll angle to absolute angle relative to horizon (not relative to vehicle). This is generally the
+default with a stabilizing gimbal.
 */
 GIMBAL_DEVICE_FLAGS_ROLL_LOCK = 4, 
 
 /**
-Lock pitch angle to absolute angle relative to horizon (not relative to drone). This is generally the
-default.
+Lock pitch angle to absolute angle relative to horizon (not relative to vehicle). This is generally the
+default with a stabilizing gimbal.
 */
 GIMBAL_DEVICE_FLAGS_PITCH_LOCK = 8, 
 
 /**
-Lock yaw angle to absolute angle relative to North (not relative to drone). If this flag is set, the quaternion
-is in the Earth frame with the x-axis pointing North (yaw absolute). If this flag is not set, the quaternion
-frame is in the Earth frame rotated so that the x-axis is pointing forward (yaw relative to vehicle).
+Lock yaw angle to absolute angle relative to North (not relative to vehicle). If this flag is set, the
+yaw angle and z component of angular velocity are relative to North (earth frame, x-axis pointing North),
+else they are relative to the vehicle heading (vehicle frame, earth frame rotated so that the x-axis
+is pointing forward).
 */
 GIMBAL_DEVICE_FLAGS_YAW_LOCK = 16, 
+
+/**
+Yaw angle and z component of angular velocity are relative to the vehicle heading (vehicle frame, earth
+frame rotated such that the x-axis is pointing forward).
+*/
+GIMBAL_DEVICE_FLAGS_YAW_IN_VEHICLE_FRAME = 32, 
+
+/**
+Yaw angle and z component of angular velocity are relative to North (earth frame, x-axis is pointing North).
+*/
+GIMBAL_DEVICE_FLAGS_YAW_IN_EARTH_FRAME = 64, 
+
+/**
+Gimbal device can accept yaw angle inputs relative to North (earth frame). This flag is only for reporting
+(attempts to set this flag are ignored).
+*/
+GIMBAL_DEVICE_FLAGS_ACCEPTS_YAW_IN_EARTH_FRAME = 128, 
+
+/**
+The gimbal orientation is set exclusively by the RC signals feed to the gimbal's radio control inputs.
+MAVLink messages for setting the gimbal orientation (GIMBAL_DEVICE_SET_ATTITUDE) are ignored.
+*/
+GIMBAL_DEVICE_FLAGS_RC_EXCLUSIVE = 256, 
+
+/**
+The gimbal orientation is determined by combining/mixing the RC signals feed to the gimbal's radio control
+inputs and the MAVLink messages for setting the gimbal orientation (GIMBAL_DEVICE_SET_ATTITUDE). How
+these two controls are combined or mixed is not defined by the protocol but is up to the implementation.
+*/
+GIMBAL_DEVICE_FLAGS_RC_MIXED = 512, 
 
 }
 
 /**
 Flags for high level gimbal manager operation The first 16 bits are identical to the GIMBAL_DEVICE_FLAGS.
 */
+[Flags]
 enum GIMBAL_MANAGER_FLAGS{
 
 /**
-Based on GIMBAL_DEVICE_FLAGS_RETRACT
+Based on GIMBAL_DEVICE_FLAGS_RETRACT.
 */
 GIMBAL_MANAGER_FLAGS_RETRACT = 1, 
 
 /**
-Based on GIMBAL_DEVICE_FLAGS_NEUTRAL
+Based on GIMBAL_DEVICE_FLAGS_NEUTRAL.
 */
 GIMBAL_MANAGER_FLAGS_NEUTRAL = 2, 
 
 /**
-Based on GIMBAL_DEVICE_FLAGS_ROLL_LOCK
+Based on GIMBAL_DEVICE_FLAGS_ROLL_LOCK.
 */
 GIMBAL_MANAGER_FLAGS_ROLL_LOCK = 4, 
 
 /**
-Based on GIMBAL_DEVICE_FLAGS_PITCH_LOCK
+Based on GIMBAL_DEVICE_FLAGS_PITCH_LOCK.
 */
 GIMBAL_MANAGER_FLAGS_PITCH_LOCK = 8, 
 
 /**
-Based on GIMBAL_DEVICE_FLAGS_YAW_LOCK
+Based on GIMBAL_DEVICE_FLAGS_YAW_LOCK.
 */
 GIMBAL_MANAGER_FLAGS_YAW_LOCK = 16, 
+
+/**
+Based on GIMBAL_DEVICE_FLAGS_YAW_IN_VEHICLE_FRAME.
+*/
+GIMBAL_MANAGER_FLAGS_YAW_IN_VEHICLE_FRAME = 32, 
+
+/**
+Based on GIMBAL_DEVICE_FLAGS_YAW_IN_EARTH_FRAME.
+*/
+GIMBAL_MANAGER_FLAGS_YAW_IN_EARTH_FRAME = 64, 
+
+/**
+Based on GIMBAL_DEVICE_FLAGS_ACCEPTS_YAW_IN_EARTH_FRAME.
+*/
+GIMBAL_MANAGER_FLAGS_ACCEPTS_YAW_IN_EARTH_FRAME = 128, 
+
+/**
+Based on GIMBAL_DEVICE_FLAGS_RC_EXCLUSIVE.
+*/
+GIMBAL_MANAGER_FLAGS_RC_EXCLUSIVE = 256, 
+
+/**
+Based on GIMBAL_DEVICE_FLAGS_RC_MIXED.
+*/
+GIMBAL_MANAGER_FLAGS_RC_MIXED = 512, 
 
 }
 
 /**
 Gimbal device (low level) error flags (bitmap, 0 means no error)
 */
+[Flags]
 enum GIMBAL_DEVICE_ERROR_FLAGS{
 
 /**
@@ -2245,7 +2894,7 @@ There is an error with the gimbal power source.
 GIMBAL_DEVICE_ERROR_FLAGS_POWER_ERROR = 16, 
 
 /**
-There is an error with the gimbal motor's.
+There is an error with the gimbal motors.
 */
 GIMBAL_DEVICE_ERROR_FLAGS_MOTOR_ERROR = 32, 
 
@@ -2260,15 +2909,21 @@ There is an error with the gimbal's communication.
 GIMBAL_DEVICE_ERROR_FLAGS_COMMS_ERROR = 128, 
 
 /**
-Gimbal is currently calibrating.
+Gimbal device is currently calibrating.
 */
 GIMBAL_DEVICE_ERROR_FLAGS_CALIBRATION_RUNNING = 256, 
+
+/**
+Gimbal device is not assigned to a gimbal manager.
+*/
+GIMBAL_DEVICE_ERROR_FLAGS_NO_MANAGER = 512, 
 
 }
 
 /**
 Gripper actions.
 */
+[Flags]
 enum GRIPPER_ACTIONS{
 
 /**
@@ -2280,6 +2935,11 @@ GRIPPER_ACTION_RELEASE = 0,
 Gripper grab onto cargo.
 */
 GRIPPER_ACTION_GRAB = 1, 
+
+/**
+Gripper hold current grip state/position.
+*/
+GRIPPER_ACTION_HOLD = 2, 
 
 }
 
@@ -2338,6 +2998,12 @@ Spool out the entire length of the line. Only action and instance command parame
 are ignored.
 */
 WINCH_ABANDON_LINE = 8, 
+
+/**
+Spools out just enough to present the hook to the user to load the payload. Only action and instance command
+parameters are used, others are ignored
+*/
+WINCH_LOAD_PAYLOAD = 9, 
 
 }
 
@@ -2440,12 +3106,8 @@ ESC_CONNECTION_TYPE_DSHOT = 5,
 /**
 Flags to report ESC failures.
 */
+[Flags]
 enum ESC_FAILURE_FLAGS{
-
-/**
-No ESC failure.
-*/
-ESC_FAILURE_NONE = 0, 
 
 /**
 Over current failure.
@@ -2567,6 +3229,7 @@ STORAGE_TYPE_OTHER = 254,
 /**
 Flags to indicate usage for a particular storage (see STORAGE_INFORMATION.storage_usage and MAV_CMD_SET_STORAGE_USAGE).
 */
+[Flags]
 enum STORAGE_USAGE_FLAG{
 
 /**
@@ -2620,6 +3283,12 @@ ORBIT_YAW_BEHAVIOUR_HOLD_FRONT_TANGENT_TO_CIRCLE = 3,
 Yaw controlled by RC input.
 */
 ORBIT_YAW_BEHAVIOUR_RC_CONTROLLED = 4, 
+
+/**
+Vehicle uses current yaw behaviour (unchanged). The vehicle-default yaw behaviour is used if this value
+is specified when orbit is first commanded.
+*/
+ORBIT_YAW_BEHAVIOUR_UNCHANGED = 5, 
 
 }
 
@@ -2720,7 +3389,7 @@ WIFI_CONFIG_AP_MODE_DISABLED = 3,
 }
 
 /**
-Supported component metadata types. These are used in the "general" metadata file returned by COMPONENT_INFORMATION
+Supported component metadata types. These are used in the "general" metadata file returned by COMPONENT_METADATA
 to provide information about supported metadata types. The types are not used directly in MAVLink messages.
 */
 enum COMP_METADATA_TYPE{
@@ -2970,14 +3639,10 @@ ACTUATOR_OUTPUT_FUNCTION_SERVO16 = 48,
 }
 
 /**
-Enable axes that will be tuned via autotuning. Used in MAV_CMD_DO_AUTOTUNE_ENABLE.
+of axes.
 */
+[Flags]
 enum AUTOTUNE_AXIS{
-
-/**
-Flight stack tunes axis according to its default settings.
-*/
-AUTOTUNE_AXIS_DEFAULT = 0, 
 
 /**
 Autotune roll axis.
@@ -2993,6 +3658,190 @@ AUTOTUNE_AXIS_PITCH = 2,
 Autotune yaw axis.
 */
 AUTOTUNE_AXIS_YAW = 4, 
+
+}
+
+/**
+Actions for reading/writing parameters between persistent and volatile storage when using MAV_CMD_PREFLIGHT_STORAGE.
+
+       (Commonly parameters are loaded from persistent storage (flash/EEPROM) into volatile storage (RAM)
+on startup and written back when they are changed.)
+*/
+enum PREFLIGHT_STORAGE_PARAMETER_ACTION{
+
+/**
+Read all parameters from persistent storage. Replaces values in volatile storage.
+*/
+PARAM_READ_PERSISTENT = 0, 
+
+/**
+Write all parameter values to persistent storage (flash/EEPROM)
+*/
+PARAM_WRITE_PERSISTENT = 1, 
+
+/**
+Reset parameters to default values (such as sensor calibration, safety settings, and so on). Note that
+a flight stack may choose not to reset some parameters at their own discretion (such as those that are
+locked or expected to persist for the vehicle lifetime).
+*/
+PARAM_RESET_FACTORY_DEFAULT = 2, 
+
+/**
+Reset only sensor calibration parameters to factory defaults (or firmware default if not available)
+*/
+PARAM_RESET_SENSOR_DEFAULT = 3, 
+
+/**
+Reset all parameters to default values.
+*/
+PARAM_RESET_ALL_DEFAULT = 4, 
+
+}
+
+/**
+Actions for reading and writing plan information (mission, rally points, geofence) between persistent
+and volatile storage when using MAV_CMD_PREFLIGHT_STORAGE.
+        (Commonly missions are loaded from
+persistent storage (flash/EEPROM) into volatile storage (RAM) on startup and written back when they are
+changed.)
+*/
+[Flags]
+enum PREFLIGHT_STORAGE_MISSION_ACTION{
+
+/**
+Read current mission data from persistent storage
+*/
+MISSION_READ_PERSISTENT = 0, 
+
+/**
+Write current mission data to persistent storage
+*/
+MISSION_WRITE_PERSISTENT = 1, 
+
+/**
+Erase all mission data stored on the vehicle (both persistent and volatile storage)
+*/
+MISSION_RESET_DEFAULT = 2, 
+
+}
+
+/**
+Reboot/shutdown action for selected component in MAV_CMD_PREFLIGHT_REBOOT_SHUTDOWN.
+*/
+enum REBOOT_SHUTDOWN_ACTION{
+
+/**
+Do nothing.
+*/
+REBOOT_SHUTDOWN_ACTION_NONE = 0, 
+
+/**
+Reboot component.
+*/
+REBOOT_SHUTDOWN_ACTION_REBOOT = 1, 
+
+/**
+Shutdown component.
+*/
+REBOOT_SHUTDOWN_ACTION_SHUTDOWN = 2, 
+
+/**
+Reboot component and keep it in the bootloader until upgraded.
+*/
+REBOOT_SHUTDOWN_ACTION_REBOOT_TO_BOOTLOADER = 3, 
+
+/**
+Power on component. Do nothing if component is already powered (ACK command with MAV_RESULT_ACCEPTED).
+*/
+REBOOT_SHUTDOWN_ACTION_POWER_ON = 4, 
+
+}
+
+/**
+Specifies the conditions under which the MAV_CMD_PREFLIGHT_REBOOT_SHUTDOWN command should be accepted.
+*/
+enum REBOOT_SHUTDOWN_CONDITIONS{
+
+/**
+Reboot/Shutdown only if allowed by safety checks, such as being landed.
+*/
+REBOOT_SHUTDOWN_CONDITIONS_SAFETY_INTERLOCKED = 0, 
+
+/**
+Force reboot/shutdown of the autopilot/component regardless of system state.
+*/
+REBOOT_SHUTDOWN_CONDITIONS_FORCE = 20190226, 
+
+}
+
+/**
+Action for the magnetometer (param2) of MAV_CMD_PREFLIGHT_CALIBRATION.
+*/
+enum PREFLIGHT_CALIBRATION_MAGNETOMETER{
+
+/**
+No action.
+*/
+PREFLIGHT_CALIBRATION_MAGNETOMETER_NONE = 0, 
+
+/**
+Start magnetometer calibration.
+*/
+PREFLIGHT_CALIBRATION_MAGNETOMETER_START = 1, 
+
+/**
+Force-accept the existing compass calibration as valid without re-running it. Useful after a parameter
+reload that cleared calibration validity flags.
+*/
+PREFLIGHT_CALIBRATION_MAGNETOMETER_FORCE_SAVE = 76, 
+
+}
+
+/**
+Action for the accelerometer (param5) of MAV_CMD_PREFLIGHT_CALIBRATION.
+*/
+enum PREFLIGHT_CALIBRATION_ACCELEROMETER{
+
+/**
+No action.
+*/
+PREFLIGHT_CALIBRATION_ACCELEROMETER_NONE = 0, 
+
+/**
+Full 6-position accelerometer calibration.
+*/
+PREFLIGHT_CALIBRATION_ACCELEROMETER_FULL = 1, 
+
+/**
+Board level (trim) calibration.
+*/
+PREFLIGHT_CALIBRATION_ACCELEROMETER_TRIM = 2, 
+
+/**
+Accelerometer temperature calibration.
+*/
+PREFLIGHT_CALIBRATION_ACCELEROMETER_TEMPERATURE = 3, 
+
+/**
+Simple accelerometer calibration.
+*/
+PREFLIGHT_CALIBRATION_ACCELEROMETER_SIMPLE = 4, 
+
+/**
+Force-accept the existing accelerometer calibration as valid without re-running it. Useful after a parameter
+reload that cleared calibration validity flags.
+*/
+PREFLIGHT_CALIBRATION_ACCELEROMETER_FORCE_SAVE = 76, 
+
+}
+[Flags]
+enum NAV_TAKEOFF_FLAGS{
+
+/**
+Accept the command even if the autopilot does not have control over its horizontal position (note that
+it might not have altitude control either).
+*/
+NAV_TAKEOFF_FLAGS_HORIZONTAL_POSITION_NOT_REQUIRED = 1, 
 
 }
 
@@ -3081,59 +3930,6 @@ MAV_ROI_TARGET = 4,
 }
 
 /**
-ACK / NACK / ERROR values as a result of MAV_CMDs and for mission item transmission.
-*/
-enum MAV_CMD_ACK{
-
-/**
-Command / mission item is ok.
-*/
-MAV_CMD_ACK_OK = 0, 
-
-/**
-Generic error message if none of the other reasons fails or if no detailed error reporting is implemented.
-*/
-MAV_CMD_ACK_ERR_FAIL = 1, 
-
-/**
-The system is refusing to accept this command from this source / communication partner.
-*/
-MAV_CMD_ACK_ERR_ACCESS_DENIED = 2, 
-
-/**
-Command or mission item is not supported, other commands would be accepted.
-*/
-MAV_CMD_ACK_ERR_NOT_SUPPORTED = 3, 
-
-/**
-The coordinate frame of this command / mission item is not supported.
-*/
-MAV_CMD_ACK_ERR_COORDINATE_FRAME_NOT_SUPPORTED = 4, 
-
-/**
-The coordinate frame of this command is ok, but he coordinate values exceed the safety limits of this
-system. This is a generic error, please use the more specific error messages below if possible.
-*/
-MAV_CMD_ACK_ERR_COORDINATES_OUT_OF_RANGE = 5, 
-
-/**
-The X or latitude value is out of range.
-*/
-MAV_CMD_ACK_ERR_X_LAT_OUT_OF_RANGE = 6, 
-
-/**
-The Y or longitude value is out of range.
-*/
-MAV_CMD_ACK_ERR_Y_LON_OUT_OF_RANGE = 7, 
-
-/**
-The Z or altitude value is out of range.
-*/
-MAV_CMD_ACK_ERR_Z_ALT_OUT_OF_RANGE = 8, 
-
-}
-
-/**
 Specifies the datatype of a MAVLink parameter.
 */
 enum MAV_PARAM_TYPE{
@@ -3187,6 +3983,59 @@ MAV_PARAM_TYPE_REAL32 = 9,
 64-bit floating-point
 */
 MAV_PARAM_TYPE_REAL64 = 10, 
+
+}
+
+/**
+Parameter protocol error types (see PARAM_ERROR).
+**WIP**
+*/
+enum MAV_PARAM_ERROR{
+
+/**
+No error occurred (not expected in PARAM_ERROR but may be used in future implementations.
+*/
+MAV_PARAM_ERROR_NO_ERROR = 0, 
+
+/**
+Parameter does not exist
+*/
+MAV_PARAM_ERROR_DOES_NOT_EXIST = 1, 
+
+/**
+Parameter value does not fit within accepted range
+*/
+MAV_PARAM_ERROR_VALUE_OUT_OF_RANGE = 2, 
+
+/**
+Caller is not permitted to set the value of this parameter
+*/
+MAV_PARAM_ERROR_PERMISSION_DENIED = 3, 
+
+/**
+Unknown component specified
+*/
+MAV_PARAM_ERROR_COMPONENT_NOT_FOUND = 4, 
+
+/**
+Parameter is read-only
+*/
+MAV_PARAM_ERROR_READ_ONLY = 5, 
+
+/**
+Parameter data type (MAV_PARAM_TYPE) is not supported by flight stack (at all)
+*/
+MAV_PARAM_ERROR_TYPE_UNSUPPORTED = 6, 
+
+/**
+Parameter type does not match expected type
+*/
+MAV_PARAM_ERROR_TYPE_MISMATCH = 7, 
+
+/**
+Parameter exists but reading failed
+*/
+MAV_PARAM_ERROR_READ_FAIL = 8, 
 
 }
 
@@ -3270,8 +4119,9 @@ Retrying later should work.
 MAV_RESULT_TEMPORARILY_REJECTED = 1, 
 
 /**
-Command is invalid (is supported but has invalid parameters). Retrying same command and parameters will
-not work.
+Command is invalid; it is supported but one or more parameter values are invalid (i.e. parameter reserved,
+value allowed by spec but not supported by flight stack, and so on). Retrying the same command and parameters
+will not work.
 */
 MAV_RESULT_DENIED = 2, 
 
@@ -3299,6 +4149,27 @@ MAV_RESULT_IN_PROGRESS = 5,
 Command has been cancelled (as a result of receiving a COMMAND_CANCEL message).
 */
 MAV_RESULT_CANCELLED = 6, 
+
+/**
+Command is only accepted when sent as a COMMAND_LONG.
+*/
+MAV_RESULT_COMMAND_LONG_ONLY = 7, 
+
+/**
+Command is only accepted when sent as a COMMAND_INT.
+*/
+MAV_RESULT_COMMAND_INT_ONLY = 8, 
+
+/**
+Command is invalid because a frame is required and the specified frame is not supported.
+*/
+MAV_RESULT_COMMAND_UNSUPPORTED_MAV_FRAME = 9, 
+
+/**
+Command has been rejected because source system is not in control of the target system/component.
+**WIP**
+*/
+MAV_RESULT_NOT_IN_CONTROL = 10, 
 
 }
 
@@ -3442,6 +4313,7 @@ MAV_SEVERITY_DEBUG = 7,
 /**
 Power supply status flags (bitmask)
 */
+[Flags]
 enum MAV_POWER_STATUS{
 
 /**
@@ -3561,6 +4433,7 @@ SERIAL_CONTROL_SERIAL9 = 109,
 /**
 SERIAL_CONTROL flags (bitmask)
 */
+[Flags]
 enum SERIAL_CONTROL_FLAG{
 
 /**
@@ -3842,109 +4715,6 @@ MAV_SENSOR_ROTATION_CUSTOM = 100,
 }
 
 /**
-Bitmask of (optional) autopilot capabilities (64 bit). If a bit is set, the autopilot supports this capability.
-*/
-enum MAV_PROTOCOL_CAPABILITY{
-
-/**
-Autopilot supports the MISSION_ITEM float message type.
-          Note that MISSION_ITEM is deprecated,
-and autopilots should use MISSION_INT instead.
-*/
-MAV_PROTOCOL_CAPABILITY_MISSION_FLOAT = 1, 
-
-/**
-Parameter protocol uses C-cast of parameter values to set the param_value (float) fields: https://mavlink.io/en/services/parameter.html#parameter-encoding.
-
-         Note that either this flag or MAV_PROTOCOL_CAPABILITY_PARAM_ENCODE_BYTEWISE should be set if
-the parameter protocol is supported.
-*/
-MAV_PROTOCOL_CAPABILITY_PARAM_ENCODE_C_CAST = 2, 
-
-/**
-Autopilot supports MISSION_ITEM_INT scaled integer message type.
-          Note that this flag must always
-be set if missions are supported, because missions must always use MISSION_ITEM_INT (rather than MISSION_ITEM,
-which is deprecated).
-*/
-MAV_PROTOCOL_CAPABILITY_MISSION_INT = 4, 
-
-/**
-Autopilot supports COMMAND_INT scaled integer message type.
-*/
-MAV_PROTOCOL_CAPABILITY_COMMAND_INT = 8, 
-
-/**
-Parameter protocol uses byte-wise encoding of parameter values into param_value (float) fields: https://mavlink.io/en/services/parameter.html#parameter-encoding.
-
-         Note that either this flag or MAV_PROTOCOL_CAPABILITY_PARAM_ENCODE_BYTEWISE should be set if
-the parameter protocol is supported.
-*/
-MAV_PROTOCOL_CAPABILITY_PARAM_ENCODE_BYTEWISE = 16, 
-
-/**
-Autopilot supports the File Transfer Protocol v1: https://mavlink.io/en/services/ftp.html.
-*/
-MAV_PROTOCOL_CAPABILITY_FTP = 32, 
-
-/**
-Autopilot supports commanding attitude offboard.
-*/
-MAV_PROTOCOL_CAPABILITY_SET_ATTITUDE_TARGET = 64, 
-
-/**
-Autopilot supports commanding position and velocity targets in local NED frame.
-*/
-MAV_PROTOCOL_CAPABILITY_SET_POSITION_TARGET_LOCAL_NED = 128, 
-
-/**
-Autopilot supports commanding position and velocity targets in global scaled integers.
-*/
-MAV_PROTOCOL_CAPABILITY_SET_POSITION_TARGET_GLOBAL_INT = 256, 
-
-/**
-Autopilot supports terrain protocol / data handling.
-*/
-MAV_PROTOCOL_CAPABILITY_TERRAIN = 512, 
-
-/**
-Autopilot supports direct actuator control.
-*/
-MAV_PROTOCOL_CAPABILITY_SET_ACTUATOR_TARGET = 1024, 
-
-/**
-Autopilot supports the MAV_CMD_DO_FLIGHTTERMINATION command (flight termination).
-*/
-MAV_PROTOCOL_CAPABILITY_FLIGHT_TERMINATION = 2048, 
-
-/**
-Autopilot supports onboard compass calibration.
-*/
-MAV_PROTOCOL_CAPABILITY_COMPASS_CALIBRATION = 4096, 
-
-/**
-Autopilot supports MAVLink version 2.
-*/
-MAV_PROTOCOL_CAPABILITY_MAVLINK2 = 8192, 
-
-/**
-Autopilot supports mission fence protocol.
-*/
-MAV_PROTOCOL_CAPABILITY_MISSION_FENCE = 16384, 
-
-/**
-Autopilot supports mission rally point protocol.
-*/
-MAV_PROTOCOL_CAPABILITY_MISSION_RALLY = 32768, 
-
-/**
-Reserved for future use.
-*/
-MAV_PROTOCOL_CAPABILITY_RESERVED2 = 65536, 
-
-}
-
-/**
 Type of mission items being requested/sent in mission protocol.
 */
 enum MAV_MISSION_TYPE{
@@ -4084,7 +4854,7 @@ MAV_BATTERY_FUNCTION_AVIONICS = 3,
 /**
 Payload battery
 */
-MAV_BATTERY_TYPE_PAYLOAD = 4, 
+MAV_BATTERY_FUNCTION_PAYLOAD = 4, 
 
 }
 
@@ -4141,6 +4911,7 @@ MAV_BATTERY_CHARGE_STATE_CHARGING = 7,
 Battery mode. Note, the normal operation mode (i.e. when flying) should be reported as MAV_BATTERY_MODE_UNKNOWN
 to allow message trimming in normal flight.
 */
+[Flags]
 enum MAV_BATTERY_MODE{
 
 /**
@@ -4164,6 +4935,7 @@ MAV_BATTERY_MODE_HOT_SWAP = 2,
 Smart battery supply status/fault flags (bitmask) for health indication. The battery must also report
 either MAV_BATTERY_CHARGE_STATE_FAILED or MAV_BATTERY_CHARGE_STATE_UNHEALTHY if any of these are set.
 */
+[Flags]
 enum MAV_BATTERY_FAULT{
 
 /**
@@ -4216,10 +4988,35 @@ BATTERY_FAULT_INCOMPATIBLE_CELLS_CONFIGURATION = 256,
 }
 
 /**
+Fuel types for use in FUEL_TYPE. Fuel types specify the units for the maximum, available and consumed
+fuel, and for the flow rates.
+*/
+[Flags]
+enum MAV_FUEL_TYPE{
+
+/**
+Not specified. Fuel levels are normalized (i.e. maximum is 1, and other levels are relative to 1).
+*/
+MAV_FUEL_TYPE_UNKNOWN = 0, 
+
+/**
+A generic liquid fuel. Fuel levels are in millilitres (ml). Fuel rates are in millilitres/second.
+*/
+MAV_FUEL_TYPE_LIQUID = 1, 
+
+/**
+A gas tank. Fuel levels are in kilo-Pascal (kPa), and flow rates are in milliliters per second (ml/s).
+*/
+MAV_FUEL_TYPE_GAS = 2, 
+
+}
+
+/**
 Flags to report status/failure cases for a power generator (used in GENERATOR_STATUS). Note that FAULTS
 are conditions that cause the generator to fail. Warnings are conditions that require attention before
 the next use (they indicate the system is not operating properly).
 */
+[Flags]
 enum MAV_GENERATOR_STATUS_FLAG{
 
 /**
@@ -4409,6 +5206,7 @@ MAV_LANDED_STATE_LANDING = 4,
 /**
 Enumeration of the ADSB altimeter types
 */
+[Flags]
 enum ADSB_ALTITUDE_TYPE{
 
 /**
@@ -4453,6 +5251,7 @@ ADSB_EMITTER_TYPE_POINT_OBSTACLE = 19,
 /**
 These flags indicate status such as data validity of each data source. Set = data valid
 */
+[Flags]
 enum ADSB_FLAGS{
 ADSB_FLAGS_VALID_COORDS = 1, 
 ADSB_FLAGS_VALID_ALTITUDE = 2, 
@@ -4470,6 +5269,7 @@ ADSB_FLAGS_SOURCE_UAT = 32768,
 /**
 Bitmap of options for the MAV_CMD_DO_REPOSITION
 */
+[Flags]
 enum MAV_DO_REPOSITION_FLAGS{
 
 /**
@@ -4477,11 +5277,44 @@ The aircraft should immediately transition into guided. This should not be set f
 */
 MAV_DO_REPOSITION_FLAGS_CHANGE_MODE = 1, 
 
+/**
+Yaw relative to the vehicle current heading (if not set, relative to North).
+*/
+MAV_DO_REPOSITION_FLAGS_RELATIVE_YAW = 2, 
+
+}
+
+/**
+Speed setpoint types used in MAV_CMD_DO_CHANGE_SPEED
+*/
+enum SPEED_TYPE{
+
+/**
+Airspeed
+*/
+SPEED_TYPE_AIRSPEED = 0, 
+
+/**
+Groundspeed
+*/
+SPEED_TYPE_GROUNDSPEED = 1, 
+
+/**
+Climb speed
+*/
+SPEED_TYPE_CLIMB_SPEED = 2, 
+
+/**
+Descent speed
+*/
+SPEED_TYPE_DESCENT_SPEED = 3, 
+
 }
 
 /**
 Flags in ESTIMATOR_STATUS message
 */
+[Flags]
 enum ESTIMATOR_STATUS_FLAGS{
 
 /**
@@ -4550,6 +5383,7 @@ ESTIMATOR_ACCEL_ERROR = 2048,
 /**
 Sequence that motors are tested when using MAV_CMD_DO_MOTOR_TEST.
 */
+[Flags]
 enum MOTOR_TEST_ORDER{
 
 /**
@@ -4595,6 +5429,7 @@ Per-motor compass calibration test.
 MOTOR_TEST_COMPASS_CAL = 3, 
 
 }
+[Flags]
 enum GPS_INPUT_IGNORE_FLAGS{
 
 /**
@@ -4684,6 +5519,7 @@ MAV_COLLISION_ACTION_HOVER = 6,
 /**
 Aircraft-rated danger from this threat.
 */
+[Flags]
 enum MAV_COLLISION_THREAT_LEVEL{
 
 /**
@@ -4706,6 +5542,7 @@ MAV_COLLISION_THREAT_LEVEL_HIGH = 2,
 /**
 Source of information about this collision.
 */
+[Flags]
 enum MAV_COLLISION_SRC{
 
 /**
@@ -4775,6 +5612,7 @@ GPS_FIX_TYPE_PPP = 8,
 /**
 RTK GPS baseline coordinate system, used for RTK corrections
 */
+[Flags]
 enum RTK_BASELINE_COORDINATE_SYSTEM{
 
 /**
@@ -4852,6 +5690,7 @@ VTOL_TRANSITION_HEADING_ANY = 4,
 /**
 Camera capability flags (Bitmap)
 */
+[Flags]
 enum CAMERA_CAP_FLAGS{
 
 /**
@@ -4915,11 +5754,23 @@ Camera supports tracking geo status (CAMERA_TRACKING_GEO_STATUS).
 */
 CAMERA_CAP_FLAGS_HAS_TRACKING_GEO_STATUS = 2048, 
 
+/**
+Camera supports absolute thermal range (request CAMERA_THERMAL_RANGE with MAV_CMD_REQUEST_MESSAGE).
+*/
+CAMERA_CAP_FLAGS_HAS_THERMAL_RANGE = 4096, 
+
+/**
+Camera supports Moving Target Indicators (MTI) on the camera view (using MAV_CMD_CAMERA_START_MTI).
+**WIP**
+*/
+CAMERA_CAP_FLAGS_HAS_MTI = 8192, 
+
 }
 
 /**
 Stream status flags (Bitmap)
 */
+[Flags]
 enum VIDEO_STREAM_STATUS_FLAGS{
 
 /**
@@ -4931,6 +5782,11 @@ VIDEO_STREAM_STATUS_FLAGS_RUNNING = 1,
 Stream is thermal imaging
 */
 VIDEO_STREAM_STATUS_FLAGS_THERMAL = 2, 
+
+/**
+Stream can report absolute thermal range (see CAMERA_THERMAL_RANGE).
+*/
+VIDEO_STREAM_STATUS_FLAGS_THERMAL_RANGE_ENABLED = 4, 
 
 }
 
@@ -4955,15 +5811,39 @@ Stream is MPEG on TCP
 VIDEO_STREAM_TYPE_TCP_MPEG = 2, 
 
 /**
-Stream is h.264 on MPEG TS (URI gives the port number)
+Stream is MPEG TS (URI gives the port number)
 */
-VIDEO_STREAM_TYPE_MPEG_TS_H264 = 3, 
+VIDEO_STREAM_TYPE_MPEG_TS = 3, 
+
+}
+
+/**
+Video stream encodings
+*/
+[Flags]
+enum VIDEO_STREAM_ENCODING{
+
+/**
+Stream encoding is unknown
+*/
+VIDEO_STREAM_ENCODING_UNKNOWN = 0, 
+
+/**
+Stream encoding is H.264
+*/
+VIDEO_STREAM_ENCODING_H264 = 1, 
+
+/**
+Stream encoding is H.265
+*/
+VIDEO_STREAM_ENCODING_H265 = 2, 
 
 }
 
 /**
 Camera tracking status flags
 */
+[Flags]
 enum CAMERA_TRACKING_STATUS_FLAGS{
 
 /**
@@ -4981,11 +5861,24 @@ Camera tracking in error state
 */
 CAMERA_TRACKING_STATUS_FLAGS_ERROR = 2, 
 
+/**
+Camera Moving Target Indicators (MTI) are active
+**WIP**
+*/
+CAMERA_TRACKING_STATUS_FLAGS_MTI = 4, 
+
+/**
+Camera tracking target is obscured and is being predicted
+**WIP**
+*/
+CAMERA_TRACKING_STATUS_FLAGS_COASTING = 8, 
+
 }
 
 /**
 Camera tracking modes
 */
+[Flags]
 enum CAMERA_TRACKING_MODE{
 
 /**
@@ -5008,12 +5901,8 @@ CAMERA_TRACKING_MODE_RECTANGLE = 2,
 /**
 Camera tracking target data (shows where tracked target is within image)
 */
+[Flags]
 enum CAMERA_TRACKING_TARGET_DATA{
-
-/**
-No target data
-*/
-CAMERA_TRACKING_TARGET_DATA_NONE = 0, 
 
 /**
 Target data embedded in image data (proprietary)
@@ -5043,21 +5932,27 @@ Zoom one step increment (-1 for wide, 1 for tele)
 ZOOM_TYPE_STEP = 0, 
 
 /**
-Continuous zoom up/down until stopped (-1 for wide, 1 for tele, 0 to stop zooming)
+Continuous normalized zoom in/out rate until stopped. Range -1..1, negative: wide, positive: narrow/tele,
+0 to stop zooming. Other values should be clipped to the range.
 */
 ZOOM_TYPE_CONTINUOUS = 1, 
 
 /**
-Zoom value as proportion of full camera range (a value between 0.0 and 100.0)
+Zoom value as proportion of full camera range (a percentage value between 0.0 and 100.0)
 */
 ZOOM_TYPE_RANGE = 2, 
 
 /**
-Zoom value/variable focal length in milimetres. Note that there is no message to get the valid zoom range
+Zoom value/variable focal length in millimetres. Note that there is no message to get the valid zoom range
 of the camera, so this can type can only be used for cameras where the zoom range is known (implying
 that this cannot reliably be used in a GCS for an arbitrary camera)
 */
 ZOOM_TYPE_FOCAL_LENGTH = 3, 
+
+/**
+Zoom value as horizontal field of view in degrees.
+*/
+ZOOM_TYPE_HORIZONTAL_FOV = 4, 
 
 }
 
@@ -5072,8 +5967,8 @@ Focus one step increment (-1 for focusing in, 1 for focusing out towards infinit
 FOCUS_TYPE_STEP = 0, 
 
 /**
-Continuous focus up/down until stopped (-1 for focusing in, 1 for focusing out towards infinity, 0 to
-stop focusing)
+Continuous normalized focus in/out rate until stopped. Range -1..1, negative: in, positive: out towards
+infinity, 0 to stop focusing. Other values should be clipped to the range.
 */
 FOCUS_TYPE_CONTINUOUS = 1, 
 
@@ -5107,7 +6002,34 @@ FOCUS_TYPE_AUTO_CONTINUOUS = 6,
 }
 
 /**
-Result from PARAM_EXT_SET message (or a PARAM_SET within a transaction).
+Camera sources for MAV_CMD_SET_CAMERA_SOURCE
+*/
+enum CAMERA_SOURCE{
+
+/**
+Default camera source.
+*/
+CAMERA_SOURCE_DEFAULT = 0, 
+
+/**
+RGB camera source.
+*/
+CAMERA_SOURCE_RGB = 1, 
+
+/**
+IR camera source.
+*/
+CAMERA_SOURCE_IR = 2, 
+
+/**
+NDVI camera source.
+*/
+CAMERA_SOURCE_NDVI = 3, 
+
+}
+
+/**
+Result from PARAM_EXT_SET message.
 */
 enum PARAM_ACK{
 
@@ -5127,9 +6049,9 @@ Parameter failed to set
 PARAM_ACK_FAILED = 2, 
 
 /**
-Parameter value received but not yet set/accepted. A subsequent PARAM_ACK_TRANSACTION or PARAM_EXT_ACK
-with the final result will follow once operation is completed. This is returned immediately for parameters
-that take longer to set, indicating taht the the parameter was recieved and does not need to be resent.
+Parameter value received but not yet set/accepted. A subsequent PARAM_EXT_ACK with the final result will
+follow once operation is completed. This is returned immediately for parameters that take longer to set,
+indicating that the the parameter was received and does not need to be resent.
 */
 PARAM_ACK_IN_PROGRESS = 3, 
 
@@ -5138,6 +6060,7 @@ PARAM_ACK_IN_PROGRESS = 3,
 /**
 Camera Modes.
 */
+[Flags]
 enum CAMERA_MODE{
 
 /**
@@ -5156,6 +6079,11 @@ Camera is in image survey capture mode. It allows for camera controller to do sp
 CAMERA_MODE_IMAGE_SURVEY = 2, 
 
 }
+
+/**
+Reasons for denying an authorization request made with MAV_CMD_ARM_AUTHORIZATION_REQUEST. If the COMMAND_ACK
+result is MAV_RESULT_DENIED, this is used to set the reason in the result_param2 field.
+*/
 enum MAV_ARM_AUTH_DENIED_REASON{
 
 /**
@@ -5192,19 +6120,58 @@ MAV_ARM_AUTH_DENIED_REASON_BAD_WEATHER = 5,
 }
 
 /**
-RC type
+RC type. Used in MAV_CMD_START_RX_PAIR.
 */
+[Flags]
 enum RC_TYPE{
+
+/**
+Spektrum
+*/
+RC_TYPE_SPEKTRUM = 0, 
+
+/**
+CRSF
+*/
+RC_TYPE_CRSF = 1, 
+
+}
+
+/**
+RC sub-type of types defined in RC_TYPE. Used in MAV_CMD_START_RX_PAIR. Ignored if value does not correspond
+to the set RC_TYPE.
+*/
+[Flags]
+enum RC_SUB_TYPE{
 
 /**
 Spektrum DSM2
 */
-RC_TYPE_SPEKTRUM_DSM2 = 0, 
+RC_SUB_TYPE_SPEKTRUM_DSM2 = 0, 
 
 /**
 Spektrum DSMX
 */
-RC_TYPE_SPEKTRUM_DSMX = 1, 
+RC_SUB_TYPE_SPEKTRUM_DSMX = 1, 
+
+/**
+Spektrum DSMX8
+*/
+RC_SUB_TYPE_SPEKTRUM_DSMX8 = 2, 
+
+}
+
+/**
+Engine control options
+*/
+[Flags]
+enum ENGINE_CONTROL_OPTIONS{
+
+/**
+Allow starting the engine while disarmed (without changing the vehicle's armed state). This effectively
+arms just the ICE, without arming the vehicle to start other motors or propellers.
+*/
+ENGINE_CONTROL_OPTIONS_ALLOW_START_WHILE_DISARMED = 1, 
 
 }
 
@@ -5213,6 +6180,7 @@ Bitmap to indicate which dimensions should be ignored by the vehicle: a value of
 0b0000001000000000 indicates that none of the setpoint dimensions should be ignored. If bit 9 is set
 the floats afx afy afz should be interpreted as force instead of acceleration.
 */
+[Flags]
 enum POSITION_TARGET_TYPEMASK{
 
 /**
@@ -5281,6 +6249,7 @@ POSITION_TARGET_TYPEMASK_YAW_RATE_IGNORE = 2048,
 Bitmap to indicate which dimensions should be ignored by the vehicle: a value of 0b00000000 indicates
 that none of the setpoint dimensions should be ignored.
 */
+[Flags]
 enum ATTITUDE_TARGET_TYPEMASK{
 
 /**
@@ -5350,6 +6319,7 @@ UTM_FLIGHT_STATE_NOCTRL = 32,
 /**
 Flags for the global position report.
 */
+[Flags]
 enum UTM_DATA_AVAIL_FLAGS{
 
 /**
@@ -5490,7 +6460,7 @@ SIM is required for the modem but missing
 CELLULAR_NETWORK_FAILED_REASON_SIM_MISSING = 2, 
 
 /**
-SIM is available, but not usuable for connection
+SIM is available, but not usable for connection
 */
 CELLULAR_NETWORK_FAILED_REASON_SIM_ERROR = 3, 
 
@@ -5511,6 +6481,7 @@ CELLULAR_NETWORK_RADIO_TYPE_LTE = 4,
 /**
 Precision land modes (used in MAV_CMD_NAV_LAND).
 */
+[Flags]
 enum PRECISION_LAND_MODE{
 
 /**
@@ -5534,6 +6505,7 @@ PRECISION_LAND_MODE_REQUIRED = 2,
 /**
 Parachute actions. Trigger release and enable/disable auto-release.
 */
+[Flags]
 enum PARACHUTE_ACTION{
 
 /**
@@ -5608,6 +6580,21 @@ MAV_TUNNEL_PAYLOAD_TYPE_STORM32_RESERVED8 = 208,
 Registered for STorM32 gimbal controller.
 */
 MAV_TUNNEL_PAYLOAD_TYPE_STORM32_RESERVED9 = 209, 
+
+/**
+Registered for ModalAI remote OSD protocol.
+*/
+MAV_TUNNEL_PAYLOAD_TYPE_MODALAI_REMOTE_OSD = 210, 
+
+/**
+Registered for ModalAI ESC UART passthru protocol.
+*/
+MAV_TUNNEL_PAYLOAD_TYPE_MODALAI_ESC_UART_PASSTHRU = 211, 
+
+/**
+Registered for ModalAI vendor use.
+*/
+MAV_TUNNEL_PAYLOAD_TYPE_MODALAI_IO_UART_PASSTHRU = 212, 
 
 }
 enum MAV_ODID_ID_TYPE{
@@ -5744,7 +6731,13 @@ The UA is having an emergency.
 */
 MAV_ODID_STATUS_EMERGENCY = 3, 
 
+/**
+The remote ID system is failing or unreliable in some way.
+*/
+MAV_ODID_STATUS_REMOTE_ID_SYSTEM_FAILURE = 4, 
+
 }
+[Flags]
 enum MAV_ODID_HEIGHT_REF{
 
 /**
@@ -6009,32 +7002,45 @@ are managed by ICAO.
 MAV_ODID_AUTH_TYPE_SPECIFIC_AUTHENTICATION = 5, 
 
 }
+[Flags]
 enum MAV_ODID_DESC_TYPE{
 
 /**
-Free-form text description of the purpose of the flight.
+Optional free-form text description of the purpose of the flight.
 */
 MAV_ODID_DESC_TYPE_TEXT = 0, 
 
+/**
+Optional additional clarification when status == MAV_ODID_STATUS_EMERGENCY.
+*/
+MAV_ODID_DESC_TYPE_EMERGENCY = 1, 
+
+/**
+Optional additional clarification when status != MAV_ODID_STATUS_EMERGENCY.
+*/
+MAV_ODID_DESC_TYPE_EXTENDED_STATUS = 2, 
+
 }
+[Flags]
 enum MAV_ODID_OPERATOR_LOCATION_TYPE{
 
 /**
-The location of the operator is the same as the take-off location.
+The location/altitude of the operator is the same as the take-off location.
 */
 MAV_ODID_OPERATOR_LOCATION_TYPE_TAKEOFF = 0, 
 
 /**
-The location of the operator is based on live GNSS data.
+The location/altitude of the operator is dynamic. E.g. based on live GNSS data.
 */
 MAV_ODID_OPERATOR_LOCATION_TYPE_LIVE_GNSS = 1, 
 
 /**
-The location of the operator is a fixed location.
+The location/altitude of the operator are fixed values.
 */
 MAV_ODID_OPERATOR_LOCATION_TYPE_FIXED = 2, 
 
 }
+[Flags]
 enum MAV_ODID_CLASSIFICATION_TYPE{
 
 /**
@@ -6114,6 +7120,7 @@ The class for the UA, according to the EU specification, is Class 6.
 MAV_ODID_CLASS_EU_CLASS_6 = 7, 
 
 }
+[Flags]
 enum MAV_ODID_OPERATOR_ID_TYPE{
 
 /**
@@ -6122,10 +7129,25 @@ CAA (Civil Aviation Authority) registered operator ID.
 MAV_ODID_OPERATOR_ID_TYPE_CAA = 0, 
 
 }
+[Flags]
+enum MAV_ODID_ARM_STATUS{
+
+/**
+Passing arming checks.
+*/
+MAV_ODID_ARM_STATUS_GOOD_TO_ARM = 0, 
+
+/**
+Generic arming failure, see error string for details.
+*/
+MAV_ODID_ARM_STATUS_PRE_ARM_FAIL_GENERIC = 1, 
+
+}
 
 /**
 Tune formats (used for vehicle buzzer/tone generation).
 */
+[Flags]
 enum TUNE_FORMAT{
 
 /**
@@ -6239,12 +7261,12 @@ AIS_TYPE_NONECOMBATANT = 59,
 AIS_TYPE_PASSENGER = 60, 
 AIS_TYPE_PASSENGER_HAZARDOUS_A = 61, 
 AIS_TYPE_PASSENGER_HAZARDOUS_B = 62, 
-AIS_TYPE_AIS_TYPE_PASSENGER_HAZARDOUS_C = 63, 
+AIS_TYPE_PASSENGER_HAZARDOUS_C = 63, 
 AIS_TYPE_PASSENGER_HAZARDOUS_D = 64, 
 AIS_TYPE_PASSENGER_RESERVED_1 = 65, 
 AIS_TYPE_PASSENGER_RESERVED_2 = 66, 
 AIS_TYPE_PASSENGER_RESERVED_3 = 67, 
-AIS_TYPE_AIS_TYPE_PASSENGER_RESERVED_4 = 68, 
+AIS_TYPE_PASSENGER_RESERVED_4 = 68, 
 AIS_TYPE_PASSENGER_UNKNOWN = 69, 
 AIS_TYPE_CARGO = 70, 
 AIS_TYPE_CARGO_HAZARDOUS_A = 71, 
@@ -6287,30 +7309,30 @@ enum AIS_NAV_STATUS{
 /**
 Under way using engine.
 */
-UNDER_WAY = 0, 
-AIS_NAV_ANCHORED = 1, 
-AIS_NAV_UN_COMMANDED = 2, 
-AIS_NAV_RESTRICTED_MANOEUVERABILITY = 3, 
-AIS_NAV_DRAUGHT_CONSTRAINED = 4, 
-AIS_NAV_MOORED = 5, 
-AIS_NAV_AGROUND = 6, 
-AIS_NAV_FISHING = 7, 
-AIS_NAV_SAILING = 8, 
-AIS_NAV_RESERVED_HSC = 9, 
-AIS_NAV_RESERVED_WIG = 10, 
-AIS_NAV_RESERVED_1 = 11, 
-AIS_NAV_RESERVED_2 = 12, 
-AIS_NAV_RESERVED_3 = 13, 
+AIS_NAV_STATUS_UNDER_WAY = 0, 
+AIS_NAV_STATUS_ANCHORED = 1, 
+AIS_NAV_STATUS_UN_COMMANDED = 2, 
+AIS_NAV_STATUS_RESTRICTED_MANOEUVERABILITY = 3, 
+AIS_NAV_STATUS_DRAUGHT_CONSTRAINED = 4, 
+AIS_NAV_STATUS_MOORED = 5, 
+AIS_NAV_STATUS_AGROUND = 6, 
+AIS_NAV_STATUS_FISHING = 7, 
+AIS_NAV_STATUS_SAILING = 8, 
+AIS_NAV_STATUS_RESERVED_HSC = 9, 
+AIS_NAV_STATUS_RESERVED_WIG = 10, 
+AIS_NAV_STATUS_RESERVED_1 = 11, 
+AIS_NAV_STATUS_RESERVED_2 = 12, 
+AIS_NAV_STATUS_RESERVED_3 = 13, 
 
 /**
 Search And Rescue Transponder.
 */
-AIS_NAV_AIS_SART = 14, 
+AIS_NAV_STATUS_AIS_SART = 14, 
 
 /**
 Not available (default).
 */
-AIS_NAV_UNKNOWN = 15, 
+AIS_NAV_STATUS_UNKNOWN = 15, 
 
 }
 
@@ -6318,47 +7340,69 @@ AIS_NAV_UNKNOWN = 15,
 These flags are used in the AIS_VESSEL.fields bitmask to indicate validity of data in the other message
 fields. When set, the data is valid.
 */
+[Flags]
 enum AIS_FLAGS{
 
 /**
-1 = Position accuracy less than 10m, 0 = position accuracy greater than 10m.
+1 = High (Position accuracy less than or equal to 10m), 0 = Low (position accuracy greater than 10m).
 */
 AIS_FLAGS_POSITION_ACCURACY = 1, 
+
+/**
+The COG field contains valid data
+*/
 AIS_FLAGS_VALID_COG = 2, 
+
+/**
+The velocity field contains valid data
+*/
 AIS_FLAGS_VALID_VELOCITY = 4, 
 
 /**
 1 = Velocity over 52.5765m/s (102.2 knots)
 */
 AIS_FLAGS_HIGH_VELOCITY = 8, 
+
+/**
+The turn_rate field contains valid data
+*/
 AIS_FLAGS_VALID_TURN_RATE = 16, 
 
 /**
-Only the sign of the returned turn rate value is valid, either greater than 5deg/30s or less than -5deg/30s
+Only the sign of the returned turn_rate value is valid. The actual turn rate is either greater than 5deg/30s
+or less than -5deg/30s.
 */
 AIS_FLAGS_TURN_RATE_SIGN_ONLY = 32, 
 AIS_FLAGS_VALID_DIMENSIONS = 64, 
 
 /**
-Distance to bow is larger than 511m
+Distance to bow is greater than or equal to 511m
 */
 AIS_FLAGS_LARGE_BOW_DIMENSION = 128, 
 
 /**
-Distance to stern is larger than 511m
+Distance to stern is greater than or equal to 511m
 */
 AIS_FLAGS_LARGE_STERN_DIMENSION = 256, 
 
 /**
-Distance to port side is larger than 63m
+Distance to port side is greater than or equal to 63m
 */
 AIS_FLAGS_LARGE_PORT_DIMENSION = 512, 
 
 /**
-Distance to starboard side is larger than 63m
+Distance to starboard side is greater than or equal to 63m
 */
 AIS_FLAGS_LARGE_STARBOARD_DIMENSION = 1024, 
+
+/**
+The callsign field contains valid data
+*/
 AIS_FLAGS_VALID_CALLSIGN = 2048, 
+
+/**
+The name field contains valid data
+*/
 AIS_FLAGS_VALID_NAME = 4096, 
 
 }
@@ -6431,6 +7475,7 @@ Unit is sometimes working, sometimes not.
 FAILURE_TYPE_INTERMITTENT = 7, 
 
 }
+[Flags]
 enum NAV_VTOL_LAND_OPTIONS{
 
 /**
@@ -6439,23 +7484,21 @@ Default autopilot landing behaviour.
 NAV_VTOL_LAND_OPTIONS_DEFAULT = 0, 
 
 /**
-Descend in fixed wing mode, transitioning to multicopter mode for vertical landing when close to the ground.
-
-         The fixed wing descent pattern is at the discretion of the vehicle (e.g. transition altitude,
-loiter direction, radius, and speed, etc.).
+Use a fixed wing spiral desent approach before landing.
 */
-NAV_VTOL_LAND_OPTIONS_FW_DESCENT = 1, 
+NAV_VTOL_LAND_OPTIONS_FW_SPIRAL_APPROACH = 1, 
 
 /**
-Land in multicopter mode on reaching the landing co-ordinates (the whole landing is by "hover descent").
+Use a fixed wing approach before detransitioning and landing vertically.
 */
-NAV_VTOL_LAND_OPTIONS_HOVER_DESCENT = 2, 
+NAV_VTOL_LAND_OPTIONS_FW_APPROACH = 2, 
 
 }
 
 /**
 Winch status flags used in WINCH_STATUS
 */
+[Flags]
 enum MAV_WINCH_STATUS_FLAG{
 
 /**
@@ -6511,9 +7554,24 @@ MAV_WINCH_STATUS_REDELIVER = 512,
 
 /**
 Winch is abandoning the line and possibly payload. Winch unspools the entire calculated line length. This
-is a failover state from REDELIVER if the number of attemps exceeds a threshold.
+is a failover state from REDELIVER if the number of attempts exceeds a threshold.
 */
 MAV_WINCH_STATUS_ABANDON_LINE = 1024, 
+
+/**
+Winch is engaging the locking mechanism.
+*/
+MAV_WINCH_STATUS_LOCKING = 2048, 
+
+/**
+Winch is spooling on line.
+*/
+MAV_WINCH_STATUS_LOAD_LINE = 4096, 
+
+/**
+Winch is loading a payload.
+*/
+MAV_WINCH_STATUS_LOAD_PAYLOAD = 8192, 
 
 }
 enum MAG_CAL_STATUS{
@@ -6531,6 +7589,7 @@ MAG_CAL_BAD_RADIUS = 7,
 /**
 Reason for an event error response.
 */
+[Flags]
 enum MAV_EVENT_ERROR_REASON{
 
 /**
@@ -6543,6 +7602,7 @@ MAV_EVENT_ERROR_REASON_UNAVAILABLE = 0,
 /**
 Flags for CURRENT_EVENT_SEQUENCE.
 */
+[Flags]
 enum MAV_EVENT_CURRENT_SEQUENCE_FLAGS{
 
 /**
@@ -6555,12 +7615,8 @@ MAV_EVENT_CURRENT_SEQUENCE_FLAGS_RESET = 1,
 /**
 Flags in the HIL_SENSOR message indicate which fields have updated since the last message
 */
+[Flags]
 enum HIL_SENSOR_UPDATED_FLAGS:long{
-
-/**
-None of the fields in HIL_SENSOR have been updated
-*/
-HIL_SENSOR_UPDATED_NONE = 0, 
 
 /**
 The value in the xacc field has been updated
@@ -6637,12 +7693,8 @@ HIL_SENSOR_UPDATED_RESET = 2147483648,
 /**
 Flags in the HIGHRES_IMU message indicate which fields have updated since the last message
 */
+[Flags]
 enum HIGHRES_IMU_UPDATED_FLAGS{
-
-/**
-None of the fields in HIGHRES_IMU have been updated
-*/
-HIGHRES_IMU_UPDATED_NONE = 0, 
 
 /**
 The value in the xacc field has been updated
@@ -6709,12 +7761,8 @@ The value in the temperature field has been updated
 */
 HIGHRES_IMU_UPDATED_TEMPERATURE = 4096, 
 
-/**
-All fields in HIGHRES_IMU have been updated.
-*/
-HIGHRES_IMU_UPDATED_ALL = 65535, 
-
 }
+[Flags]
 enum CAN_FILTER_OP{
 CAN_FILTER_REPLACE = 0, 
 CAN_FILTER_ADD = 1, 
@@ -6723,16 +7771,493 @@ CAN_FILTER_REMOVE = 2,
 }
 
 /**
-The general system state. If the system is following the MAVLink standard, the system state is mainly
-defined by three orthogonal states/modes: The system mode, which is either LOCKED (motors shut down and
-locked), MANUAL (system under RC control), GUIDED (system with autonomous position control, position
-setpoint controlled manually) or AUTO (system guided by path/waypoint planner). The NAV_MODE defined
-the current flight state: LIFTOFF (often an open-loop maneuver), LANDING, WAYPOINTS or VECTOR. This represents
-the internal navigation state machine. The system status shows whether the system is currently active
-or not and if an emergency occurred. During the CRITICAL and EMERGENCY states the MAV is still considered
-to be active, but should start emergency procedures autonomously. After a failure occurred it should
-first move from active to critical to allow manual intervention and then move to emergency after a certain
-timeout.
+MAV FTP error codes (may be used in FILE_TRANSFER_PROTOCOL). See https://mavlink.io/en/services/ftp.html.
+*/
+enum MAV_FTP_ERR{
+
+/**
+None: No error
+*/
+MAV_FTP_ERR_NONE = 0, 
+
+/**
+Fail: Unknown failure
+*/
+MAV_FTP_ERR_FAIL = 1, 
+
+/**
+This is a file-system error number understood by the server operating system.
+*/
+MAV_FTP_ERR_FAILERRNO = 2, 
+
+/**
+InvalidDataSize: Payload size is invalid
+*/
+MAV_FTP_ERR_INVALIDDATASIZE = 3, 
+
+/**
+InvalidSession: Session is not currently open
+*/
+MAV_FTP_ERR_INVALIDSESSION = 4, 
+
+/**
+NoSessionsAvailable: All available sessions are already in use
+*/
+MAV_FTP_ERR_NOSESSIONSAVAILABLE = 5, 
+
+/**
+EOF: Offset past end of file for ListDirectory and ReadFile commands
+*/
+MAV_FTP_ERR_EOF = 6, 
+
+/**
+UnknownCommand: Unknown command / opcode
+*/
+MAV_FTP_ERR_UNKNOWNCOMMAND = 7, 
+
+/**
+FileExists: File/directory already exists
+*/
+MAV_FTP_ERR_FILEEXISTS = 8, 
+
+/**
+FileProtected: File/directory is write protected
+*/
+MAV_FTP_ERR_FILEPROTECTED = 9, 
+
+/**
+FileNotFound: File/directory not found
+*/
+MAV_FTP_ERR_FILENOTFOUND = 10, 
+
+}
+
+/**
+MAV FTP opcodes (may be used in FILE_TRANSFER_PROTOCOL). See https://mavlink.io/en/services/ftp.html.
+*/
+enum MAV_FTP_OPCODE{
+
+/**
+None. Ignored, always ACKed
+*/
+MAV_FTP_OPCODE_NONE = 0, 
+
+/**
+TerminateSession: Terminates open Read session
+*/
+MAV_FTP_OPCODE_TERMINATESESSION = 1, 
+
+/**
+ResetSessions: Terminates all open read sessions
+*/
+MAV_FTP_OPCODE_RESETSESSION = 2, 
+
+/**
+ListDirectory. List files and directories in path from offset
+*/
+MAV_FTP_OPCODE_LISTDIRECTORY = 3, 
+
+/**
+OpenFileRO: Opens file at path for reading, returns session
+*/
+MAV_FTP_OPCODE_OPENFILERO = 4, 
+
+/**
+ReadFile: Reads size bytes from offset in session
+*/
+MAV_FTP_OPCODE_READFILE = 5, 
+
+/**
+CreateFile: Creates file at path for writing, returns session
+*/
+MAV_FTP_OPCODE_CREATEFILE = 6, 
+
+/**
+WriteFile: Writes size bytes to offset in session
+*/
+MAV_FTP_OPCODE_WRITEFILE = 7, 
+
+/**
+RemoveFile: Remove file at path
+*/
+MAV_FTP_OPCODE_REMOVEFILE = 8, 
+
+/**
+CreateDirectory: Creates directory at path
+*/
+MAV_FTP_OPCODE_CREATEDIRECTORY = 9, 
+
+/**
+RemoveDirectory: Removes directory at path. The directory must be empty.
+*/
+MAV_FTP_OPCODE_REMOVEDIRECTORY = 10, 
+
+/**
+OpenFileWO: Opens file at path for writing, returns session
+*/
+MAV_FTP_OPCODE_OPENFILEWO = 11, 
+
+/**
+TruncateFile: Truncate file at path to offset length
+*/
+MAV_FTP_OPCODE_TRUNCATEFILE = 12, 
+
+/**
+Rename: Rename path1 to path2
+*/
+MAV_FTP_OPCODE_RENAME = 13, 
+
+/**
+CalcFileCRC32: Calculate CRC32 for file at path
+*/
+MAV_FTP_OPCODE_CALCFILECRC = 14, 
+
+/**
+BurstReadFile: Burst download session file
+*/
+MAV_FTP_OPCODE_BURSTREADFILE = 15, 
+
+/**
+ACK: ACK response
+*/
+MAV_FTP_OPCODE_ACK = 128, 
+
+/**
+NAK: NAK response
+*/
+MAV_FTP_OPCODE_NAK = 129, 
+
+}
+
+/**
+They may not all be relevant on all vehicles.
+      
+*/
+enum MISSION_STATE{
+
+/**
+The mission status reporting is not supported.
+*/
+MISSION_STATE_UNKNOWN = 0, 
+
+/**
+No mission on the vehicle.
+*/
+MISSION_STATE_NO_MISSION = 1, 
+
+/**
+Mission has not started. This is the case after a mission has uploaded but not yet started executing.
+*/
+MISSION_STATE_NOT_STARTED = 2, 
+
+/**
+Mission is active, and will execute mission items when in auto mode.
+*/
+MISSION_STATE_ACTIVE = 3, 
+
+/**
+Mission is paused when in auto mode.
+*/
+MISSION_STATE_PAUSED = 4, 
+
+/**
+Mission has executed all mission items.
+*/
+MISSION_STATE_COMPLETE = 5, 
+
+}
+
+/**
+Possible safety switch states.
+      
+*/
+[Flags]
+enum SAFETY_SWITCH_STATE{
+
+/**
+Safety switch is engaged and vehicle should be safe to approach.
+*/
+SAFETY_SWITCH_STATE_SAFE = 0, 
+
+/**
+Safety switch is NOT engaged and motors, propellers and other actuators should be considered active.
+*/
+SAFETY_SWITCH_STATE_DANGEROUS = 1, 
+
+}
+
+/**
+Modes of illuminator
+*/
+[Flags]
+enum ILLUMINATOR_MODE{
+
+/**
+Illuminator mode is not specified/unknown
+*/
+ILLUMINATOR_MODE_UNKNOWN = 0, 
+
+/**
+Illuminator behavior is controlled by MAV_CMD_DO_ILLUMINATOR_CONFIGURE settings
+*/
+ILLUMINATOR_MODE_INTERNAL_CONTROL = 1, 
+
+/**
+Illuminator behavior is controlled by external factors: e.g. an external hardware signal
+*/
+ILLUMINATOR_MODE_EXTERNAL_SYNC = 2, 
+
+}
+
+/**
+Illuminator module error flags (bitmap, 0 means no error)
+*/
+[Flags]
+enum ILLUMINATOR_ERROR_FLAGS{
+
+/**
+Illuminator thermal throttling error.
+*/
+ILLUMINATOR_ERROR_FLAGS_THERMAL_THROTTLING = 1, 
+
+/**
+Illuminator over temperature shutdown error.
+*/
+ILLUMINATOR_ERROR_FLAGS_OVER_TEMPERATURE_SHUTDOWN = 2, 
+
+/**
+Illuminator thermistor failure.
+*/
+ILLUMINATOR_ERROR_FLAGS_THERMISTOR_FAILURE = 4, 
+
+}
+
+/**
+See https://mavlink.io/en/services/standard_modes.html
+      
+*/
+enum MAV_STANDARD_MODE{
+
+/**
+Non standard mode.
+          This may be used when reporting the mode if the current flight mode is not
+a standard mode.
+*/
+MAV_STANDARD_MODE_NON_STANDARD = 0, 
+
+/**
+Fixed-wing (FW) vehicles must not support this mode.
+          Other vehicle types must not support this
+mode (this may be revisited through the PR process).
+*/
+MAV_STANDARD_MODE_POSITION_HOLD = 1, 
+
+/**
+Other vehicle types must not support this mode (this may be revisited through the PR process).
+      
+ 
+*/
+MAV_STANDARD_MODE_ORBIT = 2, 
+
+/**
+Other vehicle types must not support this mode (this may be revisited through the PR process).
+      
+ 
+*/
+MAV_STANDARD_MODE_CRUISE = 3, 
+
+/**
+Hybrid MC/FW ("VTOL") vehicles behave according to their current configuration/mode (FW or MC).
+     
+    Other vehicle types must not support this mode (this may be revisited through the PR process).
+*/
+MAV_STANDARD_MODE_ALTITUDE_HOLD = 4, 
+
+/**
+For example, the vehicle might return to the home/launch location, a rally point, or the start of a mission
+landing, it might follow a direct path, mission path, or breadcrumb path, and land using a mission landing
+pattern or some other kind of descent.
+        
+*/
+MAV_STANDARD_MODE_SAFE_RECOVERY = 5, 
+
+/**
+Missions are executed from the current waypoint as soon as the mode is enabled.
+        
+*/
+MAV_STANDARD_MODE_MISSION = 6, 
+
+/**
+The precise landing behaviour depends on vehicle configuration and type.
+        
+*/
+MAV_STANDARD_MODE_LAND = 7, 
+
+/**
+The precise takeoff behaviour depends on vehicle configuration and type.
+        
+*/
+MAV_STANDARD_MODE_TAKEOFF = 8, 
+
+}
+
+/**
+Mode properties.
+      
+*/
+[Flags]
+enum MAV_MODE_PROPERTY{
+
+/**
+A GCS can optionally use this flag to configure the UI for its intended users.
+        
+*/
+MAV_MODE_PROPERTY_ADVANCED = 1, 
+
+/**
+If set, this mode should not be added to the list of selectable modes.
+          The mode might still
+be selected by the FC directly (for example as part of a failsafe).
+*/
+MAV_MODE_PROPERTY_NOT_USER_SELECTABLE = 2, 
+
+/**
+If set, this mode is automatically controlled (it may use but does not require a manual controller).
+
+         If unset the mode is a assumed to require user input (be a manual mode).
+*/
+MAV_MODE_PROPERTY_AUTO_MODE = 4, 
+
+}
+
+/**
+Flags used in HIL_ACTUATOR_CONTROLS message.
+*/
+[Flags]
+enum HIL_ACTUATOR_CONTROLS_FLAGS{
+
+/**
+Simulation is using lockstep
+*/
+HIL_ACTUATOR_CONTROLS_FLAGS_LOCKSTEP = 1, 
+
+}
+
+/**
+Flags used to report computer status.
+*/
+[Flags]
+enum COMPUTER_STATUS_FLAGS{
+
+/**
+Indicates if the system is experiencing voltage outside of acceptable range.
+*/
+COMPUTER_STATUS_FLAGS_UNDER_VOLTAGE = 1, 
+
+/**
+Indicates if CPU throttling is active.
+*/
+COMPUTER_STATUS_FLAGS_CPU_THROTTLE = 2, 
+
+/**
+Indicates if thermal throttling is active.
+*/
+COMPUTER_STATUS_FLAGS_THERMAL_THROTTLE = 4, 
+
+/**
+Indicates if main disk is full.
+*/
+COMPUTER_STATUS_FLAGS_DISK_FULL = 8, 
+
+}
+
+/**
+Airspeed sensor flags
+*/
+[Flags]
+enum AIRSPEED_SENSOR_FLAGS{
+
+/**
+Airspeed sensor is unhealthy
+*/
+AIRSPEED_SENSOR_UNHEALTHY = 1, 
+
+/**
+True if the data from this sensor is being actively used by the flight controller for guidance, navigation
+or control.
+*/
+AIRSPEED_SENSOR_USING = 2, 
+
+}
+
+/**
+Source for GLOBAL_POSITION measurement or estimate.
+*/
+enum GLOBAL_POSITION_SRC{
+
+/**
+Source is unknown or not one of the listed types.
+*/
+GLOBAL_POSITION_SRC_UNKNOWN = 0, 
+
+/**
+Global Navigation Satellite System (e.g.: GPS, Galileo, Glonass, BeiDou).
+*/
+GLOBAL_POSITION_SRC_GNSS = 1, 
+
+/**
+Vision system (e.g.: map matching).
+*/
+GLOBAL_POSITION_SRC_VISION = 2, 
+
+/**
+A pseudo-satellite system using transceiver beacons to perform GNSS-like positioning.
+*/
+GLOBAL_POSITION_SRC_PSEUDOLITES = 3, 
+
+/**
+Terrain referenced navigation.
+*/
+GLOBAL_POSITION_SRC_TERRAIN = 4, 
+
+/**
+Magnetic positioning.
+*/
+GLOBAL_POSITION_SRC_MAGNETIC = 5, 
+
+/**
+Estimated position based on various sensors (eg. a Kalman Filter).
+*/
+GLOBAL_POSITION_SRC_ESTIMATOR = 6, 
+
+/**
+Low Earth Orbit satellite-based positioning (e.g.: Starlink, Xona PULSAR).
+*/
+GLOBAL_POSITION_SRC_LEO = 7, 
+
+}
+
+/**
+Status flags for GLOBAL_POSITION
+*/
+[Flags]
+enum GLOBAL_POSITION_FLAGS{
+
+/**
+Unhealthy sensor/estimator.
+*/
+GLOBAL_POSITION_UNHEALTHY = 1, 
+
+/**
+True if the data originates from or is consumed by the primary estimator.
+*/
+GLOBAL_POSITION_PRIMARY = 2, 
+
+}
+
+/**
+Sensor and subsystem status information. Provides a compact representation of sensor/subsystem status
+and a few other basic statistics.
 */
 class SYS_STATUS{
 
@@ -6827,7 +8352,7 @@ MAV_SYS_STATUS_SENSOR_EXTENDED onboard_control_sensors_health_extended;
 }
 
 /**
-The system time is the time of the master clock, typically the computer clock of the main onboard computer.
+If precise time synchronization is needed then use TIMESYNC instead.
 */
 class SYSTEM_TIME{
 
@@ -6900,7 +8425,7 @@ message indicating an encryption mismatch.
 Password / Key, depending on version plaintext or encrypted. 25 or less characters, NULL terminated. The
 characters may involve A-Z, a-z, 0-9, and "!?,.-"
 */
-string  passkey;
+[D(+25)] string  passkey;
 
 }
 
@@ -6936,12 +8461,13 @@ class AUTH_KEY{
 /**
 key
 */
-string  key;
+[D(+32)] string  key;
 
 }
 
 /**
 Status generated in each node in the communication chain and injected into MAVLink stream.
+**WIP**
 */
 class LINK_NODE_STATUS{
 
@@ -7048,7 +8574,7 @@ Onboard parameter id, terminated by NULL if the length is less than 16 human-rea
 null termination (NULL) byte if the length is exactly 16 chars - applications have to provide 16+1 bytes
 storage if the ID is stored as string
 */
-string  param_id;
+[D(+16)] string  param_id;
 
 /**
 Parameter index. Send -1 to use the param ID field as identifier (else the param id will be ignored)
@@ -7087,7 +8613,7 @@ Onboard parameter id, terminated by NULL if the length is less than 16 human-rea
 null termination (NULL) byte if the length is exactly 16 chars - applications have to provide 16+1 bytes
 storage if the ID is stored as string
 */
-string  param_id;
+[D(+16)] string  param_id;
 
 /**
 Onboard parameter value
@@ -7112,9 +8638,12 @@ Index of this onboard parameter
 }
 
 /**
-PARAM_SET may also be called within the context of a transaction (started with MAV_CMD_PARAM_TRANSACTION).
-Within a transaction the receiving component should respond with PARAM_ACK_TRANSACTION to the setter
-component (instead of broadcasting PARAM_VALUE), and PARAM_SET should be re-sent if this is ACK not received.
+Set a parameter value (write new value to permanent storage).
+        The receiving component should acknowledge
+the new parameter value by broadcasting a PARAM_VALUE message (broadcasting ensures that multiple GCS
+all have an up-to-date list of all parameters). If the sending GCS did not receive a PARAM_VALUE within
+its timeout time, it should re-send the PARAM_SET message. The parameter microservice is documented at
+https://mavlink.io/en/services/parameter.html.
 */
 class PARAM_SET{
 
@@ -7133,7 +8662,7 @@ Onboard parameter id, terminated by NULL if the length is less than 16 human-rea
 null termination (NULL) byte if the length is exactly 16 chars - applications have to provide 16+1 bytes
 storage if the ID is stored as string
 */
-string  param_id;
+[D(+16)] string  param_id;
 
 /**
 Onboard parameter value
@@ -7256,27 +8785,27 @@ Number of satellites visible
 /**
 Global satellite ID
 */
-[Dims( +20 )]  byte  satellite_prn;
+[D(20)]  byte [] satellite_prn;
 
 /**
 0: Satellite not used, 1: used for localization
 */
-[Dims( +20 )]  byte  satellite_used;
+[D(20)]  byte [] satellite_used;
 
 /**
 Elevation (0: right on top of receiver, 90: on the horizon) of satellite
 */
-[Dims( +20 )]  byte  satellite_elevation;
+[D(20)]  byte [] satellite_elevation;
 
 /**
 Direction of satellite, 0: 0 deg, 255: 360 deg.
 */
-[Dims( +20 )]  byte  satellite_azimuth;
+[D(20)]  byte [] satellite_azimuth;
 
 /**
 Signal to noise ratio of satellite
 */
-[Dims( +20 )]  byte  satellite_snr;
+[D(20)]  byte [] satellite_snr;
 
 }
 
@@ -7480,7 +9009,7 @@ Differential pressure temperature (0, if not available). Report values of 0 (or 
 }
 
 /**
-The attitude in the aeronautical frame (right-handed, Z-down, X-front, Y-right).
+The attitude in the aeronautical frame (right-handed, Z-down, Y-right, X-front, ZYX, intrinsic).
 */
 class ATTITUDE{
 
@@ -7570,7 +9099,7 @@ Yaw angular speed
 /**
 in hover mode and equal to [0.7071, 0, 0.7071, 0] in fixed wing mode.
 */
-[Dims( +4 )]  float  repr_offset_q;
+[D(4)]  float [] repr_offset_q;
 
 }
 
@@ -7618,62 +9147,8 @@ Z Speed
 }
 
 /**
-The filtered global position (e.g. fused GPS and accelerometers). The position is in GPS-frame (right-handed,
-Z-up). It
-               is designed as scaled integer message since the resolution of float is not sufficient.
-*/
-class GLOBAL_POSITION_INT{
-
-/**
-Timestamp (time since system boot).
-*/
- uint  time_boot_ms;
-
-/**
-Latitude, expressed
-*/
- int  lat;
-
-/**
-Longitude, expressed
-*/
- int  lon;
-
-/**
-Altitude (MSL). Note that virtually all GPS modules provide both WGS84 and MSL.
-*/
- int  alt;
-
-/**
-Altitude above ground
-*/
- int  relative_alt;
-
-/**
-Ground X Speed (Latitude, positive north)
-*/
- short  vx;
-
-/**
-Ground Y Speed (Longitude, positive east)
-*/
- short  vy;
-
-/**
-Ground Z Speed (Altitude, positive down)
-*/
- short  vz;
-
-/**
-Vehicle heading (yaw angle), 0.0..359.99 degrees. If unknown, set to: UINT16_MAX
-*/
- ushort  hdg;
-
-}
-
-/**
 The scaled values of the RC channels received: (-100%) -10000, (0%) 0, (100%) 10000. Channels that are
-inactive should be set to UINT16_MAX.
+inactive should be set to INT16_MAX.
 */
 class RC_CHANNELS_SCALED{
 
@@ -7969,7 +9444,11 @@ MAV_MISSION_TYPE mission_type;
 }
 
 /**
+The mission item can be either in x, y, z meters (type: LOCAL) or x:lat, y:lon, z:altitude. Local frame
+is Z-down, right handed (NED), global frame is Z-up, right handed (ENU). NaN may be used to indicate
+an optional/default value (e.g. to use the system's current latitude or yaw rather than a specific value).
 See also https://mavlink.io/en/services/mission.html.
+**DEPRECATED** since=2020-06 replaced_by=MISSION_ITEM_INT
 */
 class MISSION_ITEM{
 
@@ -8004,7 +9483,7 @@ false:0, true:1
  byte  current;
 
 /**
-Autocontinue to next waypoint
+Autocontinue to next waypoint. 0: false, 1: true. Set false to pause mission after the item completes.
 */
  byte  autocontinue;
 
@@ -8053,6 +9532,7 @@ MAV_MISSION_TYPE mission_type;
 /**
 Request the information of the mission item with the sequence number seq. The response of the system to
 this message should be a MISSION_ITEM message. https://mavlink.io/en/services/mission.html
+**DEPRECATED** since=2020-06 replaced_by=MISSION_REQUEST_INT: A system that gets this request should respond with MISSION_ITEM_INT (as though MISSION_REQUEST_INT was received).
 */
 class MISSION_REQUEST{
 
@@ -8079,8 +9559,8 @@ MAV_MISSION_TYPE mission_type;
 }
 
 /**
-Set the mission item with sequence number seq as current item. This means that the MAV will continue to
-this mission item on the shortest path (not following the mission items in-between).
+If the system is not in mission mode this message must not trigger a switch to mission mode.
+      
 */
 class MISSION_SET_CURRENT{
 
@@ -8102,8 +9582,9 @@ Sequence
 }
 
 /**
-Message that announces the sequence number of the current active mission item. The MAV will fly towards
-this mission item.
+This message should be emitted following a call to MAV_CMD_DO_SET_MISSION_CURRENT or MISSION_SET_CURRENT.
+
+     
 */
 class MISSION_CURRENT{
 
@@ -8111,6 +9592,45 @@ class MISSION_CURRENT{
 Sequence
 */
  ushort  seq;
+
+/**
+Total number of mission items on vehicle (on last item, sequence == total). If the autopilot stores its
+home location as part of the mission this will be excluded from the total. 0: Not supported, UINT16_MAX
+if no mission is present on the vehicle.
+*/
+ ushort  total;
+
+/**
+Mission state machine state. MISSION_STATE_UNKNOWN if state reporting not supported.
+*/
+MISSION_STATE mission_state;
+
+/**
+Vehicle is in a mode that can execute mission items or suspended. 0: Unknown, 1: In mission mode, 2: Suspended
+(not in mission mode).
+*/
+ byte  mission_mode;
+
+/**
+Id of current on-vehicle mission plan, or 0 if IDs are not supported or there is no mission loaded. GCS
+can use this to track changes to the mission plan type. The same value is returned on mission upload
+(in the MISSION_ACK).
+*/
+ uint  mission_id;
+
+/**
+Id of current on-vehicle fence plan, or 0 if IDs are not supported or there is no fence loaded. GCS can
+use this to track changes to the fence plan type. The same value is returned on fence upload (in the
+MISSION_ACK).
+*/
+ uint  fence_id;
+
+/**
+Id of current on-vehicle rally point plan, or 0 if IDs are not supported or there are no rally points
+loaded. GCS can use this to track changes to the rally point plan type. The same value is returned on
+rally point upload (in the MISSION_ACK).
+*/
+ uint  rally_points_id;
 
 }
 
@@ -8161,6 +9681,15 @@ Number of mission items in the sequence
 Mission type.
 */
 MAV_MISSION_TYPE mission_type;
+
+/**
+The current on-vehicle plan ids are streamed in `MISSION_CURRENT`, allowing a GCS to determine if any
+part of the plan has changed and needs to be re-uploaded.
+        The ids are recalculated by the vehicle
+when any part of the on-vehicle plan changes (when a new plan is uploaded, the vehicle returns the new
+id to the GCS in MISSION_ACK).
+*/
+ uint  opaque_id;
 
 }
 
@@ -8225,10 +9754,17 @@ Mission type.
 */
 MAV_MISSION_TYPE mission_type;
 
+/**
+0 if plan ids are not supported.
+        The current on-vehicle plan ids are streamed in `MISSION_CURRENT`,
+allowing a GCS to determine if any part of the plan has changed and needs to be re-uploaded.
+*/
+ uint  opaque_id;
+
 }
 
 /**
-Sets the GPS co-ordinates of the vehicle local origin (0,0,0) position. Vehicle should emit GPS_GLOBAL_ORIGIN
+Sets the GPS coordinates of the vehicle local origin (0,0,0) position. Vehicle should emit GPS_GLOBAL_ORIGIN
 irrespective of whether the origin is changed. This enables transform between the local coordinate frame
 and the global (GPS) coordinate frame, which may be necessary when (for example) indoor and outdoor settings
 are connected and the MAV should move from in- to outdoor.
@@ -8264,7 +9800,7 @@ Timestamp (UNIX Epoch time or time since system boot). The receiving end can inf
 }
 
 /**
-Publishes the GPS co-ordinates of the vehicle local origin (0,0,0) position. Emitted whenever a new GPS-Local
+Publishes the GPS coordinates of the vehicle local origin (0,0,0) position. Emitted whenever a new GPS-Local
 position mapping is requested or set - e.g. following SET_GPS_GLOBAL_ORIGIN message.
 */
 class GPS_GLOBAL_ORIGIN{
@@ -8312,7 +9848,7 @@ Onboard parameter id, terminated by NULL if the length is less than 16 human-rea
 null termination (NULL) byte if the length is exactly 16 chars - applications have to provide 16+1 bytes
 storage if the ID is stored as string
 */
-string  param_id;
+[D(+16)] string  param_id;
 
 /**
 Parameter index. Send -1 to use the param ID field as identifier (else the param id will be ignored),
@@ -8491,7 +10027,7 @@ Timestamp (UNIX Epoch time or time since system boot). The receiving end can inf
 /**
 Quaternion components, w, x, y, z (1 0 0 0 is the null-rotation)
 */
-[Dims( +4 )]  float  q;
+[D(4)]  float [] q;
 
 /**
 Roll angular speed
@@ -8513,7 +10049,7 @@ Row-major representation of a 3x3 attitude covariance matrix (states: roll, pitc
 are the first ROW, next three entries are the second row, etc.). If unknown, assign NaN value to first
 element in the array.
 */
-[Dims( +9 )]  float  covariance;
+[D(9)]  float [] covariance;
 
 }
 
@@ -8623,7 +10159,7 @@ Row-major representation of a 6x6 position and velocity 6x6 cross-covariance mat
 alt, vx, vy, vz; first six entries are the first ROW, next six entries are the second row, etc.). If
 unknown, assign NaN value to first element in the array.
 */
-[Dims( +36 )]  float  covariance;
+[D(36)]  float [] covariance;
 
 }
 
@@ -8694,7 +10230,7 @@ Row-major representation of position, velocity and acceleration 9x9 cross-covari
 triangle (states: x, y, z, vx, vy, vz, ax, ay, az; first nine entries are the first ROW, next eight entries
 are the second row, etc.). If unknown, assign NaN value to first element in the array.
 */
-[Dims( +45 )]  float  covariance;
+[D(45)]  float [] covariance;
 
 }
 
@@ -8829,9 +10365,9 @@ The target requested to send the message stream.
  byte  target_component;
 
 /**
-The ID of the requested data stream
+The ID of the requested data stream.
 */
- byte  req_stream_id;
+MAV_DATA_STREAM req_stream_id;
 
 /**
 The requested message rate
@@ -8851,9 +10387,9 @@ Data stream status information.
 class DATA_STREAM{
 
 /**
-The ID of the requested data stream
+The ID of the requested data stream.
 */
- byte  stream_id;
+MAV_DATA_STREAM stream_id;
 
 /**
 The message rate
@@ -8868,9 +10404,10 @@ The message rate
 }
 
 /**
-This message provides an API for manually controlling the vehicle using standard joystick axes nomenclature,
-along with a joystick-like input device. Unused axes can be disabled and buttons states are transmitted
-as individual on/off bits of a bitmask
+Manual (joystick) control message.
+        This message represents movement axes and button using standard
+joystick axes nomenclature. Unused axes can be disabled and buttons states are transmitted as individual
+on/off bits of a bitmask. For more information see https://mavlink.io/en/services/manual_control.html
 */
 class MANUAL_CONTROL{
 
@@ -8901,7 +10438,7 @@ thrust.
 
 /**
 R-axis, normalized to the range [-1000,1000]. A value of INT16_MAX indicates that this axis is invalid.
-Generally corresponds to a twisting of the joystick, with counter-clockwise being 1000 and clockwise
+Generally corresponds to a twisting of the joystick, with clockwise being 1000 and counter-clockwise
 being -1000, and the yaw of a vehicle.
 */
  short  r;
@@ -8920,7 +10457,7 @@ The lowest bit corresponds to Button 16.
 
 /**
 Set bits to 1 to indicate which of the following extension fields contain valid data: bit 0: pitch, bit
-1: roll.
+1: roll, bit 2: aux1, bit 3: aux2, bit 4: aux3, bit 5: aux4, bit 6: aux5, bit 7: aux6
 */
  byte  enabled_extensions;
 
@@ -8935,6 +10472,42 @@ Roll-only-axis, normalized to the range [-1000,1000]. Generally corresponds to r
 degrees of freedom. Valid if bit 1 of enabled_extensions field is set. Set to 0 if invalid.
 */
  short  t;
+
+/**
+Aux continuous input field 1. Normalized in the range [-1000,1000]. Purpose defined by recipient. Valid
+data if bit 2 of enabled_extensions field is set. 0 if bit 2 is unset.
+*/
+ short  aux1;
+
+/**
+Aux continuous input field 2. Normalized in the range [-1000,1000]. Purpose defined by recipient. Valid
+data if bit 3 of enabled_extensions field is set. 0 if bit 3 is unset.
+*/
+ short  aux2;
+
+/**
+Aux continuous input field 3. Normalized in the range [-1000,1000]. Purpose defined by recipient. Valid
+data if bit 4 of enabled_extensions field is set. 0 if bit 4 is unset.
+*/
+ short  aux3;
+
+/**
+Aux continuous input field 4. Normalized in the range [-1000,1000]. Purpose defined by recipient. Valid
+data if bit 5 of enabled_extensions field is set. 0 if bit 5 is unset.
+*/
+ short  aux4;
+
+/**
+Aux continuous input field 5. Normalized in the range [-1000,1000]. Purpose defined by recipient. Valid
+data if bit 6 of enabled_extensions field is set. 0 if bit 6 is unset.
+*/
+ short  aux5;
+
+/**
+Aux continuous input field 6. Normalized in the range [-1000,1000]. Purpose defined by recipient. Valid
+data if bit 7 of enabled_extensions field is set. 0 if bit 7 is unset.
+*/
+ short  aux6;
 
 }
 
@@ -9109,7 +10682,7 @@ false:0, true:1
  byte  current;
 
 /**
-Autocontinue to next waypoint
+Autocontinue to next waypoint. 0: false, 1: true. Set false to pause mission after the item completes.
 */
  byte  autocontinue;
 
@@ -9195,10 +10768,13 @@ Current climb rate.
 }
 
 /**
-Message encoding a command with parameters as scaled integers. Scaling depends on the actual command value.
-NaN or INT32_MAX may be used in float/integer params (respectively) to indicate optional/default values
-(e.g. to use the component's current latitude, yaw rather than a specific value). The command microservice
-is documented at https://mavlink.io/en/services/command.html
+Send a command with up to seven parameters to the MAV, where params 5 and 6 are integers and the other
+values are floats. This is preferred over COMMAND_LONG as it allows the MAV_FRAME to be specified for
+interpreting positional information, such as altitude. COMMAND_INT is also preferred when sending latitude
+and longitude data in params 5 and 6, as it allows for greater precision. Param 5 and 6 encode positional
+data as scaled integers, where the scaling depends on the actual command value. NaN or INT32_MAX may
+be used in float/integer params (respectively) to indicate optional/default values (e.g. to use the component's
+current latitude, yaw rather than a specific value). The command microservice is documented at https://mavlink.io/en/services/command.html
 */
 class COMMAND_INT{
 
@@ -9270,7 +10846,10 @@ PARAM7 / z position: global: altitude in meters (relative or absolute, depending
 }
 
 /**
-Send a command with up to seven parameters to the MAV. The command microservice is documented at https://mavlink.io/en/services/command.html
+Send a command with up to seven parameters to the MAV. COMMAND_INT is generally preferred when sending
+MAV_CMD commands that include positional information; it offers higher precision and allows the MAV_FRAME
+to be specified (which may otherwise be ambiguous, particularly for altitude). The command microservice
+is documented at https://mavlink.io/en/services/command.html
 */
 class COMMAND_LONG{
 
@@ -9348,14 +10927,15 @@ Result of command.
 MAV_RESULT result;
 
 /**
-Also used as result_param1, it can be set with an enum containing the errors reasons of why the command
-was denied, or the progress percentage when result is MAV_RESULT_IN_PROGRESS (UINT8_MAX if the progress
-is unknown).
+The progress percentage when result is MAV_RESULT_IN_PROGRESS. Values: [0-100], or UINT8_MAX if the progress
+is unknown.
 */
  byte  progress;
 
 /**
-Additional parameter of the result, example: which parameter of MAV_CMD_NAV_WAYPOINT caused it to be denied.
+Additional result information. Can be set with a command-specific enum containing command-specific error
+reasons for why the command might be denied. If used, the associated enum must be documented in the corresponding
+MAV_CMD (this enum should have a 0 value to indicate "unused" or "unknown").
 */
  int  result_param2;
 
@@ -9378,6 +10958,7 @@ Cancel a long running command. The target system should respond with a COMMAND_A
 with result=MAV_RESULT_CANCELLED if the long running process was cancelled. If it has already completed,
 the cancel action can be ignored. The cancel action can be retried until some sort of acknowledgement
 to the original command has been received. The command microservice is documented at https://mavlink.io/en/services/command.html
+**WIP**
 */
 class COMMAND_CANCEL{
 
@@ -9467,9 +11048,9 @@ Bitmap to indicate which dimensions should be ignored by the vehicle.
 ATTITUDE_TARGET_TYPEMASK type_mask;
 
 /**
-Attitude quaternion (w, x, y, z order, zero-rotation is 1, 0, 0, 0)
+Attitude quaternion (w, x, y, z order, zero-rotation is 1, 0, 0, 0) from MAV_FRAME_LOCAL_NED to MAV_FRAME_BODY_FRD
 */
-[Dims( +4 )]  float  q;
+[D(4)]  float [] q;
 
 /**
 Body roll rate
@@ -9487,14 +11068,14 @@ Body yaw rate
  float  body_yaw_rate;
 
 /**
-Collective thrust, normalized to 0 .. 1 (-1 .. 1 for vehicles capable of reverse trust)
+Collective thrust, normalized to 0 .. 1 (-1 .. 1 for vehicles capable of reverse thrust)
 */
  float  thrust;
 
 /**
 3D thrust setpoint in the body NED frame, normalized to -1 .. 1
 */
-[Dims( +3 )]  float  thrust_body;
+[D(3)]  float [] thrust_body;
 
 }
 
@@ -9517,7 +11098,7 @@ ATTITUDE_TARGET_TYPEMASK type_mask;
 /**
 Attitude quaternion (w, x, y, z order, zero-rotation is 1, 0, 0, 0)
 */
-[Dims( +4 )]  float  q;
+[D(4)]  float [] q;
 
 /**
 Body roll rate
@@ -9535,7 +11116,7 @@ Body yaw rate
  float  body_yaw_rate;
 
 /**
-Collective thrust, normalized to 0 .. 1 (-1 .. 1 for vehicles capable of reverse trust)
+Collective thrust, normalized to 0 .. 1 (-1 .. 1 for vehicles capable of reverse thrust)
 */
  float  thrust;
 
@@ -9734,8 +11315,9 @@ Component ID
  byte  target_component;
 
 /**
-Valid options are: MAV_FRAME_GLOBAL_INT = 5, MAV_FRAME_GLOBAL_RELATIVE_ALT_INT = 6, MAV_FRAME_GLOBAL_TERRAIN_ALT_INT
-= 11
+Valid options are: MAV_FRAME_GLOBAL = 0, MAV_FRAME_GLOBAL_RELATIVE_ALT = 3, MAV_FRAME_GLOBAL_TERRAIN_ALT
+= 10 (MAV_FRAME_GLOBAL_INT, MAV_FRAME_GLOBAL_RELATIVE_ALT_INT, MAV_FRAME_GLOBAL_TERRAIN_ALT_INT are allowed
+synonyms, but have been deprecated)
 */
 MAV_FRAME coordinate_frame;
 
@@ -9745,12 +11327,12 @@ Bitmap to indicate which dimensions should be ignored by the vehicle.
 POSITION_TARGET_TYPEMASK type_mask;
 
 /**
-X Position in WGS84 frame
+Latitude in WGS84 frame
 */
  int  lat_int;
 
 /**
-Y Position in WGS84 frame
+Longitude in WGS84 frame
 */
  int  lon_int;
 
@@ -9816,8 +11398,9 @@ latency.
  uint  time_boot_ms;
 
 /**
-Valid options are: MAV_FRAME_GLOBAL_INT = 5, MAV_FRAME_GLOBAL_RELATIVE_ALT_INT = 6, MAV_FRAME_GLOBAL_TERRAIN_ALT_INT
-= 11
+Valid options are: MAV_FRAME_GLOBAL = 0, MAV_FRAME_GLOBAL_RELATIVE_ALT = 3, MAV_FRAME_GLOBAL_TERRAIN_ALT
+= 10 (MAV_FRAME_GLOBAL_INT, MAV_FRAME_GLOBAL_RELATIVE_ALT_INT, MAV_FRAME_GLOBAL_TERRAIN_ALT_INT are allowed
+synonyms, but have been deprecated)
 */
 MAV_FRAME coordinate_frame;
 
@@ -9827,12 +11410,12 @@ Bitmap to indicate which dimensions should be ignored by the vehicle.
 POSITION_TARGET_TYPEMASK type_mask;
 
 /**
-X Position in WGS84 frame
+Latitude in WGS84 frame
 */
  int  lat_int;
 
 /**
-Y Position in WGS84 frame
+Longitude in WGS84 frame
 */
  int  lon_int;
 
@@ -10017,7 +11600,7 @@ Z acceleration
 }
 
 /**
-Sent from autopilot to simulation. Hardware in the loop control outputs
+Sent from autopilot to simulation. Hardware in the loop control outputs. Alternative to HIL_ACTUATOR_CONTROLS.
 */
 class HIL_CONTROLS{
 
@@ -10160,7 +11743,7 @@ Receive signal strength indicator in device-dependent units/scale. Values: [0-25
 }
 
 /**
-Sent from autopilot to simulation. Hardware in the loop control outputs (replacement for HIL_CONTROLS)
+Sent from autopilot to simulation. Hardware in the loop control outputs. Alternative to HIL_CONTROLS.
 */
 class HIL_ACTUATOR_CONTROLS{
 
@@ -10173,7 +11756,7 @@ Timestamp (UNIX Epoch time or time since system boot). The receiving end can inf
 /**
 Control outputs -1 .. 1. Channel assignment depends on the simulated hardware.
 */
-[Dims( +16 )]  float  controls;
+[D(16)]  float [] controls;
 
 /**
 System mode. Includes arming state.
@@ -10181,9 +11764,9 @@ System mode. Includes arming state.
 MAV_MODE_FLAG mode;
 
 /**
-Flags as bitfield, 1: indicate simulation using lockstep.
+Flags bitmask.
 */
- ulong  flags;
+HIL_ACTUATOR_CONTROLS_FLAGS flags;
 
 }
 
@@ -10290,7 +11873,7 @@ Row-major representation of pose 6x6 cross-covariance matrix upper right triangl
 z_global, roll, pitch, yaw; first six entries are the first ROW, next five entries are the second ROW,
 etc.). If unknown, assign NaN value to first element in the array.
 */
-[Dims( +21 )]  float  covariance;
+[D(21)]  float [] covariance;
 
 /**
 Estimate reset counter. This should be incremented when the estimate resets in any of the dimensions (position,
@@ -10346,7 +11929,7 @@ Row-major representation of pose 6x6 cross-covariance matrix upper right triangl
 pitch, yaw; first six entries are the first ROW, next five entries are the second ROW, etc.). If unknown,
 assign NaN value to first element in the array.
 */
-[Dims( +21 )]  float  covariance;
+[D(21)]  float [] covariance;
 
 /**
 Estimate reset counter. This should be incremented when the estimate resets in any of the dimensions (position,
@@ -10386,7 +11969,7 @@ Global Z speed
 Row-major representation of 3x3 linear velocity covariance matrix (states: vx, vy, vz; 1st three entries
 - 1st row, etc.). If unknown, assign NaN value to first element in the array.
 */
-[Dims( +9 )]  float  covariance;
+[D(9)]  float [] covariance;
 
 /**
 Estimate reset counter. This should be incremented when the estimate resets in any of the dimensions (position,
@@ -10442,7 +12025,7 @@ Row-major representation of 6x6 pose cross-covariance matrix upper right triangl
 pitch, yaw; first six entries are the first ROW, next five entries are the second ROW, etc.). If unknown,
 assign NaN value to first element in the array.
 */
-[Dims( +21 )]  float  covariance;
+[D(21)]  float [] covariance;
 
 }
 
@@ -10765,12 +12348,12 @@ Angular speed around Z axis
  float  zgyro;
 
 /**
-Latitude
+Latitude (lower precision). Both this and the lat_int field should be set.
 */
  float  lat;
 
 /**
-Longitude
+Longitude (lower precision). Both this and the lon_int field should be set.
 */
  float  lon;
 
@@ -10804,6 +12387,18 @@ True velocity in down direction in earth-fixed NED frame
 */
  float  vd;
 
+/**
+Latitude (higher precision). If 0, recipients should use the lat field value (otherwise this field is
+preferred).
+*/
+ int  lat_int;
+
+/**
+Longitude (higher precision). If 0, recipients should use the lon field value (otherwise this field is
+preferred).
+*/
+ int  lon_int;
+
 }
 
 /**
@@ -10812,7 +12407,7 @@ Status generated by radio and injected into MAVLink stream.
 class RADIO_STATUS{
 
 /**
-Local (message sender) recieved signal strength indication in device-dependent units/scale. Values: [0-254],
+Local (message sender) received signal strength indication in device-dependent units/scale. Values: [0-254],
 UINT8_MAX: invalid/unknown.
 */
  byte  rssi;
@@ -10873,27 +12468,41 @@ Component ID (0 for broadcast)
  byte  target_component;
 
 /**
-Variable length payload. The length is defined by the remaining message length when subtracting the header
-and other fields. The content/format of this block is defined in https://mavlink.io/en/services/ftp.html.
+Variable length payload. The content/format of this block is defined in https://mavlink.io/en/services/ftp.html.
+The length is defined by the remaining message length when subtracting the header and other fields. See
+also MAV_FTP_OPCODE and MAV_FTP_ERR.
 */
-[Dims( +251 )]  byte  payload;
+[D(251)]  byte [] payload;
 
 }
 
 /**
-Time synchronization message.
+See also: https://mavlink.io/en/services/timesync.html.
+      
 */
 class TIMESYNC{
 
 /**
-Time sync timestamp 1
+Time sync timestamp 1. Syncing: 0. Responding: Timestamp of responding component.
 */
  long  tc1;
 
 /**
-Time sync timestamp 2
+Time sync timestamp 2. Timestamp of syncing component (mirrored in response).
 */
  long  ts1;
+
+/**
+Target system id. Request: 0 (broadcast) or id of specific system. Response must contain system id of
+the requesting component.
+*/
+ byte  target_system;
+
+/**
+Target component id. Request: 0 (broadcast) or id of specific component. Response must contain component
+id of the requesting component.
+*/
+ byte  target_component;
 
 }
 
@@ -10918,7 +12527,7 @@ Image frame sequence
 /**
 The global position, as returned by the Global Positioning System (GPS). This is
                  NOT
-the global position estimate of the sytem, but rather a RAW sensor value. See message GLOBAL_POSITION_INT
+the global position estimate of the system, but rather a RAW sensor value. See message GLOBAL_POSITION_INT
 for the global position estimate.
 */
 class HIL_GPS{
@@ -11090,7 +12699,7 @@ Timestamp (UNIX Epoch time or time since system boot). The receiving end can inf
 /**
 Vehicle attitude expressed as normalized quaternion in w, x, y, z order (with 1 0 0 0 being the null-rotation)
 */
-[Dims( +4 )]  float  attitude_quaternion;
+[D(4)]  float [] attitude_quaternion;
 
 /**
 Body frame roll / phi angular speed
@@ -11228,9 +12837,8 @@ Temperature, 0: IMU does not provide temperature values. If the IMU is at 0C it 
 }
 
 /**
-Request a list of available logs. On some systems calling this may stop on-board logging until LOG_REQUEST_END
-is called. If there are no log files available this request shall be answered with one LOG_ENTRY message
-with id = 0 and num_logs = 0.
+The ground station needs to be able to process either.
+      
 */
 class LOG_REQUEST_LIST{
 
@@ -11343,7 +12951,7 @@ Number of bytes (zero for end of log)
 /**
 log data
 */
-[Dims( +90 )]  byte  Dat;
+[D(90)]  byte [] Dat;
 
 }
 
@@ -11404,7 +13012,7 @@ Data length
 /**
 Raw data (110 is enough for 12 satellites of RTCMv2)
 */
-[Dims( +110 )]  byte  Dat;
+[D(110)]  byte [] Dat;
 
 }
 
@@ -11565,7 +13173,7 @@ how many bytes in this transfer
 /**
 serial data
 */
-[Dims( +70 )]  byte  Dat;
+[D(70)]  byte [] Dat;
 
 /**
 System ID
@@ -11843,7 +13451,7 @@ sequence number (starting with 0 on every transmission)
 /**
 image data bytes
 */
-[Dims( +253 )]  byte  Dat;
+[D(253)]  byte [] Dat;
 
 }
 
@@ -11910,7 +13518,7 @@ Quaternion of the sensor orientation in vehicle body frame (w, x, y, z order, ze
 0). Zero-rotation is along the vehicle body x-axis. This field is required if the orientation is set
 to MAV_SENSOR_ROTATION_CUSTOM. Set it to 0 if invalid."
 */
-[Dims( +4 )]  float  quaternion;
+[D(4)]  float [] quaternion;
 
 /**
 Signal quality of the sensor. Specific to each sensor type, representing the relation of the signal strength
@@ -11977,7 +13585,7 @@ bit within the terrain request mask
 /**
 Terrain data MSL
 */
-[Dims( +16 )]  short  Dat;
+[D(16)]  short [] Dat;
 
 }
 
@@ -12088,7 +13696,7 @@ Timestamp (UNIX Epoch time or time since system boot). The receiving end can inf
 /**
 Attitude quaternion (w, x, y, z order, zero-rotation is 1, 0, 0, 0)
 */
-[Dims( +4 )]  float  q;
+[D(4)]  float [] q;
 
 /**
 X position (NED)
@@ -12110,7 +13718,7 @@ Row-major representation of a pose 6x6 cross-covariance matrix upper right trian
 roll, pitch, yaw; first six entries are the first ROW, next five entries are the second ROW, etc.). If
 unknown, assign NaN value to first element in the array.
 */
-[Dims( +21 )]  float  covariance;
+[D(21)]  float [] covariance;
 
 }
 
@@ -12147,7 +13755,7 @@ motors is 0..1, negative range for reverse direction. Standard mapping for attit
 (index 0-7): roll, pitch, yaw, throttle, flaps, spoilers, airbrakes, landing gear. Load a pass-through
 mixer to repurpose them as generic outputs.
 */
-[Dims( +8 )]  float  controls;
+[D(8)]  float [] controls;
 
 }
 
@@ -12174,7 +13782,7 @@ motors is 0..1, negative range for reverse direction. Standard mapping for attit
 (index 0-7): roll, pitch, yaw, throttle, flaps, spoilers, airbrakes, landing gear. Load a pass-through
 mixer to repurpose them as generic outputs.
 */
-[Dims( +8 )]  float  controls;
+[D(8)]  float [] controls;
 
 }
 
@@ -12237,7 +13845,7 @@ The autopilot is requesting a resource (file, binary, other type of data)
 class RESOURCE_REQUEST{
 
 /**
-Request ID. This ID should be re-used when sending back URI contents
+Request ID. This ID should be reused when sending back URI contents
 */
  byte  request_id;
 
@@ -12250,7 +13858,7 @@ The type of requested URI. 0 = a file via URL. 1 = a UAVCAN binary
 The requested unique resource identifier (URI). It is not necessarily a straight domain name (depends
 on the URI type enum)
 */
-[Dims( +120 )]  byte  uri;
+[D(120)]  byte [] uri;
 
 /**
 The way the autopilot wants to receive the URI. 0 = MAVLink FTP. 1 = binary stream.
@@ -12261,7 +13869,7 @@ The way the autopilot wants to receive the URI. 0 = MAVLink FTP. 1 = binary stre
 The storage path the autopilot wants the URI to be stored in. Will only be valid if the transfer_type
 has a storage associated (e.g. MAVLink FTP).
 */
-[Dims( +120 )]  byte  storage;
+[D(120)]  byte [] storage;
 
 }
 
@@ -12330,27 +13938,27 @@ Altitude (MSL)
 /**
 target velocity (0,0,0) for unknown
 */
-[Dims( +3 )]  float  vel;
+[D(3)]  float [] vel;
 
 /**
 linear target acceleration (0,0,0) for unknown
 */
-[Dims( +3 )]  float  acc;
+[D(3)]  float [] acc;
 
 /**
 (0 0 0 0 for unknown)
 */
-[Dims( +4 )]  float  attitude_q;
+[D(4)]  float [] attitude_q;
 
 /**
 (0 0 0 for unknown)
 */
-[Dims( +3 )]  float  rates;
+[D(3)]  float [] rates;
 
 /**
 eph epv
 */
-[Dims( +3 )]  float  position_cov;
+[D(3)]  float [] position_cov;
 
 /**
 button states or switches of a tracker device
@@ -12423,17 +14031,17 @@ Airspeed, set to -1 if unknown
 /**
 Variance of body velocity estimate
 */
-[Dims( +3 )]  float  vel_variance;
+[D(3)]  float [] vel_variance;
 
 /**
 Variance in local position
 */
-[Dims( +3 )]  float  pos_variance;
+[D(3)]  float [] pos_variance;
 
 /**
 The attitude, represented as Quaternion
 */
-[Dims( +4 )]  float  q;
+[D(4)]  float [] q;
 
 /**
 Angular rate in roll axis
@@ -12454,7 +14062,7 @@ Angular rate in yaw axis
 
 /**
 Battery information. Updates GCS with flight controller battery status. Smart batteries also use this
-message, but may additionally send SMART_BATTERY_INFO.
+message, but may additionally send BATTERY_INFO.
 */
 class BATTERY_STATUS{
 
@@ -12486,7 +14094,7 @@ others set to UINT16_MAX. If the voltage of the battery is greater than (UINT16_
 should be set to (UINT16_MAX - 1), and cell 1 to the remaining voltage. This can be extended to multiple
 cells if the total voltage is greater than 2 * (UINT16_MAX - 1).
 */
-[Dims( +10 )]  ushort  voltages;
+[D(10)]  ushort [] voltages;
 
 /**
 Battery current, -1: autopilot does not measure the current
@@ -12523,7 +14131,7 @@ Battery voltages for cells 11 to 14. Cells above the valid cell count for this b
 of 0, where zero indicates not supported (note, this is different than for the voltages field and allows
 empty byte truncation). If the measured value is 0 then 1 should be sent instead.
 */
-[Dims( +4 )]  ushort  voltages_ext;
+[D(4)]  ushort [] voltages_ext;
 
 /**
 Battery mode. Default (0) is that battery mode reporting is not supported or battery is in normal-use
@@ -12536,78 +14144,6 @@ Fault/health indications. These should be set when charge_state is MAV_BATTERY_C
 MAV_BATTERY_CHARGE_STATE_UNHEALTHY (if not, fault reporting is not supported).
 */
 MAV_BATTERY_FAULT fault_bitmask;
-
-}
-
-/**
-Version and capability of autopilot software. This should be emitted in response to a request with MAV_CMD_REQUEST_MESSAGE.
-*/
-class AUTOPILOT_VERSION{
-
-/**
-Bitmap of capabilities
-*/
-MAV_PROTOCOL_CAPABILITY capabilities;
-
-/**
-Firmware version number
-*/
- uint  flight_sw_version;
-
-/**
-Middleware version number
-*/
- uint  middleware_sw_version;
-
-/**
-Operating system version number
-*/
- uint  os_sw_version;
-
-/**
-HW / board version (last 8 bits should be silicon ID, if any). The first 16 bits of this field specify
-https://github.com/PX4/PX4-Bootloader/blob/master/board_types.txt
-*/
- uint  board_version;
-
-/**
-Custom version field, commonly the first 8 bytes of the git hash. This is not an unique identifier, but
-should allow to identify the commit using the main version number even for very large code bases.
-*/
-[Dims( +8 )]  byte  flight_custom_version;
-
-/**
-Custom version field, commonly the first 8 bytes of the git hash. This is not an unique identifier, but
-should allow to identify the commit using the main version number even for very large code bases.
-*/
-[Dims( +8 )]  byte  middleware_custom_version;
-
-/**
-Custom version field, commonly the first 8 bytes of the git hash. This is not an unique identifier, but
-should allow to identify the commit using the main version number even for very large code bases.
-*/
-[Dims( +8 )]  byte  os_custom_version;
-
-/**
-ID of the board vendor
-*/
- ushort  vendor_id;
-
-/**
-ID of the product
-*/
- ushort  product_id;
-
-/**
-UID if provided by hardware (see uid2)
-*/
- ulong  uid;
-
-/**
-UID if provided by hardware (supersedes the uid field. If this is non-zero, use this field, otherwise
-use uid)
-*/
-[Dims( +18 )]  byte  uid2;
 
 }
 
@@ -12675,7 +14211,7 @@ Z Position of the landing target in MAV_FRAME
 /**
 Quaternion of landing target orientation (w, x, y, z order, zero-rotation is 1, 0, 0, 0)
 */
-[Dims( +4 )]  float  q;
+[D(4)]  float [] q;
 
 /**
 Type of landing target
@@ -12683,10 +14219,10 @@ Type of landing target
 LANDING_TARGET_TYPE Typ;
 
 /**
-Boolean indicating whether the position fields (x, y, z, q, type) contain valid target position information
-(valid: 1, invalid: 0). Default is 0 (invalid).
+Position fields (x, y, z, q, type) contain valid target position information (MAV_BOOL_FALSE: invalid
+values). Values not equal to 0 or 1 are invalid.
 */
- byte  position_valid;
+MAV_BOOL position_valid;
 
 }
 
@@ -12909,6 +14445,18 @@ Pressure/temperature compensation
 */
  float  pt_compensation;
 
+/**
+Supply voltage to EFI sparking system.  Zero in this value means "unknown", so if the supply voltage really
+is zero volts use 0.0001 instead.
+*/
+ float  ignition_voltage;
+
+/**
+Fuel pressure. Zero in this value means "unknown", so if the fuel pressure really is zero kPa use 0.0001
+instead.
+*/
+ float  fuel_pressure;
+
 }
 
 /**
@@ -12977,7 +14525,8 @@ Vertical position 1-STD accuracy relative to the EKF local origin
 }
 
 /**
-Wind covariance estimate from vehicle.
+Wind estimate from vehicle. Note that despite the name, this message does not actually contain any covariances
+but instead variability and accuracy fields in terms of standard deviation (1-STD).
 */
 class WIND_COV{
 
@@ -12988,42 +14537,42 @@ Timestamp (UNIX Epoch time or time since system boot). The receiving end can inf
  ulong  time_usec;
 
 /**
-Wind in X (NED) direction
+Wind in North (NED) direction (NAN if unknown)
 */
  float  wind_x;
 
 /**
-Wind in Y (NED) direction
+Wind in East (NED) direction (NAN if unknown)
 */
  float  wind_y;
 
 /**
-Wind in Z (NED) direction
+Wind in down (NED) direction (NAN if unknown)
 */
  float  wind_z;
 
 /**
-Variability of the wind in XY. RMS of a 1 Hz lowpassed wind estimate.
+Variability of wind in XY, 1-STD estimated from a 1 Hz lowpassed wind estimate (NAN if unknown)
 */
  float  var_horiz;
 
 /**
-Variability of the wind in Z. RMS of a 1 Hz lowpassed wind estimate.
+Variability of wind in Z, 1-STD estimated from a 1 Hz lowpassed wind estimate (NAN if unknown)
 */
  float  var_vert;
 
 /**
-Altitude (MSL) that this measurement was taken at
+Altitude (MSL) that this measurement was taken at (NAN if unknown)
 */
  float  wind_alt;
 
 /**
-Horizontal speed 1-STD accuracy
+Horizontal speed 1-STD accuracy (0 if unknown)
 */
  float  horiz_accuracy;
 
 /**
-Vertical speed 1-STD accuracy
+Vertical speed 1-STD accuracy (0 if unknown)
 */
  float  vert_accuracy;
 
@@ -13157,7 +14706,7 @@ data length
 /**
 RTCM message (may be fragmented)
 */
-[Dims( +180 )]  byte  Dat;
+[D(180)]  byte [] Dat;
 
 }
 
@@ -13390,7 +14939,7 @@ Maximum error vertical position since last message
  byte  epv;
 
 /**
-Air temperature from airspeed sensor
+Air temperature
 */
  sbyte  temperature_air;
 
@@ -13475,13 +15024,8 @@ third accelerometer clipping count
 }
 
 /**
-This message can be requested by sending the MAV_CMD_GET_HOME_POSITION command. The position the system
-will return to and land on. The position is set automatically by the system during the takeoff in case
-it was not explicitly set by the operator before or after. The global and local positions encode the
-position in the respective coordinate frames, while the q parameter encodes the orientation of the surface.
-Under normal conditions it describes the heading and terrain slope, which can be used by the aircraft
-to adjust the approach. The approach 3D vector describes the point to which the system should fly in
-normal flight mode and then perform a landing sequence along the vector.
+Note: this message can be requested by sending the MAV_CMD_REQUEST_MESSAGE with param1=242.
+      
 */
 class HOME_POSITION{
 
@@ -13501,25 +15045,26 @@ Altitude (MSL). Positive for up.
  int  altitude;
 
 /**
-Local X position of this position in the local coordinate frame
+Local X position of this position in the local coordinate frame (NED)
 */
  float  x;
 
 /**
-Local Y position of this position in the local coordinate frame
+Local Y position of this position in the local coordinate frame (NED)
 */
  float  y;
 
 /**
-Local Z position of this position in the local coordinate frame
+Local Z position of this position in the local coordinate frame (NED: positive "down")
 */
  float  z;
 
 /**
-World to surface normal and heading transformation of the takeoff position. Used to indicate the heading
-and slope of the ground
+All fields should be set to NaN if an accurate quaternion for both heading and surface slope cannot be
+supplied.
+      
 */
-[Dims( +4 )]  float  q;
+[D(4)]  float [] q;
 
 /**
 Local X position of the end of the approach vector. Multicopters should set this position based on their
@@ -13554,12 +15099,9 @@ Timestamp (UNIX Epoch time or time since system boot). The receiving end can inf
 }
 
 /**
-The position the system will return to and land on. The position is set automatically by the system during
-the takeoff in case it was not explicitly set by the operator before or after. The global and local positions
-encode the position in the respective coordinate frames, while the q parameter encodes the orientation
-of the surface. Under normal conditions it describes the heading and terrain slope, which can be used
-by the aircraft to adjust the approach. The approach 3D vector describes the point to which the system
-should fly in normal flight mode and then perform a landing sequence along the vector.
+Note: the current home position may be emitted in a HOME_POSITION message on request (using MAV_CMD_REQUEST_MESSAGE
+with param1=242).
+      
 */
 class SET_HOME_POSITION{
 
@@ -13584,17 +15126,17 @@ Altitude (MSL). Positive for up.
  int  altitude;
 
 /**
-Local X position of this position in the local coordinate frame
+Local X position of this position in the local coordinate frame (NED)
 */
  float  x;
 
 /**
-Local Y position of this position in the local coordinate frame
+Local Y position of this position in the local coordinate frame (NED)
 */
  float  y;
 
 /**
-Local Z position of this position in the local coordinate frame
+Local Z position of this position in the local coordinate frame (NED: positive "down")
 */
  float  z;
 
@@ -13602,7 +15144,7 @@ Local Z position of this position in the local coordinate frame
 World to surface normal and heading transformation of the takeoff position. Used to indicate the heading
 and slope of the ground
 */
-[Dims( +4 )]  float  q;
+[D(4)]  float [] q;
 
 /**
 Local X position of the end of the approach vector. Multicopters should set this position based on their
@@ -13637,8 +15179,7 @@ Timestamp (UNIX Epoch time or time since system boot). The receiving end can inf
 }
 
 /**
-The interval between messages for a particular MAVLink message ID. This message is the response to the
-MAV_CMD_GET_MESSAGE_INTERVAL command. This interface replaces DATA_STREAM.
+This interface replaces DATA_STREAM.
 */
 class MESSAGE_INTERVAL{
 
@@ -13697,7 +15238,7 @@ ADSB altitude type.
 ADSB_ALTITUDE_TYPE altitude_type;
 
 /**
-Altitude(ASL)
+Altitude (ASL)
 */
  int  altitude;
 
@@ -13719,7 +15260,7 @@ The vertical velocity. Positive is up
 /**
 The callsign, 8+null
 */
-string  callsign;
+[D(+9)] string  callsign;
 
 /**
 ADSB emitter type.
@@ -13727,7 +15268,7 @@ ADSB emitter type.
 ADSB_EMITTER_TYPE emitter_type;
 
 /**
-Time since last communication in seconds
+Time since last communication from the remote vehicle, in seconds.
 */
  byte  tslc;
 
@@ -13737,7 +15278,8 @@ Bitmap to indicate various statuses including valid data fields
 ADSB_FLAGS flags;
 
 /**
-Squawk code
+Squawk code. Note that the code is in decimal: e.g. 7700 (general emergency) is encoded as binary 0b0001_1110_0001_0100,
+not(!) as 0b0000_111_111_000_000
 */
  ushort  squawk;
 
@@ -13823,7 +15365,7 @@ by MAVLink 2 empty-byte truncation. The entire content of the payload block is o
 the encoding message_type. The particular encoding used can be extension specific and might not always
 be documented as part of the MAVLink specification.
 */
-[Dims( +249 )]  byte  payload;
+[D(249)]  byte [] payload;
 
 }
 
@@ -13851,7 +15393,7 @@ Type code of the memory variables. for ver = 1: 0=16 x int16_t, 1=16 x uint16_t,
 /**
 Memory contents at specified address
 */
-[Dims( +32 )]  sbyte  Valu;
+[D(32)]  sbyte [] Valu;
 
 }
 
@@ -13863,7 +15405,7 @@ class DEBUG_VECT{
 /**
 Name
 */
-string  name;
+[D(+10)] string  name;
 
 /**
 Timestamp (UNIX Epoch time or time since system boot). The receiving end can infer timestamp format (since
@@ -13902,7 +15444,7 @@ Timestamp (time since system boot).
 /**
 Name of the debug variable
 */
-string  name;
+[D(+10)] string  name;
 
 /**
 Floating point value
@@ -13925,7 +15467,7 @@ Timestamp (time since system boot).
 /**
 Name of the debug variable
 */
-string  name;
+[D(+10)] string  name;
 
 /**
 Signed integer value
@@ -13947,9 +15489,9 @@ Severity of status. Relies on the definitions within RFC-5424.
 MAV_SEVERITY severity;
 
 /**
-Status text message, without null termination character
+Status text message, without null termination character. UTF-8 encoded.
 */
-string  text;
+[D(+50)] string  text;
 
 /**
 Unique (opaque) identifier for this statustext message.  May be used to reassemble a logical long-statustext
@@ -14008,7 +15550,7 @@ component ID of the target
 /**
 signing key
 */
-[Dims( +32 )]  byte  secret_key;
+[D(32)]  byte [] secret_key;
 
 /**
 initial timestamp
@@ -14057,12 +15599,12 @@ Component ID
 /**
 tune in board specific format
 */
-string  tune;
+[D(+30)] string  tune;
 
 /**
 tune extension (appended to tune)
 */
-string  tune2;
+[D(+200)] string  tune2;
 
 }
 
@@ -14079,45 +15621,45 @@ Timestamp (time since system boot).
 /**
 Name of the camera vendor
 */
-[Dims( +32 )]  byte  vendor_name;
+[D(32)]  byte [] vendor_name;
 
 /**
 Name of the camera model
 */
-[Dims( +32 )]  byte  model_name;
+[D(32)]  byte [] model_name;
 
 /**
-0xff)
+0xff)`. Use 0 if not known.
 */
  uint  firmware_version;
 
 /**
-Focal length
+Focal length. Use NaN if not known.
 */
  float  focal_length;
 
 /**
-Image sensor size horizontal
+Image sensor size horizontal. Use NaN if not known.
 */
  float  sensor_size_h;
 
 /**
-Image sensor size vertical
+Image sensor size vertical. Use NaN if not known.
 */
  float  sensor_size_v;
 
 /**
-Horizontal image resolution
+Horizontal image resolution. Use 0 if not known.
 */
  ushort  resolution_h;
 
 /**
-Vertical image resolution
+Vertical image resolution. Use 0 if not known.
 */
  ushort  resolution_v;
 
 /**
-Reserved for a lens ID
+Reserved for a lens ID.  Use 0 if not known.
 */
  byte  lens_id;
 
@@ -14127,7 +15669,7 @@ Bitmap of camera capability flags.
 CAMERA_CAP_FLAGS flags;
 
 /**
-Camera definition version (iteration)
+Camera definition version (iteration).  Use 0 if not known.
 */
  ushort  cam_definition_version;
 
@@ -14136,9 +15678,21 @@ Camera definition URI (if any, otherwise only basic functions will be available)
 MAVLink FTP- (mavlinkftp://) formatted URIs are allowed (and both must be supported by any GCS that implements
 the Camera Protocol). The definition file may be xz compressed, which will be indicated by the file extension
 .xml.xz (a GCS that implements the protocol must support decompressing the file). The string needs to
-be zero terminated.
+be zero terminated.  Use a zero-length string if not known.
 */
-string  cam_definition_uri;
+[D(+140)] string  cam_definition_uri;
+
+/**
+Gimbal id of a gimbal associated with this camera. This is the component id of the gimbal device, or 1-6
+for non mavlink gimbals. Use 0 if no gimbal is associated with the camera.
+*/
+ byte  gimbal_device_id;
+
+/**
+Camera id of a non-MAVLink camera attached to an autopilot (1-6).  0 if the component is a MAVLink camera
+(with its own component id).
+*/
+ byte  camera_device_id;
 
 }
 
@@ -14158,14 +15712,20 @@ Camera mode
 CAMERA_MODE mode_id;
 
 /**
-Current zoom level (0.0 to 100.0, NaN if not known)
+Current zoom level as a percentage of the full range (0.0 to 100.0, NaN if not known)
 */
  float  zoomLevel;
 
 /**
-Current focus level (0.0 to 100.0, NaN if not known)
+Current focus level as a percentage of the full range (0.0 to 100.0, NaN if not known)
 */
  float  focusLevel;
+
+/**
+Camera id of a non-MAVLink camera attached to an autopilot (1-6).  0 if the component is a MAVLink camera
+(with its own component id).
+*/
+ byte  camera_device_id;
 
 }
 
@@ -14231,7 +15791,7 @@ Textual storage name to be used in UI (microSD 1, Internal Memory, etc.) This is
 If it is exactly 32 characters long, add a terminating NULL. If this string is empty, the generic type
 is shown to the user.
 */
-string  name;
+[D(+32)] string  name;
 
 /**
 This setting can then be overridden using MAV_CMD_SET_STORAGE_USAGE.
@@ -14284,12 +15844,18 @@ Total number of images captured ('forever', or until reset using MAV_CMD_STORAGE
 */
  int  image_count;
 
+/**
+Camera id of a non-MAVLink camera attached to an autopilot (1-6).  0 if the component is a MAVLink camera
+(with its own component id).
+*/
+ byte  camera_device_id;
+
 }
 
 /**
 set to -1 to send the message for the sequence number in param 2 and all the following sequence numbers,
 
-        set to the sequence number of the final message in the range.
+       set to the sequence number of the final message in the range.
 */
 class CAMERA_IMAGE_CAPTURED{
 
@@ -14304,7 +15870,8 @@ Timestamp (time since UNIX epoch) in UTC. 0 for unknown.
  ulong  time_utc;
 
 /**
-Deprecated/unused. Component IDs are used to differentiate multiple cameras.
+Camera id of a non-MAVLink camera attached to an autopilot (1-6).  0 if the component is a MAVLink camera
+(with its own component id). Field name is usually camera_device_id.
 */
  byte  camera_id;
 
@@ -14331,7 +15898,7 @@ Altitude above ground
 /**
 Quaternion of camera orientation (w, x, y, z order, zero-rotation is 1, 0, 0, 0)
 */
-[Dims( +4 )]  float  q;
+[D(4)]  float [] q;
 
 /**
 Zero based index of this image (i.e. a new image will have index CAMERA_CAPTURE_STATUS.image count -1)
@@ -14339,20 +15906,21 @@ Zero based index of this image (i.e. a new image will have index CAMERA_CAPTURE_
  int  image_index;
 
 /**
-Boolean indicating success (1) or failure (0) while capturing this image.
+Image was captured successfully (MAV_BOOL_TRUE). Values not equal to 0 or 1 are invalid.
 */
- sbyte  capture_result;
+MAV_BOOL capture_result;
 
 /**
 URL of image taken. Either local storage or http://foo.jpg if camera provides an HTTP interface.
 */
-string  file_url;
+[D(+205)] string  file_url;
 
 }
 
 /**
-Information about flight since last arming.
-        This can be requested using MAV_CMD_REQUEST_MESSAGE.
+Note, some fields are misnamed - timestamps are from boot (not UTC) and the flight_uuid is a sequence
+number.
+      
 */
 class FLIGHT_INFORMATION{
 
@@ -14362,19 +15930,25 @@ Timestamp (time since system boot).
  uint  time_boot_ms;
 
 /**
-Timestamp at arming (time since UNIX epoch) in UTC, 0 for unknown
+Timestamp at arming (since system boot). Set to 0 on boot. Set value on arming. Note, field is misnamed
+UTC.
 */
  ulong  arming_time_utc;
 
 /**
-Timestamp at takeoff (time since UNIX epoch) in UTC, 0 for unknown
+Timestamp at takeoff (since system boot). Set to 0 at boot and on arming. Note, field is misnamed UTC.
 */
  ulong  takeoff_time_utc;
 
 /**
-Universally unique identifier (UUID) of flight, should correspond to name of log files
+Flight number. Note, field is misnamed UUID.
 */
  ulong  flight_uuid;
+
+/**
+Timestamp at landing (in ms since system boot). Set to 0 at boot and on arming.
+*/
+ uint  landing_time;
 
 }
 
@@ -14444,7 +16018,7 @@ lost (set to UINT8_MAX if no start exists).
 /**
 logged data
 */
-[Dims( +249 )]  byte  Dat;
+[D(249)]  byte [] Dat;
 
 }
 
@@ -14482,7 +16056,7 @@ lost (set to UINT8_MAX if no start exists).
 /**
 logged data
 */
-[Dims( +249 )]  byte  Dat;
+[D(249)]  byte [] Dat;
 
 }
 
@@ -14567,13 +16141,24 @@ Horizontal Field of view.
 /**
 Stream name.
 */
-string  name;
+[D(+32)] string  name;
 
 /**
 Video stream URI (TCP or RTSP URI ground station should connect to) or port number (UDP port ground station
 should listen to).
 */
-string  uri;
+[D(+160)] string  uri;
+
+/**
+Encoding of stream.
+*/
+VIDEO_STREAM_ENCODING encoding;
+
+/**
+Camera id of a non-MAVLink camera attached to an autopilot (1-6).  0 if the component is a MAVLink camera
+(with its own component id).
+*/
+ byte  camera_device_id;
 
 }
 
@@ -14622,6 +16207,12 @@ Horizontal Field of view
 */
  ushort  hfov;
 
+/**
+Camera id of a non-MAVLink camera attached to an autopilot (1-6).  0 if the component is a MAVLink camera
+(with its own component id).
+*/
+ byte  camera_device_id;
+
 }
 
 /**
@@ -14668,7 +16259,7 @@ horizon).
 /**
 Quaternion of camera orientation (w, x, y, z order, zero-rotation is 1, 0, 0, 0)
 */
-[Dims( +4 )]  float  q;
+[D(4)]  float [] q;
 
 /**
 Horizontal field of view (NaN if unknown).
@@ -14679,6 +16270,12 @@ Horizontal field of view (NaN if unknown).
 Vertical field of view (NaN if unknown).
 */
  float  vfov;
+
+/**
+Camera id of a non-MAVLink camera attached to an autopilot (1-6).  0 if the component is a MAVLink camera
+(with its own component id).
+*/
+ byte  camera_device_id;
 
 }
 
@@ -14744,6 +16341,12 @@ Current tracked rectangle bottom y value if CAMERA_TRACKING_MODE_RECTANGLE (norm
 1 is bottom), NAN if unknown
 */
  float  rec_bottom_y;
+
+/**
+Camera id of a non-MAVLink camera attached to an autopilot (1-6).  0 if the component is a MAVLink camera
+(with its own component id).
+*/
+ byte  camera_device_id;
 
 }
 
@@ -14818,6 +16421,69 @@ Accuracy of heading, in NED. NAN if unknown
 */
  float  hdg_acc;
 
+/**
+Camera id of a non-MAVLink camera attached to an autopilot (1-6).  0 if the component is a MAVLink camera
+(with its own component id).
+*/
+ byte  camera_device_id;
+
+}
+
+/**
+Camera absolute thermal range. This can be streamed when the associated VIDEO_STREAM_STATUS `flag` field
+bit VIDEO_STREAM_STATUS_FLAGS_THERMAL_RANGE_ENABLED is set, but a GCS may choose to only request it for
+the current active stream. Use MAV_CMD_SET_MESSAGE_INTERVAL to define message interval (param3 indicates
+the stream id of the current camera, or 0 for all streams, param4 indicates the target camera_device_id
+for autopilot-attached cameras or 0 for MAVLink cameras).
+*/
+class CAMERA_THERMAL_RANGE{
+
+/**
+Timestamp (time since system boot).
+*/
+ uint  time_boot_ms;
+
+/**
+Video Stream ID (1 for first, 2 for second, etc.)
+*/
+ byte  stream_id;
+
+/**
+Camera id of a non-MAVLink camera attached to an autopilot (1-6).  0 if the component is a MAVLink camera
+(with its own component id).
+*/
+ byte  camera_device_id;
+
+/**
+Temperature max.
+*/
+ float  max;
+
+/**
+Temperature max point x value (normalized 0..1, 0 is left, 1 is right), NAN if unknown.
+*/
+ float  max_point_x;
+
+/**
+Temperature max point y value (normalized 0..1, 0 is top, 1 is bottom), NAN if unknown.
+*/
+ float  max_point_y;
+
+/**
+Temperature min.
+*/
+ float  min;
+
+/**
+Temperature min point x value (normalized 0..1, 0 is left, 1 is right), NAN if unknown.
+*/
+ float  min_point_x;
+
+/**
+Temperature min point y value (normalized 0..1, 0 is top, 1 is bottom), NAN if unknown.
+*/
+ float  min_point_y;
+
 }
 
 /**
@@ -14837,7 +16503,8 @@ Bitmap of gimbal capability flags.
 GIMBAL_MANAGER_CAP_FLAGS cap_flags;
 
 /**
-Gimbal device ID that this gimbal manager is responsible for.
+Gimbal device ID that this gimbal manager is responsible for. Component ID of gimbal device (or 1-6 for
+non-MAVLink gimbal).
 */
  byte  gimbal_device_id;
 
@@ -14890,7 +16557,8 @@ High level gimbal manager flags currently applied.
 GIMBAL_MANAGER_FLAGS flags;
 
 /**
-Gimbal device ID that this gimbal manager is responsible for.
+Gimbal device ID that this gimbal manager is responsible for. Component ID of gimbal device (or 1-6 for
+non-MAVLink gimbal).
 */
  byte  gimbal_device_id;
 
@@ -14947,7 +16615,7 @@ Send command multiple times for more than one gimbal (but not all gimbals).
 Quaternion components, w, x, y, z (1 0 0 0 is the null-rotation, the frame is depends on whether the flag
 GIMBAL_MANAGER_FLAGS_YAW_LOCK is set)
 */
-[Dims( +4 )]  float  q;
+[D(4)]  float [] q;
 
 /**
 X component of angular velocity, positive is rolling to the right, NaN to be ignored.
@@ -14981,25 +16649,25 @@ Timestamp (time since system boot).
 /**
 Name of the gimbal vendor.
 */
-string  vendor_name;
+[D(+32)] string  vendor_name;
 
 /**
 Name of the gimbal model.
 */
-string  model_name;
+[D(+32)] string  model_name;
 
 /**
 Custom name of the gimbal given to it by the user.
 */
-string  custom_name;
+[D(+32)] string  custom_name;
 
 /**
-0xff).
+0xff)`.
 */
  uint  firmware_version;
 
 /**
-0xff).
+0xff)`.
 */
  uint  hardware_version;
 
@@ -15019,40 +16687,52 @@ Bitmap for use for gimbal-specific capability flags.
  ushort  custom_cap_flags;
 
 /**
-Minimum hardware roll angle (positive: rolling to the right, negative: rolling to the left)
+Minimum hardware roll angle (positive: rolling to the right, negative: rolling to the left). NAN if unknown.
 */
  float  roll_min;
 
 /**
-Maximum hardware roll angle (positive: rolling to the right, negative: rolling to the left)
+Maximum hardware roll angle (positive: rolling to the right, negative: rolling to the left). NAN if unknown.
 */
  float  roll_max;
 
 /**
-Minimum hardware pitch angle (positive: up, negative: down)
+Minimum hardware pitch angle (positive: up, negative: down). NAN if unknown.
 */
  float  pitch_min;
 
 /**
-Maximum hardware pitch angle (positive: up, negative: down)
+Maximum hardware pitch angle (positive: up, negative: down). NAN if unknown.
 */
  float  pitch_max;
 
 /**
-Minimum hardware yaw angle (positive: to the right, negative: to the left)
+Minimum hardware yaw angle (positive: to the right, negative: to the left). NAN if unknown.
 */
  float  yaw_min;
 
 /**
-Maximum hardware yaw angle (positive: to the right, negative: to the left)
+Maximum hardware yaw angle (positive: to the right, negative: to the left). NAN if unknown.
 */
  float  yaw_max;
+
+/**
+This field is to be used if the gimbal manager and the gimbal device are the same component and hence
+have the same component ID. This field is then set to a number between 1-6. If the component ID is separate,
+this field is not required and must be set to 0.
+*/
+ byte  gimbal_device_id;
+
+/**
+Extended bitmap of gimbal capability flags (32 bit). For backwards compatibility, the lower 16 bits should
+also be set in cap_flags. Ground stations should prefer this field if non-zero.
+*/
+GIMBAL_DEVICE_CAP_FLAGS cap_flags2;
 
 }
 
 /**
-Low level message to control a gimbal device's attitude. This message is to be sent from the gimbal manager
-to the gimbal device component. Angles and rates can be set to NaN according to use case.
+New implementations should always set either GIMBAL_DEVICE_FLAGS_YAW_IN_VEHICLE_FRAME or GIMBAL_DEVICE_FLAGS_YAW_IN_EARTH_FRAME.
 */
 class GIMBAL_DEVICE_SET_ATTITUDE{
 
@@ -15072,34 +16752,33 @@ Low level gimbal flags.
 GIMBAL_DEVICE_FLAGS flags;
 
 /**
-Quaternion components, w, x, y, z (1 0 0 0 is the null-rotation, the frame is depends on whether the flag
-GIMBAL_DEVICE_FLAGS_YAW_LOCK is set, set all fields to NaN if only angular velocity should be used)
+Quaternion components, w, x, y, z (1 0 0 0 is the null-rotation). The frame is described in the message
+description. Set fields to NaN to be ignored.
 */
-[Dims( +4 )]  float  q;
+[D(4)]  float [] q;
 
 /**
-X component of angular velocity, positive is rolling to the right, NaN to be ignored.
+X component of angular velocity (positive: rolling to the right). The frame is described in the message
+description. NaN to be ignored.
 */
  float  angular_velocity_x;
 
 /**
-Y component of angular velocity, positive is pitching up, NaN to be ignored.
+Y component of angular velocity (positive: pitching up). The frame is described in the message description.
+NaN to be ignored.
 */
  float  angular_velocity_y;
 
 /**
-Z component of angular velocity, positive is yawing to the right, NaN to be ignored.
+Z component of angular velocity (positive: yawing to the right). The frame is described in the message
+description. NaN to be ignored.
 */
  float  angular_velocity_z;
 
 }
 
 /**
-Message reporting the status of a gimbal device. This message should be broadcasted by a gimbal device
-component. The angles encoded in the quaternion are relative to absolute North if the flag GIMBAL_DEVICE_FLAGS_YAW_LOCK
-is set (roll: positive is rolling to the right, pitch: positive is pitching up, yaw is turn to the right)
-or relative to the vehicle heading if the flag is not set. This message should be broadcast at a low
-regular rate (e.g. 10Hz).
+and always should set delta_yaw and delta_yaw_velocity either to the proper value or NaN.
 */
 class GIMBAL_DEVICE_ATTITUDE_STATUS{
 
@@ -15124,23 +16803,26 @@ Current gimbal flags set.
 GIMBAL_DEVICE_FLAGS flags;
 
 /**
-Quaternion components, w, x, y, z (1 0 0 0 is the null-rotation, the frame is depends on whether the flag
-GIMBAL_DEVICE_FLAGS_YAW_LOCK is set)
+Quaternion components, w, x, y, z (1 0 0 0 is the null-rotation). The frame is described in the message
+description.
 */
-[Dims( +4 )]  float  q;
+[D(4)]  float [] q;
 
 /**
-X component of angular velocity (NaN if unknown)
+X component of angular velocity (positive: rolling to the right). The frame is described in the message
+description. NaN if unknown.
 */
  float  angular_velocity_x;
 
 /**
-Y component of angular velocity (NaN if unknown)
+Y component of angular velocity (positive: pitching up). The frame is described in the message description.
+NaN if unknown.
 */
  float  angular_velocity_y;
 
 /**
-Z component of angular velocity (NaN if unknown)
+Z component of angular velocity (positive: yawing to the right). The frame is described in the message
+description. NaN if unknown.
 */
  float  angular_velocity_z;
 
@@ -15149,13 +16831,31 @@ Failure flags (0 for no failure)
 */
 GIMBAL_DEVICE_ERROR_FLAGS failure_flags;
 
+/**
+Yaw angle relating the quaternions in earth and body frames (see message description). NaN if unknown.
+*/
+ float  delta_yaw;
+
+/**
+Yaw angular velocity relating the angular velocities in earth and body frames (see message description).
+NaN if unknown.
+*/
+ float  delta_yaw_velocity;
+
+/**
+This field is to be used if the gimbal manager and the gimbal device are the same component and hence
+have the same component ID. This field is then set a number between 1-6. If the component ID is separate,
+this field is not required and must be set to 0.
+*/
+ byte  gimbal_device_id;
+
 }
 
 /**
 Low level message containing autopilot state relevant for a gimbal device. This message is to be sent
-from the gimbal manager to the gimbal device component. The data of this message server for the gimbal's
-estimator corrections in particular horizon compensation, as well as the autopilot's control intention
-e.g. feed forward angular control in z-axis.
+from the autopilot to the gimbal device component. The data of this message are for the gimbal device's
+estimator corrections, in particular horizon compensation, as well as indicates autopilot control intentions,
+e.g. feed forward angular control in the z-axis.
 */
 class AUTOPILOT_STATE_FOR_GIMBAL_DEVICE{
 
@@ -15177,35 +16877,35 @@ Timestamp (time since system boot).
 /**
 Quaternion components of autopilot attitude: w, x, y, z (1 0 0 0 is the null-rotation, Hamilton convention).
 */
-[Dims( +4 )]  float  q;
+[D(4)]  float [] q;
 
 /**
-Estimated delay of the attitude data.
+Estimated delay of the attitude data. 0 if unknown.
 */
  uint  q_estimated_delay_us;
 
 /**
-X Speed in NED (North, East, Down).
+X Speed in NED (North, East, Down). NAN if unknown.
 */
  float  vx;
 
 /**
-Y Speed in NED (North, East, Down).
+Y Speed in NED (North, East, Down). NAN if unknown.
 */
  float  vy;
 
 /**
-Z Speed in NED (North, East, Down).
+Z Speed in NED (North, East, Down). NAN if unknown.
 */
  float  vz;
 
 /**
-Estimated delay of the speed data.
+Estimated delay of the speed data. 0 if unknown.
 */
  uint  v_estimated_delay_us;
 
 /**
-Feed forward Z component of angular velocity, positive is yawing to the right, NaN to be ignored. This
+Feed forward Z component of angular velocity (positive: yawing to the right). NaN to be ignored. This
 is to indicate if the autopilot is actively yawing.
 */
  float  feed_forward_angular_velocity_z;
@@ -15220,11 +16920,18 @@ The landed state. Is set to MAV_LANDED_STATE_UNDEFINED if landed state is unknow
 */
 MAV_LANDED_STATE landed_state;
 
+/**
+Z component of angular velocity in NED (North, East, Down). NaN if unknown.
+*/
+ float  angular_velocity_z;
+
 }
 
 /**
-High level message to control a gimbal's pitch and yaw angles. This message is to be sent to the gimbal
-manager (e.g. from a ground station). Angles and rates can be set to NaN according to use case.
+Set gimbal manager pitch and yaw angles (high rate message). This message is to be sent to the gimbal
+manager (e.g. from a ground station) and will be ignored by gimbal devices. Angles and rates can be set
+to NaN according to use case. Use MAV_CMD_DO_GIMBAL_MANAGER_PITCHYAW for low-rate adjustments that require
+confirmation.
 */
 class GIMBAL_MANAGER_SET_PITCHYAW{
 
@@ -15325,11 +17032,13 @@ Yaw angular rate unitless (-1..1, positive: to the right, negative: to the left,
 /**
 ESC information for lower rate streaming. Recommended streaming rate 1Hz. See ESC_STATUS for higher-rate
 ESC data.
+**WIP**
 */
 class ESC_INFO{
 
 /**
-Index of the first ESC in this message. minValue = 0, maxValue = 60, increment = 4.
+Index of the first ESC in this message (ESC are indexed in motor order). minValue = 0, maxValue = 60,
+increment = 4.
 */
  byte  index;
 
@@ -15368,12 +17077,12 @@ ESC_FAILURE_FLAGS failure_flags;
 /**
 Number of reported errors by each ESC since boot.
 */
-[Dims( +4 )]  uint  error_count;
+[D(4)]  uint [] error_count;
 
 /**
 Temperature of each ESC. INT16_MAX: if data not supplied by ESC.
 */
-[Dims( +4 )]  short  temperature;
+[D(4)]  short [] temperature;
 
 }
 
@@ -15381,11 +17090,13 @@ Temperature of each ESC. INT16_MAX: if data not supplied by ESC.
 ESC information for higher rate streaming. Recommended streaming rate is ~10 Hz. Information that changes
 more slowly is sent in ESC_INFO. It should typically only be streamed on high-bandwidth links (i.e. to
 a companion computer).
+**WIP**
 */
 class ESC_STATUS{
 
 /**
-Index of the first ESC in this message. minValue = 0, maxValue = 60, increment = 4.
+Index of the first ESC in this message (ESC are indexed in motor order). minValue = 0, maxValue = 60,
+increment = 4.
 */
  byte  index;
 
@@ -15398,17 +17109,125 @@ Timestamp (UNIX Epoch time or time since system boot). The receiving end can inf
 /**
 Reported motor RPM from each ESC (negative for reverse rotation).
 */
-[Dims( +4 )]  int  rpm;
+[D(4)]  int [] rpm;
 
 /**
 Voltage measured from each ESC.
 */
-[Dims( +4 )]  float  voltage;
+[D(4)]  float [] voltage;
 
 /**
 Current measured from each ESC.
 */
-[Dims( +4 )]  float  current;
+[D(4)]  float [] current;
+
+}
+
+/**
+Airspeed information from a sensor.
+*/
+class AIRSPEED{
+
+/**
+Sensor ID.
+*/
+ byte  id;
+
+/**
+Calibrated airspeed (CAS).
+*/
+ float  airspeed;
+
+/**
+Temperature.
+*/
+ short  temperature;
+
+/**
+Raw differential pressure.
+*/
+ float  raw_press;
+
+/**
+Airspeed sensor flags.
+*/
+AIRSPEED_SENSOR_FLAGS flags;
+
+}
+
+/**
+Reports measurement/estimate from a global position sensor. Used as navigation fusion source and optionally
+displayed in the UI.
+*/
+class GLOBAL_POSITION_SENSOR{
+
+/**
+System ID (ID of target system, normally autopilot and ground station).
+*/
+ byte  target_system;
+
+/**
+Component ID (normally 0 for broadcast).
+*/
+ byte  target_component;
+
+/**
+Sensor ID
+*/
+ byte  id;
+
+/**
+Timestamp of message transmission (UNIX Epoch time or time since system boot). The receiving end can infer
+timestamp format (since 1.1.1970 or since system boot) by checking for the magnitude of the number.
+*/
+ ulong  time_usec;
+
+/**
+The time spent in processing the sensor data that is the basis for this position. The recipient can use
+this to improve time alignment of the data. This is the time between measurement (e.g. camera exposure
+time) and transmission of this message. Set to NaN if not known.
+*/
+ uint  processing_time;
+
+/**
+Source of position/estimate (such as GNSS, estimator, etc.)
+*/
+GLOBAL_POSITION_SRC source;
+
+/**
+Status flags
+*/
+GLOBAL_POSITION_FLAGS flags;
+
+/**
+Latitude (WGS84)
+*/
+ int  lat;
+
+/**
+Longitude (WGS84)
+*/
+ int  lon;
+
+/**
+Altitude (WGS84 elipsoid), preferred if available
+*/
+ float  alt_ellipsoid;
+
+/**
+Altitude (MSL - position-system specific value) use if no alt_ellipsoid available
+*/
+ float  alt;
+
+/**
+Standard deviation of horizontal position error
+*/
+ float  eph;
+
+/**
+Standard deviation of vertical position error
+*/
+ float  epv;
 
 }
 
@@ -15422,12 +17241,12 @@ class WIFI_CONFIG_AP{
 Name of Wi-Fi network (SSID). Blank to leave it unchanged when setting. Current SSID when sent back as
 a response.
 */
-string  ssid;
+[D(+32)] string  ssid;
 
 /**
 Password. Blank for an open AP. MD5 hash when message is sent back as a response.
 */
-string  password;
+[D(+64)] string  password;
 
 /**
 WiFi Mode.
@@ -15438,6 +17257,43 @@ WIFI_CONFIG_AP_MODE mode;
 Message acceptance response (sent back to GS).
 */
 WIFI_CONFIG_AP_RESPONSE response;
+
+}
+
+/**
+Version and capability of protocol version. This message can be requested with MAV_CMD_REQUEST_MESSAGE
+and is used as part of the handshaking to establish which MAVLink version should be used on the network.
+Every node should respond to a request for PROTOCOL_VERSION to enable the handshaking. Library implementers
+should consider adding this into the default decoding state machine to allow the protocol core to respond
+directly.
+**DEPRECATED** since=2025-11 replaced_by=Nothing: No longer needed. Support is being removed from flight stacks.
+*/
+class PROTOCOL_VERSION{
+
+/**
+Currently active MAVLink version number * 100: v1.0 is 100, v2.0 is 200, etc.
+*/
+ ushort  version;
+
+/**
+Minimum MAVLink version supported
+*/
+ ushort  min_version;
+
+/**
+Maximum MAVLink version supported (set to the same value as version by default)
+*/
+ ushort  max_version;
+
+/**
+The first 8 bytes (not characters printed in hex!) of the git hash.
+*/
+[D(8)]  byte [] spec_version_hash;
+
+/**
+The first 8 bytes (not characters printed in hex!) of the git hash.
+*/
+[D(8)]  byte [] library_version_hash;
 
 }
 
@@ -15477,7 +17333,7 @@ Speed over ground
  ushort  velocity;
 
 /**
-Turn rate
+Turn rate, 0.1 degrees per second
 */
  sbyte  turn_rate;
 
@@ -15512,17 +17368,21 @@ Distance from lat/lon location to starboard side
  byte  dimension_starboard;
 
 /**
-The vessel callsign
+The vessel callsign. Characters are encoded as 7-bit ASCII, but only characters in the [AIS 6-bit ASCII
+subset](https://en.wikipedia.org/wiki/Six-bit_character_code#AIS_SixBit_ASCII) are permitted. Also set
+AIS_FLAGS_VALID_CALLSIGN if valid. The string is NULL-terminated if it is shorter than the array length.
 */
-string  callsign;
+[D(+7)] string  callsign;
 
 /**
-The vessel name
+The vessel name. Characters are encoded as 7-bit ASCII, but only characters in the [AIS 6-bit ASCII subset](https://en.wikipedia.org/wiki/Six-bit_character_code#AIS_SixBit_ASCII)
+are permitted. Also set AIS_FLAGS_VALID_NAME if valid. The string is NULL-terminated if it is shorter
+than the array length.
 */
-string  name;
+[D(+20)] string  name;
 
 /**
-Time since last communication in seconds
+Time since last communication from the vessel, in seconds
 */
  ushort  tslc;
 
@@ -15573,12 +17433,9 @@ Vendor-specific status information.
 }
 
 /**
-General information describing a particular UAVCAN node. Please refer to the definition of the UAVCAN
-service "uavcan.protocol.GetNodeInfo" for the background information. This message should be emitted
-by the system whenever a new node appears online, or an existing node reboots. Additionally, it can be
-emitted upon request from the other end of the MAVLink channel (see MAV_CMD_UAVCAN_GET_NODE_INFO). It
-is also not prohibited to emit this message unconditionally at a low frequency. The UAVCAN specification
-is available at http://uavcan.org.
+It is also not prohibited to emit this message unconditionally at a low frequency.
+        The DroneCAN
+specification is available at https://dronecan.github.io/Specification/1._Introduction/.
 */
 class UAVCAN_NODE_INFO{
 
@@ -15596,7 +17453,7 @@ Time since the start-up of the node.
 /**
 Node name string. For example, "sapog.px4.io".
 */
-string  name;
+[D(+80)] string  name;
 
 /**
 Hardware major version number.
@@ -15611,7 +17468,7 @@ Hardware minor version number.
 /**
 Hardware unique 128-bit ID.
 */
-[Dims( +16 )]  byte  hw_unique_id;
+[D(16)]  byte [] hw_unique_id;
 
 /**
 Software major version number.
@@ -15651,7 +17508,7 @@ Parameter id, terminated by NULL if the length is less than 16 human-readable ch
 (NULL) byte if the length is exactly 16 chars - applications have to provide 16+1 bytes storage if the
 ID is stored as string
 */
-string  param_id;
+[D(+16)] string  param_id;
 
 /**
 Parameter index. Set to -1 to use the Parameter ID field as identifier (else param_id will be ignored)
@@ -15689,12 +17546,12 @@ Parameter id, terminated by NULL if the length is less than 16 human-readable ch
 (NULL) byte if the length is exactly 16 chars - applications have to provide 16+1 bytes storage if the
 ID is stored as string
 */
-string  param_id;
+[D(+16)] string  param_id;
 
 /**
 Parameter value
 */
-string  param_value;
+[D(+128)] string  param_value;
 
 /**
 Parameter type.
@@ -15736,12 +17593,12 @@ Parameter id, terminated by NULL if the length is less than 16 human-readable ch
 (NULL) byte if the length is exactly 16 chars - applications have to provide 16+1 bytes storage if the
 ID is stored as string
 */
-string  param_id;
+[D(+16)] string  param_id;
 
 /**
 Parameter value
 */
-string  param_value;
+[D(+128)] string  param_value;
 
 /**
 Parameter type.
@@ -15760,12 +17617,12 @@ Parameter id, terminated by NULL if the length is less than 16 human-readable ch
 (NULL) byte if the length is exactly 16 chars - applications have to provide 16+1 bytes storage if the
 ID is stored as string
 */
-string  param_id;
+[D(+16)] string  param_id;
 
 /**
 Parameter value (new value if PARAM_ACK_ACCEPTED, current value otherwise)
 */
-string  param_value;
+[D(+128)] string  param_value;
 
 /**
 Parameter type.
@@ -15801,7 +17658,7 @@ specified in the frame. A value of 0 is valid and means that the obstacle is pra
 sensor. A value of max_distance +1 means no obstacle is present. A value of UINT16_MAX for unknown/not
 used. In a array element, one unit corresponds to 1cm.
 */
-[Dims( +72 )]  ushort  distances;
+[D(72)]  ushort [] distances;
 
 /**
 Angular width in degrees of each array element. Increment direction is clockwise. This field is ignored
@@ -15879,7 +17736,7 @@ Z Position
 /**
 Quaternion components, w, x, y, z (1 0 0 0 is the null-rotation)
 */
-[Dims( +4 )]  float  q;
+[D(4)]  float [] q;
 
 /**
 X linear speed
@@ -15916,14 +17773,14 @@ Row-major representation of a 6x6 pose cross-covariance matrix upper right trian
 roll, pitch, yaw; first six entries are the first ROW, next five entries are the second ROW, etc.). If
 unknown, assign NaN value to first element in the array.
 */
-[Dims( +21 )]  float  pose_covariance;
+[D(21)]  float [] pose_covariance;
 
 /**
 Row-major representation of a 6x6 velocity cross-covariance matrix upper right triangle (states: vx, vy,
 vz, rollspeed, pitchspeed, yawspeed; first six entries are the first ROW, next five entries are the second
 ROW, etc.). If unknown, assign NaN value to first element in the array.
 */
-[Dims( +21 )]  float  velocity_covariance;
+[D(21)]  float [] velocity_covariance;
 
 /**
 Estimate reset counter. This should be incremented when the estimate resets in any of the dimensions (position,
@@ -15937,10 +17794,17 @@ Type of estimator that is providing the odometry.
 */
 MAV_ESTIMATOR_TYPE estimator_type;
 
+/**
+Optional odometry quality metric as a percentage. -1 = odometry has failed, 0 = unknown/unset quality,
+1 = worst quality, 100 = best quality
+*/
+ sbyte  quality;
+
 }
 
 /**
 Describe a trajectory using an array of up-to 5 waypoints in the local frame (MAV_FRAME_LOCAL_NED).
+**DEPRECATED** since=2025-03 replaced_by=Nothing: Implemented PX4 v1.11 to v1.14. Not used in current flight stacks.
 */
 class TRAJECTORY_REPRESENTATION_WAYPOINTS{
 
@@ -15958,57 +17822,57 @@ Number of valid points (up-to 5 waypoints are possible)
 /**
 X-coordinate of waypoint, set to NaN if not being used
 */
-[Dims( +5 )]  float  pos_x;
+[D(5)]  float [] pos_x;
 
 /**
 Y-coordinate of waypoint, set to NaN if not being used
 */
-[Dims( +5 )]  float  pos_y;
+[D(5)]  float [] pos_y;
 
 /**
 Z-coordinate of waypoint, set to NaN if not being used
 */
-[Dims( +5 )]  float  pos_z;
+[D(5)]  float [] pos_z;
 
 /**
 X-velocity of waypoint, set to NaN if not being used
 */
-[Dims( +5 )]  float  vel_x;
+[D(5)]  float [] vel_x;
 
 /**
 Y-velocity of waypoint, set to NaN if not being used
 */
-[Dims( +5 )]  float  vel_y;
+[D(5)]  float [] vel_y;
 
 /**
 Z-velocity of waypoint, set to NaN if not being used
 */
-[Dims( +5 )]  float  vel_z;
+[D(5)]  float [] vel_z;
 
 /**
 X-acceleration of waypoint, set to NaN if not being used
 */
-[Dims( +5 )]  float  acc_x;
+[D(5)]  float [] acc_x;
 
 /**
 Y-acceleration of waypoint, set to NaN if not being used
 */
-[Dims( +5 )]  float  acc_y;
+[D(5)]  float [] acc_y;
 
 /**
 Z-acceleration of waypoint, set to NaN if not being used
 */
-[Dims( +5 )]  float  acc_z;
+[D(5)]  float [] acc_z;
 
 /**
 Yaw angle, set to NaN if not being used
 */
-[Dims( +5 )]  float  pos_yaw;
+[D(5)]  float [] pos_yaw;
 
 /**
 Yaw rate, set to NaN if not being used
 */
-[Dims( +5 )]  float  vel_yaw;
+[D(5)]  float [] vel_yaw;
 
 /**
 MAV_CMD command id of waypoint, set to UINT16_MAX if not being used.
@@ -16019,6 +17883,7 @@ MAV_CMD command;
 
 /**
 Describe a trajectory using an array of up-to 5 bezier control points in the local frame (MAV_FRAME_LOCAL_NED).
+**DEPRECATED** since=2025-03 replaced_by=Nothing: Implemented PX4 v1.11 to v1.14. Not used in current flight stacks.
 */
 class TRAJECTORY_REPRESENTATION_BEZIER{
 
@@ -16036,27 +17901,27 @@ Number of valid control points (up-to 5 points are possible)
 /**
 X-coordinate of bezier control points. Set to NaN if not being used
 */
-[Dims( +5 )]  float  pos_x;
+[D(5)]  float [] pos_x;
 
 /**
 Y-coordinate of bezier control points. Set to NaN if not being used
 */
-[Dims( +5 )]  float  pos_y;
+[D(5)]  float [] pos_y;
 
 /**
 Z-coordinate of bezier control points. Set to NaN if not being used
 */
-[Dims( +5 )]  float  pos_z;
+[D(5)]  float [] pos_z;
 
 /**
 Bezier time horizon. Set to NaN if velocity/acceleration should not be incorporated
 */
-[Dims( +5 )]  float  delta;
+[D(5)]  float [] delta;
 
 /**
 Yaw. Set to NaN for unchanged
 */
-[Dims( +5 )]  float  pos_yaw;
+[D(5)]  float [] pos_yaw;
 
 }
 
@@ -16071,7 +17936,7 @@ Cellular modem status
 CELLULAR_STATUS_FLAG status;
 
 /**
-Failure reason when status in in CELLUAR_STATUS_FAILED
+Failure reason when status in in CELLULAR_STATUS_FLAG_FAILED
 */
 CELLULAR_NETWORK_FAILED_REASON failure_reason;
 
@@ -16172,23 +18037,23 @@ sent back as a response.
 /**
 PIN sent to the SIM card. Blank when PIN is disabled. Empty when message is sent back as a response.
 */
-string  pin;
+[D(+16)] string  pin;
 
 /**
 New PIN when changing the PIN. Blank to leave it unchanged. Empty when message is sent back as a response.
 */
-string  new_pin;
+[D(+16)] string  new_pin;
 
 /**
 Name of the cellular APN. Blank to leave it unchanged. Current APN when sent back as a response.
 */
-string  apn;
+[D(+32)] string  apn;
 
 /**
 Required PUK code in case the user failed to authenticate 3 times with the PIN. Empty when message is
 sent back as a response.
 */
-string  puk;
+[D(+16)] string  puk;
 
 /**
 Enable/disable roaming. 0: setting unchanged, 1: disabled, 2: enabled. Current setting when sent back
@@ -16233,7 +18098,7 @@ Time of applicability of position (microseconds since UNIX epoch).
 /**
 Unique UAS ID.
 */
-[Dims( +18 )]  byte  uas_id;
+[D(18)]  byte [] uas_id;
 
 /**
 Latitude (WGS84)
@@ -16318,6 +18183,44 @@ UTM_DATA_AVAIL_FLAGS flags;
 }
 
 /**
+Parameter set/get error. Returned from a MAVLink node in response to an error in the parameter protocol,
+for example failing to set a parameter because it does not exist.
+      
+**WIP**
+*/
+class PARAM_ERROR{
+
+/**
+System ID
+*/
+ byte  target_system;
+
+/**
+Component ID
+*/
+ byte  target_component;
+
+/**
+Parameter id. Terminated by NULL if the length is less than 16 human-readable chars and WITHOUT null termination
+(NULL) byte if the length is exactly 16 chars - applications have to provide 16+1 bytes storage if the
+ID is stored as string
+*/
+[D(+16)] string  param_id;
+
+/**
+Parameter index. Will be -1 if the param ID field should be used as an identifier (else the param id will
+be ignored)
+*/
+ short  param_index;
+
+/**
+Error being returned to client.
+*/
+MAV_PARAM_ERROR error;
+
+}
+
+/**
 Large debug/prototyping array. The message uses the maximum available payload for data. The array_id and
 name fields are used to discriminate between messages in code and in user interfaces (respectively).
 Do not use in production code.
@@ -16333,7 +18236,7 @@ Timestamp (UNIX Epoch time or time since system boot). The receiving end can inf
 /**
 Name, for human-friendly display in a Ground Control Station
 */
-string  name;
+[D(+10)] string  name;
 
 /**
 Unique ID used to discriminate between arrays
@@ -16343,7 +18246,7 @@ Unique ID used to discriminate between arrays
 /**
 data
 */
-[Dims( +58 )]  float  Dat;
+[D(58)]  float [] Dat;
 
 }
 
@@ -16389,7 +18292,7 @@ Altitude of center point. Coordinate system depends on frame field.
 
 /**
 Smart Battery information (static/infrequent update). Use for updates from: smart battery to flight stack,
-flight stack to GCS. Use BATTERY_STATUS for smart battery frequent updates.
+flight stack to GCS. Use BATTERY_STATUS for the frequent battery updates.
 */
 class SMART_BATTERY_INFO{
 
@@ -16426,13 +18329,13 @@ Charge/discharge cycle count. UINT16_MAX: field not provided.
 /**
 Serial number in ASCII characters, 0 terminated. All 0: field not provided.
 */
-string  serial_number;
+[D(+16)] string  serial_number;
 
 /**
 Static device name in ASCII characters, 0 terminated. All 0: field not provided. Encode as manufacturer
 name then product name separated using an underscore.
 */
-string  device_name;
+[D(+50)] string  device_name;
 
 /**
 Battery weight. 0: field not provided.
@@ -16477,7 +18380,222 @@ Maximum pack discharge burst current. 0: field not provided.
 /**
 Manufacture date (DD/MM/YYYY) in ASCII characters, 0 terminated. All 0: field not provided.
 */
-string  manufacture_date;
+[D(+11)] string  manufacture_date;
+
+}
+
+/**
+Vehicle status report that is sent out while figure eight execution is in progress (see MAV_CMD_DO_FIGURE_EIGHT).
+
+       This may typically send at low rates: of the order of 2Hz.
+*/
+class FIGURE_EIGHT_EXECUTION_STATUS{
+
+/**
+Timestamp (UNIX Epoch time or time since system boot). The receiving end can infer timestamp format (since
+1.1.1970 or since system boot) by checking for the magnitude of the number.
+*/
+ ulong  time_usec;
+
+/**
+Major axis radius of the figure eight. Positive: orbit the north circle clockwise. Negative: orbit the
+north circle counter-clockwise.
+*/
+ float  major_radius;
+
+/**
+Minor axis radius of the figure eight. Defines the radius of two circles that make up the figure.
+*/
+ float  minor_radius;
+
+/**
+Orientation of the figure eight major axis with respect to true north in [-pi,pi).
+*/
+ float  orientation;
+
+/**
+The coordinate system of the fields: x, y, z.
+*/
+MAV_FRAME frame;
+
+/**
+X coordinate of center point. Coordinate system depends on frame field.
+*/
+ int  x;
+
+/**
+Y coordinate of center point. Coordinate system depends on frame field.
+*/
+ int  y;
+
+/**
+Altitude of center point. Coordinate system depends on frame field.
+*/
+ float  z;
+
+}
+
+/**
+If both messages are sent for the same fuel system, the ids and corresponding information must match.
+
+
+       This should be streamed (nominally at 0.1 Hz).
+*/
+class FUEL_STATUS{
+
+/**
+Fuel ID. Must match ID of other messages for same fuel system, such as BATTERY_STATUS_V2.
+*/
+ byte  id;
+
+/**
+Capacity when full. Must be provided.
+*/
+ float  maximum_fuel;
+
+/**
+Consumed fuel (measured). This value should not be inferred: if not measured set to NaN. NaN: field not
+provided.
+*/
+ float  consumed_fuel;
+
+/**
+Remaining fuel until empty (measured). The value should not be inferred: if not measured set to NaN. NaN:
+field not provided.
+*/
+ float  remaining_fuel;
+
+/**
+Percentage of remaining fuel, relative to full. Values: [0-100], UINT8_MAX: field not provided.
+*/
+ byte  percent_remaining;
+
+/**
+Positive value when emptying/using, and negative if filling/replacing. NaN: field not provided.
+*/
+ float  flow_rate;
+
+/**
+Fuel temperature. NaN: field not provided.
+*/
+ float  temperature;
+
+/**
+Fuel type. Defines units for fuel capacity and consumption fields above.
+*/
+MAV_FUEL_TYPE fuel_type;
+
+}
+
+/**
+BATTERY_STATUS_V2 is used for higher-rate battery status information.
+      
+**WIP**
+*/
+class BATTERY_INFO{
+
+/**
+Battery ID
+*/
+ byte  id;
+
+/**
+Function of the battery.
+*/
+MAV_BATTERY_FUNCTION battery_function;
+
+/**
+Type (chemistry) of the battery.
+*/
+MAV_BATTERY_TYPE Typ;
+
+/**
+State of Health (SOH) estimate. Typically 100% at the time of manufacture and will decrease over time
+and use. -1: field not provided.
+*/
+ byte  state_of_health;
+
+/**
+Number of battery cells in series. 0: field not provided.
+*/
+ byte  cells_in_series;
+
+/**
+Lifetime count of the number of charge/discharge cycles (https://en.wikipedia.org/wiki/Charge_cycle).
+UINT16_MAX: field not provided.
+*/
+ ushort  cycle_count;
+
+/**
+Battery weight. 0: field not provided.
+*/
+ ushort  weight;
+
+/**
+Minimum per-cell voltage when discharging. 0: field not provided.
+*/
+ float  discharge_minimum_voltage;
+
+/**
+Minimum per-cell voltage when charging. 0: field not provided.
+*/
+ float  charging_minimum_voltage;
+
+/**
+Minimum per-cell voltage when resting. 0: field not provided.
+*/
+ float  resting_minimum_voltage;
+
+/**
+Maximum per-cell voltage when charged. 0: field not provided.
+*/
+ float  charging_maximum_voltage;
+
+/**
+Maximum pack continuous charge current. 0: field not provided.
+*/
+ float  charging_maximum_current;
+
+/**
+Battery nominal voltage. Used for conversion between Wh and Ah. 0: field not provided.
+*/
+ float  nominal_voltage;
+
+/**
+Maximum pack discharge current. 0: field not provided.
+*/
+ float  discharge_maximum_current;
+
+/**
+Maximum pack discharge burst current. 0: field not provided.
+*/
+ float  discharge_maximum_burst_current;
+
+/**
+Fully charged design capacity. 0: field not provided.
+*/
+ float  design_capacity;
+
+/**
+Predicted battery capacity when fully charged (accounting for battery degradation). NAN: field not provided.
+*/
+ float  full_charge_capacity;
+
+/**
+Manufacture date (DDMMYYYY) in ASCII characters, 0 terminated. All 0: field not provided.
+*/
+[D(+9)] string  manufacture_date;
+
+/**
+Serial number in ASCII characters, 0 terminated. All 0: field not provided.
+*/
+[D(+32)] string  serial_number;
+
+/**
+Battery device name. Formatted as manufacturer name then product name, separated with an underscore (in
+ASCII characters), 0 terminated. All 0: field not provided.
+*/
+[D(+50)] string  name;
 
 }
 
@@ -16565,12 +18683,37 @@ Active outputs
 /**
 Servo / motor output array values. Zero values indicate unused channels.
 */
-[Dims( +32 )]  float  actuator;
+[D(32)]  float [] actuator;
+
+}
+
+/**
+Note that it should not be sent on every relay state change to avoid flooding the link.
+      
+*/
+class RELAY_STATUS{
+
+/**
+Timestamp (time since system boot).
+*/
+ uint  time_boot_ms;
+
+/**
+Relay states. Relay instance numbers are represented as individual bits in this mask by offset.
+*/
+ ushort  on;
+
+/**
+Relay present. Relay instance numbers are represented as individual bits in this mask by offset.  Bits
+will be true if a relay instance is configured.
+*/
+ ushort  present;
 
 }
 
 /**
 Time/duration estimates for various events and actions given the current vehicle state and position.
+**WIP**
 */
 class TIME_ESTIMATE_TO_TARGET{
 
@@ -16638,7 +18781,7 @@ Length of the data transported in payload
 Variable length payload. The payload length is defined by payload_length. The entire content of this block
 is opaque unless you understand the encoding specified by payload_type.
 */
-[Dims( +128 )]  byte  payload;
+[D(128)]  byte [] payload;
 
 }
 
@@ -16675,7 +18818,7 @@ Frame ID
 /**
 Frame data
 */
-[Dims( +8 )]  byte  Dat;
+[D(8)]  byte [] Dat;
 
 }
 
@@ -16704,26 +18847,26 @@ backup 2, 3: Compute node, 4-5: Compute spares, 6-9: Payload computers.
 /**
 CPU usage on the component in percent (100 - idle). A value of UINT8_MAX implies the field is unused.
 */
-[Dims( +8 )]  byte  cpu_cores;
+[D(8)]  byte [] cpu_cores;
 
 /**
 Combined CPU usage as the last 10 slices of 100 MS (a histogram). This allows to identify spikes in load
 that max out the system, but only for a short amount of time. A value of UINT8_MAX implies the field
 is unused.
 */
-[Dims( +10 )]  byte  cpu_combined;
+[D(10)]  byte [] cpu_combined;
 
 /**
 GPU usage on the component in percent (100 - idle). A value of UINT8_MAX implies the field is unused.
 */
-[Dims( +4 )]  byte  gpu_cores;
+[D(4)]  byte [] gpu_cores;
 
 /**
 Combined GPU usage as the last 10 slices of 100 MS (a histogram). This allows to identify spikes in load
 that max out the system, but only for a short amount of time. A value of UINT8_MAX implies the field
 is unused.
 */
-[Dims( +10 )]  byte  gpu_combined;
+[D(10)]  byte [] gpu_combined;
 
 /**
 Temperature of the board. A value of INT8_MAX implies the field is unused.
@@ -16733,12 +18876,12 @@ Temperature of the board. A value of INT8_MAX implies the field is unused.
 /**
 Temperature of the CPU core. A value of INT8_MAX implies the field is unused.
 */
-[Dims( +8 )]  sbyte  temperature_core;
+[D(8)]  sbyte [] temperature_core;
 
 /**
 Fan speeds. A value of INT16_MAX implies the field is unused.
 */
-[Dims( +4 )]  short  fan_speed;
+[D(4)]  short [] fan_speed;
 
 /**
 Amount of used RAM on the component system. A value of UINT32_MAX implies the field is unused.
@@ -16754,49 +18897,55 @@ Total amount of RAM on the component system. A value of UINT32_MAX implies the f
 Storage type: 0: HDD, 1: SSD, 2: EMMC, 3: SD card (non-removable), 4: SD card (removable). A value of
 UINT32_MAX implies the field is unused.
 */
-[Dims( +4 )]  uint  storage_type;
+[D(4)]  uint [] storage_type;
 
 /**
 Amount of used storage space on the component system. A value of UINT32_MAX implies the field is unused.
 */
-[Dims( +4 )]  uint  storage_usage;
+[D(4)]  uint [] storage_usage;
 
 /**
 Total amount of storage space on the component system. A value of UINT32_MAX implies the field is unused.
 */
-[Dims( +4 )]  uint  storage_total;
+[D(4)]  uint [] storage_total;
 
 /**
 Link type: 0-9: UART, 10-19: Wired network, 20-29: Wifi, 30-39: Point-to-point proprietary, 40-49: Mesh
 proprietary
 */
-[Dims( +6 )]  uint  link_type;
+[D(6)]  uint [] link_type;
 
 /**
 Network traffic from the component system. A value of UINT32_MAX implies the field is unused.
 */
-[Dims( +6 )]  uint  link_tx_rate;
+[D(6)]  uint [] link_tx_rate;
 
 /**
 Network traffic to the component system. A value of UINT32_MAX implies the field is unused.
 */
-[Dims( +6 )]  uint  link_rx_rate;
+[D(6)]  uint [] link_rx_rate;
 
 /**
 Network capacity from the component system. A value of UINT32_MAX implies the field is unused.
 */
-[Dims( +6 )]  uint  link_tx_max;
+[D(6)]  uint [] link_tx_max;
 
 /**
 Network capacity to the component system. A value of UINT32_MAX implies the field is unused.
 */
-[Dims( +6 )]  uint  link_rx_max;
+[D(6)]  uint [] link_rx_max;
+
+/**
+Bitmap of status flags.
+*/
+COMPUTER_STATUS_FLAGS status_flags;
 
 }
 
 /**
-Note: Camera components should use CAMERA_INFORMATION instead, and autopilots may use both this message
-and AUTOPILOT_VERSION.
+Component information message, which may be requested using MAV_CMD_REQUEST_MESSAGE.
+      
+**DEPRECATED** since=2022-04 replaced_by=COMPONENT_METADATA
 */
 class COMPONENT_INFORMATION{
 
@@ -16816,7 +18965,7 @@ xz. The file contains general component metadata, and may contain URI links for 
 COMP_METADATA_TYPE). The information is static from boot, and may be generated at compile time. The string
 needs to be zero terminated.
 */
-string  general_metadata_uri;
+[D(+100)] string  general_metadata_uri;
 
 /**
 CRC32 of peripherals metadata file (peripherals_metadata_uri).
@@ -16829,7 +18978,86 @@ be compressed with xz. This contains data about "attached components" such as UA
 are in a separate file because the information must be generated dynamically at runtime. The string needs
 to be zero terminated.
 */
-string  peripherals_metadata_uri;
+[D(+100)] string  peripherals_metadata_uri;
+
+}
+
+/**
+Basic component information data. Should be requested using MAV_CMD_REQUEST_MESSAGE on startup, or when
+required.
+*/
+class COMPONENT_INFORMATION_BASIC{
+
+/**
+Timestamp (time since system boot).
+*/
+ uint  time_boot_ms;
+
+/**
+Component capability flags
+*/
+MAV_PROTOCOL_CAPABILITY capabilities;
+
+/**
+Date of manufacture as a UNIX Epoch time (since 1.1.1970) in seconds.
+*/
+ uint  time_manufacture_s;
+
+/**
+Name of the component vendor. Needs to be zero terminated. The field is optional and can be empty/all
+zeros.
+*/
+[D(+32)] string  vendor_name;
+
+/**
+Name of the component model. Needs to be zero terminated. The field is optional and can be empty/all zeros.
+*/
+[D(+32)] string  model_name;
+
+/**
+Software version. The recommended format is SEMVER: 'major.minor.patch'  (any format may be used). The
+field must be zero terminated if it has a value. The field is optional and can be empty/all zeros.
+*/
+[D(+24)] string  software_version;
+
+/**
+Hardware version. The recommended format is SEMVER: 'major.minor.patch'  (any format may be used). The
+field must be zero terminated if it has a value. The field is optional and can be empty/all zeros.
+*/
+[D(+24)] string  hardware_version;
+
+/**
+Hardware serial number. The field must be zero terminated if it has a value. The field is optional and
+can be empty/all zeros.
+*/
+[D(+32)] string  serial_number;
+
+}
+
+/**
+Note: Camera components should use CAMERA_INFORMATION instead, and autopilots may use both this message
+and AUTOPILOT_VERSION.
+      
+*/
+class COMPONENT_METADATA{
+
+/**
+Timestamp (time since system boot).
+*/
+ uint  time_boot_ms;
+
+/**
+CRC32 of the general metadata file.
+*/
+ uint  file_crc;
+
+/**
+MAVLink FTP URI for the general metadata file (COMP_METADATA_TYPE_GENERAL), which may be compressed with
+xz. The file contains general component metadata, and may contain URI links for additional metadata (see
+COMP_METADATA_TYPE). The information is static from boot, and may be generated at compile time. The string
+needs to be zero terminated.
+*/
+[D(+100)] string  uri;
 
 }
 
@@ -16856,7 +19084,7 @@ TUNE_FORMAT format;
 /**
 Tune definition as a NULL-terminated string.
 */
-string  tune;
+[D(+248)] string  tune;
 
 }
 
@@ -16887,6 +19115,7 @@ Event message. Each new event from a particular component gets a new sequence nu
 might be sent multiple times if (re-)requested. Most events are broadcast, some can be specific to a
 target component (as receivers keep track of the sequence for missed events, all events need to be broadcast.
 Thus we use destination_component instead of target_component).
+**WIP**
 */
 class EVENT{
 
@@ -16925,13 +19154,14 @@ Alert = 1, Critical = 2, Error = 3, Warning = 4, Notice = 5, Info = 6, Debug = 7
 /**
 Arguments (depend on event ID).
 */
-[Dims( +40 )]  byte  arguments;
+[D(40)]  byte [] arguments;
 
 }
 
 /**
 Regular broadcast for the current latest event sequence number for a component. This is used to check
 for dropped events.
+**WIP**
 */
 class CURRENT_EVENT_SEQUENCE{
 
@@ -16951,6 +19181,7 @@ MAV_EVENT_CURRENT_SEQUENCE_FLAGS flags;
 Request one or more events to be (re-)sent. If first_sequence==last_sequence, only a single event is requested.
 Note that first_sequence can be larger than last_sequence (because the sequence number can wrap). Each
 sequence will trigger an EVENT or EVENT_ERROR response.
+**WIP**
 */
 class REQUEST_EVENT{
 
@@ -16978,6 +19209,7 @@ Last sequence number of the requested event.
 
 /**
 Response to a REQUEST_EVENT in case of an error (e.g. the event is not available anymore).
+**WIP**
 */
 class RESPONSE_EVENT_ERROR{
 
@@ -17005,6 +19237,147 @@ Oldest Sequence number that is still available after the sequence set in REQUEST
 Error reason.
 */
 MAV_EVENT_ERROR_REASON reason;
+
+}
+
+/**
+See https://mavlink.io/en/services/standard_modes.html
+      
+*/
+class AVAILABLE_MODES{
+
+/**
+The total number of available modes for the current vehicle type.
+*/
+ byte  number_modes;
+
+/**
+The current mode index within number_modes, indexed from 1. The index is not guaranteed to be persistent,
+and may change between reboots or if the set of modes change.
+*/
+ byte  mode_index;
+
+/**
+Standard mode.
+*/
+MAV_STANDARD_MODE standard_mode;
+
+/**
+A bitfield for use for autopilot-specific flags
+*/
+ uint  custom_mode;
+
+/**
+Mode properties.
+*/
+MAV_MODE_PROPERTY properties;
+
+/**
+Name of custom mode, with null termination character. Should be omitted for standard modes.
+*/
+[D(+35)] string  mode_name;
+
+}
+
+/**
+It may be requested using MAV_CMD_REQUEST_MESSAGE.
+        See https://mavlink.io/en/services/standard_modes.html
+*/
+class CURRENT_MODE{
+
+/**
+Standard mode.
+*/
+MAV_STANDARD_MODE standard_mode;
+
+/**
+A bitfield for use for autopilot-specific flags
+*/
+ uint  custom_mode;
+
+/**
+The custom_mode of the mode that was last commanded by the user (for example, with MAV_CMD_DO_SET_STANDARD_MODE,
+MAV_CMD_DO_SET_MODE or via RC). This should usually be the same as custom_mode. It will be different
+if the vehicle is unable to enter the intended mode, or has left that mode due to a failsafe condition.
+0 indicates the intended custom mode is unknown/not supplied
+*/
+ uint  intended_custom_mode;
+
+}
+
+/**
+See https://mavlink.io/en/services/standard_modes.html
+      
+*/
+class AVAILABLE_MODES_MONITOR{
+
+/**
+Sequence number. The value iterates sequentially whenever AVAILABLE_MODES changes (e.g. support for a
+new mode is added/removed dynamically).
+*/
+ byte  seq;
+
+}
+
+/**
+Illuminator status
+*/
+class ILLUMINATOR_STATUS{
+
+/**
+Time since the start-up of the illuminator in ms
+*/
+ uint  uptime_ms;
+
+/**
+0: Illuminators OFF, 1: Illuminators ON
+*/
+ byte  enable;
+
+/**
+Supported illuminator modes
+*/
+ILLUMINATOR_MODE mode_bitmask;
+
+/**
+Errors
+*/
+ILLUMINATOR_ERROR_FLAGS error_status;
+
+/**
+Illuminator mode
+*/
+ILLUMINATOR_MODE mode;
+
+/**
+Illuminator brightness
+*/
+ float  brightness;
+
+/**
+Illuminator strobing period in seconds
+*/
+ float  strobe_period;
+
+/**
+Illuminator strobing duty cycle
+*/
+ float  strobe_duty_cycle;
+
+/**
+Temperature in Celsius
+*/
+ float  temp_c;
+
+/**
+Minimum strobing period in seconds
+*/
+ float  min_strobe_period;
+
+/**
+Maximum strobing period in seconds
+*/
+ float  max_strobe_period;
 
 }
 
@@ -17042,13 +19415,13 @@ Frame ID
 /**
 Frame data
 */
-[Dims( +64 )]  byte  Dat;
+[D(64)]  byte [] Dat;
 
 }
 
 /**
 Modify the filter of what CAN messages to forward over the mavlink. This can be used to make CAN forwarding
-work well on low bandwith links. The filtering is applied on bits 8 to 24 of the CAN id (2nd and 3rd
+work well on low bandwidth links. The filtering is applied on bits 8 to 24 of the CAN id (2nd and 3rd
 bytes) which corresponds to the DroneCAN message ID for DroneCAN. Filters with more than 16 IDs can be
 constructed by sending multiple CAN_FILTER_MODIFY messages.
 */
@@ -17082,7 +19455,7 @@ number of IDs in filter list
 /**
 filter IDs, length num_ids
 */
-[Dims( +16 )]  ushort  ids;
+[D(16)]  ushort [] ids;
 
 }
 
@@ -17106,7 +19479,7 @@ Distance reported by individual wheel encoders. Forward rotations increase value
 them. Not all wheels will necessarily have wheel encoders; the mapping of encoders to wheel positions
 must be agreed/understood by the endpoints.
 */
-[Dims( +16 )]  double  distance;
+[D(16)]  double [] distance;
 
 }
 
@@ -17161,8 +19534,8 @@ MAV_WINCH_STATUS_FLAG status;
 /**
 Data for filling the OpenDroneID Basic ID message. This and the below messages are primarily meant for
 feeding data to/from an OpenDroneID implementation. E.g. https://github.com/opendroneid/opendroneid-core-c.
-These messages are compatible with the ASTM Remote ID standard at https://www.astm.org/Standards/F3411.htm
-and the ASD-STAN Direct Remote ID standard. The usage of these messages is documented at https://mavlink.io/en/services/opendroneid.html.
+These messages are compatible with the ASTM F3411 Remote ID standard and the ASD-STAN prEN 4709-002 Direct
+Remote ID standard. Additional information and usage of these messages is documented at https://mavlink.io/en/services/opendroneid.html.
 */
 class OPEN_DRONE_ID_BASIC_ID{
 
@@ -17180,7 +19553,7 @@ Component ID (0 for broadcast).
 Only used for drone ID data received from other UAs. See detailed description at https://mavlink.io/en/services/opendroneid.html.
 
 */
-[Dims( +20 )]  byte  id_or_mac;
+[D(20)]  byte [] id_or_mac;
 
 /**
 Indicates the format for the uas_id field of this message.
@@ -17196,7 +19569,7 @@ MAV_ODID_UA_TYPE ua_type;
 UAS (Unmanned Aircraft System) ID following the format specified by id_type. Shall be filled with nulls
 in the unused portion of the field.
 */
-[Dims( +20 )]  byte  uas_id;
+[D(20)]  byte [] uas_id;
 
 }
 
@@ -17220,7 +19593,7 @@ Component ID (0 for broadcast).
 Only used for drone ID data received from other UAs. See detailed description at https://mavlink.io/en/services/opendroneid.html.
 
 */
-[Dims( +20 )]  byte  id_or_mac;
+[D(20)]  byte [] id_or_mac;
 
 /**
 Indicates whether the unmanned aircraft is on the ground or in the air.
@@ -17255,7 +19628,7 @@ Current longitude of the unmanned aircraft. If unknown: 0 (both Lat/Lon).
  int  longitude;
 
 /**
-The altitude calculated from the barometric pressue. Reference is against 29.92inHg or 1013.2mb. If unknown:
+The altitude calculated from the barometric pressure. Reference is against 29.92inHg or 1013.2mb. If unknown:
 -1000 m.
 */
  float  altitude_barometric;
@@ -17313,9 +19686,9 @@ MAV_ODID_TIME_ACC timestamp_accuracy;
 /**
 Data for filling the OpenDroneID Authentication message. The Authentication Message defines a field that
 can provide a means of authenticity for the identity of the UAS (Unmanned Aircraft System). The Authentication
-message can have two different formats. Five data pages are supported. For data page 0, the fields PageCount,
-Length and TimeStamp are present and AuthData is only 17 bytes. For data page 1 through 15, PageCount,
-Length and TimeStamp are not present and the size of AuthData is 23 bytes.
+message can have two different formats. For data page 0, the fields PageCount, Length and TimeStamp are
+present and AuthData is only 17 bytes. For data page 1 through 15, PageCount, Length and TimeStamp are
+not present and the size of AuthData is 23 bytes.
 */
 class OPEN_DRONE_ID_AUTHENTICATION{
 
@@ -17333,7 +19706,7 @@ Component ID (0 for broadcast).
 Only used for drone ID data received from other UAs. See detailed description at https://mavlink.io/en/services/opendroneid.html.
 
 */
-[Dims( +20 )]  byte  id_or_mac;
+[D(20)]  byte [] id_or_mac;
 
 /**
 Indicates the type of authentication.
@@ -17366,7 +19739,7 @@ This field is only present for page 0. 32 bit Unix Timestamp in seconds since 00
 Opaque authentication data. For page 0, the size is only 17 bytes. For other pages, the size is 23 bytes.
 Shall be filled with nulls in the unused portion of the field.
 */
-[Dims( +23 )]  byte  authentication_data;
+[D(23)]  byte [] authentication_data;
 
 }
 
@@ -17374,7 +19747,8 @@ Shall be filled with nulls in the unused portion of the field.
 Data for filling the OpenDroneID Self ID message. The Self ID Message is an opportunity for the operator
 to (optionally) declare their identity and purpose of the flight. This message can provide additional
 information that could reduce the threat profile of a UA (Unmanned Aircraft) flying in a particular area
-or manner.
+or manner. This message can also be used to provide optional additional clarification in an emergency/remote
+ID system failure situation.
 */
 class OPEN_DRONE_ID_SELF_ID{
 
@@ -17392,7 +19766,7 @@ Component ID (0 for broadcast).
 Only used for drone ID data received from other UAs. See detailed description at https://mavlink.io/en/services/opendroneid.html.
 
 */
-[Dims( +20 )]  byte  id_or_mac;
+[D(20)]  byte [] id_or_mac;
 
 /**
 Indicates the type of the description field.
@@ -17403,13 +19777,13 @@ MAV_ODID_DESC_TYPE description_type;
 Text description or numeric value expressed as ASCII characters. Shall be filled with nulls in the unused
 portion of the field.
 */
-string  description;
+[D(+23)] string  description;
 
 }
 
 /**
 Data for filling the OpenDroneID System message. The System Message contains general system information
-including the operator location and possible aircraft group information.
+including the operator location/altitude and possible aircraft group and/or category/class information.
 */
 class OPEN_DRONE_ID_SYSTEM{
 
@@ -17427,7 +19801,7 @@ Component ID (0 for broadcast).
 Only used for drone ID data received from other UAs. See detailed description at https://mavlink.io/en/services/opendroneid.html.
 
 */
-[Dims( +20 )]  byte  id_or_mac;
+[D(20)]  byte [] id_or_mac;
 
 /**
 Specifies the operator location type.
@@ -17450,22 +19824,22 @@ Longitude of the operator. If unknown: 0 (both Lat/Lon).
  int  operator_longitude;
 
 /**
-Number of aircraft in the area, group or formation (default 1).
+Number of aircraft in the area, group or formation (default 1). Used only for swarms/multiple UA.
 */
  ushort  area_count;
 
 /**
-Radius of the cylindrical area of the group or formation (default 0).
+Radius of the cylindrical area of the group or formation (default 0). Used only for swarms/multiple UA.
 */
  ushort  area_radius;
 
 /**
-Area Operations Ceiling relative to WGS84. If unknown: -1000 m.
+Area Operations Ceiling relative to WGS84. If unknown: -1000 m. Used only for swarms/multiple UA.
 */
  float  area_ceiling;
 
 /**
-Area Operations Floor relative to WGS84. If unknown: -1000 m.
+Area Operations Floor relative to WGS84. If unknown: -1000 m. Used only for swarms/multiple UA.
 */
  float  area_floor;
 
@@ -17483,6 +19857,11 @@ MAV_ODID_CLASS_EU class_eu;
 Geodetic altitude of the operator relative to WGS84. If unknown: -1000 m.
 */
  float  operator_altitude_geo;
+
+/**
+32 bit Unix Timestamp in seconds since 00:00:00 01/01/2019.
+*/
+ uint  timestamp;
 
 }
 
@@ -17506,7 +19885,7 @@ Component ID (0 for broadcast).
 Only used for drone ID data received from other UAs. See detailed description at https://mavlink.io/en/services/opendroneid.html.
 
 */
-[Dims( +20 )]  byte  id_or_mac;
+[D(20)]  byte [] id_or_mac;
 
 /**
 Indicates the type of the operator_id field.
@@ -17517,15 +19896,15 @@ MAV_ODID_OPERATOR_ID_TYPE operator_id_type;
 Text description or numeric value expressed as ASCII characters. Shall be filled with nulls in the unused
 portion of the field.
 */
-string  operator_id;
+[D(+20)] string  operator_id;
 
 }
 
 /**
 An OpenDroneID message pack is a container for multiple encoded OpenDroneID messages (i.e. not in the
-format given for the above messages descriptions but after encoding into the compressed OpenDroneID byte
+format given for the above message descriptions but after encoding into the compressed OpenDroneID byte
 format). Used e.g. when transmitting on Bluetooth 5.0 Long Range/Extended Advertising or on WiFi Neighbor
-Aware Networking.
+Aware Networking or on WiFi Beacon.
 */
 class OPEN_DRONE_ID_MESSAGE_PACK{
 
@@ -17543,10 +19922,10 @@ Component ID (0 for broadcast).
 Only used for drone ID data received from other UAs. See detailed description at https://mavlink.io/en/services/opendroneid.html.
 
 */
-[Dims( +20 )]  byte  id_or_mac;
+[D(20)]  byte [] id_or_mac;
 
 /**
-This field must currently always be equal to 25 (bytes), since all encoded OpenDroneID messages are specificed
+This field must currently always be equal to 25 (bytes), since all encoded OpenDroneID messages are specified
 to have this length.
 */
  byte  single_message_size;
@@ -17560,7 +19939,65 @@ Number of encoded messages in the pack (not the number of bytes). Allowed range 
 Concatenation of encoded OpenDroneID messages. Shall be filled with nulls in the unused portion of the
 field.
 */
-[Dims( +225 )]  byte  messages;
+[D(225)]  byte [] messages;
+
+}
+
+/**
+Transmitter (remote ID system) is enabled and ready to start sending location and other required information.
+This is streamed by transmitter. A flight controller uses it as a condition to arm.
+*/
+class OPEN_DRONE_ID_ARM_STATUS{
+
+/**
+Status level indicating if arming is allowed.
+*/
+MAV_ODID_ARM_STATUS status;
+
+/**
+Text error message, should be empty if status is good to arm. Fill with nulls in unused portion.
+*/
+[D(+50)] string  error;
+
+}
+
+/**
+Update the data in the OPEN_DRONE_ID_SYSTEM message with new location information. This can be sent to
+update the location information for the operator when no other information in the SYSTEM message has
+changed. This message allows for efficient operation on radio links which have limited uplink bandwidth
+while meeting requirements for update frequency of the operator location.
+*/
+class OPEN_DRONE_ID_SYSTEM_UPDATE{
+
+/**
+System ID (0 for broadcast).
+*/
+ byte  target_system;
+
+/**
+Component ID (0 for broadcast).
+*/
+ byte  target_component;
+
+/**
+Latitude of the operator. If unknown: 0 (both Lat/Lon).
+*/
+ int  operator_latitude;
+
+/**
+Longitude of the operator. If unknown: 0 (both Lat/Lon).
+*/
+ int  operator_longitude;
+
+/**
+Geodetic altitude of the operator relative to WGS84. If unknown: -1000 m.
+*/
+ float  operator_altitude_geo;
+
+/**
+32 bit Unix Timestamp in seconds since 00:00:00 01/01/2019.
+*/
+ uint  timestamp;
 
 }
 
@@ -17623,7 +20060,7 @@ MODE_M300_P_GPS = 6,
 /**
 In hotpoint mode 
 */
-MODE_M300_HOTPOINT_MODE  = 9, 
+MODE_M300_HOTPOINT_MODE = 9, 
 
 /**
 In assisted takeoff mode
@@ -17648,7 +20085,7 @@ MODE_M300_NAVI_GO_HOME = 15,
 /**
 In sdk control mode
 */
-MODE_M300_NAVI_SDK_CTRL  = 17, 
+MODE_M300_NAVI_SDK_CTRL = 17, 
 
 /**
 In sport mode
@@ -17658,7 +20095,7 @@ MODE_M300_S_SPORT = 31,
 /**
 In force auto landing mode
 */
- MODE_M300_FORCE_AUTO_LANDING = 33, 
+MODE_M300_FORCE_AUTO_LANDING = 33, 
 
 /**
 In tripod mode
@@ -17993,7 +20430,8 @@ struct SI_Unit
     }enum MAV_CMD {
 
 /**
-Navigate to waypoint.
+Navigate to waypoint. This is intended for use in missions (for guided commands outside of missions use
+MAV_CMD_DO_REPOSITION).
 */
 MAV_CMD_NAV_WAYPOINT = 16, 
 
@@ -18077,6 +20515,20 @@ Start orbiting on the circumference of a circle defined by the parameters. Setti
 MAV_CMD_DO_ORBIT = 34, 
 
 /**
+Yaw and other degrees of freedom are not specified, and will be flight-stack specific (on vehicles where
+they can be controlled independent of the heading).
+        
+*/
+MAV_CMD_DO_FIGURE_EIGHT = 35, 
+
+/**
+The resulting path is a circular arc in the NE frame, with the difference in height being defined by the
+difference in waypoint altitudes.
+        
+*/
+MAV_CMD_NAV_ARC_WAYPOINT = 36, 
+
+/**
 Sets the region of interest (ROI) for a sensor set or the vehicle itself. This can then be used by the
 vehicle's control system to control the vehicle attitude and the attitude of various sensors such as
 cameras.
@@ -18105,7 +20557,7 @@ Land using VTOL mode
 MAV_CMD_NAV_VTOL_LAND = 85, 
 
 /**
-hand control over to an external controller
+Hand control over to an external controller
 */
 MAV_CMD_NAV_GUIDED_ENABLE = 92, 
 
@@ -18163,23 +20615,28 @@ Jump to the desired command in the mission list.  Repeat this action only the sp
 MAV_CMD_DO_JUMP = 177, 
 
 /**
-Change speed and/or throttle set points.
+Change speed and/or throttle set points. The value persists until it is overridden or there is a mode
+change
 */
 MAV_CMD_DO_CHANGE_SPEED = 178, 
 
 /**
-Changes the home location either to the current location or a specified location.
+The position is set automatically by the system during the takeoff (and may also be set using this command).
+
+         Note: the current home position may be emitted in a HOME_POSITION message on request (using
+MAV_CMD_REQUEST_MESSAGE with param1=242).
 */
 MAV_CMD_DO_SET_HOME = 179, 
 
 /**
 Set a system parameter.  Caution!  Use of this command requires knowledge of the numeric enumeration value
 of the parameter.
+**DEPRECATED** since=2024-04 replaced_by=PARAM_SET
 */
 MAV_CMD_DO_SET_PARAMETER = 180, 
 
 /**
-Set a relay to a condition.
+Set a relay to a condition. The current value may optionally be reported using RELAY_STATUS.
 */
 MAV_CMD_DO_SET_RELAY = 181, 
 
@@ -18216,11 +20673,17 @@ on any MAIN or AUX PWM or UAVCAN) using a flight-stack specific mechanism (i.e. 
 MAV_CMD_DO_SET_ACTUATOR = 187, 
 
 /**
-Mission command to perform a landing. This is used as a marker in a mission to tell the autopilot where
-a sequence of mission items that represents a landing starts. It may also be sent via a COMMAND_LONG
-to trigger a landing, in which case the nearest (geographically) landing sequence in the mission will
-be used. The Latitude/Longitude is optional, and may be set to 0 if not needed. If specified then it
-will be used to help find the closest landing sequence.
+If sent using as a command, the vehicle will perform a mission landing (using the land segment if defined)
+or reject the command if mission landings are not supported, or no mission landing is defined. When used
+as a command any position information in the command is ignored.
+        
+**WIP**
+*/
+MAV_CMD_DO_RETURN_PATH_START = 188, 
+
+/**
+The location parameters are not used in this case, and should be set to 0.
+	
 */
 MAV_CMD_DO_LAND_START = 189, 
 
@@ -18235,7 +20698,8 @@ Mission command to safely abort an autonomous landing.
 MAV_CMD_DO_GO_AROUND = 191, 
 
 /**
-Reposition the vehicle to a specific WGS84 global position.
+Reposition the vehicle to a specific WGS84 global position. This command is intended for guided commands
+(for missions use MAV_CMD_NAV_WAYPOINT instead).
 */
 MAV_CMD_DO_REPOSITION = 192, 
 
@@ -18321,7 +20785,8 @@ distance is exceeded. This command can also be used to set the shutter integrati
 MAV_CMD_DO_SET_CAM_TRIGG_DIST = 206, 
 
 /**
-Mission command to enable the geofence
+Flight stacks typically reset the setting to system defaults on reboot.
+	
 */
 MAV_CMD_DO_FENCE_ENABLE = 207, 
 
@@ -18384,8 +20849,12 @@ state. It is intended for vehicles with internal combustion engines
 MAV_CMD_DO_ENGINE_CONTROL = 223, 
 
 /**
-Set the mission item with sequence number seq as current item. This means that the MAV will continue to
-this mission item on the shortest path (not following the mission items in-between).
+Resetting also explicitly changes a mission state of MISSION_STATE_COMPLETE to MISSION_STATE_PAUSED or
+MISSION_STATE_ACTIVE, potentially allowing it to resume when it is (next) in a mission mode.
+
+	  The
+command will ACK with MAV_RESULT_FAILED if the sequence number is out of range (including if there is
+no mission item).
 */
 MAV_CMD_DO_SET_MISSION_CURRENT = 224, 
 
@@ -18440,6 +20909,12 @@ HFOV). This command can also be used to set the shutter integration time for the
 MAV_CMD_OBLIQUE_SURVEY = 260, 
 
 /**
+See https://mavlink.io/en/services/standard_modes.html
+        
+*/
+MAV_CMD_DO_SET_STANDARD_MODE = 262, 
+
+/**
 start running a mission
 */
 MAV_CMD_MISSION_START = 300, 
@@ -18447,7 +20922,7 @@ MAV_CMD_MISSION_START = 300,
 /**
 Actuator testing command. This is similar to MAV_CMD_DO_MOTOR_TEST but operates on the level of output
 functions, i.e. it is possible to test Motor1 independent from which output it is configured on. Autopilots
-typically refuse this command while armed.
+must NACK this command with MAV_RESULT_TEMPORARILY_REJECTED while armed.
 */
 MAV_CMD_ACTUATOR_TEST = 310, 
 
@@ -18462,22 +20937,29 @@ Arms / Disarms a component
 MAV_CMD_COMPONENT_ARM_DISARM = 400, 
 
 /**
-Instructs system to run pre-arm checks. This command should return MAV_RESULT_TEMPORARILY_REJECTED in
-the case the system is armed, otherwise MAV_RESULT_ACCEPTED. Note that the return value from executing
-this command does not indicate whether the vehicle is armable or not, just whether the system has successfully
-run/is currently running the checks.  The result of the checks is reflected in the SYS_STATUS message.
+The command should return MAV_RESULT_TEMPORARILY_REJECTED if the system is already armed.
+        
 */
 MAV_CMD_RUN_PREARM_CHECKS = 401, 
 
 /**
 Turns illuminators ON/OFF. An illuminator is a light source that is used for lighting up dark areas external
-to the sytstem: e.g. a torch or searchlight (as opposed to a light source for illuminating the system
+to the system: e.g. a torch or searchlight (as opposed to a light source for illuminating the system
 itself, e.g. an indicator light).
 */
 MAV_CMD_ILLUMINATOR_ON_OFF = 405, 
 
 /**
+Configures illuminator settings. An illuminator is a light source that is used for lighting up dark areas
+external to the system: e.g. a torch or searchlight (as opposed to a light source for illuminating the
+system itself, e.g. an indicator light).
+*/
+MAV_CMD_DO_ILLUMINATOR_CONFIGURE = 406, 
+
+/**
 Request the home position from the vehicle.
+          The vehicle will ACK the command and emit the HOME_POSITION
+message.
 */
 MAV_CMD_GET_HOME_POSITION = 410, 
 
@@ -18493,8 +20975,9 @@ Starts receiver pairing.
 MAV_CMD_START_RX_PAIR = 500, 
 
 /**
-Request the interval between messages for a particular MAVLink message ID. The receiver should ACK the
-command and then emit its response in a MESSAGE_INTERVAL message.
+Request the interval between messages for a particular MAVLink message ID.
+          The receiver should
+ACK the command and then emit its response in a MESSAGE_INTERVAL message.
 */
 MAV_CMD_GET_MESSAGE_INTERVAL = 510, 
 
@@ -18512,6 +20995,7 @@ MAV_CMD_REQUEST_MESSAGE = 512,
 /**
 Request MAVLink protocol version compatibility. All receivers should ACK the command and then emit their
 capabilities in an PROTOCOL_VERSION message
+**DEPRECATED** since=2025-11 replaced_by=MAV_CMD_REQUEST_MESSAGE
 */
 MAV_CMD_REQUEST_PROTOCOL_VERSION = 519, 
 
@@ -18581,6 +21065,11 @@ case it should ACK the command with MAV_RESULT_DENIED.
 MAV_CMD_SET_STORAGE_USAGE = 533, 
 
 /**
+Set camera source. Changes the camera's active sources on cameras with multiple image sensors.
+*/
+MAV_CMD_SET_CAMERA_SOURCE = 534, 
+
+/**
 Tagged jump target. Can be jumped to with MAV_CMD_DO_JUMP_TAG.
 */
 MAV_CMD_JUMP_TAG = 600, 
@@ -18594,10 +21083,11 @@ select the one with the lowest mission sequence number.
 MAV_CMD_DO_JUMP_TAG = 601, 
 
 /**
-High level setpoint to be sent to a gimbal manager to set a gimbal attitude. It is possible to set combinations
-of the values below. E.g. an angle as well as a desired angular rate can be used to get to this angle
-at a certain angular rate, or an angular rate only will result in continuous turning. NaN is to be used
-to signal unset. Note: a gimbal is never to react to this command but only the gimbal manager.
+Set gimbal manager pitch/yaw setpoints (low rate command). It is possible to set combinations of the values
+below. E.g. an angle as well as a desired angular rate can be used to get to this angle at a certain
+angular rate, or an angular rate only will result in continuous turning. NaN is to be used to signal
+unset. Note: only the gimbal manager will react to this command - it will be ignored by a gimbal device.
+Use GIMBAL_MANAGER_SET_PITCHYAW if you need to stream pitch/yaw setpoints at higher rate. 
 */
 MAV_CMD_DO_GIMBAL_MANAGER_PITCHYAW = 1000, 
 
@@ -18607,12 +21097,22 @@ Gimbal configuration to set which sysid/compid is in primary and secondary contr
 MAV_CMD_DO_GIMBAL_MANAGER_CONFIGURE = 1001, 
 
 /**
-Start image capture sequence. Sends CAMERA_IMAGE_CAPTURED after each capture. Use NaN for reserved values.
+If addressed to a MAVLink camera, param 1 can be used to address all cameras (0), or to separately address
+1 to 7 individual sensors. Other values should be NACKed with MAV_RESULT_DENIED.
+          If the command
+is broadcast (target_component is 0) then param 1 should be set to 0 (any other value should be NACKED
+with MAV_RESULT_DENIED). An autopilot would trigger any local cameras and forward the command to all
+channels.
 */
 MAV_CMD_IMAGE_START_CAPTURE = 2000, 
 
 /**
-Stop image capture sequence Use NaN for reserved values.
+If addressed to a MAVLink camera, param1 can be used to address all cameras (0), or to separately address
+1 to 7 individual sensors. Other values should be NACKed with MAV_RESULT_DENIED.
+          If the command
+is broadcast (target_component is 0) then param 1 should be set to 0 (any other value should be NACKED
+with MAV_RESULT_DENIED). An autopilot would trigger any local cameras and forward the command to all
+channels.
 */
 MAV_CMD_IMAGE_STOP_CAPTURE = 2001, 
 
@@ -18700,12 +21200,9 @@ Request VTOL transition
 MAV_CMD_DO_VTOL_TRANSITION = 3000, 
 
 /**
-Request authorization to arm the vehicle to a external entity, the arm authorizer is responsible to request
-all data that is needs from the vehicle before authorize or deny the request. If approved the progress
-of command_ack message should be set with period of time that this authorization is valid in seconds
-or in case it was denied it should be set with one of the reasons in ARM_AUTH_DENIED_REASON.
-       
+If the authorization is denied COMMAND_ACK.result_param2 should be set with one of the reasons in MAV_ARM_AUTH_DENIED_REASON.
 
+       
 */
 MAV_CMD_ARM_AUTHORIZATION_REQUEST = 3001, 
 
@@ -18726,6 +21223,7 @@ MAV_CMD_SET_GUIDED_SUBMODE_CIRCLE = 4001,
 
 /**
 Delay mission state machine until gate has been reached.
+**WIP**
 */
 MAV_CMD_CONDITION_GATE = 4501, 
 
@@ -18738,14 +21236,16 @@ MAV_CMD_NAV_FENCE_RETURN_POINT = 5000,
 /**
 Fence vertex for an inclusion polygon (the polygon must not be self-intersecting). The vehicle must stay
 within this area. Minimum of 3 vertices required.
-        
+          The vertices for a polygon must be sent sequentially,
+each with param1 set to the total number of vertices in the polygon.
 */
 MAV_CMD_NAV_FENCE_POLYGON_VERTEX_INCLUSION = 5001, 
 
 /**
 Fence vertex for an exclusion polygon (the polygon must not be self-intersecting). The vehicle must stay
 outside this area. Minimum of 3 vertices required.
-        
+          The vertices for a polygon must be sent
+sequentially, each with param1 set to the total number of vertices in the polygon.
 */
 MAV_CMD_NAV_FENCE_POLYGON_VERTEX_EXCLUSION = 5002, 
 
@@ -18777,6 +21277,11 @@ node information messages.
 MAV_CMD_UAVCAN_GET_NODE_INFO = 5200, 
 
 /**
+Change state of safety switch.
+*/
+MAV_CMD_DO_SET_SAFETY_SWITCH_STATE = 5300, 
+
+/**
 Trigger the start of an ADSB-out IDENT. This should only be used when requested to do so by an Air Traffic
 Controller in controlled airspace. This starts the IDENT which is then typically held for 18 seconds
 by the hardware per the Mode A, C, and S transponder spec.
@@ -18805,6 +21310,13 @@ MAV_CMD_FIXED_MAG_CAL_YAW = 42006,
 Command to operate winch.
 */
 MAV_CMD_DO_WINCH = 42600, 
+
+/**
+Provide an external position estimate for use when dead-reckoning. This is meant to be used for occasional
+position resets that may be provided by a external system such as a remote pilot using landmarks over
+a video link.
+*/
+MAV_CMD_EXTERNAL_POSITION_ESTIMATE = 43003, 
 
 /**
 User defined waypoint item. Ground Station will show the Vehicle as flying through this item.
@@ -18892,8 +21404,8 @@ item.
 MAV_CMD_USER_5 = 31014, 
 
 /**
-Request forwarding of CAN packets from the given CAN bus to this component. CAN Frames are sent using
-CAN_FRAME and CANFD_FRAME messages
+Request forwarding of CAN packets from the given CAN bus to this component via this MAVLink channel. CAN
+Frames are sent using CAN_FRAME and CANFD_FRAME messages
 */
 MAV_CMD_CAN_FORWARD = 32000, 
 
@@ -18933,83 +21445,84 @@ AVSS defined command. Shuts down the PRS system.
 MAV_CMD_PRS_SHUTDOWN = 60072, 
 
 }
-class MAV_CMD_PARAMS {
-class MAV_CMD_NAV_WAYPOINT{
-public class param_1{
+struct MAV_CMD_PARAMS {
+struct MAV_CMD_NAV_WAYPOINT{
+public struct param_1{
 public const string label = "Hold";
 public const string minValue = "0";
  public const string description = @"Hold time. (ignored by fixed wing, time to stay at waypoint for rotary wing)";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Accept Radius";
 public const string minValue = "0";
  public const string description = @"Acceptance radius (if the sphere with this radius is hit, the waypoint counts as reached)";
 
 }
-public class param_3{
+public struct param_3{
 public const string label = "Pass Radius";
  public const string description = @"0 radius to pass by WP. Positive value for clockwise orbit, negative value for counter-clockwise orbit.
 Allows trajectory control.";
 
 }
-public class param_4{
+public struct param_4{
 public const string label = "Yaw";
  public const string description = @"Desired yaw angle at waypoint (rotary wing). NaN to use the current system yaw heading mode (e.g. yaw
 towards next waypoint, yaw to home, etc.).";
 
 }
-public class param_5{
+public struct param_5{
 public const string label = "Latitude";
  public const string description = @"Latitude";
 
 }
-public class param_6{
+public struct param_6{
 public const string label = "Longitude";
  public const string description = @"Longitude";
 
 }
-public class param_7{
+public struct param_7{
 public const string label = "Altitude";
  public const string description = @"Altitude";
 
 }
 
- public const string description = @"Navigate to waypoint.";
+ public const string description = @"Navigate to waypoint. This is intended for use in missions (for guided commands outside of missions use
+MAV_CMD_DO_REPOSITION).";
 
 }
-class MAV_CMD_NAV_LOITER_UNLIM{
-public class param_1{
+struct MAV_CMD_NAV_LOITER_UNLIM{
+public struct param_1{
  public const string description = @"Empty";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"Empty";
 
 }
-public class param_3{
+public struct param_3{
 public const string label = "Radius";
  public const string description = @"Loiter radius around waypoint for forward-only moving vehicles (not multicopters). If positive loiter
 clockwise, else counter-clockwise";
 
 }
-public class param_4{
+public struct param_4{
 public const string label = "Yaw";
  public const string description = @"Desired yaw angle. NaN to use the current system yaw heading mode (e.g. yaw towards next waypoint, yaw
 to home, etc.).";
 
 }
-public class param_5{
+public struct param_5{
 public const string label = "Latitude";
  public const string description = @"Latitude";
 
 }
-public class param_6{
+public struct param_6{
 public const string label = "Longitude";
  public const string description = @"Longitude";
 
 }
-public class param_7{
+public struct param_7{
 public const string label = "Altitude";
  public const string description = @"Altitude";
 
@@ -19018,28 +21531,27 @@ public const string label = "Altitude";
  public const string description = @"Loiter around this waypoint an unlimited amount of time";
 
 }
-class MAV_CMD_NAV_LOITER_TURNS{
-public class param_1{
+struct MAV_CMD_NAV_LOITER_TURNS{
+public struct param_1{
 public const string label = "Turns";
 public const string minValue = "0";
  public const string description = @"Number of turns.";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Heading Required";
-public const string increment = "1";
-public const string minValue = "0";
-public const string maxValue = "1";
- public const string description = @"Leave loiter circle only once heading towards the next waypoint (0 = False)";
+public const string Enum = "MAV_BOOL";
+ public const string description = @"Leave loiter circle only when track heads towards the next waypoint (MAV_BOOL_FALSE: Leave when turns
+complete). Values not equal to 0 or 1 are invalid.";
 
 }
-public class param_3{
+public struct param_3{
 public const string label = "Radius";
  public const string description = @"Loiter radius around waypoint for forward-only moving vehicles (not multicopters). If positive loiter
 clockwise, else counter-clockwise";
 
 }
-public class param_4{
+public struct param_4{
 public const string label = "Xtrack Location";
  public const string description = @"Loiter circle exit location and/or path to next waypoint (""xtrack"") for forward-only moving vehicles (not
 multicopters). 0 for the vehicle to converge towards the center xtrack when it leaves the loiter (the
@@ -19049,17 +21561,17 @@ degrees) between the tangent of the loiter circle and the center xtrack at which
 the loiter (and converge to the center xtrack). NaN to use the current system default xtrack behaviour.";
 
 }
-public class param_5{
+public struct param_5{
 public const string label = "Latitude";
  public const string description = @"Latitude";
 
 }
-public class param_6{
+public struct param_6{
 public const string label = "Longitude";
  public const string description = @"Longitude";
 
 }
-public class param_7{
+public struct param_7{
 public const string label = "Altitude";
  public const string description = @"Altitude";
 
@@ -19068,28 +21580,27 @@ public const string label = "Altitude";
  public const string description = @"Loiter around this waypoint for X turns";
 
 }
-class MAV_CMD_NAV_LOITER_TIME{
-public class param_1{
+struct MAV_CMD_NAV_LOITER_TIME{
+public struct param_1{
 public const string label = "Time";
 public const string minValue = "0";
  public const string description = @"Loiter time (only starts once Lat, Lon and Alt is reached).";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Heading Required";
-public const string increment = "1";
-public const string minValue = "0";
-public const string maxValue = "1";
- public const string description = @"Leave loiter circle only once heading towards the next waypoint (0 = False)";
+public const string Enum = "MAV_BOOL";
+ public const string description = @"Leave loiter circle only when track heading towards the next waypoint (MAV_BOOL_FALSE: Leave on time expiry).
+Values not equal to 0 or 1 are invalid.";
 
 }
-public class param_3{
+public struct param_3{
 public const string label = "Radius";
  public const string description = @"Loiter radius around waypoint for forward-only moving vehicles (not multicopters). If positive loiter
 clockwise, else counter-clockwise.";
 
 }
-public class param_4{
+public struct param_4{
 public const string label = "Xtrack Location";
  public const string description = @"Loiter circle exit location and/or path to next waypoint (""xtrack"") for forward-only moving vehicles (not
 multicopters). 0 for the vehicle to converge towards the center xtrack when it leaves the loiter (the
@@ -19099,17 +21610,17 @@ degrees) between the tangent of the loiter circle and the center xtrack at which
 the loiter (and converge to the center xtrack). NaN to use the current system default xtrack behaviour.";
 
 }
-public class param_5{
+public struct param_5{
 public const string label = "Latitude";
  public const string description = @"Latitude";
 
 }
-public class param_6{
+public struct param_6{
 public const string label = "Longitude";
  public const string description = @"Longitude";
 
 }
-public class param_7{
+public struct param_7{
 public const string label = "Altitude";
  public const string description = @"Altitude";
 
@@ -19121,32 +21632,32 @@ circle the point with the specified radius/direction. If the Heading Required pa
 forward moving aircraft will only leave the loiter circle once heading towards the next waypoint.";
 
 }
-class MAV_CMD_NAV_RETURN_TO_LAUNCH{
-public class param_1{
+struct MAV_CMD_NAV_RETURN_TO_LAUNCH{
+public struct param_1{
  public const string description = @"Empty";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"Empty";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"Empty";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"Empty";
 
 }
-public class param_5{
+public struct param_5{
  public const string description = @"Empty";
 
 }
-public class param_6{
+public struct param_6{
  public const string description = @"Empty";
 
 }
-public class param_7{
+public struct param_7{
  public const string description = @"Empty";
 
 }
@@ -19154,39 +21665,39 @@ public class param_7{
  public const string description = @"Return to launch location";
 
 }
-class MAV_CMD_NAV_LAND{
-public class param_1{
+struct MAV_CMD_NAV_LAND{
+public struct param_1{
 public const string label = "Abort Alt";
  public const string description = @"Minimum target altitude if landing is aborted (0 = undefined/use system default).";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Land Mode";
 public const string Enum = "PRECISION_LAND_MODE";
  public const string description = @"Precision land mode.";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"Empty.";
 
 }
-public class param_4{
+public struct param_4{
 public const string label = "Yaw Angle";
  public const string description = @"Desired yaw angle. NaN to use the current system yaw heading mode (e.g. yaw towards next waypoint, yaw
 to home, etc.).";
 
 }
-public class param_5{
+public struct param_5{
 public const string label = "Latitude";
  public const string description = @"Latitude.";
 
 }
-public class param_6{
+public struct param_6{
 public const string label = "Longitude";
  public const string description = @"Longitude.";
 
 }
-public class param_7{
+public struct param_7{
 public const string label = "Altitude";
  public const string description = @"Landing altitude (ground level in current frame).";
 
@@ -19195,37 +21706,39 @@ public const string label = "Altitude";
  public const string description = @"Land at location.";
 
 }
-class MAV_CMD_NAV_TAKEOFF{
-public class param_1{
+struct MAV_CMD_NAV_TAKEOFF{
+public struct param_1{
 public const string label = "Pitch";
  public const string description = @"Minimum pitch (if airspeed sensor present), desired pitch without sensor";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"Empty";
 
 }
-public class param_3{
- public const string description = @"Empty";
+public struct param_3{
+public const string label = "Flags";
+public const string Enum = "NAV_TAKEOFF_FLAGS";
+ public const string description = @"Bitmask of options flags.";
 
 }
-public class param_4{
+public struct param_4{
 public const string label = "Yaw";
  public const string description = @"Yaw angle (if magnetometer present), ignored without magnetometer. NaN to use the current system yaw heading
 mode (e.g. yaw towards next waypoint, yaw to home, etc.).";
 
 }
-public class param_5{
+public struct param_5{
 public const string label = "Latitude";
  public const string description = @"Latitude";
 
 }
-public class param_6{
+public struct param_6{
 public const string label = "Longitude";
  public const string description = @"Longitude";
 
 }
-public class param_7{
+public struct param_7{
 public const string label = "Altitude";
  public const string description = @"Altitude";
 
@@ -19235,15 +21748,15 @@ public const string label = "Altitude";
 take off using the currently configured mode.";
 
 }
-class MAV_CMD_NAV_LAND_LOCAL{
-public class param_1{
+struct MAV_CMD_NAV_LAND_LOCAL{
+public struct param_1{
 public const string label = "Target";
 public const string increment = "1";
 public const string minValue = "0";
  public const string description = @"Landing target number (if available)";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Offset";
 public const string minValue = "0";
  public const string description = @"Maximum accepted offset from desired landing position - computed magnitude from spherical coordinates:
@@ -19251,27 +21764,27 @@ d = sqrt(x^2 + y^2 + z^2), which gives the maximum accepted distance between the
 and the position where the vehicle is about to land";
 
 }
-public class param_3{
+public struct param_3{
 public const string label = "Descend Rate";
  public const string description = @"Landing descend rate";
 
 }
-public class param_4{
+public struct param_4{
 public const string label = "Yaw";
  public const string description = @"Desired yaw angle";
 
 }
-public class param_5{
+public struct param_5{
 public const string label = "Y Position";
  public const string description = @"Y-axis position";
 
 }
-public class param_6{
+public struct param_6{
 public const string label = "X Position";
  public const string description = @"X-axis position";
 
 }
-public class param_7{
+public struct param_7{
 public const string label = "Z Position";
  public const string description = @"Z-axis / ground level position";
 
@@ -19280,37 +21793,37 @@ public const string label = "Z Position";
  public const string description = @"Land at local position (local frame only)";
 
 }
-class MAV_CMD_NAV_TAKEOFF_LOCAL{
-public class param_1{
+struct MAV_CMD_NAV_TAKEOFF_LOCAL{
+public struct param_1{
 public const string label = "Pitch";
  public const string description = @"Minimum pitch (if airspeed sensor present), desired pitch without sensor";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"Empty";
 
 }
-public class param_3{
+public struct param_3{
 public const string label = "Ascend Rate";
  public const string description = @"Takeoff ascend rate";
 
 }
-public class param_4{
+public struct param_4{
 public const string label = "Yaw";
  public const string description = @"Yaw angle (if magnetometer or another yaw estimation source present), ignored without one of these";
 
 }
-public class param_5{
+public struct param_5{
 public const string label = "Y Position";
  public const string description = @"Y-axis position";
 
 }
-public class param_6{
+public struct param_6{
 public const string label = "X Position";
  public const string description = @"X-axis position";
 
 }
-public class param_7{
+public struct param_7{
 public const string label = "Z Position";
  public const string description = @"Z-axis position";
 
@@ -19319,39 +21832,39 @@ public const string label = "Z Position";
  public const string description = @"Takeoff from local position (local frame only)";
 
 }
-class MAV_CMD_NAV_FOLLOW{
-public class param_1{
+struct MAV_CMD_NAV_FOLLOW{
+public struct param_1{
 public const string label = "Following";
 public const string increment = "1";
  public const string description = @"Following logic to use (e.g. loitering or sinusoidal following) - depends on specific autopilot implementation";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Ground Speed";
  public const string description = @"Ground speed of vehicle to be followed";
 
 }
-public class param_3{
+public struct param_3{
 public const string label = "Radius";
  public const string description = @"Radius around waypoint. If positive loiter clockwise, else counter-clockwise";
 
 }
-public class param_4{
+public struct param_4{
 public const string label = "Yaw";
  public const string description = @"Desired yaw angle.";
 
 }
-public class param_5{
+public struct param_5{
 public const string label = "Latitude";
  public const string description = @"Latitude";
 
 }
-public class param_6{
+public struct param_6{
 public const string label = "Longitude";
  public const string description = @"Longitude";
 
 }
-public class param_7{
+public struct param_7{
 public const string label = "Altitude";
  public const string description = @"Altitude";
 
@@ -19360,8 +21873,8 @@ public const string label = "Altitude";
  public const string description = @"Vehicle following, i.e. this waypoint represents the position of a moving vehicle";
 
 }
-class MAV_CMD_NAV_CONTINUE_AND_CHANGE_ALT{
-public class param_1{
+struct MAV_CMD_NAV_CONTINUE_AND_CHANGE_ALT{
+public struct param_1{
 public const string label = "Action";
 public const string increment = "1";
 public const string minValue = "0";
@@ -19371,27 +21884,27 @@ command completes when at or above this command's altitude, 2 = Descending, comm
 or below this command's altitude.";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"Empty";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"Empty";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"Empty";
 
 }
-public class param_5{
+public struct param_5{
  public const string description = @"Empty";
 
 }
-public class param_6{
+public struct param_6{
  public const string description = @"Empty";
 
 }
-public class param_7{
+public struct param_7{
 public const string label = "Altitude";
  public const string description = @"Desired altitude";
 
@@ -19401,26 +21914,25 @@ public const string label = "Altitude";
 continue to the next command (i.e., don't proceed to the next command until the desired altitude is reached.";
 
 }
-class MAV_CMD_NAV_LOITER_TO_ALT{
-public class param_1{
+struct MAV_CMD_NAV_LOITER_TO_ALT{
+public struct param_1{
 public const string label = "Heading Required";
-public const string increment = "1";
-public const string minValue = "0";
-public const string maxValue = "1";
- public const string description = @"Leave loiter circle only once heading towards the next waypoint (0 = False)";
+public const string Enum = "MAV_BOOL";
+ public const string description = @"Leave loiter circle only when track heading towards the next waypoint (MAV_BOOL_FALSE: Leave when altitude
+reached). Values not equal to 0 or 1 are invalid.";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Radius";
  public const string description = @"Loiter radius around waypoint for forward-only moving vehicles (not multicopters). If positive loiter
 clockwise, negative counter-clockwise, 0 means no change to standard loiter.";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"Empty";
 
 }
-public class param_4{
+public struct param_4{
 public const string label = "Xtrack Location";
 public const string increment = "1";
 public const string minValue = "0";
@@ -19433,17 +21945,17 @@ degrees) between the tangent of the loiter circle and the center xtrack at which
 the loiter (and converge to the center xtrack). NaN to use the current system default xtrack behaviour.";
 
 }
-public class param_5{
+public struct param_5{
 public const string label = "Latitude";
  public const string description = @"Latitude";
 
 }
-public class param_6{
+public struct param_6{
 public const string label = "Longitude";
  public const string description = @"Longitude";
 
 }
-public class param_7{
+public struct param_7{
 public const string label = "Altitude";
  public const string description = @"Altitude";
 
@@ -19455,8 +21967,8 @@ Additionally, if the Heading Required parameter is non-zero the aircraft will no
 heading toward the next waypoint.";
 
 }
-class MAV_CMD_DO_FOLLOW{
-public class param_1{
+struct MAV_CMD_DO_FOLLOW{
+public struct param_1{
 public const string label = "System ID";
 public const string increment = "1";
 public const string minValue = "0";
@@ -19465,15 +21977,15 @@ public const string maxValue = "255";
 hold mode.";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"Reserved";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"Reserved";
 
 }
-public class param_4{
+public struct param_4{
 public const string label = "Altitude Mode";
 public const string increment = "1";
 public const string minValue = "0";
@@ -19482,16 +21994,16 @@ public const string maxValue = "2";
 above home.";
 
 }
-public class param_5{
+public struct param_5{
 public const string label = "Altitude";
  public const string description = @"Altitude above home. (used if mode=2)";
 
 }
-public class param_6{
+public struct param_6{
  public const string description = @"Reserved";
 
 }
-public class param_7{
+public struct param_7{
 public const string label = "Time to Land";
 public const string minValue = "0";
  public const string description = @"Time to land in which the MAV should go to the default position hold mode after a message RX timeout.";
@@ -19501,38 +22013,38 @@ public const string minValue = "0";
  public const string description = @"Begin following a target";
 
 }
-class MAV_CMD_DO_FOLLOW_REPOSITION{
-public class param_1{
+struct MAV_CMD_DO_FOLLOW_REPOSITION{
+public struct param_1{
 public const string label = "Camera Q1";
  public const string description = @"Camera q1 (where 0 is on the ray from the camera to the tracking device)";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Camera Q2";
  public const string description = @"Camera q2";
 
 }
-public class param_3{
+public struct param_3{
 public const string label = "Camera Q3";
  public const string description = @"Camera q3";
 
 }
-public class param_4{
+public struct param_4{
 public const string label = "Camera Q4";
  public const string description = @"Camera q4";
 
 }
-public class param_5{
+public struct param_5{
 public const string label = "Altitude Offset";
  public const string description = @"altitude offset from target";
 
 }
-public class param_6{
+public struct param_6{
 public const string label = "X Offset";
  public const string description = @"X offset from target";
 
 }
-public class param_7{
+public struct param_7{
 public const string label = "Y Offset";
  public const string description = @"Y offset from target";
 
@@ -19541,25 +22053,25 @@ public const string label = "Y Offset";
  public const string description = @"Reposition the MAV after a follow target command has been sent";
 
 }
-class MAV_CMD_DO_ORBIT{
-public class param_1{
+struct MAV_CMD_DO_ORBIT{
+public struct param_1{
 public const string label = "Radius";
  public const string description = @"Radius of the circle. Positive: orbit clockwise. Negative: orbit counter-clockwise. NaN: Use vehicle default
 radius, or current radius if already orbiting.";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Velocity";
  public const string description = @"Tangential Velocity. NaN: Use vehicle default velocity, or current velocity if already orbiting.";
 
 }
-public class param_3{
+public struct param_3{
 public const string label = "Yaw Behavior";
 public const string Enum = "ORBIT_YAW_BEHAVIOUR";
  public const string description = @"Yaw behavior of the vehicle.";
 
 }
-public class param_4{
+public struct param_4{
 public const string label = "Orbits";
 public const string minValue = "0";
 public const string Default = "0";
@@ -19567,19 +22079,19 @@ public const string Default = "0";
 Orbit forever. NaN: Use vehicle default, or current value if already orbiting.";
 
 }
-public class param_5{
+public struct param_5{
 public const string label = "Latitude/X";
  public const string description = @"Center point latitude (if no MAV_FRAME specified) / X coordinate according to MAV_FRAME. INT32_MAX (or
 NaN if sent in COMMAND_LONG): Use current vehicle position, or current center if already orbiting.";
 
 }
-public class param_6{
+public struct param_6{
 public const string label = "Longitude/Y";
  public const string description = @"Center point longitude (if no MAV_FRAME specified) / Y coordinate according to MAV_FRAME. INT32_MAX (or
 NaN if sent in COMMAND_LONG): Use current vehicle position, or current center if already orbiting.";
 
 }
-public class param_7{
+public struct param_7{
 public const string label = "Altitude/Z";
  public const string description = @"Center point altitude (MSL) (if no MAV_FRAME specified) / Z coordinate according to MAV_FRAME. NaN: Use
 current vehicle altitude.";
@@ -19590,42 +22102,124 @@ current vehicle altitude.";
 (as appropriate) results in using defaults.";
 
 }
-class MAV_CMD_NAV_ROI{
-public class param_1{
+struct MAV_CMD_DO_FIGURE_EIGHT{
+public struct param_1{
+public const string label = "Major Radius";
+ public const string description = @"Must be greater or equal to two times the minor radius for feasible values.";
+
+}
+public struct param_2{
+public const string label = "Minor Radius";
+ public const string description = @"Minor axis radius of the figure eight. Defines the radius of the two circles that make up the figure.
+Negative value has no effect.
+        NaN: The radius will be set to the default loiter radius.";
+
+}
+public struct param_3{
+public const string reserved = "true";
+public const string Default = "NaN";
+
+}
+public struct param_4{
+public const string label = "Orientation";
+ public const string description = @"Orientation of the figure eight major axis with respect to true north (range: [-pi,pi]). NaN: use default
+orientation aligned to true north.";
+
+}
+public struct param_5{
+public const string label = "Latitude/X";
+ public const string description = @"Center point latitude/X coordinate according to MAV_FRAME. If no MAV_FRAME specified, MAV_FRAME_GLOBAL
+is assumed.
+        INT32_MAX or NaN: Use current vehicle position, or current center if already loitering.";
+
+}
+public struct param_6{
+public const string label = "Longitude/Y";
+ public const string description = @"Center point longitude/Y coordinate according to MAV_FRAME. If no MAV_FRAME specified, MAV_FRAME_GLOBAL
+is assumed.
+        INT32_MAX or NaN: Use current vehicle position, or current center if already loitering.";
+
+}
+public struct param_7{
+public const string label = "Altitude/Z";
+ public const string description = @"Center point altitude MSL/Z coordinate according to MAV_FRAME. If no MAV_FRAME specified, MAV_FRAME_GLOBAL
+is assumed.
+        INT32_MAX or NaN: Use current vehicle altitude.";
+
+}
+
+ public const string description = @"Yaw and other degrees of freedom are not specified, and will be flight-stack specific (on vehicles where
+they can be controlled independent of the heading).
+        ";
+
+}
+struct MAV_CMD_NAV_ARC_WAYPOINT{
+public struct param_1{
+public const string label = "Arc Angle";
+public const string increment = "1";
+public const string minValue = "-359";
+public const string maxValue = "359";
+ public const string description = @"The angle in degrees from the starting position to the exit position of the arc in the NE frame. Positive
+values are CW arcs and negative values are CCW arcs.";
+
+}
+public struct param_5{
+public const string label = "Latitude";
+ public const string description = @"Latitude";
+
+}
+public struct param_6{
+public const string label = "Longitude";
+ public const string description = @"Longitude";
+
+}
+public struct param_7{
+public const string label = "Altitude";
+ public const string description = @"Altitude";
+
+}
+
+ public const string description = @"The resulting path is a circular arc in the NE frame, with the difference in height being defined by the
+difference in waypoint altitudes.
+        ";
+
+}
+struct MAV_CMD_NAV_ROI{
+public struct param_1{
 public const string label = "ROI Mode";
 public const string Enum = "MAV_ROI";
  public const string description = @"Region of interest mode.";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "WP Index";
 public const string increment = "1";
 public const string minValue = "0";
  public const string description = @"Waypoint index/ target ID. (see MAV_ROI enum)";
 
 }
-public class param_3{
+public struct param_3{
 public const string label = "ROI Index";
 public const string increment = "1";
 public const string minValue = "0";
  public const string description = @"ROI index (allows a vehicle to manage multiple ROI's)";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"Empty";
 
 }
-public class param_5{
+public struct param_5{
 public const string label = "X";
  public const string description = @"x the location of the fixed ROI (see MAV_FRAME)";
 
 }
-public class param_6{
+public struct param_6{
 public const string label = "Y";
  public const string description = @"y";
 
 }
-public class param_7{
+public struct param_7{
 public const string label = "Z";
  public const string description = @"z";
 
@@ -19636,8 +22230,8 @@ vehicle's control system to control the vehicle attitude and the attitude of var
 cameras.";
 
 }
-class MAV_CMD_NAV_PATHPLANNING{
-public class param_1{
+struct MAV_CMD_NAV_PATHPLANNING{
+public struct param_1{
 public const string label = "Local Ctrl";
 public const string increment = "1";
 public const string minValue = "0";
@@ -19646,7 +22240,7 @@ public const string maxValue = "2";
 planning, 2: Enable and reset local path planning";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Global Ctrl";
 public const string increment = "1";
 public const string minValue = "0";
@@ -19655,26 +22249,26 @@ public const string maxValue = "3";
 3: Enable and reset planned route, but not occupancy grid";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"Empty";
 
 }
-public class param_4{
+public struct param_4{
 public const string label = "Yaw";
  public const string description = @"Yaw angle at goal";
 
 }
-public class param_5{
+public struct param_5{
 public const string label = "Latitude/X";
  public const string description = @"Latitude/X of goal";
 
 }
-public class param_6{
+public struct param_6{
 public const string label = "Longitude/Y";
  public const string description = @"Longitude/Y of goal";
 
 }
-public class param_7{
+public struct param_7{
 public const string label = "Altitude/Z";
  public const string description = @"Altitude/Z of goal";
 
@@ -19683,36 +22277,36 @@ public const string label = "Altitude/Z";
  public const string description = @"Control autonomous path planning on the MAV.";
 
 }
-class MAV_CMD_NAV_SPLINE_WAYPOINT{
-public class param_1{
+struct MAV_CMD_NAV_SPLINE_WAYPOINT{
+public struct param_1{
 public const string label = "Hold";
 public const string minValue = "0";
  public const string description = @"Hold time. (ignored by fixed wing, time to stay at waypoint for rotary wing)";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"Empty";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"Empty";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"Empty";
 
 }
-public class param_5{
+public struct param_5{
 public const string label = "Latitude/X";
  public const string description = @"Latitude/X of goal";
 
 }
-public class param_6{
+public struct param_6{
 public const string label = "Longitude/Y";
  public const string description = @"Longitude/Y of goal";
 
 }
-public class param_7{
+public struct param_7{
 public const string label = "Altitude/Z";
  public const string description = @"Altitude/Z of goal";
 
@@ -19721,38 +22315,38 @@ public const string label = "Altitude/Z";
  public const string description = @"Navigate to waypoint using a spline path.";
 
 }
-class MAV_CMD_NAV_VTOL_TAKEOFF{
-public class param_1{
+struct MAV_CMD_NAV_VTOL_TAKEOFF{
+public struct param_1{
  public const string description = @"Empty";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Transition Heading";
 public const string Enum = "VTOL_TRANSITION_HEADING";
  public const string description = @"Front transition heading.";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"Empty";
 
 }
-public class param_4{
+public struct param_4{
 public const string label = "Yaw Angle";
  public const string description = @"Yaw angle. NaN to use the current system yaw heading mode (e.g. yaw towards next waypoint, yaw to home,
 etc.).";
 
 }
-public class param_5{
+public struct param_5{
 public const string label = "Latitude";
  public const string description = @"Latitude";
 
 }
-public class param_6{
+public struct param_6{
 public const string label = "Longitude";
  public const string description = @"Longitude";
 
 }
-public class param_7{
+public struct param_7{
 public const string label = "Altitude";
  public const string description = @"Altitude";
 
@@ -19762,39 +22356,39 @@ public const string label = "Altitude";
 should be ignored by vehicles that dont support both VTOL and fixed-wing flight (multicopters, boats,etc.).";
 
 }
-class MAV_CMD_NAV_VTOL_LAND{
-public class param_1{
+struct MAV_CMD_NAV_VTOL_LAND{
+public struct param_1{
 public const string label = "Land Options";
 public const string Enum = "NAV_VTOL_LAND_OPTIONS";
  public const string description = @"Landing behaviour.";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"Empty";
 
 }
-public class param_3{
+public struct param_3{
 public const string label = "Approach Altitude";
  public const string description = @"Approach altitude (with the same reference as the Altitude field). NaN if unspecified.";
 
 }
-public class param_4{
+public struct param_4{
 public const string label = "Yaw";
  public const string description = @"Yaw angle. NaN to use the current system yaw heading mode (e.g. yaw towards next waypoint, yaw to home,
 etc.).";
 
 }
-public class param_5{
+public struct param_5{
 public const string label = "Latitude";
  public const string description = @"Latitude";
 
 }
-public class param_6{
+public struct param_6{
 public const string label = "Longitude";
  public const string description = @"Longitude";
 
 }
-public class param_7{
+public struct param_7{
 public const string label = "Ground Altitude";
  public const string description = @"Altitude (ground level) relative to the current coordinate frame. NaN to use system default landing altitude
 (ignore value).";
@@ -19804,52 +22398,50 @@ public const string label = "Ground Altitude";
  public const string description = @"Land using VTOL mode";
 
 }
-class MAV_CMD_NAV_GUIDED_ENABLE{
-public class param_1{
+struct MAV_CMD_NAV_GUIDED_ENABLE{
+public struct param_1{
 public const string label = "Enable";
-public const string increment = "1";
-public const string minValue = "0";
-public const string maxValue = "1";
- public const string description = @"0.5f on)";
+public const string Enum = "MAV_BOOL";
+ public const string description = @"Guided mode on (MAV_BOOL_FALSE: Off). Values not equal to 0 or 1 are invalid.";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"Empty";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"Empty";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"Empty";
 
 }
-public class param_5{
+public struct param_5{
  public const string description = @"Empty";
 
 }
-public class param_6{
+public struct param_6{
  public const string description = @"Empty";
 
 }
-public class param_7{
+public struct param_7{
  public const string description = @"Empty";
 
 }
 
- public const string description = @"hand control over to an external controller";
+ public const string description = @"Hand control over to an external controller";
 
 }
-class MAV_CMD_NAV_DELAY{
-public class param_1{
+struct MAV_CMD_NAV_DELAY{
+public struct param_1{
 public const string label = "Delay";
 public const string increment = "1";
 public const string minValue = "-1";
  public const string description = @"Delay (-1 to enable time-of-day fields)";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Hour";
 public const string increment = "1";
 public const string minValue = "-1";
@@ -19857,7 +22449,7 @@ public const string maxValue = "23";
  public const string description = @"hour (24h format, UTC, -1 to ignore)";
 
 }
-public class param_3{
+public struct param_3{
 public const string label = "Minute";
 public const string increment = "1";
 public const string minValue = "-1";
@@ -19865,7 +22457,7 @@ public const string maxValue = "59";
  public const string description = @"minute (24h format, UTC, -1 to ignore)";
 
 }
-public class param_4{
+public struct param_4{
 public const string label = "Second";
 public const string increment = "1";
 public const string minValue = "-1";
@@ -19873,15 +22465,15 @@ public const string maxValue = "59";
  public const string description = @"second (24h format, UTC, -1 to ignore)";
 
 }
-public class param_5{
+public struct param_5{
  public const string description = @"Empty";
 
 }
-public class param_6{
+public struct param_6{
  public const string description = @"Empty";
 
 }
-public class param_7{
+public struct param_7{
  public const string description = @"Empty";
 
 }
@@ -19889,36 +22481,36 @@ public class param_7{
  public const string description = @"Delay the next navigation command a number of seconds or until a specified time";
 
 }
-class MAV_CMD_NAV_PAYLOAD_PLACE{
-public class param_1{
+struct MAV_CMD_NAV_PAYLOAD_PLACE{
+public struct param_1{
 public const string label = "Max Descent";
 public const string minValue = "0";
  public const string description = @"Maximum distance to descend.";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"Empty";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"Empty";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"Empty";
 
 }
-public class param_5{
+public struct param_5{
 public const string label = "Latitude";
  public const string description = @"Latitude";
 
 }
-public class param_6{
+public struct param_6{
 public const string label = "Longitude";
  public const string description = @"Longitude";
 
 }
-public class param_7{
+public struct param_7{
 public const string label = "Altitude";
  public const string description = @"Altitude";
 
@@ -19929,32 +22521,32 @@ has reached the ground, and then releases the payload. If ground is not detected
 the maximum descent value (param1), the command will complete without releasing the payload.";
 
 }
-class MAV_CMD_NAV_LAST{
-public class param_1{
+struct MAV_CMD_NAV_LAST{
+public struct param_1{
  public const string description = @"Empty";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"Empty";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"Empty";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"Empty";
 
 }
-public class param_5{
+public struct param_5{
  public const string description = @"Empty";
 
 }
-public class param_6{
+public struct param_6{
  public const string description = @"Empty";
 
 }
-public class param_7{
+public struct param_7{
  public const string description = @"Empty";
 
 }
@@ -19962,34 +22554,34 @@ public class param_7{
  public const string description = @"NOP - This command is only used to mark the upper limit of the NAV/ACTION commands in the enumeration";
 
 }
-class MAV_CMD_CONDITION_DELAY{
-public class param_1{
+struct MAV_CMD_CONDITION_DELAY{
+public struct param_1{
 public const string label = "Delay";
 public const string minValue = "0";
  public const string description = @"Delay";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"Empty";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"Empty";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"Empty";
 
 }
-public class param_5{
+public struct param_5{
  public const string description = @"Empty";
 
 }
-public class param_6{
+public struct param_6{
  public const string description = @"Empty";
 
 }
-public class param_7{
+public struct param_7{
  public const string description = @"Empty";
 
 }
@@ -19997,33 +22589,33 @@ public class param_7{
  public const string description = @"Delay mission state machine.";
 
 }
-class MAV_CMD_CONDITION_CHANGE_ALT{
-public class param_1{
+struct MAV_CMD_CONDITION_CHANGE_ALT{
+public struct param_1{
 public const string label = "Rate";
  public const string description = @"Descent / Ascend rate.";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"Empty";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"Empty";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"Empty";
 
 }
-public class param_5{
+public struct param_5{
  public const string description = @"Empty";
 
 }
-public class param_6{
+public struct param_6{
  public const string description = @"Empty";
 
 }
-public class param_7{
+public struct param_7{
 public const string label = "Altitude";
  public const string description = @"Target Altitude";
 
@@ -20033,34 +22625,34 @@ public const string label = "Altitude";
 reached.";
 
 }
-class MAV_CMD_CONDITION_DISTANCE{
-public class param_1{
+struct MAV_CMD_CONDITION_DISTANCE{
+public struct param_1{
 public const string label = "Distance";
 public const string minValue = "0";
  public const string description = @"Distance.";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"Empty";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"Empty";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"Empty";
 
 }
-public class param_5{
+public struct param_5{
  public const string description = @"Empty";
 
 }
-public class param_6{
+public struct param_6{
  public const string description = @"Empty";
 
 }
-public class param_7{
+public struct param_7{
  public const string description = @"Empty";
 
 }
@@ -20068,42 +22660,44 @@ public class param_7{
  public const string description = @"Delay mission state machine until within desired distance of next NAV point.";
 
 }
-class MAV_CMD_CONDITION_YAW{
-public class param_1{
+struct MAV_CMD_CONDITION_YAW{
+public struct param_1{
 public const string label = "Angle";
- public const string description = @"target angle, 0 is north";
+public const string minValue = "0";
+public const string maxValue = "360";
+ public const string description = @"target angle [0-360]. Absolute angles: 0 is north. Relative angle: 0 is initial yaw. Direction set by
+param3.";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Angular Speed";
+public const string minValue = "0";
  public const string description = @"angular speed";
 
 }
-public class param_3{
+public struct param_3{
 public const string label = "Direction";
-public const string increment = "2";
+public const string increment = "1";
 public const string minValue = "-1";
 public const string maxValue = "1";
- public const string description = @"direction: -1: counter clockwise, 1: clockwise";
+ public const string description = @"direction: -1: counter clockwise, 0: shortest direction, 1: clockwise";
 
 }
-public class param_4{
+public struct param_4{
 public const string label = "Relative";
-public const string increment = "1";
-public const string minValue = "0";
-public const string maxValue = "1";
- public const string description = @"0: absolute angle, 1: relative offset";
+public const string Enum = "MAV_BOOL";
+ public const string description = @"Relative offset (MAV_BOOL_FALSE: absolute angle). Values not equal to 0 or 1 are invalid.";
 
 }
-public class param_5{
+public struct param_5{
  public const string description = @"Empty";
 
 }
-public class param_6{
+public struct param_6{
  public const string description = @"Empty";
 
 }
-public class param_7{
+public struct param_7{
  public const string description = @"Empty";
 
 }
@@ -20111,32 +22705,32 @@ public class param_7{
  public const string description = @"Reach a certain target angle.";
 
 }
-class MAV_CMD_CONDITION_LAST{
-public class param_1{
+struct MAV_CMD_CONDITION_LAST{
+public struct param_1{
  public const string description = @"Empty";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"Empty";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"Empty";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"Empty";
 
 }
-public class param_5{
+public struct param_5{
  public const string description = @"Empty";
 
 }
-public class param_6{
+public struct param_6{
  public const string description = @"Empty";
 
 }
-public class param_7{
+public struct param_7{
  public const string description = @"Empty";
 
 }
@@ -20144,37 +22738,38 @@ public class param_7{
  public const string description = @"NOP - This command is only used to mark the upper limit of the CONDITION commands in the enumeration";
 
 }
-class MAV_CMD_DO_SET_MODE{
-public class param_1{
+struct MAV_CMD_DO_SET_MODE{
+public struct param_1{
 public const string label = "Mode";
-public const string Enum = "MAV_MODE";
- public const string description = @"Mode";
+public const string Enum = "MAV_MODE_FLAG";
+ public const string description = @"Mode flags. MAV_MODE values can be used to set some mode flag combinations.";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Custom Mode";
- public const string description = @"Custom mode - this is system specific, please refer to the individual autopilot specifications for details.";
+ public const string description = @"Custom system-specific mode (see target autopilot specifications for mode information). If MAV_MODE_FLAG_CUSTOM_MODE_ENABLED
+is set in param1 (mode) this mode is used: otherwise the field is ignored.";
 
 }
-public class param_3{
+public struct param_3{
 public const string label = "Custom Submode";
  public const string description = @"Custom sub mode - this is system specific, please refer to the individual autopilot specifications for
 details.";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"Empty";
 
 }
-public class param_5{
+public struct param_5{
  public const string description = @"Empty";
 
 }
-public class param_6{
+public struct param_6{
  public const string description = @"Empty";
 
 }
-public class param_7{
+public struct param_7{
  public const string description = @"Empty";
 
 }
@@ -20182,38 +22777,38 @@ public class param_7{
  public const string description = @"Set system mode.";
 
 }
-class MAV_CMD_DO_JUMP{
-public class param_1{
+struct MAV_CMD_DO_JUMP{
+public struct param_1{
 public const string label = "Number";
 public const string increment = "1";
 public const string minValue = "0";
  public const string description = @"Sequence number";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Repeat";
 public const string increment = "1";
 public const string minValue = "0";
  public const string description = @"Repeat count";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"Empty";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"Empty";
 
 }
-public class param_5{
+public struct param_5{
  public const string description = @"Empty";
 
 }
-public class param_6{
+public struct param_6{
  public const string description = @"Empty";
 
 }
-public class param_7{
+public struct param_7{
  public const string description = @"Empty";
 
 }
@@ -20221,122 +22816,130 @@ public class param_7{
  public const string description = @"Jump to the desired command in the mission list.  Repeat this action only the specified number of times";
 
 }
-class MAV_CMD_DO_CHANGE_SPEED{
-public class param_1{
+struct MAV_CMD_DO_CHANGE_SPEED{
+public struct param_1{
 public const string label = "Speed Type";
-public const string increment = "1";
-public const string minValue = "0";
-public const string maxValue = "3";
- public const string description = @"Speed type (0=Airspeed, 1=Ground Speed, 2=Climb Speed, 3=Descent Speed)";
+public const string Enum = "SPEED_TYPE";
+ public const string description = @"Speed type of value set in param2 (such as airspeed, ground speed, and so on)";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Speed";
-public const string minValue = "-1";
- public const string description = @"Speed (-1 indicates no change)";
+public const string minValue = "-2";
+ public const string description = @"Speed (-1 indicates no change, -2 indicates return to default vehicle speed)";
 
 }
-public class param_3{
+public struct param_3{
 public const string label = "Throttle";
-public const string minValue = "-1";
- public const string description = @"Throttle (-1 indicates no change)";
+public const string minValue = "-2";
+ public const string description = @"Throttle (-1 indicates no change, -2 indicates return to default vehicle throttle value)";
 
 }
-public class param_4{
-public const string label = "Relative";
-public const string increment = "1";
-public const string minValue = "0";
-public const string maxValue = "1";
- public const string description = @"0: absolute, 1: relative";
+public struct param_4{
+public const string reserved = "true";
+public const string Default = "0";
 
 }
-public class param_5{
- public const string description = @"Empty";
+public struct param_5{
+public const string reserved = "true";
+public const string Default = "0";
 
 }
-public class param_6{
- public const string description = @"Empty";
+public struct param_6{
+public const string reserved = "true";
+public const string Default = "0";
 
 }
-public class param_7{
- public const string description = @"Empty";
+public struct param_7{
+public const string reserved = "true";
+public const string Default = "0";
 
 }
 
- public const string description = @"Change speed and/or throttle set points.";
+ public const string description = @"Change speed and/or throttle set points. The value persists until it is overridden or there is a mode
+change";
 
 }
-class MAV_CMD_DO_SET_HOME{
-public class param_1{
+struct MAV_CMD_DO_SET_HOME{
+public struct param_1{
 public const string label = "Use Current";
-public const string increment = "1";
-public const string minValue = "0";
-public const string maxValue = "1";
- public const string description = @"Use current (1=use current location, 0=use specified location)";
+public const string Enum = "MAV_BOOL";
+ public const string description = @"Use current location (MAV_BOOL_FALSE: use specified location). Values not equal to 0 or 1 are invalid.";
 
 }
-public class param_2{
- public const string description = @"Empty";
+public struct param_2{
+public const string label = "Roll";
+public const string minValue = "-180";
+public const string maxValue = "180";
+ public const string description = @"Roll angle (of surface). Range: -180..180 degrees. NAN or 0 means value not set. 0.01 indicates zero roll.";
 
 }
-public class param_3{
- public const string description = @"Empty";
+public struct param_3{
+public const string label = "Pitch";
+public const string minValue = "-90";
+public const string maxValue = "90";
+ public const string description = @"Pitch angle (of surface). Range: -90..90 degrees. NAN or 0 means value not set. 0.01 means zero pitch.";
 
 }
-public class param_4{
+public struct param_4{
 public const string label = "Yaw";
- public const string description = @"Yaw angle. NaN to use default heading";
+public const string minValue = "-180";
+public const string maxValue = "180";
+ public const string description = @"Yaw angle. NaN to use default heading. Range: -180..180 degrees.";
 
 }
-public class param_5{
+public struct param_5{
 public const string label = "Latitude";
  public const string description = @"Latitude";
 
 }
-public class param_6{
+public struct param_6{
 public const string label = "Longitude";
  public const string description = @"Longitude";
 
 }
-public class param_7{
+public struct param_7{
 public const string label = "Altitude";
  public const string description = @"Altitude";
 
 }
 
- public const string description = @"Changes the home location either to the current location or a specified location.";
+ public const string description = @"The position is set automatically by the system during the takeoff (and may also be set using this command).
+
+         Note: the current home position may be emitted in a HOME_POSITION message on request (using
+MAV_CMD_REQUEST_MESSAGE with param1=242).";
 
 }
-class MAV_CMD_DO_SET_PARAMETER{
-public class param_1{
+struct MAV_CMD_DO_SET_PARAMETER{
+public struct param_1{
 public const string label = "Number";
 public const string increment = "1";
 public const string minValue = "0";
  public const string description = @"Parameter number";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Value";
  public const string description = @"Parameter value";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"Empty";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"Empty";
 
 }
-public class param_5{
+public struct param_5{
  public const string description = @"Empty";
 
 }
-public class param_6{
+public struct param_6{
  public const string description = @"Empty";
 
 }
-public class param_7{
+public struct param_7{
  public const string description = @"Empty";
 
 }
@@ -20345,79 +22948,79 @@ public class param_7{
 of the parameter.";
 
 }
-class MAV_CMD_DO_SET_RELAY{
-public class param_1{
+struct MAV_CMD_DO_SET_RELAY{
+public struct param_1{
 public const string label = "Instance";
 public const string increment = "1";
 public const string minValue = "0";
  public const string description = @"Relay instance number.";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Setting";
 public const string increment = "1";
 public const string minValue = "0";
  public const string description = @"Setting. (1=on, 0=off, others possible depending on system hardware)";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"Empty";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"Empty";
 
 }
-public class param_5{
+public struct param_5{
  public const string description = @"Empty";
 
 }
-public class param_6{
+public struct param_6{
  public const string description = @"Empty";
 
 }
-public class param_7{
+public struct param_7{
  public const string description = @"Empty";
 
 }
 
- public const string description = @"Set a relay to a condition.";
+ public const string description = @"Set a relay to a condition. The current value may optionally be reported using RELAY_STATUS.";
 
 }
-class MAV_CMD_DO_REPEAT_RELAY{
-public class param_1{
+struct MAV_CMD_DO_REPEAT_RELAY{
+public struct param_1{
 public const string label = "Instance";
 public const string increment = "1";
 public const string minValue = "0";
  public const string description = @"Relay instance number.";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Count";
 public const string increment = "1";
 public const string minValue = "1";
  public const string description = @"Cycle count.";
 
 }
-public class param_3{
+public struct param_3{
 public const string label = "Time";
 public const string minValue = "0";
  public const string description = @"Cycle time.";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"Empty";
 
 }
-public class param_5{
+public struct param_5{
  public const string description = @"Empty";
 
 }
-public class param_6{
+public struct param_6{
  public const string description = @"Empty";
 
 }
-public class param_7{
+public struct param_7{
  public const string description = @"Empty";
 
 }
@@ -20425,38 +23028,38 @@ public class param_7{
  public const string description = @"Cycle a relay on and off for a desired number of cycles with a desired period.";
 
 }
-class MAV_CMD_DO_SET_SERVO{
-public class param_1{
+struct MAV_CMD_DO_SET_SERVO{
+public struct param_1{
 public const string label = "Instance";
 public const string increment = "1";
 public const string minValue = "0";
  public const string description = @"Servo instance number.";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "PWM";
 public const string increment = "1";
 public const string minValue = "0";
  public const string description = @"Pulse Width Modulation.";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"Empty";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"Empty";
 
 }
-public class param_5{
+public struct param_5{
  public const string description = @"Empty";
 
 }
-public class param_6{
+public struct param_6{
  public const string description = @"Empty";
 
 }
-public class param_7{
+public struct param_7{
  public const string description = @"Empty";
 
 }
@@ -20464,43 +23067,43 @@ public class param_7{
  public const string description = @"Set a servo to a desired PWM value.";
 
 }
-class MAV_CMD_DO_REPEAT_SERVO{
-public class param_1{
+struct MAV_CMD_DO_REPEAT_SERVO{
+public struct param_1{
 public const string label = "Instance";
 public const string increment = "1";
 public const string minValue = "0";
  public const string description = @"Servo instance number.";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "PWM";
 public const string increment = "1";
 public const string minValue = "0";
  public const string description = @"Pulse Width Modulation.";
 
 }
-public class param_3{
+public struct param_3{
 public const string label = "Count";
 public const string increment = "1";
 public const string minValue = "1";
  public const string description = @"Cycle count.";
 
 }
-public class param_4{
+public struct param_4{
 public const string label = "Time";
 public const string minValue = "0";
  public const string description = @"Cycle time.";
 
 }
-public class param_5{
+public struct param_5{
  public const string description = @"Empty";
 
 }
-public class param_6{
+public struct param_6{
  public const string description = @"Empty";
 
 }
-public class param_7{
+public struct param_7{
  public const string description = @"Empty";
 
 }
@@ -20508,8 +23111,8 @@ public class param_7{
  public const string description = @"Cycle a between its nominal setting and a desired PWM for a desired number of cycles with a desired period.";
 
 }
-class MAV_CMD_DO_FLIGHTTERMINATION{
-public class param_1{
+struct MAV_CMD_DO_FLIGHTTERMINATION{
+public struct param_1{
 public const string label = "Terminate";
 public const string increment = "1";
 public const string minValue = "0";
@@ -20517,27 +23120,27 @@ public const string maxValue = "1";
  public const string description = @"0.5. Otherwise not activated and ACK with MAV_RESULT_FAILED.";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"Empty";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"Empty";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"Empty";
 
 }
-public class param_5{
+public struct param_5{
  public const string description = @"Empty";
 
 }
-public class param_6{
+public struct param_6{
  public const string description = @"Empty";
 
 }
-public class param_7{
+public struct param_7{
  public const string description = @"Empty";
 
 }
@@ -20546,35 +23149,35 @@ public class param_7{
         ";
 
 }
-class MAV_CMD_DO_CHANGE_ALTITUDE{
-public class param_1{
+struct MAV_CMD_DO_CHANGE_ALTITUDE{
+public struct param_1{
 public const string label = "Altitude";
  public const string description = @"Altitude.";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Frame";
 public const string Enum = "MAV_FRAME";
  public const string description = @"Frame of new altitude.";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"Empty";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"Empty";
 
 }
-public class param_5{
+public struct param_5{
  public const string description = @"Empty";
 
 }
-public class param_6{
+public struct param_6{
  public const string description = @"Empty";
 
 }
-public class param_7{
+public struct param_7{
  public const string description = @"Empty";
 
 }
@@ -20582,50 +23185,50 @@ public class param_7{
  public const string description = @"Change altitude set point.";
 
 }
-class MAV_CMD_DO_SET_ACTUATOR{
-public class param_1{
+struct MAV_CMD_DO_SET_ACTUATOR{
+public struct param_1{
 public const string label = "Actuator 1";
 public const string minValue = "-1";
 public const string maxValue = "1";
  public const string description = @"Actuator 1 value, scaled from [-1 to 1]. NaN to ignore.";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Actuator 2";
 public const string minValue = "-1";
 public const string maxValue = "1";
  public const string description = @"Actuator 2 value, scaled from [-1 to 1]. NaN to ignore.";
 
 }
-public class param_3{
+public struct param_3{
 public const string label = "Actuator 3";
 public const string minValue = "-1";
 public const string maxValue = "1";
  public const string description = @"Actuator 3 value, scaled from [-1 to 1]. NaN to ignore.";
 
 }
-public class param_4{
+public struct param_4{
 public const string label = "Actuator 4";
 public const string minValue = "-1";
 public const string maxValue = "1";
  public const string description = @"Actuator 4 value, scaled from [-1 to 1]. NaN to ignore.";
 
 }
-public class param_5{
+public struct param_5{
 public const string label = "Actuator 5";
 public const string minValue = "-1";
 public const string maxValue = "1";
  public const string description = @"Actuator 5 value, scaled from [-1 to 1]. NaN to ignore.";
 
 }
-public class param_6{
+public struct param_6{
 public const string label = "Actuator 6";
 public const string minValue = "-1";
 public const string maxValue = "1";
  public const string description = @"Actuator 6 value, scaled from [-1 to 1]. NaN to ignore.";
 
 }
-public class param_7{
+public struct param_7{
 public const string label = "Index";
 public const string increment = "1";
 public const string minValue = "0";
@@ -20637,73 +23240,110 @@ public const string minValue = "0";
 on any MAIN or AUX PWM or UAVCAN) using a flight-stack specific mechanism (i.e. a parameter).";
 
 }
-class MAV_CMD_DO_LAND_START{
-public class param_1{
+struct MAV_CMD_DO_RETURN_PATH_START{
+public struct param_1{
  public const string description = @"Empty";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"Empty";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"Empty";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"Empty";
 
 }
-public class param_5{
+public struct param_5{
 public const string label = "Latitude";
- public const string description = @"Latitude";
+ public const string description = @"Latitudee. 0: not used.";
 
 }
-public class param_6{
+public struct param_6{
 public const string label = "Longitude";
- public const string description = @"Longitude";
+ public const string description = @"Longitudee. 0: not used.";
 
 }
-public class param_7{
+public struct param_7{
+public const string label = "Altitude";
+ public const string description = @"Altitudee. 0: not used.";
+
+}
+
+ public const string description = @"If sent using as a command, the vehicle will perform a mission landing (using the land segment if defined)
+or reject the command if mission landings are not supported, or no mission landing is defined. When used
+as a command any position information in the command is ignored.
+        ";
+
+}
+struct MAV_CMD_DO_LAND_START{
+public struct param_1{
  public const string description = @"Empty";
 
 }
-
- public const string description = @"Mission command to perform a landing. This is used as a marker in a mission to tell the autopilot where
-a sequence of mission items that represents a landing starts. It may also be sent via a COMMAND_LONG
-to trigger a landing, in which case the nearest (geographically) landing sequence in the mission will
-be used. The Latitude/Longitude is optional, and may be set to 0 if not needed. If specified then it
-will be used to help find the closest landing sequence.";
+public struct param_2{
+ public const string description = @"Empty";
 
 }
-class MAV_CMD_DO_RALLY_LAND{
-public class param_1{
+public struct param_3{
+ public const string description = @"Empty";
+
+}
+public struct param_4{
+ public const string description = @"Empty";
+
+}
+public struct param_5{
+public const string label = "Latitude";
+ public const string description = @"Latitude for landing sequence selection, or 0 (see description). Ignored in commands (set 0).";
+
+}
+public struct param_6{
+public const string label = "Longitude";
+ public const string description = @"Longitude for landing sequence selection, or 0 (see description). Ignored in commands (set 0).";
+
+}
+public struct param_7{
+public const string label = "Altitude";
+ public const string description = @"Altitude for landing sequence selection, or 0 (see description). Ignored in commands (set 0).";
+
+}
+
+ public const string description = @"The location parameters are not used in this case, and should be set to 0.
+	";
+
+}
+struct MAV_CMD_DO_RALLY_LAND{
+public struct param_1{
 public const string label = "Altitude";
  public const string description = @"Break altitude";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Speed";
  public const string description = @"Landing speed";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"Empty";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"Empty";
 
 }
-public class param_5{
+public struct param_5{
  public const string description = @"Empty";
 
 }
-public class param_6{
+public struct param_6{
  public const string description = @"Empty";
 
 }
-public class param_7{
+public struct param_7{
  public const string description = @"Empty";
 
 }
@@ -20711,33 +23351,33 @@ public class param_7{
  public const string description = @"Mission command to perform a landing from a rally point.";
 
 }
-class MAV_CMD_DO_GO_AROUND{
-public class param_1{
+struct MAV_CMD_DO_GO_AROUND{
+public struct param_1{
 public const string label = "Altitude";
  public const string description = @"Altitude";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"Empty";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"Empty";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"Empty";
 
 }
-public class param_5{
+public struct param_5{
  public const string description = @"Empty";
 
 }
-public class param_6{
+public struct param_6{
  public const string description = @"Empty";
 
 }
-public class param_7{
+public struct param_7{
  public const string description = @"Empty";
 
 }
@@ -20745,80 +23385,82 @@ public class param_7{
  public const string description = @"Mission command to safely abort an autonomous landing.";
 
 }
-class MAV_CMD_DO_REPOSITION{
-public class param_1{
+struct MAV_CMD_DO_REPOSITION{
+public struct param_1{
 public const string label = "Speed";
 public const string minValue = "-1";
  public const string description = @"Ground speed, less than 0 (-1) for default";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Bitmask";
 public const string Enum = "MAV_DO_REPOSITION_FLAGS";
  public const string description = @"Bitmask of option flags.";
 
 }
-public class param_3{
- public const string description = @"Reserved";
+public struct param_3{
+public const string label = "Radius";
+ public const string description = @"Loiter radius for planes. Positive values only, direction is controlled by Yaw value. A value of zero
+or NaN is ignored. ";
 
 }
-public class param_4{
+public struct param_4{
 public const string label = "Yaw";
- public const string description = @"Yaw heading. NaN to use the current system yaw heading mode (e.g. yaw towards next waypoint, yaw to home,
-etc.). For planes indicates loiter direction (0: clockwise, 1: counter clockwise)";
+ public const string description = @"Yaw heading (heading reference defined in Bitmask field). NaN to use the current system yaw heading mode
+(e.g. yaw towards next waypoint, yaw to home, etc.). For planes indicates loiter direction (0: clockwise,
+1: counter clockwise)";
 
 }
-public class param_5{
+public struct param_5{
 public const string label = "Latitude";
  public const string description = @"Latitude";
 
 }
-public class param_6{
+public struct param_6{
 public const string label = "Longitude";
  public const string description = @"Longitude";
 
 }
-public class param_7{
+public struct param_7{
 public const string label = "Altitude";
  public const string description = @"Altitude";
 
 }
 
- public const string description = @"Reposition the vehicle to a specific WGS84 global position.";
+ public const string description = @"Reposition the vehicle to a specific WGS84 global position. This command is intended for guided commands
+(for missions use MAV_CMD_NAV_WAYPOINT instead).";
 
 }
-class MAV_CMD_DO_PAUSE_CONTINUE{
-public class param_1{
+struct MAV_CMD_DO_PAUSE_CONTINUE{
+public struct param_1{
 public const string label = "Continue";
-public const string increment = "1";
-public const string minValue = "0";
-public const string maxValue = "1";
- public const string description = @"0: Pause current mission or reposition command, hold current position. 1: Continue mission. A VTOL capable
-vehicle should enter hover mode (multicopter and VTOL planes). A plane should loiter with the default
-loiter radius.";
+public const string Enum = "MAV_BOOL";
+ public const string description = @"Continue mission (MAV_BOOL_TRUE), Pause current mission or reposition command, hold current position (MAV_BOOL_FALSE).
+Values not equal to 0 or 1 are invalid. A VTOL capable vehicle should enter hover mode (multicopter and
+VTOL planes). A plane should loiter with the default loiter radius.";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"Reserved";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"Reserved";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"Reserved";
 
 }
-public class param_5{
+public struct param_5{
  public const string description = @"Reserved";
 
 }
-public class param_6{
+public struct param_6{
  public const string description = @"Reserved";
 
 }
-public class param_7{
+public struct param_7{
  public const string description = @"Reserved";
 
 }
@@ -20826,36 +23468,34 @@ public class param_7{
  public const string description = @"If in a GPS controlled position mode, hold the current position or continue.";
 
 }
-class MAV_CMD_DO_SET_REVERSE{
-public class param_1{
+struct MAV_CMD_DO_SET_REVERSE{
+public struct param_1{
 public const string label = "Reverse";
-public const string increment = "1";
-public const string minValue = "0";
-public const string maxValue = "1";
- public const string description = @"Direction (0=Forward, 1=Reverse)";
+public const string Enum = "MAV_BOOL";
+ public const string description = @"Reverse direction (MAV_BOOL_FALSE: Forward direction). Values not equal to 0 or 1 are invalid.";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"Empty";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"Empty";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"Empty";
 
 }
-public class param_5{
+public struct param_5{
  public const string description = @"Empty";
 
 }
-public class param_6{
+public struct param_6{
  public const string description = @"Empty";
 
 }
-public class param_7{
+public struct param_7{
  public const string description = @"Empty";
 
 }
@@ -20863,36 +23503,36 @@ public class param_7{
  public const string description = @"Set moving direction to forward or reverse.";
 
 }
-class MAV_CMD_DO_SET_ROI_LOCATION{
-public class param_1{
+struct MAV_CMD_DO_SET_ROI_LOCATION{
+public struct param_1{
 public const string label = "Gimbal device ID";
  public const string description = @"Component ID of gimbal device to address (or 1-6 for non-MAVLink gimbal), 0 for all gimbal device components.
 Send command multiple times for more than one gimbal (but not all gimbals).";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"Empty";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"Empty";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"Empty";
 
 }
-public class param_5{
+public struct param_5{
 public const string label = "Latitude";
  public const string description = @"Latitude of ROI location";
 
 }
-public class param_6{
+public struct param_6{
 public const string label = "Longitude";
  public const string description = @"Longitude of ROI location";
 
 }
-public class param_7{
+public struct param_7{
 public const string label = "Altitude";
  public const string description = @"Altitude of ROI location";
 
@@ -20903,36 +23543,36 @@ to control the vehicle attitude and the attitude of various sensors such as came
 be sent to a gimbal manager but not to a gimbal device. A gimbal is not to react to this message.";
 
 }
-class MAV_CMD_DO_SET_ROI_WPNEXT_OFFSET{
-public class param_1{
+struct MAV_CMD_DO_SET_ROI_WPNEXT_OFFSET{
+public struct param_1{
 public const string label = "Gimbal device ID";
  public const string description = @"Component ID of gimbal device to address (or 1-6 for non-MAVLink gimbal), 0 for all gimbal device components.
 Send command multiple times for more than one gimbal (but not all gimbals).";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"Empty";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"Empty";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"Empty";
 
 }
-public class param_5{
+public struct param_5{
 public const string label = "Pitch Offset";
  public const string description = @"Pitch offset from next waypoint, positive pitching up";
 
 }
-public class param_6{
+public struct param_6{
 public const string label = "Roll Offset";
  public const string description = @"Roll offset from next waypoint, positive rolling to the right";
 
 }
-public class param_7{
+public struct param_7{
 public const string label = "Yaw Offset";
  public const string description = @"Yaw offset from next waypoint, positive yawing to the right";
 
@@ -20944,34 +23584,34 @@ various sensors such as cameras. This command can be sent to a gimbal manager bu
 A gimbal device is not to react to this message.";
 
 }
-class MAV_CMD_DO_SET_ROI_NONE{
-public class param_1{
+struct MAV_CMD_DO_SET_ROI_NONE{
+public struct param_1{
 public const string label = "Gimbal device ID";
  public const string description = @"Component ID of gimbal device to address (or 1-6 for non-MAVLink gimbal), 0 for all gimbal device components.
 Send command multiple times for more than one gimbal (but not all gimbals).";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"Empty";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"Empty";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"Empty";
 
 }
-public class param_5{
+public struct param_5{
  public const string description = @"Empty";
 
 }
-public class param_6{
+public struct param_6{
  public const string description = @"Empty";
 
 }
-public class param_7{
+public struct param_7{
  public const string description = @"Empty";
 
 }
@@ -20983,8 +23623,8 @@ A gimbal device is not to react to this message. After this command the gimbal m
 to manual input if available, and otherwise assume a neutral position.";
 
 }
-class MAV_CMD_DO_SET_ROI_SYSID{
-public class param_1{
+struct MAV_CMD_DO_SET_ROI_SYSID{
+public struct param_1{
 public const string label = "System ID";
 public const string increment = "1";
 public const string minValue = "1";
@@ -20992,7 +23632,7 @@ public const string maxValue = "255";
  public const string description = @"System ID";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Gimbal device ID";
  public const string description = @"Component ID of gimbal device to address (or 1-6 for non-MAVLink gimbal), 0 for all gimbal device components.
 Send command multiple times for more than one gimbal (but not all gimbals).";
@@ -21004,15 +23644,15 @@ GLOBAL_POSITION_INT or any other means. This command can be sent to a gimbal man
 device. A gimbal device is not to react to this message.";
 
 }
-class MAV_CMD_DO_CONTROL_VIDEO{
-public class param_1{
+struct MAV_CMD_DO_CONTROL_VIDEO{
+public struct param_1{
 public const string label = "ID";
 public const string increment = "1";
 public const string minValue = "-1";
  public const string description = @"Camera ID (-1 for all)";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Transmission";
 public const string increment = "1";
 public const string minValue = "0";
@@ -21020,13 +23660,13 @@ public const string maxValue = "2";
  public const string description = @"Transmission: 0: disabled, 1: enabled compressed, 2: enabled raw";
 
 }
-public class param_3{
+public struct param_3{
 public const string label = "Interval";
 public const string minValue = "0";
  public const string description = @"0: single images every n seconds";
 
 }
-public class param_4{
+public struct param_4{
 public const string label = "Recording";
 public const string increment = "1";
 public const string minValue = "0";
@@ -21034,15 +23674,15 @@ public const string maxValue = "2";
  public const string description = @"Recording: 0: disabled, 1: enabled compressed, 2: enabled raw";
 
 }
-public class param_5{
+public struct param_5{
  public const string description = @"Empty";
 
 }
-public class param_6{
+public struct param_6{
  public const string description = @"Empty";
 
 }
-public class param_7{
+public struct param_7{
  public const string description = @"Empty";
 
 }
@@ -21050,40 +23690,40 @@ public class param_7{
  public const string description = @"Control onboard camera system.";
 
 }
-class MAV_CMD_DO_SET_ROI{
-public class param_1{
+struct MAV_CMD_DO_SET_ROI{
+public struct param_1{
 public const string label = "ROI Mode";
 public const string Enum = "MAV_ROI";
  public const string description = @"Region of interest mode.";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "WP Index";
 public const string increment = "1";
 public const string minValue = "0";
  public const string description = @"Waypoint index/ target ID (depends on param 1).";
 
 }
-public class param_3{
+public struct param_3{
 public const string label = "ROI Index";
 public const string increment = "1";
 public const string minValue = "0";
  public const string description = @"Region of interest index. (allows a vehicle to manage multiple ROI's)";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"Empty";
 
 }
-public class param_5{
+public struct param_5{
  public const string description = @"MAV_ROI_WPNEXT: pitch offset from next waypoint, MAV_ROI_LOCATION: latitude";
 
 }
-public class param_6{
+public struct param_6{
  public const string description = @"MAV_ROI_WPNEXT: roll offset from next waypoint, MAV_ROI_LOCATION: longitude";
 
 }
-public class param_7{
+public struct param_7{
  public const string description = @"MAV_ROI_WPNEXT: yaw offset from next waypoint, MAV_ROI_LOCATION: altitude";
 
 }
@@ -21093,45 +23733,45 @@ vehicle's control system to control the vehicle attitude and the attitude of var
 cameras.";
 
 }
-class MAV_CMD_DO_DIGICAM_CONFIGURE{
-public class param_1{
+struct MAV_CMD_DO_DIGICAM_CONFIGURE{
+public struct param_1{
 public const string label = "Mode";
 public const string increment = "1";
 public const string minValue = "0";
  public const string description = @"Modes: P, TV, AV, M, Etc.";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Shutter Speed";
 public const string increment = "1";
 public const string minValue = "0";
  public const string description = @"Shutter speed: Divisor number for one second.";
 
 }
-public class param_3{
+public struct param_3{
 public const string label = "Aperture";
 public const string minValue = "0";
  public const string description = @"Aperture: F stop number.";
 
 }
-public class param_4{
+public struct param_4{
 public const string label = "ISO";
 public const string increment = "1";
 public const string minValue = "0";
  public const string description = @"ISO number e.g. 80, 100, 200, Etc.";
 
 }
-public class param_5{
+public struct param_5{
 public const string label = "Exposure";
  public const string description = @"Exposure type enumerator.";
 
 }
-public class param_6{
+public struct param_6{
 public const string label = "Command Identity";
  public const string description = @"Command Identity.";
 
 }
-public class param_7{
+public struct param_7{
 public const string label = "Engine Cut-off";
 public const string increment = "1";
 public const string minValue = "0";
@@ -21143,38 +23783,38 @@ public const string minValue = "0";
 messages and camera definition files (see https://mavlink.io/en/services/camera_def.html ).";
 
 }
-class MAV_CMD_DO_DIGICAM_CONTROL{
-public class param_1{
+struct MAV_CMD_DO_DIGICAM_CONTROL{
+public struct param_1{
 public const string label = "Session Control";
  public const string description = @"Session control e.g. show/hide lens";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Zoom Absolute";
  public const string description = @"Zoom's absolute position";
 
 }
-public class param_3{
+public struct param_3{
 public const string label = "Zoom Relative";
  public const string description = @"Zooming step value to offset zoom from the current position";
 
 }
-public class param_4{
+public struct param_4{
 public const string label = "Focus";
  public const string description = @"Focus Locking, Unlocking or Re-locking";
 
 }
-public class param_5{
+public struct param_5{
 public const string label = "Shoot Command";
  public const string description = @"Shooting Command";
 
 }
-public class param_6{
+public struct param_6{
 public const string label = "Command Identity";
  public const string description = @"Command Identity";
 
 }
-public class param_7{
+public struct param_7{
 public const string label = "Shot ID";
  public const string description = @"Test shot identifier. If set to 1, image will only be captured, but not counted towards internal frame
 count.";
@@ -21185,88 +23825,82 @@ count.";
 messages and camera definition files (see https://mavlink.io/en/services/camera_def.html ).";
 
 }
-class MAV_CMD_DO_MOUNT_CONFIGURE{
-public class param_1{
+struct MAV_CMD_DO_MOUNT_CONFIGURE{
+public struct param_1{
 public const string label = "Mode";
 public const string Enum = "MAV_MOUNT_MODE";
  public const string description = @"Mount operation mode";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Stabilize Roll";
-public const string increment = "1";
-public const string minValue = "0";
-public const string maxValue = "1";
- public const string description = @"stabilize roll? (1 = yes, 0 = no)";
+public const string Enum = "MAV_BOOL";
+ public const string description = @"Stabilize roll (MAV_BOOL_TRUE). Values not equal to 0 or 1 are invalid.";
 
 }
-public class param_3{
+public struct param_3{
 public const string label = "Stabilize Pitch";
-public const string increment = "1";
-public const string minValue = "0";
-public const string maxValue = "1";
- public const string description = @"stabilize pitch? (1 = yes, 0 = no)";
+public const string Enum = "MAV_BOOL";
+ public const string description = @"Stabilize pitch (MAV_BOOL_TRUE). Values not equal to 0 or 1 are invalid.";
 
 }
-public class param_4{
+public struct param_4{
 public const string label = "Stabilize Yaw";
-public const string increment = "1";
-public const string minValue = "0";
-public const string maxValue = "1";
- public const string description = @"stabilize yaw? (1 = yes, 0 = no)";
+public const string Enum = "MAV_BOOL";
+ public const string description = @"Stabilize yaw (MAV_BOOL_TRUE). Values not equal to 0 or 1 are invalid.";
 
 }
-public class param_5{
+public struct param_5{
 public const string label = "Roll Input Mode";
- public const string description = @"roll input (0 = angle body frame, 1 = angular rate, 2 = angle absolute frame)";
+ public const string description = @"Roll input (0 = angle body frame, 1 = angular rate, 2 = angle absolute frame)";
 
 }
-public class param_6{
+public struct param_6{
 public const string label = "Pitch Input Mode";
- public const string description = @"pitch input (0 = angle body frame, 1 = angular rate, 2 = angle absolute frame)";
+ public const string description = @"Pitch input (0 = angle body frame, 1 = angular rate, 2 = angle absolute frame)";
 
 }
-public class param_7{
+public struct param_7{
 public const string label = "Yaw Input Mode";
- public const string description = @"yaw input (0 = angle body frame, 1 = angular rate, 2 = angle absolute frame)";
+ public const string description = @"Yaw input (0 = angle body frame, 1 = angular rate, 2 = angle absolute frame)";
 
 }
 
  public const string description = @"Mission command to configure a camera or antenna mount";
 
 }
-class MAV_CMD_DO_MOUNT_CONTROL{
-public class param_1{
+struct MAV_CMD_DO_MOUNT_CONTROL{
+public struct param_1{
 public const string label = "Pitch";
  public const string description = @"pitch depending on mount mode (degrees or degrees/second depending on pitch input).";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Roll";
  public const string description = @"roll depending on mount mode (degrees or degrees/second depending on roll input).";
 
 }
-public class param_3{
+public struct param_3{
 public const string label = "Yaw";
  public const string description = @"yaw depending on mount mode (degrees or degrees/second depending on yaw input).";
 
 }
-public class param_4{
+public struct param_4{
 public const string label = "Altitude";
  public const string description = @"altitude depending on mount mode.";
 
 }
-public class param_5{
+public struct param_5{
 public const string label = "Latitude";
  public const string description = @"latitude, set if appropriate mount mode.";
 
 }
-public class param_6{
+public struct param_6{
 public const string label = "Longitude";
  public const string description = @"longitude, set if appropriate mount mode.";
 
 }
-public class param_7{
+public struct param_7{
 public const string label = "Mode";
 public const string Enum = "MAV_MOUNT_MODE";
  public const string description = @"Mount mode.";
@@ -21276,41 +23910,45 @@ public const string Enum = "MAV_MOUNT_MODE";
  public const string description = @"Mission command to control a camera or antenna mount";
 
 }
-class MAV_CMD_DO_SET_CAM_TRIGG_DIST{
-public class param_1{
+struct MAV_CMD_DO_SET_CAM_TRIGG_DIST{
+public struct param_1{
 public const string label = "Distance";
 public const string minValue = "0";
  public const string description = @"Camera trigger distance. 0 to stop triggering.";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Shutter";
 public const string increment = "1";
 public const string minValue = "-1";
  public const string description = @"Camera shutter integration time. -1 or 0 to ignore";
 
 }
-public class param_3{
+public struct param_3{
 public const string label = "Trigger";
+public const string Enum = "MAV_BOOL";
+ public const string description = @"Trigger camera once, immediately (MAV_BOOL_TRUE). Values not equal to 0 or 1 are invalid.";
+
+}
+public struct param_4{
+public const string label = "Target Camera ID";
 public const string increment = "1";
 public const string minValue = "0";
-public const string maxValue = "1";
- public const string description = @"Trigger camera once immediately. (0 = no trigger, 1 = trigger)";
+public const string maxValue = "255";
+ public const string description = @"Target camera ID. 7 to 255: MAVLink camera component id. 1 to 6 for cameras attached to the autopilot,
+which don't have a distinct component id. 0: all cameras. This is used to target specific autopilot-connected
+cameras. It is also used to target specific cameras when the MAV_CMD is used in a mission.";
 
 }
-public class param_4{
+public struct param_5{
  public const string description = @"Empty";
 
 }
-public class param_5{
+public struct param_6{
  public const string description = @"Empty";
 
 }
-public class param_6{
- public const string description = @"Empty";
-
-}
-public class param_7{
+public struct param_7{
  public const string description = @"Empty";
 
 }
@@ -21319,8 +23957,8 @@ public class param_7{
 distance is exceeded. This command can also be used to set the shutter integration time for the camera.";
 
 }
-class MAV_CMD_DO_FENCE_ENABLE{
-public class param_1{
+struct MAV_CMD_DO_FENCE_ENABLE{
+public struct param_1{
 public const string label = "Enable";
 public const string increment = "1";
 public const string minValue = "0";
@@ -21328,62 +23966,66 @@ public const string maxValue = "2";
  public const string description = @"enable? (0=disable, 1=enable, 2=disable_floor_only)";
 
 }
-public class param_2{
+public struct param_2{
+public const string label = "Types";
+public const string Enum = "FENCE_TYPE";
+ public const string description = @"Fence types to enable or disable as a bitmask. 0: field is unused/all fences should be enabled or disabled
+(for compatibility reasons). Parameter is ignored if param1=2.";
+
+}
+public struct param_3{
  public const string description = @"Empty";
 
 }
-public class param_3{
+public struct param_4{
  public const string description = @"Empty";
 
 }
-public class param_4{
+public struct param_5{
  public const string description = @"Empty";
 
 }
-public class param_5{
+public struct param_6{
  public const string description = @"Empty";
 
 }
-public class param_6{
- public const string description = @"Empty";
-
-}
-public class param_7{
+public struct param_7{
  public const string description = @"Empty";
 
 }
 
- public const string description = @"Mission command to enable the geofence";
+ public const string description = @"Flight stacks typically reset the setting to system defaults on reboot.
+	";
 
 }
-class MAV_CMD_DO_PARACHUTE{
-public class param_1{
+struct MAV_CMD_DO_PARACHUTE{
+public struct param_1{
 public const string label = "Action";
 public const string Enum = "PARACHUTE_ACTION";
  public const string description = @"Action";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"Empty";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"Empty";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"Empty";
 
 }
-public class param_5{
+public struct param_5{
  public const string description = @"Empty";
 
 }
-public class param_6{
+public struct param_6{
  public const string description = @"Empty";
 
 }
-public class param_7{
+public struct param_7{
  public const string description = @"Empty";
 
 }
@@ -21391,32 +24033,32 @@ public class param_7{
  public const string description = @"Mission item/command to release a parachute or enable/disable auto release.";
 
 }
-class MAV_CMD_DO_MOTOR_TEST{
-public class param_1{
+struct MAV_CMD_DO_MOTOR_TEST{
+public struct param_1{
 public const string label = "Instance";
 public const string increment = "1";
 public const string minValue = "1";
  public const string description = @"Motor instance number (from 1 to max number of motors on the vehicle).";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Throttle Type";
 public const string Enum = "MOTOR_TEST_THROTTLE_TYPE";
  public const string description = @"Throttle type (whether the Throttle Value in param3 is a percentage, PWM value, etc.)";
 
 }
-public class param_3{
+public struct param_3{
 public const string label = "Throttle";
  public const string description = @"Throttle value.";
 
 }
-public class param_4{
+public struct param_4{
 public const string label = "Timeout";
 public const string minValue = "0";
  public const string description = @"Timeout between tests that are run in sequence.";
 
 }
-public class param_5{
+public struct param_5{
 public const string label = "Motor Count";
 public const string increment = "1";
 public const string minValue = "0";
@@ -21424,13 +24066,13 @@ public const string minValue = "0";
 is used between tests.";
 
 }
-public class param_6{
+public struct param_6{
 public const string label = "Test Order";
 public const string Enum = "MOTOR_TEST_ORDER";
  public const string description = @"Motor test order.";
 
 }
-public class param_7{
+public struct param_7{
  public const string description = @"Empty";
 
 }
@@ -21438,36 +24080,34 @@ public class param_7{
  public const string description = @"Command to perform motor test.";
 
 }
-class MAV_CMD_DO_INVERTED_FLIGHT{
-public class param_1{
+struct MAV_CMD_DO_INVERTED_FLIGHT{
+public struct param_1{
 public const string label = "Inverted";
-public const string increment = "1";
-public const string minValue = "0";
-public const string maxValue = "1";
- public const string description = @"Inverted flight. (0=normal, 1=inverted)";
+public const string Enum = "MAV_BOOL";
+ public const string description = @"Inverted flight (MAV_BOOL_False: normal flight). Values not equal to 0 or 1 are invalid.";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"Empty";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"Empty";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"Empty";
 
 }
-public class param_5{
+public struct param_5{
  public const string description = @"Empty";
 
 }
-public class param_6{
+public struct param_6{
  public const string description = @"Empty";
 
 }
-public class param_7{
+public struct param_7{
  public const string description = @"Empty";
 
 }
@@ -21475,37 +24115,38 @@ public class param_7{
  public const string description = @"Change to/from inverted flight.";
 
 }
-class MAV_CMD_DO_GRIPPER{
-public class param_1{
-public const string label = "Instance";
+struct MAV_CMD_DO_GRIPPER{
+public struct param_1{
+public const string label = "Gripper ID";
 public const string increment = "1";
-public const string minValue = "1";
- public const string description = @"Gripper instance number.";
+public const string minValue = "0";
+ public const string description = @"Gripper ID. 1-6 for an autopilot connected gripper. In missions this may be set to 1-6 for an autopilot
+gripper, or the gripper component id for a MAVLink gripper. 0 targets all grippers.";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Action";
 public const string Enum = "GRIPPER_ACTIONS";
  public const string description = @"Gripper action to perform.";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"Empty";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"Empty";
 
 }
-public class param_5{
+public struct param_5{
  public const string description = @"Empty";
 
 }
-public class param_6{
+public struct param_6{
  public const string description = @"Empty";
 
 }
-public class param_7{
+public struct param_7{
  public const string description = @"Empty";
 
 }
@@ -21513,38 +24154,37 @@ public class param_7{
  public const string description = @"Mission command to operate a gripper.";
 
 }
-class MAV_CMD_DO_AUTOTUNE_ENABLE{
-public class param_1{
+struct MAV_CMD_DO_AUTOTUNE_ENABLE{
+public struct param_1{
 public const string label = "Enable";
-public const string increment = "1";
-public const string minValue = "0";
-public const string maxValue = "1";
- public const string description = @"Enable (1: enable, 0:disable).";
+public const string Enum = "MAV_BOOL";
+ public const string description = @"Enable autotune (MAV_BOOL_FALSE: disable autotune). Values not equal to 0 or 1 are invalid.";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Axis";
 public const string Enum = "AUTOTUNE_AXIS";
- public const string description = @"Specify which axis are autotuned. 0 indicates autopilot default settings.";
+ public const string description = @"Specify axes for which autotuning is enabled/disabled. 0 indicates the field is unused (for compatibility
+reasons). If 0 the autopilot will follow its default behaviour, which is usually to tune all axes.";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"Empty.";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"Empty.";
 
 }
-public class param_5{
+public struct param_5{
  public const string description = @"Empty.";
 
 }
-public class param_6{
+public struct param_6{
  public const string description = @"Empty.";
 
 }
-public class param_7{
+public struct param_7{
  public const string description = @"Empty.";
 
 }
@@ -21552,38 +24192,36 @@ public class param_7{
  public const string description = @"Enable/disable autotune.";
 
 }
-class MAV_CMD_NAV_SET_YAW_SPEED{
-public class param_1{
+struct MAV_CMD_NAV_SET_YAW_SPEED{
+public struct param_1{
 public const string label = "Yaw";
  public const string description = @"Yaw angle to adjust steering by.";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Speed";
  public const string description = @"Speed.";
 
 }
-public class param_3{
+public struct param_3{
 public const string label = "Angle";
-public const string increment = "1";
-public const string minValue = "0";
-public const string maxValue = "1";
- public const string description = @"Final angle. (0=absolute, 1=relative)";
+public const string Enum = "MAV_BOOL";
+ public const string description = @"Relative final angle (MAV_BOOL_FALSE: Absolute angle). Values not equal to 0 or 1 are invalid.";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"Empty";
 
 }
-public class param_5{
+public struct param_5{
  public const string description = @"Empty";
 
 }
-public class param_6{
+public struct param_6{
  public const string description = @"Empty";
 
 }
-public class param_7{
+public struct param_7{
  public const string description = @"Empty";
 
 }
@@ -21591,38 +24229,44 @@ public class param_7{
  public const string description = @"Sets a desired vehicle turn angle and speed change.";
 
 }
-class MAV_CMD_DO_SET_CAM_TRIGG_INTERVAL{
-public class param_1{
+struct MAV_CMD_DO_SET_CAM_TRIGG_INTERVAL{
+public struct param_1{
 public const string label = "Trigger Cycle";
 public const string increment = "1";
 public const string minValue = "-1";
  public const string description = @"Camera trigger cycle time. -1 or 0 to ignore.";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Shutter Integration";
 public const string increment = "1";
 public const string minValue = "-1";
  public const string description = @"Camera shutter integration time. Should be less than trigger cycle time. -1 or 0 to ignore.";
 
 }
-public class param_3{
+public struct param_3{
+public const string label = "Target Camera ID";
+public const string increment = "1";
+public const string minValue = "0";
+public const string maxValue = "255";
+ public const string description = @"Target camera ID. 7 to 255: MAVLink camera component id. 1 to 6 for cameras attached to the autopilot,
+which don't have a distinct component id. 0: all cameras. This is used to target specific autopilot-connected
+cameras. It is also used to target specific cameras when the MAV_CMD is used in a mission.";
+
+}
+public struct param_4{
  public const string description = @"Empty";
 
 }
-public class param_4{
+public struct param_5{
  public const string description = @"Empty";
 
 }
-public class param_5{
+public struct param_6{
  public const string description = @"Empty";
 
 }
-public class param_6{
- public const string description = @"Empty";
-
-}
-public class param_7{
+public struct param_7{
  public const string description = @"Empty";
 
 }
@@ -21632,36 +24276,36 @@ triggered each time this interval expires. This command can also be used to set 
 time for the camera.";
 
 }
-class MAV_CMD_DO_MOUNT_CONTROL_QUAT{
-public class param_1{
+struct MAV_CMD_DO_MOUNT_CONTROL_QUAT{
+public struct param_1{
 public const string label = "Q1";
  public const string description = @"quaternion param q1, w (1 in null-rotation)";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Q2";
  public const string description = @"quaternion param q2, x (0 in null-rotation)";
 
 }
-public class param_3{
+public struct param_3{
 public const string label = "Q3";
  public const string description = @"quaternion param q3, y (0 in null-rotation)";
 
 }
-public class param_4{
+public struct param_4{
 public const string label = "Q4";
  public const string description = @"quaternion param q4, z (0 in null-rotation)";
 
 }
-public class param_5{
+public struct param_5{
  public const string description = @"Empty";
 
 }
-public class param_6{
+public struct param_6{
  public const string description = @"Empty";
 
 }
-public class param_7{
+public struct param_7{
  public const string description = @"Empty";
 
 }
@@ -21669,8 +24313,8 @@ public class param_7{
  public const string description = @"Mission command to control a camera or antenna mount, using a quaternion as reference.";
 
 }
-class MAV_CMD_DO_GUIDED_MASTER{
-public class param_1{
+struct MAV_CMD_DO_GUIDED_MASTER{
+public struct param_1{
 public const string label = "System ID";
 public const string increment = "1";
 public const string minValue = "0";
@@ -21678,7 +24322,7 @@ public const string maxValue = "255";
  public const string description = @"System ID";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Component ID";
 public const string increment = "1";
 public const string minValue = "0";
@@ -21686,23 +24330,23 @@ public const string maxValue = "255";
  public const string description = @"Component ID";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"Empty";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"Empty";
 
 }
-public class param_5{
+public struct param_5{
  public const string description = @"Empty";
 
 }
-public class param_6{
+public struct param_6{
  public const string description = @"Empty";
 
 }
-public class param_7{
+public struct param_7{
  public const string description = @"Empty";
 
 }
@@ -21710,41 +24354,41 @@ public class param_7{
  public const string description = @"set id of master controller";
 
 }
-class MAV_CMD_DO_GUIDED_LIMITS{
-public class param_1{
+struct MAV_CMD_DO_GUIDED_LIMITS{
+public struct param_1{
 public const string label = "Timeout";
 public const string minValue = "0";
  public const string description = @"Timeout - maximum time that external controller will be allowed to control vehicle. 0 means no timeout.";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Min Altitude";
  public const string description = @"Altitude (MSL) min - if vehicle moves below this alt, the command will be aborted and the mission will
 continue. 0 means no lower altitude limit.";
 
 }
-public class param_3{
+public struct param_3{
 public const string label = "Max Altitude";
  public const string description = @"Altitude (MSL) max - if vehicle moves above this alt, the command will be aborted and the mission will
 continue. 0 means no upper altitude limit.";
 
 }
-public class param_4{
+public struct param_4{
 public const string label = "Horiz. Move Limit";
 public const string minValue = "0";
  public const string description = @"Horizontal move limit - if vehicle moves more than this distance from its location at the moment the command
 was executed, the command will be aborted and the mission will continue. 0 means no horizontal move limit.";
 
 }
-public class param_5{
+public struct param_5{
  public const string description = @"Empty";
 
 }
-public class param_6{
+public struct param_6{
  public const string description = @"Empty";
 
 }
-public class param_7{
+public struct param_7{
  public const string description = @"Empty";
 
 }
@@ -21752,24 +24396,21 @@ public class param_7{
  public const string description = @"Set limits for external control";
 
 }
-class MAV_CMD_DO_ENGINE_CONTROL{
-public class param_1{
+struct MAV_CMD_DO_ENGINE_CONTROL{
+public struct param_1{
 public const string label = "Start Engine";
-public const string increment = "1";
-public const string minValue = "0";
-public const string maxValue = "1";
- public const string description = @"0: Stop engine, 1:Start Engine";
+public const string Enum = "MAV_BOOL";
+ public const string description = @"Start engine (MAV_BOOL_False: Stop engine). Values not equal to 0 or 1 are invalid.";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Cold Start";
-public const string increment = "1";
-public const string minValue = "0";
-public const string maxValue = "1";
- public const string description = @"0: Warm start, 1:Cold start. Controls use of choke where applicable";
+public const string Enum = "MAV_BOOL";
+ public const string description = @"Cold start engine (MAV_BOOL_FALSE: Warm start). Values not equal to 0 or 1 are invalid. Controls use of
+choke where applicable";
 
 }
-public class param_3{
+public struct param_3{
 public const string label = "Height Delay";
 public const string minValue = "0";
  public const string description = @"Height delay. This is for commanding engine start only after the vehicle has gained the specified height.
@@ -21777,19 +24418,21 @@ Used in VTOL vehicles during takeoff to start engine after the aircraft is off t
 delay.";
 
 }
-public class param_4{
+public struct param_4{
+public const string label = "Options";
+public const string Enum = "ENGINE_CONTROL_OPTIONS";
+ public const string description = @"A bitmask of options for engine control";
+
+}
+public struct param_5{
  public const string description = @"Empty";
 
 }
-public class param_5{
+public struct param_6{
  public const string description = @"Empty";
 
 }
-public class param_6{
- public const string description = @"Empty";
-
-}
-public class param_7{
+public struct param_7{
  public const string description = @"Empty";
 
 }
@@ -21798,69 +24441,77 @@ public class param_7{
 state. It is intended for vehicles with internal combustion engines";
 
 }
-class MAV_CMD_DO_SET_MISSION_CURRENT{
-public class param_1{
+struct MAV_CMD_DO_SET_MISSION_CURRENT{
+public struct param_1{
 public const string label = "Number";
 public const string increment = "1";
-public const string minValue = "0";
- public const string description = @"Mission sequence value to set";
+public const string minValue = "-1";
+ public const string description = @"Mission sequence value to set. -1 for the current mission item (use to reset mission without changing
+current mission item).";
 
 }
-public class param_2{
+public struct param_2{
+public const string label = "Reset Mission";
+public const string Enum = "MAV_BOOL";
+ public const string description = @"Reset mission (MAV_BOOL_TRUE). Values not equal to 0 or 1 are invalid. Resets jump counters to initial
+values and changes mission state ""completed"" to be ""active"" or ""paused"".";
+
+}
+public struct param_3{
  public const string description = @"Empty";
 
 }
-public class param_3{
+public struct param_4{
  public const string description = @"Empty";
 
 }
-public class param_4{
+public struct param_5{
  public const string description = @"Empty";
 
 }
-public class param_5{
+public struct param_6{
  public const string description = @"Empty";
 
 }
-public class param_6{
- public const string description = @"Empty";
-
-}
-public class param_7{
+public struct param_7{
  public const string description = @"Empty";
 
 }
 
- public const string description = @"Set the mission item with sequence number seq as current item. This means that the MAV will continue to
-this mission item on the shortest path (not following the mission items in-between).";
+ public const string description = @"Resetting also explicitly changes a mission state of MISSION_STATE_COMPLETE to MISSION_STATE_PAUSED or
+MISSION_STATE_ACTIVE, potentially allowing it to resume when it is (next) in a mission mode.
+
+	  The
+command will ACK with MAV_RESULT_FAILED if the sequence number is out of range (including if there is
+no mission item).";
 
 }
-class MAV_CMD_DO_LAST{
-public class param_1{
+struct MAV_CMD_DO_LAST{
+public struct param_1{
  public const string description = @"Empty";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"Empty";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"Empty";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"Empty";
 
 }
-public class param_5{
+public struct param_5{
  public const string description = @"Empty";
 
 }
-public class param_6{
+public struct param_6{
  public const string description = @"Empty";
 
 }
-public class param_7{
+public struct param_7{
  public const string description = @"Empty";
 
 }
@@ -21868,8 +24519,8 @@ public class param_7{
  public const string description = @"NOP - This command is only used to mark the upper limit of the DO commands in the enumeration";
 
 }
-class MAV_CMD_PREFLIGHT_CALIBRATION{
-public class param_1{
+struct MAV_CMD_PREFLIGHT_CALIBRATION{
+public struct param_1{
 public const string label = "Gyro Temperature";
 public const string increment = "1";
 public const string minValue = "0";
@@ -21877,23 +24528,19 @@ public const string maxValue = "3";
  public const string description = @"1: gyro calibration, 3: gyro temperature calibration";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Magnetometer";
-public const string increment = "1";
-public const string minValue = "0";
-public const string maxValue = "1";
- public const string description = @"1: magnetometer calibration";
+public const string Enum = "PREFLIGHT_CALIBRATION_MAGNETOMETER";
+ public const string description = @"Magnetometer calibration action.";
 
 }
-public class param_3{
+public struct param_3{
 public const string label = "Ground Pressure";
-public const string increment = "1";
-public const string minValue = "0";
-public const string maxValue = "1";
- public const string description = @"1: ground pressure calibration";
+public const string Enum = "MAV_BOOL";
+ public const string description = @"Ground pressure calibration. Values not equal to 0 or 1 are invalid.";
 
 }
-public class param_4{
+public struct param_4{
 public const string label = "Remote Control";
 public const string increment = "1";
 public const string minValue = "0";
@@ -21901,16 +24548,13 @@ public const string maxValue = "1";
  public const string description = @"1: radio RC calibration, 2: RC trim calibration";
 
 }
-public class param_5{
+public struct param_5{
 public const string label = "Accelerometer";
-public const string increment = "1";
-public const string minValue = "0";
-public const string maxValue = "4";
- public const string description = @"1: accelerometer calibration, 2: board level calibration, 3: accelerometer temperature calibration, 4:
-simple accelerometer calibration";
+public const string Enum = "PREFLIGHT_CALIBRATION_ACCELEROMETER";
+ public const string description = @"Accelerometer calibration action.";
 
 }
-public class param_6{
+public struct param_6{
 public const string label = "Compmot or Airspeed";
 public const string increment = "1";
 public const string minValue = "0";
@@ -21918,7 +24562,7 @@ public const string maxValue = "2";
  public const string description = @"1: APM: compass/motor interference calibration (PX4: airspeed calibration, deprecated), 2: airspeed calibration";
 
 }
-public class param_7{
+public struct param_7{
 public const string label = "ESC or Baro";
 public const string increment = "1";
 public const string minValue = "0";
@@ -21931,8 +24575,8 @@ public const string maxValue = "3";
 Calibration, only one sensor should be set in a single message and all others should be zero.";
 
 }
-class MAV_CMD_PREFLIGHT_SET_SENSOR_OFFSETS{
-public class param_1{
+struct MAV_CMD_PREFLIGHT_SET_SENSOR_OFFSETS{
+public struct param_1{
 public const string label = "Sensor Type";
 public const string increment = "1";
 public const string minValue = "0";
@@ -21941,32 +24585,32 @@ public const string maxValue = "6";
 flow, 5: second magnetometer, 6: third magnetometer";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "X Offset";
  public const string description = @"X axis offset (or generic dimension 1), in the sensor's raw units";
 
 }
-public class param_3{
+public struct param_3{
 public const string label = "Y Offset";
  public const string description = @"Y axis offset (or generic dimension 2), in the sensor's raw units";
 
 }
-public class param_4{
+public struct param_4{
 public const string label = "Z Offset";
  public const string description = @"Z axis offset (or generic dimension 3), in the sensor's raw units";
 
 }
-public class param_5{
+public struct param_5{
 public const string label = "4th Dimension";
  public const string description = @"Generic dimension 4, in the sensor's raw units";
 
 }
-public class param_6{
+public struct param_6{
 public const string label = "5th Dimension";
  public const string description = @"Generic dimension 5, in the sensor's raw units";
 
 }
-public class param_7{
+public struct param_7{
 public const string label = "6th Dimension";
  public const string description = @"Generic dimension 6, in the sensor's raw units";
 
@@ -21975,33 +24619,33 @@ public const string label = "6th Dimension";
  public const string description = @"Set sensor offsets. This command will be only accepted if in pre-flight mode.";
 
 }
-class MAV_CMD_PREFLIGHT_UAVCAN{
-public class param_1{
+struct MAV_CMD_PREFLIGHT_UAVCAN{
+public struct param_1{
 public const string label = "Actuator ID";
  public const string description = @"1: Trigger actuator ID assignment and direction mapping. 0: Cancel command.";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"Reserved";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"Reserved";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"Reserved";
 
 }
-public class param_5{
+public struct param_5{
  public const string description = @"Reserved";
 
 }
-public class param_6{
+public struct param_6{
  public const string description = @"Reserved";
 
 }
-public class param_7{
+public struct param_7{
  public const string description = @"Reserved";
 
 }
@@ -22011,45 +24655,39 @@ legacy UAVCAN v0 function UAVCAN_ENUMERATE, which is intended to be executed jus
 vehicle configuration (it is not a normal pre-flight command and has been poorly named).";
 
 }
-class MAV_CMD_PREFLIGHT_STORAGE{
-public class param_1{
+struct MAV_CMD_PREFLIGHT_STORAGE{
+public struct param_1{
 public const string label = "Parameter Storage";
-public const string increment = "1";
-public const string minValue = "0";
-public const string maxValue = "3";
- public const string description = @"Parameter storage: 0: Read from flash/EEPROM, 1: Write current parameter data to flash/EEPROM, 2: Reset
-to defaults, 3: Reset sensor calibration parameter data to factory default (or firmware default if not
-available)";
+public const string Enum = "PREFLIGHT_STORAGE_PARAMETER_ACTION";
+ public const string description = @"Action to perform on the persistent parameter storage";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Mission Storage";
-public const string increment = "1";
-public const string minValue = "0";
-public const string maxValue = "2";
- public const string description = @"Mission storage: 0: Read from FLASH/EEPROM, 1: Write current data to flash/EEPROM, 2: Reset to defaults";
+public const string Enum = "PREFLIGHT_STORAGE_MISSION_ACTION";
+ public const string description = @"Action to perform on the persistent mission storage";
 
 }
-public class param_3{
+public struct param_3{
 public const string label = "Logging Rate";
 public const string increment = "1";
 public const string minValue = "-1";
  public const string description = @"1: logging rate (e.g. set to 1000 for 1000 Hz logging)";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"Reserved";
 
 }
-public class param_5{
+public struct param_5{
  public const string description = @"Empty";
 
 }
-public class param_6{
+public struct param_6{
  public const string description = @"Empty";
 
 }
-public class param_7{
+public struct param_7{
  public const string description = @"Empty";
 
 }
@@ -22058,35 +24696,26 @@ public class param_7{
 mode.";
 
 }
-class MAV_CMD_PREFLIGHT_REBOOT_SHUTDOWN{
-public class param_1{
+struct MAV_CMD_PREFLIGHT_REBOOT_SHUTDOWN{
+public struct param_1{
 public const string label = "Autopilot";
-public const string increment = "1";
-public const string minValue = "0";
-public const string maxValue = "3";
- public const string description = @"0: Do nothing for autopilot, 1: Reboot autopilot, 2: Shutdown autopilot, 3: Reboot autopilot and keep
-it in the bootloader until upgraded.";
+public const string Enum = "REBOOT_SHUTDOWN_ACTION";
+ public const string description = @"Action to take for autopilot.";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Companion";
-public const string increment = "1";
-public const string minValue = "0";
-public const string maxValue = "3";
- public const string description = @"0: Do nothing for onboard computer, 1: Reboot onboard computer, 2: Shutdown onboard computer, 3: Reboot
-onboard computer and keep it in the bootloader until upgraded.";
+public const string Enum = "REBOOT_SHUTDOWN_ACTION";
+ public const string description = @"Action to take for onboard computer.";
 
 }
-public class param_3{
-public const string label = "Component action";
-public const string increment = "1";
-public const string minValue = "0";
-public const string maxValue = "3";
- public const string description = @"0: Do nothing for component, 1: Reboot component, 2: Shutdown component, 3: Reboot component and keep
-it in the bootloader until upgraded";
+public struct param_3{
+public const string label = "Component Action";
+public const string Enum = "REBOOT_SHUTDOWN_ACTION";
+ public const string description = @"Action to take for component specified in param4.";
 
 }
-public class param_4{
+public struct param_4{
 public const string label = "Component ID";
 public const string increment = "1";
 public const string minValue = "0";
@@ -22094,15 +24723,17 @@ public const string maxValue = "255";
  public const string description = @"MAVLink Component ID targeted in param3 (0 for all components).";
 
 }
-public class param_5{
+public struct param_5{
  public const string description = @"Reserved (set to 0)";
 
 }
-public class param_6{
- public const string description = @"Reserved (set to 0)";
+public struct param_6{
+public const string label = "Conditions";
+public const string Enum = "REBOOT_SHUTDOWN_CONDITIONS";
+ public const string description = @"Conditions under which reboot/shutdown is allowed.";
 
 }
-public class param_7{
+public struct param_7{
  public const string description = @"WIP: ID (e.g. camera ID -1 for all IDs)";
 
 }
@@ -22110,43 +24741,43 @@ public class param_7{
  public const string description = @"Request the reboot or shutdown of system components.";
 
 }
-class MAV_CMD_OVERRIDE_GOTO{
-public class param_1{
+struct MAV_CMD_OVERRIDE_GOTO{
+public struct param_1{
 public const string label = "Continue";
 public const string Enum = "MAV_GOTO";
  public const string description = @"MAV_GOTO_DO_HOLD: pause mission and either hold or move to specified position (depending on param2), MAV_GOTO_DO_CONTINUE:
 resume mission.";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Position";
 public const string Enum = "MAV_GOTO";
  public const string description = @"MAV_GOTO_HOLD_AT_CURRENT_POSITION: hold at current position, MAV_GOTO_HOLD_AT_SPECIFIED_POSITION: hold
 at specified position.";
 
 }
-public class param_3{
+public struct param_3{
 public const string label = "Frame";
 public const string Enum = "MAV_FRAME";
  public const string description = @"Coordinate frame of hold point.";
 
 }
-public class param_4{
+public struct param_4{
 public const string label = "Yaw";
  public const string description = @"Desired yaw angle.";
 
 }
-public class param_5{
+public struct param_5{
 public const string label = "Latitude/X";
  public const string description = @"Latitude/X position.";
 
 }
-public class param_6{
+public struct param_6{
 public const string label = "Longitude/Y";
  public const string description = @"Longitude/Y position.";
 
 }
-public class param_7{
+public struct param_7{
 public const string label = "Altitude/Z";
  public const string description = @"Altitude/Z position.";
 
@@ -22157,14 +24788,14 @@ mission. When param 1 indicates that the mission is paused (MAV_GOTO_DO_HOLD), p
 it holds in place or moves to another position.";
 
 }
-class MAV_CMD_OBLIQUE_SURVEY{
-public class param_1{
+struct MAV_CMD_OBLIQUE_SURVEY{
+public struct param_1{
 public const string label = "Distance";
 public const string minValue = "0";
  public const string description = @"Camera trigger distance. 0 to stop triggering.";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Shutter";
 public const string increment = "1";
 public const string minValue = "0";
@@ -22172,7 +24803,7 @@ public const string Default = "0";
  public const string description = @"Camera shutter integration time. 0 to ignore";
 
 }
-public class param_3{
+public struct param_3{
 public const string label = "Min Interval";
 public const string increment = "1";
 public const string minValue = "0";
@@ -22181,7 +24812,7 @@ public const string Default = "0";
  public const string description = @"The minimum interval in which the camera is capable of taking subsequent pictures repeatedly. 0 to ignore.";
 
 }
-public class param_4{
+public struct param_4{
 public const string label = "Positions";
 public const string increment = "1";
 public const string minValue = "2";
@@ -22189,14 +24820,14 @@ public const string minValue = "2";
 across the limits defined by param5).";
 
 }
-public class param_5{
+public struct param_5{
 public const string label = "Roll Angle";
 public const string minValue = "0";
 public const string Default = "0";
  public const string description = @"Angle limits that the camera can be rolled to left and right of center.";
 
 }
-public class param_6{
+public struct param_6{
 public const string label = "Pitch Angle";
 public const string minValue = "-180";
 public const string maxValue = "180";
@@ -22204,7 +24835,7 @@ public const string Default = "0";
  public const string description = @"Fixed pitch angle that the camera will hold in oblique mode if the mount is actuated in the pitch axis.";
 
 }
-public class param_7{
+public struct param_7{
  public const string description = @"Empty";
 
 }
@@ -22216,15 +24847,57 @@ automatically roll the camera between shots to emulate an oblique camera setup (
 HFOV). This command can also be used to set the shutter integration time for the camera.";
 
 }
-class MAV_CMD_MISSION_START{
-public class param_1{
+struct MAV_CMD_DO_SET_STANDARD_MODE{
+public struct param_1{
+public const string label = "Standard Mode";
+public const string Enum = "MAV_STANDARD_MODE";
+ public const string description = @"The mode to set.";
+
+}
+public struct param_2{
+public const string reserved = "true";
+public const string Default = "0";
+
+}
+public struct param_3{
+public const string reserved = "true";
+public const string Default = "0";
+
+}
+public struct param_4{
+public const string reserved = "true";
+public const string Default = "0";
+
+}
+public struct param_5{
+public const string reserved = "true";
+public const string Default = "0";
+
+}
+public struct param_6{
+public const string reserved = "true";
+public const string Default = "0";
+
+}
+public struct param_7{
+public const string reserved = "true";
+public const string Default = "NaN";
+
+}
+
+ public const string description = @"See https://mavlink.io/en/services/standard_modes.html
+        ";
+
+}
+struct MAV_CMD_MISSION_START{
+public struct param_1{
 public const string label = "First Item";
 public const string increment = "1";
 public const string minValue = "0";
  public const string description = @"first_item: the first mission item to run";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Last Item";
 public const string increment = "1";
 public const string minValue = "0";
@@ -22235,8 +24908,8 @@ public const string minValue = "0";
  public const string description = @"start running a mission";
 
 }
-class MAV_CMD_ACTUATOR_TEST{
-public class param_1{
+struct MAV_CMD_ACTUATOR_TEST{
+public struct param_1{
 public const string label = "Value";
 public const string minValue = "-1";
 public const string maxValue = "1";
@@ -22245,7 +24918,7 @@ spin), -1 for maximum negative (if not supported by the motors, i.e. motor is no
 than 0 maps to NaN). And NaN maps to disarmed (stop the motors).";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Timeout";
 public const string minValue = "0";
 public const string maxValue = "3";
@@ -22253,28 +24926,28 @@ public const string maxValue = "3";
 has to be set for safety reasons. A timeout of 0 means to restore the previous value immediately.";
 
 }
-public class param_3{
+public struct param_3{
 public const string reserved = "true";
 public const string Default = "0";
 
 }
-public class param_4{
+public struct param_4{
 public const string reserved = "true";
 public const string Default = "0";
 
 }
-public class param_5{
+public struct param_5{
 public const string label = "Output Function";
 public const string Enum = "ACTUATOR_OUTPUT_FUNCTION";
  public const string description = @"Actuator Output function";
 
 }
-public class param_6{
+public struct param_6{
 public const string reserved = "true";
 public const string Default = "0";
 
 }
-public class param_7{
+public struct param_7{
 public const string reserved = "true";
 public const string Default = "0";
 
@@ -22282,43 +24955,43 @@ public const string Default = "0";
 
  public const string description = @"Actuator testing command. This is similar to MAV_CMD_DO_MOTOR_TEST but operates on the level of output
 functions, i.e. it is possible to test Motor1 independent from which output it is configured on. Autopilots
-typically refuse this command while armed.";
+must NACK this command with MAV_RESULT_TEMPORARILY_REJECTED while armed.";
 
 }
-class MAV_CMD_CONFIGURE_ACTUATOR{
-public class param_1{
+struct MAV_CMD_CONFIGURE_ACTUATOR{
+public struct param_1{
 public const string label = "Configuration";
 public const string Enum = "ACTUATOR_CONFIGURATION";
  public const string description = @"Actuator configuration action";
 
 }
-public class param_2{
+public struct param_2{
 public const string reserved = "true";
 public const string Default = "0";
 
 }
-public class param_3{
+public struct param_3{
 public const string reserved = "true";
 public const string Default = "0";
 
 }
-public class param_4{
+public struct param_4{
 public const string reserved = "true";
 public const string Default = "0";
 
 }
-public class param_5{
+public struct param_5{
 public const string label = "Output Function";
 public const string Enum = "ACTUATOR_OUTPUT_FUNCTION";
  public const string description = @"Actuator Output function";
 
 }
-public class param_6{
+public struct param_6{
 public const string reserved = "true";
 public const string Default = "0";
 
 }
-public class param_7{
+public struct param_7{
 public const string reserved = "true";
 public const string Default = "0";
 
@@ -22327,16 +25000,14 @@ public const string Default = "0";
  public const string description = @"Actuator configuration command.";
 
 }
-class MAV_CMD_COMPONENT_ARM_DISARM{
-public class param_1{
+struct MAV_CMD_COMPONENT_ARM_DISARM{
+public struct param_1{
 public const string label = "Arm";
-public const string increment = "1";
-public const string minValue = "0";
-public const string maxValue = "1";
- public const string description = @"0: disarm, 1: arm";
+public const string Enum = "MAV_BOOL";
+ public const string description = @"Arm (MAV_BOOL_FALSE: disarm). Values not equal to 0 or 1 are invalid.";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Force";
 public const string increment = "21196";
 public const string minValue = "0";
@@ -22349,76 +25020,107 @@ allow arming to override preflight checks and disarming in flight)";
  public const string description = @"Arms / Disarms a component";
 
 }
-class MAV_CMD_RUN_PREARM_CHECKS{
+struct MAV_CMD_RUN_PREARM_CHECKS{
 
- public const string description = @"Instructs system to run pre-arm checks. This command should return MAV_RESULT_TEMPORARILY_REJECTED in
-the case the system is armed, otherwise MAV_RESULT_ACCEPTED. Note that the return value from executing
-this command does not indicate whether the vehicle is armable or not, just whether the system has successfully
-run/is currently running the checks.  The result of the checks is reflected in the SYS_STATUS message.";
+ public const string description = @"The command should return MAV_RESULT_TEMPORARILY_REJECTED if the system is already armed.
+        ";
 
 }
-class MAV_CMD_ILLUMINATOR_ON_OFF{
-public class param_1{
+struct MAV_CMD_ILLUMINATOR_ON_OFF{
+public struct param_1{
 public const string label = "Enable";
-public const string increment = "1";
-public const string minValue = "0";
-public const string maxValue = "1";
- public const string description = @"0: Illuminators OFF, 1: Illuminators ON";
+public const string Enum = "MAV_BOOL";
+ public const string description = @"Illuminators on/off (MAV_BOOL_TRUE: illuminators on). Values not equal to 0 or 1 are invalid.";
 
 }
 
  public const string description = @"Turns illuminators ON/OFF. An illuminator is a light source that is used for lighting up dark areas external
-to the sytstem: e.g. a torch or searchlight (as opposed to a light source for illuminating the system
+to the system: e.g. a torch or searchlight (as opposed to a light source for illuminating the system
 itself, e.g. an indicator light).";
 
 }
-class MAV_CMD_GET_HOME_POSITION{
-public class param_1{
+struct MAV_CMD_DO_ILLUMINATOR_CONFIGURE{
+public struct param_1{
+public const string label = "Mode";
+public const string Enum = "ILLUMINATOR_MODE";
+ public const string description = @"Mode";
+
+}
+public struct param_2{
+public const string label = "Brightness";
+public const string minValue = "0";
+public const string maxValue = "100";
+ public const string description = @"0%: Off, 100%: Max Brightness";
+
+}
+public struct param_3{
+public const string label = "Strobe Period";
+public const string minValue = "0";
+ public const string description = @"Strobe period in seconds where 0 means strobing is not used";
+
+}
+public struct param_4{
+public const string label = "Strobe Duty";
+public const string minValue = "0";
+public const string maxValue = "100";
+ public const string description = @"Strobe duty cycle where 100% means it is on constantly and 0 means strobing is not used";
+
+}
+
+ public const string description = @"Configures illuminator settings. An illuminator is a light source that is used for lighting up dark areas
+external to the system: e.g. a torch or searchlight (as opposed to a light source for illuminating the
+system itself, e.g. an indicator light).";
+
+}
+struct MAV_CMD_GET_HOME_POSITION{
+public struct param_1{
  public const string description = @"Reserved";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"Reserved";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"Reserved";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"Reserved";
 
 }
-public class param_5{
+public struct param_5{
  public const string description = @"Reserved";
 
 }
-public class param_6{
+public struct param_6{
  public const string description = @"Reserved";
 
 }
-public class param_7{
+public struct param_7{
  public const string description = @"Reserved";
 
 }
 
- public const string description = @"Request the home position from the vehicle.";
+ public const string description = @"Request the home position from the vehicle.
+          The vehicle will ACK the command and emit the HOME_POSITION
+message.";
 
 }
-class MAV_CMD_INJECT_FAILURE{
-public class param_1{
+struct MAV_CMD_INJECT_FAILURE{
+public struct param_1{
 public const string label = "Failure unit";
 public const string Enum = "FAILURE_UNIT";
  public const string description = @"The unit which is affected by the failure.";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Failure type";
 public const string Enum = "FAILURE_TYPE";
  public const string description = @"The type how the failure manifests itself.";
 
 }
-public class param_3{
+public struct param_3{
 public const string label = "Instance";
  public const string description = @"Instance affected by failure (0 to signal all).";
 
@@ -22428,24 +25130,25 @@ public const string label = "Instance";
 before accepting this command such as a specific param setting.";
 
 }
-class MAV_CMD_START_RX_PAIR{
-public class param_1{
-public const string label = "Spektrum";
- public const string description = @"0:Spektrum.";
-
-}
-public class param_2{
+struct MAV_CMD_START_RX_PAIR{
+public struct param_1{
 public const string label = "RC Type";
 public const string Enum = "RC_TYPE";
  public const string description = @"RC type.";
+
+}
+public struct param_2{
+public const string label = "RC Sub Type";
+public const string Enum = "RC_SUB_TYPE";
+ public const string description = @"RC sub type.";
 
 }
 
  public const string description = @"Starts receiver pairing.";
 
 }
-class MAV_CMD_GET_MESSAGE_INTERVAL{
-public class param_1{
+struct MAV_CMD_GET_MESSAGE_INTERVAL{
+public struct param_1{
 public const string label = "Message ID";
 public const string increment = "1";
 public const string minValue = "0";
@@ -22454,12 +25157,13 @@ public const string maxValue = "16777215";
 
 }
 
- public const string description = @"Request the interval between messages for a particular MAVLink message ID. The receiver should ACK the
-command and then emit its response in a MESSAGE_INTERVAL message.";
+ public const string description = @"Request the interval between messages for a particular MAVLink message ID.
+          The receiver should
+ACK the command and then emit its response in a MESSAGE_INTERVAL message.";
 
 }
-class MAV_CMD_SET_MESSAGE_INTERVAL{
-public class param_1{
+struct MAV_CMD_SET_MESSAGE_INTERVAL{
+public struct param_1{
 public const string label = "Message ID";
 public const string increment = "1";
 public const string minValue = "0";
@@ -22467,28 +25171,54 @@ public const string maxValue = "16777215";
  public const string description = @"The MAVLink message ID";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Interval";
 public const string increment = "1";
 public const string minValue = "-1";
- public const string description = @"The interval between two messages. Set to -1 to disable and 0 to request default rate.";
+ public const string description = @"The interval between two messages. -1: disable. 0: request default rate (which may be zero).";
 
 }
-public class param_7{
+public struct param_3{
+public const string label = "Req Param 3";
+ public const string description = @"Use for index ID, if required. Otherwise, the use of this parameter (if any) must be defined in the requested
+message. By default assumed not used (0).  When used as an index ID, 0 means ""all instances"", ""1"" means
+the first instance in the sequence (the emitted message will have an id of 0 if message ids are 0-indexed,
+or 1 if index numbers start from one).";
+
+}
+public struct param_4{
+public const string label = "Req Param 4";
+ public const string description = @"The use of this parameter (if any), must be defined in the requested message. By default assumed not used
+(0).";
+
+}
+public struct param_5{
+public const string label = "Req Param 5";
+ public const string description = @"The use of this parameter (if any), must be defined in the requested message. By default assumed not used
+(0/NaN).";
+
+}
+public struct param_6{
+public const string label = "Req Param 6";
+ public const string description = @"The use of this parameter (if any), must be defined in the requested message. By default assumed not used
+(0/NaN).";
+
+}
+public struct param_7{
 public const string label = "Response Target";
 public const string increment = "1";
 public const string minValue = "0";
 public const string maxValue = "2";
  public const string description = @"Target address of message stream (if message has target address fields). 0: Flight-stack default (recommended),
-1: address of requestor, 2: broadcast.";
+1: address of requester, 2: broadcast.";
 
 }
 
  public const string description = @"Set the interval between messages for a particular MAVLink message ID. This interface replaces REQUEST_DATA_STREAM.";
 
 }
-class MAV_CMD_REQUEST_MESSAGE{
-public class param_1{
+struct MAV_CMD_REQUEST_MESSAGE{
+public struct param_1{
 public const string label = "Message ID";
 public const string increment = "1";
 public const string minValue = "0";
@@ -22496,43 +25226,43 @@ public const string maxValue = "16777215";
  public const string description = @"The MAVLink message ID of the requested message.";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Req Param 1";
  public const string description = @"Use for index ID, if required. Otherwise, the use of this parameter (if any) must be defined in the requested
 message. By default assumed not used (0).";
 
 }
-public class param_3{
+public struct param_3{
 public const string label = "Req Param 2";
  public const string description = @"The use of this parameter (if any), must be defined in the requested message. By default assumed not used
 (0).";
 
 }
-public class param_4{
+public struct param_4{
 public const string label = "Req Param 3";
  public const string description = @"The use of this parameter (if any), must be defined in the requested message. By default assumed not used
 (0).";
 
 }
-public class param_5{
+public struct param_5{
 public const string label = "Req Param 4";
  public const string description = @"The use of this parameter (if any), must be defined in the requested message. By default assumed not used
 (0).";
 
 }
-public class param_6{
+public struct param_6{
 public const string label = "Req Param 5";
  public const string description = @"The use of this parameter (if any), must be defined in the requested message. By default assumed not used
 (0).";
 
 }
-public class param_7{
+public struct param_7{
 public const string label = "Response Target";
 public const string increment = "1";
 public const string minValue = "0";
 public const string maxValue = "2";
  public const string description = @"Target address for requested message (if message has target address fields). 0: Flight-stack default,
-1: address of requestor, 2: broadcast.";
+1: address of requester, 2: broadcast.";
 
 }
 
@@ -22540,16 +25270,15 @@ public const string maxValue = "2";
 of MAV_CMD_SET_MESSAGE_INTERVAL).";
 
 }
-class MAV_CMD_REQUEST_PROTOCOL_VERSION{
-public class param_1{
+struct MAV_CMD_REQUEST_PROTOCOL_VERSION{
+public struct param_1{
 public const string label = "Protocol";
-public const string increment = "1";
-public const string minValue = "0";
-public const string maxValue = "1";
- public const string description = @"1: Request supported protocol versions by all nodes on the network";
+public const string Enum = "MAV_BOOL";
+ public const string description = @"Request supported protocol versions by all nodes on the network (MAV_BOOL_TRUE). Values not equal to 0
+or 1 are invalid.";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"Reserved (all remaining params)";
 
 }
@@ -22558,16 +25287,14 @@ public class param_2{
 capabilities in an PROTOCOL_VERSION message";
 
 }
-class MAV_CMD_REQUEST_AUTOPILOT_CAPABILITIES{
-public class param_1{
+struct MAV_CMD_REQUEST_AUTOPILOT_CAPABILITIES{
+public struct param_1{
 public const string label = "Version";
-public const string increment = "1";
-public const string minValue = "0";
-public const string maxValue = "1";
- public const string description = @"1: Request autopilot version";
+public const string Enum = "MAV_BOOL";
+ public const string description = @"Request autopilot version (MAV_BOOL_TRUE). Values not equal to 0 or 1 are invalid.";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"Reserved (all remaining params)";
 
 }
@@ -22576,16 +25303,14 @@ public class param_2{
 an AUTOPILOT_VERSION message";
 
 }
-class MAV_CMD_REQUEST_CAMERA_INFORMATION{
-public class param_1{
+struct MAV_CMD_REQUEST_CAMERA_INFORMATION{
+public struct param_1{
 public const string label = "Capabilities";
-public const string increment = "1";
-public const string minValue = "0";
-public const string maxValue = "1";
- public const string description = @"0: No action 1: Request camera capabilities";
+public const string Enum = "MAV_BOOL";
+ public const string description = @"Request camera capabilities (MAV_BOOL_TRUE). Values not equal to 0 or 1 are invalid.";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"Reserved (all remaining params)";
 
 }
@@ -22593,16 +25318,14 @@ public class param_2{
  public const string description = @"Request camera information (CAMERA_INFORMATION).";
 
 }
-class MAV_CMD_REQUEST_CAMERA_SETTINGS{
-public class param_1{
+struct MAV_CMD_REQUEST_CAMERA_SETTINGS{
+public struct param_1{
 public const string label = "Settings";
-public const string increment = "1";
-public const string minValue = "0";
-public const string maxValue = "1";
- public const string description = @"0: No Action 1: Request camera settings";
+public const string Enum = "MAV_BOOL";
+ public const string description = @"Request camera settings (MAV_BOOL_TRUE). Values not equal to 0 or 1 are invalid.";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"Reserved (all remaining params)";
 
 }
@@ -22610,23 +25333,21 @@ public class param_2{
  public const string description = @"Request camera settings (CAMERA_SETTINGS).";
 
 }
-class MAV_CMD_REQUEST_STORAGE_INFORMATION{
-public class param_1{
+struct MAV_CMD_REQUEST_STORAGE_INFORMATION{
+public struct param_1{
 public const string label = "Storage ID";
 public const string increment = "1";
 public const string minValue = "0";
  public const string description = @"Storage ID (0 for all, 1 for first, 2 for second, etc.)";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Information";
-public const string increment = "1";
-public const string minValue = "0";
-public const string maxValue = "1";
- public const string description = @"0: No Action 1: Request storage information";
+public const string Enum = "MAV_BOOL";
+ public const string description = @"Request storage information (MAV_BOOL_TRUE). Values not equal to 0 or 1 are invalid.";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"Reserved (all remaining params)";
 
 }
@@ -22635,32 +25356,28 @@ public class param_3{
 component's storage.";
 
 }
-class MAV_CMD_STORAGE_FORMAT{
-public class param_1{
+struct MAV_CMD_STORAGE_FORMAT{
+public struct param_1{
 public const string label = "Storage ID";
 public const string increment = "1";
 public const string minValue = "0";
  public const string description = @"Storage ID (1 for first, 2 for second, etc.)";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Format";
-public const string increment = "1";
-public const string minValue = "0";
-public const string maxValue = "1";
- public const string description = @"Format storage (and reset image log). 0: No action 1: Format storage";
+public const string Enum = "MAV_BOOL";
+ public const string description = @"Format storage (and reset image log). Values not equal to 0 or 1 are invalid.";
 
 }
-public class param_3{
+public struct param_3{
 public const string label = "Reset Image Log";
-public const string increment = "1";
-public const string minValue = "0";
-public const string maxValue = "1";
+public const string Enum = "MAV_BOOL";
  public const string description = @"Reset Image Log (without formatting storage medium). This will reset CAMERA_CAPTURE_STATUS.image_count
-and CAMERA_IMAGE_CAPTURED.image_index. 0: No action 1: Reset Image Log";
+and CAMERA_IMAGE_CAPTURED.image_index. Values not equal to 0 or 1 are invalid.";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"Reserved (all remaining params)";
 
 }
@@ -22669,16 +25386,14 @@ public class param_4{
 target_component to target a specific component's storage.";
 
 }
-class MAV_CMD_REQUEST_CAMERA_CAPTURE_STATUS{
-public class param_1{
+struct MAV_CMD_REQUEST_CAMERA_CAPTURE_STATUS{
+public struct param_1{
 public const string label = "Capture Status";
-public const string increment = "1";
-public const string minValue = "0";
-public const string maxValue = "1";
- public const string description = @"0: No Action 1: Request camera capture status";
+public const string Enum = "MAV_BOOL";
+ public const string description = @"Request camera capture status (MAV_BOOL_TRUE). Values not equal to 0 or 1 are invalid.";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"Reserved (all remaining params)";
 
 }
@@ -22686,16 +25401,14 @@ public class param_2{
  public const string description = @"Request camera capture status (CAMERA_CAPTURE_STATUS)";
 
 }
-class MAV_CMD_REQUEST_FLIGHT_INFORMATION{
-public class param_1{
+struct MAV_CMD_REQUEST_FLIGHT_INFORMATION{
+public struct param_1{
 public const string label = "Flight Information";
-public const string increment = "1";
-public const string minValue = "0";
-public const string maxValue = "1";
- public const string description = @"1: Request flight information";
+public const string Enum = "MAV_BOOL";
+ public const string description = @"Request flight information (MAV_BOOL_TRUE). Values not equal to 0 or 1 are invalid.";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"Reserved (all remaining params)";
 
 }
@@ -22703,45 +25416,55 @@ public class param_2{
  public const string description = @"Request flight information (FLIGHT_INFORMATION)";
 
 }
-class MAV_CMD_RESET_CAMERA_SETTINGS{
-public class param_1{
+struct MAV_CMD_RESET_CAMERA_SETTINGS{
+public struct param_1{
 public const string label = "Reset";
-public const string increment = "1";
-public const string minValue = "0";
-public const string maxValue = "1";
- public const string description = @"0: No Action 1: Reset all settings";
+public const string Enum = "MAV_BOOL";
+ public const string description = @"Reset all settings (MAV_BOOL_TRUE). Values not equal to 0 or 1 are invalid.";
 
 }
-public class param_2{
- public const string description = @"Reserved (all remaining params)";
+public struct param_2{
+public const string label = "Target Camera ID";
+public const string increment = "1";
+public const string minValue = "0";
+public const string maxValue = "255";
+ public const string description = @"Target camera ID. 7 to 255: MAVLink camera component id. 1 to 6 for cameras attached to the autopilot,
+which don't have a distinct component id. 0: all cameras. This is used to target specific autopilot-connected
+cameras. It is also used to target specific cameras when the MAV_CMD is used in a mission.";
 
 }
 
  public const string description = @"Reset all camera settings to Factory Default";
 
 }
-class MAV_CMD_SET_CAMERA_MODE{
-public class param_1{
- public const string description = @"Reserved (Set to 0)";
+struct MAV_CMD_SET_CAMERA_MODE{
+public struct param_1{
+public const string label = "id";
+public const string increment = "1";
+public const string minValue = "0";
+public const string maxValue = "255";
+ public const string description = @"Target camera ID. 7 to 255: MAVLink camera component id. 1 to 6 for cameras attached to the autopilot,
+which don't have a distinct component id. 0: all cameras. This is used to target specific autopilot-connected
+cameras. It is also used to target specific cameras when the MAV_CMD is used in a mission.";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Camera Mode";
 public const string Enum = "CAMERA_MODE";
  public const string description = @"Camera mode";
 
 }
-public class param_3{
+public struct param_3{
 public const string reserved = "true";
 public const string Default = "NaN";
 
 }
-public class param_4{
+public struct param_4{
 public const string reserved = "true";
 public const string Default = "NaN";
 
 }
-public class param_7{
+public struct param_7{
 public const string reserved = "true";
 public const string Default = "NaN";
 
@@ -22751,29 +25474,29 @@ public const string Default = "NaN";
 command after a mode change if the camera supports video streaming.";
 
 }
-class MAV_CMD_SET_CAMERA_ZOOM{
-public class param_1{
+struct MAV_CMD_SET_CAMERA_ZOOM{
+public struct param_1{
 public const string label = "Zoom Type";
 public const string Enum = "CAMERA_ZOOM_TYPE";
  public const string description = @"Zoom type";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Zoom Value";
  public const string description = @"Zoom value. The range of valid values depend on the zoom type.";
 
 }
-public class param_3{
-public const string reserved = "true";
-public const string Default = "NaN";
+public struct param_3{
+public const string label = "Target Camera ID";
+public const string increment = "1";
+public const string minValue = "0";
+public const string maxValue = "255";
+ public const string description = @"Target camera ID. 7 to 255: MAVLink camera component id. 1 to 6 for cameras attached to the autopilot,
+which don't have a distinct component id. 0: all cameras. This is used to target specific autopilot-connected
+cameras. It is also used to target specific cameras when the MAV_CMD is used in a mission.";
 
 }
-public class param_4{
-public const string reserved = "true";
-public const string Default = "NaN";
-
-}
-public class param_7{
+public struct param_4{
 public const string reserved = "true";
 public const string Default = "NaN";
 
@@ -22782,29 +25505,29 @@ public const string Default = "NaN";
  public const string description = @"Set camera zoom. Camera must respond with a CAMERA_SETTINGS message (on success).";
 
 }
-class MAV_CMD_SET_CAMERA_FOCUS{
-public class param_1{
+struct MAV_CMD_SET_CAMERA_FOCUS{
+public struct param_1{
 public const string label = "Focus Type";
 public const string Enum = "SET_FOCUS_TYPE";
  public const string description = @"Focus type";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Focus Value";
  public const string description = @"Focus value";
 
 }
-public class param_3{
-public const string reserved = "true";
-public const string Default = "NaN";
+public struct param_3{
+public const string label = "Target Camera ID";
+public const string increment = "1";
+public const string minValue = "0";
+public const string maxValue = "255";
+ public const string description = @"Target camera ID. 7 to 255: MAVLink camera component id. 1 to 6 for cameras attached to the autopilot,
+which don't have a distinct component id. 0: all cameras. This is used to target specific autopilot-connected
+cameras. It is also used to target specific cameras when the MAV_CMD is used in a mission.";
 
 }
-public class param_4{
-public const string reserved = "true";
-public const string Default = "NaN";
-
-}
-public class param_7{
+public struct param_4{
 public const string reserved = "true";
 public const string Default = "NaN";
 
@@ -22813,15 +25536,15 @@ public const string Default = "NaN";
  public const string description = @"Set camera focus. Camera must respond with a CAMERA_SETTINGS message (on success).";
 
 }
-class MAV_CMD_SET_STORAGE_USAGE{
-public class param_1{
+struct MAV_CMD_SET_STORAGE_USAGE{
+public struct param_1{
 public const string label = "Storage ID";
 public const string increment = "1";
 public const string minValue = "0";
  public const string description = @"Storage ID (1 for first, 2 for second, etc.)";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Usage";
 public const string Enum = "STORAGE_USAGE_FLAG";
  public const string description = @"Usage flags";
@@ -22832,8 +25555,30 @@ public const string Enum = "STORAGE_USAGE_FLAG";
 case it should ACK the command with MAV_RESULT_DENIED.";
 
 }
-class MAV_CMD_JUMP_TAG{
-public class param_1{
+struct MAV_CMD_SET_CAMERA_SOURCE{
+public struct param_1{
+public const string label = "device id";
+ public const string description = @"Component Id of camera to address or 1-6 for non-MAVLink cameras, 0 for all cameras.";
+
+}
+public struct param_2{
+public const string label = "primary source";
+public const string Enum = "CAMERA_SOURCE";
+ public const string description = @"Primary Source";
+
+}
+public struct param_3{
+public const string label = "secondary source";
+public const string Enum = "CAMERA_SOURCE";
+ public const string description = @"Secondary Source. If non-zero the second source will be displayed as picture-in-picture.";
+
+}
+
+ public const string description = @"Set camera source. Changes the camera's active sources on cameras with multiple image sensors.";
+
+}
+struct MAV_CMD_JUMP_TAG{
+public struct param_1{
 public const string label = "Tag";
 public const string increment = "1";
 public const string minValue = "0";
@@ -22844,15 +25589,15 @@ public const string minValue = "0";
  public const string description = @"Tagged jump target. Can be jumped to with MAV_CMD_DO_JUMP_TAG.";
 
 }
-class MAV_CMD_DO_JUMP_TAG{
-public class param_1{
+struct MAV_CMD_DO_JUMP_TAG{
+public struct param_1{
 public const string label = "Tag";
 public const string increment = "1";
 public const string minValue = "0";
  public const string description = @"Target tag to jump to.";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Repeat";
 public const string increment = "1";
 public const string minValue = "0";
@@ -22866,8 +25611,8 @@ missing tag should complete the mission, and a jump where there are multiple mat
 select the one with the lowest mission sequence number.";
 
 }
-class MAV_CMD_DO_GIMBAL_MANAGER_PITCHYAW{
-public class param_1{
+struct MAV_CMD_DO_GIMBAL_MANAGER_PITCHYAW{
+public struct param_1{
 public const string label = "Pitch angle";
 public const string minValue = "-180";
 public const string maxValue = "180";
@@ -22875,7 +25620,7 @@ public const string maxValue = "180";
 LOCK mode).";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Yaw angle";
 public const string minValue = "-180";
 public const string maxValue = "180";
@@ -22883,61 +25628,62 @@ public const string maxValue = "180";
 mode).";
 
 }
-public class param_3{
+public struct param_3{
 public const string label = "Pitch rate";
  public const string description = @"Pitch rate (positive to pitch up).";
 
 }
-public class param_4{
+public struct param_4{
 public const string label = "Yaw rate";
  public const string description = @"Yaw rate (positive to yaw to the right).";
 
 }
-public class param_5{
+public struct param_5{
 public const string label = "Gimbal manager flags";
 public const string Enum = "GIMBAL_MANAGER_FLAGS";
  public const string description = @"Gimbal manager flags to use.";
 
 }
-public class param_7{
+public struct param_7{
 public const string label = "Gimbal device ID";
  public const string description = @"Component ID of gimbal device to address (or 1-6 for non-MAVLink gimbal), 0 for all gimbal device components.
 Send command multiple times for more than one gimbal (but not all gimbals).";
 
 }
 
- public const string description = @"High level setpoint to be sent to a gimbal manager to set a gimbal attitude. It is possible to set combinations
-of the values below. E.g. an angle as well as a desired angular rate can be used to get to this angle
-at a certain angular rate, or an angular rate only will result in continuous turning. NaN is to be used
-to signal unset. Note: a gimbal is never to react to this command but only the gimbal manager.";
+ public const string description = @"Set gimbal manager pitch/yaw setpoints (low rate command). It is possible to set combinations of the values
+below. E.g. an angle as well as a desired angular rate can be used to get to this angle at a certain
+angular rate, or an angular rate only will result in continuous turning. NaN is to be used to signal
+unset. Note: only the gimbal manager will react to this command - it will be ignored by a gimbal device.
+Use GIMBAL_MANAGER_SET_PITCHYAW if you need to stream pitch/yaw setpoints at higher rate. ";
 
 }
-class MAV_CMD_DO_GIMBAL_MANAGER_CONFIGURE{
-public class param_1{
+struct MAV_CMD_DO_GIMBAL_MANAGER_CONFIGURE{
+public struct param_1{
 public const string label = "sysid primary control";
  public const string description = @"Sysid for primary control (0: no one in control, -1: leave unchanged, -2: set itself in control (for missions
 where the own sysid is still unknown), -3: remove control if currently in control).";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "compid primary control";
  public const string description = @"Compid for primary control (0: no one in control, -1: leave unchanged, -2: set itself in control (for
 missions where the own sysid is still unknown), -3: remove control if currently in control).";
 
 }
-public class param_3{
+public struct param_3{
 public const string label = "sysid secondary control";
  public const string description = @"Sysid for secondary control (0: no one in control, -1: leave unchanged, -2: set itself in control (for
 missions where the own sysid is still unknown), -3: remove control if currently in control).";
 
 }
-public class param_4{
+public struct param_4{
 public const string label = "compid secondary control";
  public const string description = @"Compid for secondary control (0: no one in control, -1: leave unchanged, -2: set itself in control (for
 missions where the own sysid is still unknown), -3: remove control if currently in control).";
 
 }
-public class param_7{
+public struct param_7{
 public const string label = "Gimbal device ID";
  public const string description = @"Component ID of gimbal device to address (or 1-6 for non-MAVLink gimbal), 0 for all gimbal device components.
 Send command multiple times for more than one gimbal (but not all gimbals).";
@@ -22947,26 +25693,32 @@ Send command multiple times for more than one gimbal (but not all gimbals).";
  public const string description = @"Gimbal configuration to set which sysid/compid is in primary and secondary control.";
 
 }
-class MAV_CMD_IMAGE_START_CAPTURE{
-public class param_1{
- public const string description = @"Reserved (Set to 0)";
+struct MAV_CMD_IMAGE_START_CAPTURE{
+public struct param_1{
+public const string label = "Target Camera ID";
+public const string increment = "1";
+public const string minValue = "0";
+public const string maxValue = "255";
+ public const string description = @"Target camera ID. 7 to 255: MAVLink camera component id. 1 to 6 for cameras attached to the autopilot,
+which don't have a distinct component id. 0: all cameras. This is used to target specific autopilot-connected
+cameras. It is also used to target specific cameras when the MAV_CMD is used in a mission.";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Interval";
 public const string minValue = "0";
  public const string description = @"Desired elapsed time between two consecutive pictures (in seconds). Minimum values depend on hardware
 (typically greater than 2 seconds).";
 
 }
-public class param_3{
+public struct param_3{
 public const string label = "Total Images";
 public const string increment = "1";
 public const string minValue = "0";
  public const string description = @"Total number of images to capture. 0 to capture forever/until MAV_CMD_IMAGE_STOP_CAPTURE.";
 
 }
-public class param_4{
+public struct param_4{
 public const string label = "Sequence Number";
 public const string increment = "1";
 public const string minValue = "1";
@@ -22975,78 +25727,108 @@ set to 0. Increment the capture ID for each capture command to prevent double ca
 is re-transmitted.";
 
 }
-public class param_5{
+public struct param_5{
 public const string reserved = "true";
-public const string Default = "NaN";
 
 }
-public class param_6{
+public struct param_6{
 public const string reserved = "true";
-public const string Default = "NaN";
 
 }
-public class param_7{
-public const string reserved = "true";
-public const string Default = "NaN";
-
-}
-
- public const string description = @"Start image capture sequence. Sends CAMERA_IMAGE_CAPTURED after each capture. Use NaN for reserved values.";
-
-}
-class MAV_CMD_IMAGE_STOP_CAPTURE{
-public class param_1{
- public const string description = @"Reserved (Set to 0)";
-
-}
-public class param_2{
-public const string reserved = "true";
-public const string Default = "NaN";
-
-}
-public class param_3{
-public const string reserved = "true";
-public const string Default = "NaN";
-
-}
-public class param_4{
-public const string reserved = "true";
-public const string Default = "NaN";
-
-}
-public class param_7{
+public struct param_7{
 public const string reserved = "true";
 public const string Default = "NaN";
 
 }
 
- public const string description = @"Stop image capture sequence Use NaN for reserved values.";
+ public const string description = @"If addressed to a MAVLink camera, param 1 can be used to address all cameras (0), or to separately address
+1 to 7 individual sensors. Other values should be NACKed with MAV_RESULT_DENIED.
+          If the command
+is broadcast (target_component is 0) then param 1 should be set to 0 (any other value should be NACKED
+with MAV_RESULT_DENIED). An autopilot would trigger any local cameras and forward the command to all
+channels.";
 
 }
-class MAV_CMD_REQUEST_CAMERA_IMAGE_CAPTURE{
-public class param_1{
+struct MAV_CMD_IMAGE_STOP_CAPTURE{
+public struct param_1{
+public const string label = "Target Camera ID";
+public const string increment = "1";
+public const string minValue = "0";
+public const string maxValue = "255";
+ public const string description = @"Target camera ID. 7 to 255: MAVLink camera component id. 1 to 6 for cameras attached to the autopilot,
+which don't have a distinct component id. 0: all cameras. This is used to target specific autopilot-connected
+cameras. It is also used to target specific cameras when the MAV_CMD is used in a mission.";
+
+}
+public struct param_2{
+public const string reserved = "true";
+public const string Default = "NaN";
+
+}
+public struct param_3{
+public const string reserved = "true";
+public const string Default = "NaN";
+
+}
+public struct param_4{
+public const string reserved = "true";
+public const string Default = "NaN";
+
+}
+public struct param_5{
+public const string reserved = "true";
+
+}
+public struct param_6{
+public const string reserved = "true";
+
+}
+public struct param_7{
+public const string reserved = "true";
+public const string Default = "NaN";
+
+}
+
+ public const string description = @"If addressed to a MAVLink camera, param1 can be used to address all cameras (0), or to separately address
+1 to 7 individual sensors. Other values should be NACKed with MAV_RESULT_DENIED.
+          If the command
+is broadcast (target_component is 0) then param 1 should be set to 0 (any other value should be NACKED
+with MAV_RESULT_DENIED). An autopilot would trigger any local cameras and forward the command to all
+channels.";
+
+}
+struct MAV_CMD_REQUEST_CAMERA_IMAGE_CAPTURE{
+public struct param_1{
 public const string label = "Number";
 public const string increment = "1";
 public const string minValue = "0";
  public const string description = @"Sequence number for missing CAMERA_IMAGE_CAPTURED message";
 
 }
-public class param_2{
+public struct param_2{
 public const string reserved = "true";
 public const string Default = "NaN";
 
 }
-public class param_3{
+public struct param_3{
 public const string reserved = "true";
 public const string Default = "NaN";
 
 }
-public class param_4{
+public struct param_4{
 public const string reserved = "true";
 public const string Default = "NaN";
 
 }
-public class param_7{
+public struct param_5{
+public const string reserved = "true";
+
+}
+public struct param_6{
+public const string reserved = "true";
+
+}
+public struct param_7{
 public const string reserved = "true";
 public const string Default = "NaN";
 
@@ -23055,8 +25837,8 @@ public const string Default = "NaN";
  public const string description = @"Re-request a CAMERA_IMAGE_CAPTURED message.";
 
 }
-class MAV_CMD_DO_TRIGGER_CONTROL{
-public class param_1{
+struct MAV_CMD_DO_TRIGGER_CONTROL{
+public struct param_1{
 public const string label = "Enable";
 public const string increment = "1";
 public const string minValue = "-1";
@@ -23064,7 +25846,7 @@ public const string maxValue = "1";
  public const string description = @"Trigger enable/disable (0 for disable, 1 for start), -1 to ignore";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Reset";
 public const string increment = "1";
 public const string minValue = "-1";
@@ -23072,7 +25854,7 @@ public const string maxValue = "1";
  public const string description = @"1 to reset the trigger sequence, -1 or 0 to ignore";
 
 }
-public class param_3{
+public struct param_3{
 public const string label = "Pause";
 public const string increment = "2";
 public const string minValue = "-1";
@@ -23080,30 +25862,50 @@ public const string maxValue = "1";
  public const string description = @"1 to pause triggering, but without switching the camera off or retracting it. -1 to ignore";
 
 }
+public struct param_4{
+public const string label = "Target Camera ID";
+public const string increment = "1";
+public const string minValue = "0";
+public const string maxValue = "255";
+ public const string description = @"Target camera ID. 7 to 255: MAVLink camera component id. 1 to 6 for cameras attached to the autopilot,
+which don't have a distinct component id. 0: all cameras. This is used to target specific autopilot-connected
+cameras. It is also used to target specific cameras when the MAV_CMD is used in a mission.";
+
+}
 
  public const string description = @"Enable or disable on-board camera triggering system.";
 
 }
-class MAV_CMD_CAMERA_TRACK_POINT{
-public class param_1{
+struct MAV_CMD_CAMERA_TRACK_POINT{
+public struct param_1{
 public const string label = "Point x";
 public const string minValue = "0";
 public const string maxValue = "1";
  public const string description = @"Point to track x value (normalized 0..1, 0 is left, 1 is right).";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Point y";
 public const string minValue = "0";
 public const string maxValue = "1";
  public const string description = @"Point to track y value (normalized 0..1, 0 is top, 1 is bottom).";
 
 }
-public class param_3{
+public struct param_3{
 public const string label = "Radius";
 public const string minValue = "0";
 public const string maxValue = "1";
- public const string description = @"Point radius (normalized 0..1, 0 is image left, 1 is image right).";
+ public const string description = @"Point radius (normalized 0..1, 0 is one pixel, 1 is full image width).";
+
+}
+public struct param_4{
+public const string label = "Target Camera ID";
+public const string increment = "1";
+public const string minValue = "0";
+public const string maxValue = "255";
+ public const string description = @"Target camera ID. 7 to 255: MAVLink camera component id. 1 to 6 for cameras attached to the autopilot,
+which don't have a distinct component id. 0: all cameras. This is used to target specific autopilot-connected
+cameras. It is also used to target specific cameras when the MAV_CMD is used in a mission.";
 
 }
 
@@ -23111,33 +25913,43 @@ public const string maxValue = "1";
 allows to initiate the tracking.";
 
 }
-class MAV_CMD_CAMERA_TRACK_RECTANGLE{
-public class param_1{
+struct MAV_CMD_CAMERA_TRACK_RECTANGLE{
+public struct param_1{
 public const string label = "Top left corner x";
 public const string minValue = "0";
 public const string maxValue = "1";
  public const string description = @"Top left corner of rectangle x value (normalized 0..1, 0 is left, 1 is right).";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Top left corner y";
 public const string minValue = "0";
 public const string maxValue = "1";
  public const string description = @"Top left corner of rectangle y value (normalized 0..1, 0 is top, 1 is bottom).";
 
 }
-public class param_3{
+public struct param_3{
 public const string label = "Bottom right corner x";
 public const string minValue = "0";
 public const string maxValue = "1";
  public const string description = @"Bottom right corner of rectangle x value (normalized 0..1, 0 is left, 1 is right).";
 
 }
-public class param_4{
+public struct param_4{
 public const string label = "Bottom right corner y";
 public const string minValue = "0";
 public const string maxValue = "1";
  public const string description = @"Bottom right corner of rectangle y value (normalized 0..1, 0 is top, 1 is bottom).";
+
+}
+public struct param_5{
+public const string label = "Target Camera ID";
+public const string increment = "1";
+public const string minValue = "0";
+public const string maxValue = "255";
+ public const string description = @"Target camera ID. 7 to 255: MAVLink camera component id. 1 to 6 for cameras attached to the autopilot,
+which don't have a distinct component id. 0: all cameras. This is used to target specific autopilot-connected
+cameras. It is also used to target specific cameras when the MAV_CMD is used in a mission.";
 
 }
 
@@ -23145,47 +25957,60 @@ public const string maxValue = "1";
 command allows to initiate the tracking.";
 
 }
-class MAV_CMD_CAMERA_STOP_TRACKING{
+struct MAV_CMD_CAMERA_STOP_TRACKING{
+public struct param_1{
+public const string label = "Target Camera ID";
+public const string increment = "1";
+public const string minValue = "0";
+public const string maxValue = "255";
+ public const string description = @"Target camera ID. 7 to 255: MAVLink camera component id. 1 to 6 for cameras attached to the autopilot,
+which don't have a distinct component id. 0: all cameras. This is used to target specific autopilot-connected
+cameras. It is also used to target specific cameras when the MAV_CMD is used in a mission.";
+
+}
 
  public const string description = @"Stops ongoing tracking.";
 
 }
-class MAV_CMD_VIDEO_START_CAPTURE{
-public class param_1{
+struct MAV_CMD_VIDEO_START_CAPTURE{
+public struct param_1{
 public const string label = "Stream ID";
 public const string increment = "1";
 public const string minValue = "0";
  public const string description = @"Video Stream ID (0 for all streams)";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Status Frequency";
 public const string minValue = "0";
  public const string description = @"Frequency CAMERA_CAPTURE_STATUS messages should be sent while recording (0 for no messages, otherwise
 frequency)";
 
 }
-public class param_3{
+public struct param_3{
+public const string label = "Target Camera ID";
+public const string increment = "1";
+public const string minValue = "0";
+public const string maxValue = "255";
+ public const string description = @"Target camera ID. 7 to 255: MAVLink camera component id. 1 to 6 for cameras attached to the autopilot,
+which don't have a distinct component id. 0: all cameras. This is used to target specific autopilot-connected
+cameras. It is also used to target specific cameras when the MAV_CMD is used in a mission.";
+
+}
+public struct param_4{
 public const string reserved = "true";
 public const string Default = "NaN";
 
 }
-public class param_4{
+public struct param_5{
 public const string reserved = "true";
-public const string Default = "NaN";
 
 }
-public class param_5{
+public struct param_6{
 public const string reserved = "true";
-public const string Default = "NaN";
 
 }
-public class param_6{
-public const string reserved = "true";
-public const string Default = "NaN";
-
-}
-public class param_7{
+public struct param_7{
 public const string reserved = "true";
 public const string Default = "NaN";
 
@@ -23194,40 +26019,43 @@ public const string Default = "NaN";
  public const string description = @"Starts video capture (recording).";
 
 }
-class MAV_CMD_VIDEO_STOP_CAPTURE{
-public class param_1{
+struct MAV_CMD_VIDEO_STOP_CAPTURE{
+public struct param_1{
 public const string label = "Stream ID";
 public const string increment = "1";
 public const string minValue = "0";
  public const string description = @"Video Stream ID (0 for all streams)";
 
 }
-public class param_2{
+public struct param_2{
+public const string label = "Target Camera ID";
+public const string increment = "1";
+public const string minValue = "0";
+public const string maxValue = "255";
+ public const string description = @"Target camera ID. 7 to 255: MAVLink camera component id. 1 to 6 for cameras attached to the autopilot,
+which don't have a distinct component id. 0: all cameras. This is used to target specific autopilot-connected
+cameras. It is also used to target specific cameras when the MAV_CMD is used in a mission.";
+
+}
+public struct param_3{
 public const string reserved = "true";
 public const string Default = "NaN";
 
 }
-public class param_3{
+public struct param_4{
 public const string reserved = "true";
 public const string Default = "NaN";
 
 }
-public class param_4{
+public struct param_5{
 public const string reserved = "true";
-public const string Default = "NaN";
 
 }
-public class param_5{
+public struct param_6{
 public const string reserved = "true";
-public const string Default = "NaN";
 
 }
-public class param_6{
-public const string reserved = "true";
-public const string Default = "NaN";
-
-}
-public class param_7{
+public struct param_7{
 public const string reserved = "true";
 public const string Default = "NaN";
 
@@ -23236,32 +26064,52 @@ public const string Default = "NaN";
  public const string description = @"Stop the current video capture (recording).";
 
 }
-class MAV_CMD_VIDEO_START_STREAMING{
-public class param_1{
+struct MAV_CMD_VIDEO_START_STREAMING{
+public struct param_1{
 public const string label = "Stream ID";
 public const string increment = "1";
 public const string minValue = "0";
  public const string description = @"Video Stream ID (0 for all streams, 1 for first, 2 for second, etc.)";
+
+}
+public struct param_2{
+public const string label = "Target Camera ID";
+public const string increment = "1";
+public const string minValue = "0";
+public const string maxValue = "255";
+ public const string description = @"Target camera ID. 7 to 255: MAVLink camera component id. 1 to 6 for cameras attached to the autopilot,
+which don't have a distinct component id. 0: all cameras. This is used to target specific autopilot-connected
+cameras. It is also used to target specific cameras when the MAV_CMD is used in a mission.";
 
 }
 
  public const string description = @"Start video streaming";
 
 }
-class MAV_CMD_VIDEO_STOP_STREAMING{
-public class param_1{
+struct MAV_CMD_VIDEO_STOP_STREAMING{
+public struct param_1{
 public const string label = "Stream ID";
 public const string increment = "1";
 public const string minValue = "0";
  public const string description = @"Video Stream ID (0 for all streams, 1 for first, 2 for second, etc.)";
 
 }
+public struct param_2{
+public const string label = "Target Camera ID";
+public const string increment = "1";
+public const string minValue = "0";
+public const string maxValue = "255";
+ public const string description = @"Target camera ID. 7 to 255: MAVLink camera component id. 1 to 6 for cameras attached to the autopilot,
+which don't have a distinct component id. 0: all cameras. This is used to target specific autopilot-connected
+cameras. It is also used to target specific cameras when the MAV_CMD is used in a mission.";
+
+}
 
  public const string description = @"Stop the given video stream";
 
 }
-class MAV_CMD_REQUEST_VIDEO_STREAM_INFORMATION{
-public class param_1{
+struct MAV_CMD_REQUEST_VIDEO_STREAM_INFORMATION{
+public struct param_1{
 public const string label = "Stream ID";
 public const string increment = "1";
 public const string minValue = "0";
@@ -23272,8 +26120,8 @@ public const string minValue = "0";
  public const string description = @"Request video stream information (VIDEO_STREAM_INFORMATION)";
 
 }
-class MAV_CMD_REQUEST_VIDEO_STREAM_STATUS{
-public class param_1{
+struct MAV_CMD_REQUEST_VIDEO_STREAM_STATUS{
+public struct param_1{
 public const string label = "Stream ID";
 public const string increment = "1";
 public const string minValue = "0";
@@ -23284,35 +26132,35 @@ public const string minValue = "0";
  public const string description = @"Request video stream status (VIDEO_STREAM_STATUS)";
 
 }
-class MAV_CMD_LOGGING_START{
-public class param_1{
+struct MAV_CMD_LOGGING_START{
+public struct param_1{
 public const string label = "Format";
 public const string increment = "1";
 public const string minValue = "0";
  public const string description = @"Format: 0: ULog";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"Reserved (set to 0)";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"Reserved (set to 0)";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"Reserved (set to 0)";
 
 }
-public class param_5{
+public struct param_5{
  public const string description = @"Reserved (set to 0)";
 
 }
-public class param_6{
+public struct param_6{
  public const string description = @"Reserved (set to 0)";
 
 }
-public class param_7{
+public struct param_7{
  public const string description = @"Reserved (set to 0)";
 
 }
@@ -23320,32 +26168,32 @@ public class param_7{
  public const string description = @"Request to start streaming logging data over MAVLink (see also LOGGING_DATA message)";
 
 }
-class MAV_CMD_LOGGING_STOP{
-public class param_1{
+struct MAV_CMD_LOGGING_STOP{
+public struct param_1{
  public const string description = @"Reserved (set to 0)";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"Reserved (set to 0)";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"Reserved (set to 0)";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"Reserved (set to 0)";
 
 }
-public class param_5{
+public struct param_5{
  public const string description = @"Reserved (set to 0)";
 
 }
-public class param_6{
+public struct param_6{
  public const string description = @"Reserved (set to 0)";
 
 }
-public class param_7{
+public struct param_7{
  public const string description = @"Reserved (set to 0)";
 
 }
@@ -23353,77 +26201,74 @@ public class param_7{
  public const string description = @"Request to stop streaming log data over MAVLink";
 
 }
-class MAV_CMD_AIRFRAME_CONFIGURATION{
-public class param_1{
+struct MAV_CMD_AIRFRAME_CONFIGURATION{
+public struct param_1{
 public const string label = "Landing Gear ID";
 public const string increment = "1";
 public const string minValue = "-1";
  public const string description = @"Landing gear ID (default: 0, -1 for all)";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Landing Gear Position";
  public const string description = @"Landing gear position (Down: 0, Up: 1, NaN for no change)";
 
 }
-public class param_3{
+public struct param_3{
 public const string reserved = "true";
 public const string Default = "NaN";
 
 }
-public class param_4{
+public struct param_4{
 public const string reserved = "true";
 public const string Default = "NaN";
 
 }
-public class param_5{
+public struct param_5{
+public const string reserved = "true";
+
+}
+public struct param_6{
+public const string reserved = "true";
+
+}
+public struct param_7{
 public const string reserved = "true";
 public const string Default = "NaN";
 
 }
-public class param_6{
-public const string reserved = "true";
-public const string Default = "NaN";
-
-}
-public class param_7{
-public const string reserved = "true";
-public const string Default = "NaN";
-
-}
 
 
 }
-class MAV_CMD_CONTROL_HIGH_LATENCY{
-public class param_1{
+struct MAV_CMD_CONTROL_HIGH_LATENCY{
+public struct param_1{
 public const string label = "Enable";
-public const string increment = "1";
-public const string minValue = "0";
-public const string maxValue = "1";
- public const string description = @"Control transmission over high latency telemetry (0: stop, 1: start)";
+public const string Enum = "MAV_BOOL";
+ public const string description = @"Start transmission over high latency telemetry (MAV_BOOL_FALSE: stop transmission). Values not equal to
+0 or 1 are invalid.";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"Empty";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"Empty";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"Empty";
 
 }
-public class param_5{
+public struct param_5{
  public const string description = @"Empty";
 
 }
-public class param_6{
+public struct param_6{
  public const string description = @"Empty";
 
 }
-public class param_7{
+public struct param_7{
  public const string description = @"Empty";
 
 }
@@ -23431,23 +26276,23 @@ public class param_7{
  public const string description = @"Request to start/stop transmitting over the high latency telemetry";
 
 }
-class MAV_CMD_PANORAMA_CREATE{
-public class param_1{
+struct MAV_CMD_PANORAMA_CREATE{
+public struct param_1{
 public const string label = "Horizontal Angle";
  public const string description = @"Viewing angle horizontal of the panorama (+- 0.5 the total angle)";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Vertical Angle";
  public const string description = @"Viewing angle vertical of panorama.";
 
 }
-public class param_3{
+public struct param_3{
 public const string label = "Horizontal Speed";
  public const string description = @"Speed of the horizontal rotation.";
 
 }
-public class param_4{
+public struct param_4{
 public const string label = "Vertical Speed";
  public const string description = @"Speed of the vertical rotation.";
 
@@ -23456,14 +26301,14 @@ public const string label = "Vertical Speed";
  public const string description = @"Create a panorama at the current position";
 
 }
-class MAV_CMD_DO_VTOL_TRANSITION{
-public class param_1{
+struct MAV_CMD_DO_VTOL_TRANSITION{
+public struct param_1{
 public const string label = "State";
 public const string Enum = "MAV_VTOL_STATE";
  public const string description = @"The target VTOL state. For normal transitions, only MAV_VTOL_STATE_MC and MAV_VTOL_STATE_FW can be used.";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Immediate";
  public const string description = @"Force immediate transition to the specified MAV_VTOL_STATE. 1: Force immediate, 0: normal transition.
 Can be used, for example, to trigger an emergency ""Quadchute"". Caution: Can be dangerous/damage vehicle,
@@ -23474,8 +26319,8 @@ depending on autopilot implementation of this command.";
  public const string description = @"Request VTOL transition";
 
 }
-class MAV_CMD_ARM_AUTHORIZATION_REQUEST{
-public class param_1{
+struct MAV_CMD_ARM_AUTHORIZATION_REQUEST{
+public struct param_1{
 public const string label = "System ID";
 public const string increment = "1";
 public const string minValue = "0";
@@ -23484,45 +26329,42 @@ public const string maxValue = "255";
 
 }
 
- public const string description = @"Request authorization to arm the vehicle to a external entity, the arm authorizer is responsible to request
-all data that is needs from the vehicle before authorize or deny the request. If approved the progress
-of command_ack message should be set with period of time that this authorization is valid in seconds
-or in case it was denied it should be set with one of the reasons in ARM_AUTH_DENIED_REASON.
-       
-";
+ public const string description = @"If the authorization is denied COMMAND_ACK.result_param2 should be set with one of the reasons in MAV_ARM_AUTH_DENIED_REASON.
+
+       ";
 
 }
-class MAV_CMD_SET_GUIDED_SUBMODE_STANDARD{
+struct MAV_CMD_SET_GUIDED_SUBMODE_STANDARD{
 
  public const string description = @"This command sets the submode to standard guided when vehicle is in guided mode. The vehicle holds position
 and altitude and the user can input the desired velocities along all three axes.
                   ";
 
 }
-class MAV_CMD_SET_GUIDED_SUBMODE_CIRCLE{
-public class param_1{
+struct MAV_CMD_SET_GUIDED_SUBMODE_CIRCLE{
+public struct param_1{
 public const string label = "Radius";
  public const string description = @"Radius of desired circle in CIRCLE_MODE";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"User defined";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"User defined";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"User defined";
 
 }
-public class param_5{
+public struct param_5{
 public const string label = "Latitude";
  public const string description = @"Target latitude of center of circle in CIRCLE_MODE";
 
 }
-public class param_6{
+public struct param_6{
 public const string label = "Longitude";
  public const string description = @"Target longitude of center of circle in CIRCLE_MODE";
 
@@ -23534,41 +26376,39 @@ is given the vehicle will hold position.
                   ";
 
 }
-class MAV_CMD_CONDITION_GATE{
-public class param_1{
+struct MAV_CMD_CONDITION_GATE{
+public struct param_1{
 public const string label = "Geometry";
 public const string increment = "1";
 public const string minValue = "0";
  public const string description = @"Geometry: 0: orthogonal to path between previous and next waypoint.";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "UseAltitude";
-public const string increment = "1";
-public const string minValue = "0";
-public const string maxValue = "1";
- public const string description = @"Altitude: 0: ignore altitude";
+public const string Enum = "MAV_BOOL";
+ public const string description = @"Use altitude (MAV_BOOL_FALSE: ignore altitude). Values not equal to 0 or 1 are invalid.";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"Empty";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"Empty";
 
 }
-public class param_5{
+public struct param_5{
 public const string label = "Latitude";
  public const string description = @"Latitude";
 
 }
-public class param_6{
+public struct param_6{
 public const string label = "Longitude";
  public const string description = @"Longitude";
 
 }
-public class param_7{
+public struct param_7{
 public const string label = "Altitude";
  public const string description = @"Altitude";
 
@@ -23577,34 +26417,34 @@ public const string label = "Altitude";
  public const string description = @"Delay mission state machine until gate has been reached.";
 
 }
-class MAV_CMD_NAV_FENCE_RETURN_POINT{
-public class param_1{
+struct MAV_CMD_NAV_FENCE_RETURN_POINT{
+public struct param_1{
  public const string description = @"Reserved";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"Reserved";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"Reserved";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"Reserved";
 
 }
-public class param_5{
+public struct param_5{
 public const string label = "Latitude";
  public const string description = @"Latitude";
 
 }
-public class param_6{
+public struct param_6{
 public const string label = "Longitude";
  public const string description = @"Longitude";
 
 }
-public class param_7{
+public struct param_7{
 public const string label = "Altitude";
  public const string description = @"Altitude";
 
@@ -23614,15 +26454,16 @@ public const string label = "Altitude";
 they should be used instead.";
 
 }
-class MAV_CMD_NAV_FENCE_POLYGON_VERTEX_INCLUSION{
-public class param_1{
+struct MAV_CMD_NAV_FENCE_POLYGON_VERTEX_INCLUSION{
+public struct param_1{
 public const string label = "Vertex Count";
 public const string increment = "1";
 public const string minValue = "3";
- public const string description = @"Polygon vertex count";
+ public const string description = @"Polygon vertex count. This is the number of vertices in the current polygon (all vertices will have the
+same number).";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Inclusion Group";
 public const string increment = "1";
 public const string minValue = "0";
@@ -23630,106 +26471,109 @@ public const string minValue = "0";
 must be the same for all points in each polygon";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"Reserved";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"Reserved";
 
 }
-public class param_5{
+public struct param_5{
 public const string label = "Latitude";
  public const string description = @"Latitude";
 
 }
-public class param_6{
+public struct param_6{
 public const string label = "Longitude";
  public const string description = @"Longitude";
 
 }
-public class param_7{
+public struct param_7{
  public const string description = @"Reserved";
 
 }
 
  public const string description = @"Fence vertex for an inclusion polygon (the polygon must not be self-intersecting). The vehicle must stay
 within this area. Minimum of 3 vertices required.
-        ";
+          The vertices for a polygon must be sent sequentially,
+each with param1 set to the total number of vertices in the polygon.";
 
 }
-class MAV_CMD_NAV_FENCE_POLYGON_VERTEX_EXCLUSION{
-public class param_1{
+struct MAV_CMD_NAV_FENCE_POLYGON_VERTEX_EXCLUSION{
+public struct param_1{
 public const string label = "Vertex Count";
 public const string increment = "1";
 public const string minValue = "3";
- public const string description = @"Polygon vertex count";
+ public const string description = @"Polygon vertex count. This is the number of vertices in the current polygon (all vertices will have the
+same number).";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"Reserved";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"Reserved";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"Reserved";
 
 }
-public class param_5{
+public struct param_5{
 public const string label = "Latitude";
  public const string description = @"Latitude";
 
 }
-public class param_6{
+public struct param_6{
 public const string label = "Longitude";
  public const string description = @"Longitude";
 
 }
-public class param_7{
+public struct param_7{
  public const string description = @"Reserved";
 
 }
 
  public const string description = @"Fence vertex for an exclusion polygon (the polygon must not be self-intersecting). The vehicle must stay
 outside this area. Minimum of 3 vertices required.
-        ";
+          The vertices for a polygon must be sent
+sequentially, each with param1 set to the total number of vertices in the polygon.";
 
 }
-class MAV_CMD_NAV_FENCE_CIRCLE_INCLUSION{
-public class param_1{
+struct MAV_CMD_NAV_FENCE_CIRCLE_INCLUSION{
+public struct param_1{
 public const string label = "Radius";
  public const string description = @"Radius.";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Inclusion Group";
 public const string increment = "1";
 public const string minValue = "0";
  public const string description = @"Vehicle must be inside ALL inclusion zones in a single group, vehicle must be inside at least one group";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"Reserved";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"Reserved";
 
 }
-public class param_5{
+public struct param_5{
 public const string label = "Latitude";
  public const string description = @"Latitude";
 
 }
-public class param_6{
+public struct param_6{
 public const string label = "Longitude";
  public const string description = @"Longitude";
 
 }
-public class param_7{
+public struct param_7{
  public const string description = @"Reserved";
 
 }
@@ -23738,35 +26582,35 @@ public class param_7{
         ";
 
 }
-class MAV_CMD_NAV_FENCE_CIRCLE_EXCLUSION{
-public class param_1{
+struct MAV_CMD_NAV_FENCE_CIRCLE_EXCLUSION{
+public struct param_1{
 public const string label = "Radius";
  public const string description = @"Radius.";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"Reserved";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"Reserved";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"Reserved";
 
 }
-public class param_5{
+public struct param_5{
 public const string label = "Latitude";
  public const string description = @"Latitude";
 
 }
-public class param_6{
+public struct param_6{
 public const string label = "Longitude";
  public const string description = @"Longitude";
 
 }
-public class param_7{
+public struct param_7{
  public const string description = @"Reserved";
 
 }
@@ -23775,34 +26619,34 @@ public class param_7{
         ";
 
 }
-class MAV_CMD_NAV_RALLY_POINT{
-public class param_1{
+struct MAV_CMD_NAV_RALLY_POINT{
+public struct param_1{
  public const string description = @"Reserved";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"Reserved";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"Reserved";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"Reserved";
 
 }
-public class param_5{
+public struct param_5{
 public const string label = "Latitude";
  public const string description = @"Latitude";
 
 }
-public class param_6{
+public struct param_6{
 public const string label = "Longitude";
  public const string description = @"Longitude";
 
 }
-public class param_7{
+public struct param_7{
 public const string label = "Altitude";
  public const string description = @"Altitude";
 
@@ -23812,32 +26656,32 @@ public const string label = "Altitude";
         ";
 
 }
-class MAV_CMD_UAVCAN_GET_NODE_INFO{
-public class param_1{
+struct MAV_CMD_UAVCAN_GET_NODE_INFO{
+public struct param_1{
  public const string description = @"Reserved (set to 0)";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"Reserved (set to 0)";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"Reserved (set to 0)";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"Reserved (set to 0)";
 
 }
-public class param_5{
+public struct param_5{
  public const string description = @"Reserved (set to 0)";
 
 }
-public class param_6{
+public struct param_6{
  public const string description = @"Reserved (set to 0)";
 
 }
-public class param_7{
+public struct param_7{
  public const string description = @"Reserved (set to 0)";
 
 }
@@ -23849,32 +26693,67 @@ received earlier; if not, this command should be sent again in order to request 
 node information messages.";
 
 }
-class MAV_CMD_DO_ADSB_OUT_IDENT{
-public class param_1{
+struct MAV_CMD_DO_SET_SAFETY_SWITCH_STATE{
+public struct param_1{
+public const string label = "Desired State";
+public const string Enum = "SAFETY_SWITCH_STATE";
+ public const string description = @"New safety switch state.";
+
+}
+public struct param_2{
+ public const string description = @"Empty.";
+
+}
+public struct param_3{
+ public const string description = @"Empty.";
+
+}
+public struct param_4{
+ public const string description = @"Empty";
+
+}
+public struct param_5{
+ public const string description = @"Empty.";
+
+}
+public struct param_6{
+ public const string description = @"Empty.";
+
+}
+public struct param_7{
+ public const string description = @"Empty.";
+
+}
+
+ public const string description = @"Change state of safety switch.";
+
+}
+struct MAV_CMD_DO_ADSB_OUT_IDENT{
+public struct param_1{
  public const string description = @"Reserved (set to 0)";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"Reserved (set to 0)";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"Reserved (set to 0)";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"Reserved (set to 0)";
 
 }
-public class param_5{
+public struct param_5{
  public const string description = @"Reserved (set to 0)";
 
 }
-public class param_6{
+public struct param_6{
  public const string description = @"Reserved (set to 0)";
 
 }
-public class param_7{
+public struct param_7{
  public const string description = @"Reserved (set to 0)";
 
 }
@@ -23884,8 +26763,8 @@ Controller in controlled airspace. This starts the IDENT which is then typically
 by the hardware per the Mode A, C, and S transponder spec.";
 
 }
-class MAV_CMD_PAYLOAD_PREPARE_DEPLOY{
-public class param_1{
+struct MAV_CMD_PAYLOAD_PREPARE_DEPLOY{
+public struct param_1{
 public const string label = "Operation Mode";
 public const string increment = "1";
 public const string minValue = "0";
@@ -23895,7 +26774,7 @@ public const string maxValue = "2";
 abort). 2: add payload deploy to existing deployment list.";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Approach Vector";
 public const string minValue = "-1";
 public const string maxValue = "360";
@@ -23903,31 +26782,31 @@ public const string maxValue = "360";
 vector at will.";
 
 }
-public class param_3{
+public struct param_3{
 public const string label = "Ground Speed";
 public const string minValue = "-1";
  public const string description = @"Desired ground speed at release time. This can be overridden by the airframe in case it needs to meet
 minimum airspeed. A negative value indicates the system can define the ground speed at will.";
 
 }
-public class param_4{
+public struct param_4{
 public const string label = "Altitude Clearance";
 public const string minValue = "-1";
  public const string description = @"Minimum altitude clearance to the release position. A negative value indicates the system can define the
 clearance at will.";
 
 }
-public class param_5{
+public struct param_5{
 public const string label = "Latitude";
- public const string description = @"Latitude. Note, if used in MISSION_ITEM (deprecated) the units are degrees (unscaled)";
+ public const string description = @"Latitude.";
 
 }
-public class param_6{
+public struct param_6{
 public const string label = "Longitude";
- public const string description = @"Longitude. Note, if used in MISSION_ITEM (deprecated) the units are degrees (unscaled)";
+ public const string description = @"Longitude.";
 
 }
-public class param_7{
+public struct param_7{
 public const string label = "Altitude";
  public const string description = @"Altitude (MSL)";
 
@@ -23937,8 +26816,8 @@ public const string label = "Altitude";
 position and velocity.";
 
 }
-class MAV_CMD_PAYLOAD_CONTROL_DEPLOY{
-public class param_1{
+struct MAV_CMD_PAYLOAD_CONTROL_DEPLOY{
+public struct param_1{
 public const string label = "Operation Mode";
 public const string increment = "1";
 public const string minValue = "0";
@@ -23947,27 +26826,27 @@ public const string maxValue = "101";
 delete first payload deployment request. 101: delete all payload deployment requests.";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"Reserved";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"Reserved";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"Reserved";
 
 }
-public class param_5{
+public struct param_5{
  public const string description = @"Reserved";
 
 }
-public class param_6{
+public struct param_6{
  public const string description = @"Reserved";
 
 }
-public class param_7{
+public struct param_7{
  public const string description = @"Reserved";
 
 }
@@ -23975,36 +26854,36 @@ public class param_7{
  public const string description = @"Control the payload deployment.";
 
 }
-class MAV_CMD_FIXED_MAG_CAL_YAW{
-public class param_1{
+struct MAV_CMD_FIXED_MAG_CAL_YAW{
+public struct param_1{
 public const string label = "Yaw";
  public const string description = @"Yaw of vehicle in earth frame.";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "CompassMask";
  public const string description = @"CompassMask, 0 for all.";
 
 }
-public class param_3{
+public struct param_3{
 public const string label = "Latitude";
  public const string description = @"Latitude.";
 
 }
-public class param_4{
+public struct param_4{
 public const string label = "Longitude";
  public const string description = @"Longitude.";
 
 }
-public class param_5{
+public struct param_5{
  public const string description = @"Empty.";
 
 }
-public class param_6{
+public struct param_6{
  public const string description = @"Empty.";
 
 }
-public class param_7{
+public struct param_7{
  public const string description = @"Empty.";
 
 }
@@ -24014,39 +26893,39 @@ tables in the vehicle, given only the known yaw of the vehicle. If Latitude and 
 then use the current vehicle location.";
 
 }
-class MAV_CMD_DO_WINCH{
-public class param_1{
+struct MAV_CMD_DO_WINCH{
+public struct param_1{
 public const string label = "Instance";
 public const string increment = "1";
 public const string minValue = "1";
  public const string description = @"Winch instance number.";
 
 }
-public class param_2{
+public struct param_2{
 public const string label = "Action";
 public const string Enum = "WINCH_ACTIONS";
  public const string description = @"Action to perform.";
 
 }
-public class param_3{
+public struct param_3{
 public const string label = "Length";
  public const string description = @"Length of line to release (negative to wind).";
 
 }
-public class param_4{
+public struct param_4{
 public const string label = "Rate";
  public const string description = @"Release rate (negative to wind).";
 
 }
-public class param_5{
+public struct param_5{
  public const string description = @"Empty.";
 
 }
-public class param_6{
+public struct param_6{
  public const string description = @"Empty.";
 
 }
-public class param_7{
+public struct param_7{
  public const string description = @"Empty.";
 
 }
@@ -24054,34 +26933,80 @@ public class param_7{
  public const string description = @"Command to operate winch.";
 
 }
-class MAV_CMD_WAYPOINT_USER_1{
-public class param_1{
+struct MAV_CMD_EXTERNAL_POSITION_ESTIMATE{
+public struct param_1{
+public const string label = "transmission_time";
+ public const string description = @"Timestamp that this message was sent as a time in the transmitters time domain. The sender should wrap
+this time back to zero based on required timing accuracy for the application and the limitations of a
+32 bit float. For example, wrapping at 10 hours would give approximately 1ms accuracy. Recipient must
+handle time wrap in any timing jitter correction applied to this field. Wrap rollover time should not
+be at not more than 250 seconds, which would give approximately 10 microsecond accuracy.";
+
+}
+public struct param_2{
+public const string label = "processing_time";
+ public const string description = @"The time spent in processing the sensor data that is the basis for this position. The recipient can use
+this to improve time alignment of the data. Set to zero if not known.";
+
+}
+public struct param_3{
+public const string label = "accuracy";
+ public const string description = @"estimated one standard deviation accuracy of the measurement. Set to NaN if not known.";
+
+}
+public struct param_4{
+ public const string description = @"Empty";
+
+}
+public struct param_5{
+public const string label = "Latitude";
+ public const string description = @"Latitude";
+
+}
+public struct param_6{
+public const string label = "Longitude";
+ public const string description = @"Longitude";
+
+}
+public struct param_7{
+public const string label = "Altitude";
+ public const string description = @"Altitude, not used. Should be sent as NaN. May be supported in a future version of this message.";
+
+}
+
+ public const string description = @"Provide an external position estimate for use when dead-reckoning. This is meant to be used for occasional
+position resets that may be provided by a external system such as a remote pilot using landmarks over
+a video link.";
+
+}
+struct MAV_CMD_WAYPOINT_USER_1{
+public struct param_1{
  public const string description = @"User defined";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"User defined";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"User defined";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"User defined";
 
 }
-public class param_5{
+public struct param_5{
 public const string label = "Latitude";
  public const string description = @"Latitude unscaled";
 
 }
-public class param_6{
+public struct param_6{
 public const string label = "Longitude";
  public const string description = @"Longitude unscaled";
 
 }
-public class param_7{
+public struct param_7{
 public const string label = "Altitude";
  public const string description = @"Altitude (MSL)";
 
@@ -24090,34 +27015,34 @@ public const string label = "Altitude";
  public const string description = @"User defined waypoint item. Ground Station will show the Vehicle as flying through this item.";
 
 }
-class MAV_CMD_WAYPOINT_USER_2{
-public class param_1{
+struct MAV_CMD_WAYPOINT_USER_2{
+public struct param_1{
  public const string description = @"User defined";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"User defined";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"User defined";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"User defined";
 
 }
-public class param_5{
+public struct param_5{
 public const string label = "Latitude";
  public const string description = @"Latitude unscaled";
 
 }
-public class param_6{
+public struct param_6{
 public const string label = "Longitude";
  public const string description = @"Longitude unscaled";
 
 }
-public class param_7{
+public struct param_7{
 public const string label = "Altitude";
  public const string description = @"Altitude (MSL)";
 
@@ -24126,34 +27051,34 @@ public const string label = "Altitude";
  public const string description = @"User defined waypoint item. Ground Station will show the Vehicle as flying through this item.";
 
 }
-class MAV_CMD_WAYPOINT_USER_3{
-public class param_1{
+struct MAV_CMD_WAYPOINT_USER_3{
+public struct param_1{
  public const string description = @"User defined";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"User defined";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"User defined";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"User defined";
 
 }
-public class param_5{
+public struct param_5{
 public const string label = "Latitude";
  public const string description = @"Latitude unscaled";
 
 }
-public class param_6{
+public struct param_6{
 public const string label = "Longitude";
  public const string description = @"Longitude unscaled";
 
 }
-public class param_7{
+public struct param_7{
 public const string label = "Altitude";
  public const string description = @"Altitude (MSL)";
 
@@ -24162,34 +27087,34 @@ public const string label = "Altitude";
  public const string description = @"User defined waypoint item. Ground Station will show the Vehicle as flying through this item.";
 
 }
-class MAV_CMD_WAYPOINT_USER_4{
-public class param_1{
+struct MAV_CMD_WAYPOINT_USER_4{
+public struct param_1{
  public const string description = @"User defined";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"User defined";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"User defined";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"User defined";
 
 }
-public class param_5{
+public struct param_5{
 public const string label = "Latitude";
  public const string description = @"Latitude unscaled";
 
 }
-public class param_6{
+public struct param_6{
 public const string label = "Longitude";
  public const string description = @"Longitude unscaled";
 
 }
-public class param_7{
+public struct param_7{
 public const string label = "Altitude";
  public const string description = @"Altitude (MSL)";
 
@@ -24198,34 +27123,34 @@ public const string label = "Altitude";
  public const string description = @"User defined waypoint item. Ground Station will show the Vehicle as flying through this item.";
 
 }
-class MAV_CMD_WAYPOINT_USER_5{
-public class param_1{
+struct MAV_CMD_WAYPOINT_USER_5{
+public struct param_1{
  public const string description = @"User defined";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"User defined";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"User defined";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"User defined";
 
 }
-public class param_5{
+public struct param_5{
 public const string label = "Latitude";
  public const string description = @"Latitude unscaled";
 
 }
-public class param_6{
+public struct param_6{
 public const string label = "Longitude";
  public const string description = @"Longitude unscaled";
 
 }
-public class param_7{
+public struct param_7{
 public const string label = "Altitude";
  public const string description = @"Altitude (MSL)";
 
@@ -24234,34 +27159,34 @@ public const string label = "Altitude";
  public const string description = @"User defined waypoint item. Ground Station will show the Vehicle as flying through this item.";
 
 }
-class MAV_CMD_SPATIAL_USER_1{
-public class param_1{
+struct MAV_CMD_SPATIAL_USER_1{
+public struct param_1{
  public const string description = @"User defined";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"User defined";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"User defined";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"User defined";
 
 }
-public class param_5{
+public struct param_5{
 public const string label = "Latitude";
  public const string description = @"Latitude unscaled";
 
 }
-public class param_6{
+public struct param_6{
 public const string label = "Longitude";
  public const string description = @"Longitude unscaled";
 
 }
-public class param_7{
+public struct param_7{
 public const string label = "Altitude";
  public const string description = @"Altitude (MSL)";
 
@@ -24271,34 +27196,34 @@ public const string label = "Altitude";
 ROI item.";
 
 }
-class MAV_CMD_SPATIAL_USER_2{
-public class param_1{
+struct MAV_CMD_SPATIAL_USER_2{
+public struct param_1{
  public const string description = @"User defined";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"User defined";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"User defined";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"User defined";
 
 }
-public class param_5{
+public struct param_5{
 public const string label = "Latitude";
  public const string description = @"Latitude unscaled";
 
 }
-public class param_6{
+public struct param_6{
 public const string label = "Longitude";
  public const string description = @"Longitude unscaled";
 
 }
-public class param_7{
+public struct param_7{
 public const string label = "Altitude";
  public const string description = @"Altitude (MSL)";
 
@@ -24308,34 +27233,34 @@ public const string label = "Altitude";
 ROI item.";
 
 }
-class MAV_CMD_SPATIAL_USER_3{
-public class param_1{
+struct MAV_CMD_SPATIAL_USER_3{
+public struct param_1{
  public const string description = @"User defined";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"User defined";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"User defined";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"User defined";
 
 }
-public class param_5{
+public struct param_5{
 public const string label = "Latitude";
  public const string description = @"Latitude unscaled";
 
 }
-public class param_6{
+public struct param_6{
 public const string label = "Longitude";
  public const string description = @"Longitude unscaled";
 
 }
-public class param_7{
+public struct param_7{
 public const string label = "Altitude";
  public const string description = @"Altitude (MSL)";
 
@@ -24345,34 +27270,34 @@ public const string label = "Altitude";
 ROI item.";
 
 }
-class MAV_CMD_SPATIAL_USER_4{
-public class param_1{
+struct MAV_CMD_SPATIAL_USER_4{
+public struct param_1{
  public const string description = @"User defined";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"User defined";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"User defined";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"User defined";
 
 }
-public class param_5{
+public struct param_5{
 public const string label = "Latitude";
  public const string description = @"Latitude unscaled";
 
 }
-public class param_6{
+public struct param_6{
 public const string label = "Longitude";
  public const string description = @"Longitude unscaled";
 
 }
-public class param_7{
+public struct param_7{
 public const string label = "Altitude";
  public const string description = @"Altitude (MSL)";
 
@@ -24382,34 +27307,34 @@ public const string label = "Altitude";
 ROI item.";
 
 }
-class MAV_CMD_SPATIAL_USER_5{
-public class param_1{
+struct MAV_CMD_SPATIAL_USER_5{
+public struct param_1{
  public const string description = @"User defined";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"User defined";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"User defined";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"User defined";
 
 }
-public class param_5{
+public struct param_5{
 public const string label = "Latitude";
  public const string description = @"Latitude unscaled";
 
 }
-public class param_6{
+public struct param_6{
 public const string label = "Longitude";
  public const string description = @"Longitude unscaled";
 
 }
-public class param_7{
+public struct param_7{
 public const string label = "Altitude";
  public const string description = @"Altitude (MSL)";
 
@@ -24419,66 +27344,32 @@ public const string label = "Altitude";
 ROI item.";
 
 }
-class MAV_CMD_USER_1{
-public class param_1{
+struct MAV_CMD_USER_1{
+public struct param_1{
  public const string description = @"User defined";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"User defined";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"User defined";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"User defined";
 
 }
-public class param_5{
+public struct param_5{
  public const string description = @"User defined";
 
 }
-public class param_6{
+public struct param_6{
  public const string description = @"User defined";
 
 }
-public class param_7{
- public const string description = @"User defined";
-
-}
-
- public const string description = @"User defined command. Ground Station will not show the Vehicle as flying through this item. Example: MAV_CMD_DO_SET_PARAMETER
-item.";
-
-}
-class MAV_CMD_USER_2{
-public class param_1{
- public const string description = @"User defined";
-
-}
-public class param_2{
- public const string description = @"User defined";
-
-}
-public class param_3{
- public const string description = @"User defined";
-
-}
-public class param_4{
- public const string description = @"User defined";
-
-}
-public class param_5{
- public const string description = @"User defined";
-
-}
-public class param_6{
- public const string description = @"User defined";
-
-}
-public class param_7{
+public struct param_7{
  public const string description = @"User defined";
 
 }
@@ -24487,66 +27378,32 @@ public class param_7{
 item.";
 
 }
-class MAV_CMD_USER_3{
-public class param_1{
+struct MAV_CMD_USER_2{
+public struct param_1{
  public const string description = @"User defined";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"User defined";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"User defined";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"User defined";
 
 }
-public class param_5{
+public struct param_5{
  public const string description = @"User defined";
 
 }
-public class param_6{
+public struct param_6{
  public const string description = @"User defined";
 
 }
-public class param_7{
- public const string description = @"User defined";
-
-}
-
- public const string description = @"User defined command. Ground Station will not show the Vehicle as flying through this item. Example: MAV_CMD_DO_SET_PARAMETER
-item.";
-
-}
-class MAV_CMD_USER_4{
-public class param_1{
- public const string description = @"User defined";
-
-}
-public class param_2{
- public const string description = @"User defined";
-
-}
-public class param_3{
- public const string description = @"User defined";
-
-}
-public class param_4{
- public const string description = @"User defined";
-
-}
-public class param_5{
- public const string description = @"User defined";
-
-}
-public class param_6{
- public const string description = @"User defined";
-
-}
-public class param_7{
+public struct param_7{
  public const string description = @"User defined";
 
 }
@@ -24555,32 +27412,32 @@ public class param_7{
 item.";
 
 }
-class MAV_CMD_USER_5{
-public class param_1{
+struct MAV_CMD_USER_3{
+public struct param_1{
  public const string description = @"User defined";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"User defined";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"User defined";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"User defined";
 
 }
-public class param_5{
+public struct param_5{
  public const string description = @"User defined";
 
 }
-public class param_6{
+public struct param_6{
  public const string description = @"User defined";
 
 }
-public class param_7{
+public struct param_7{
  public const string description = @"User defined";
 
 }
@@ -24589,68 +27446,136 @@ public class param_7{
 item.";
 
 }
-class MAV_CMD_CAN_FORWARD{
-public class param_1{
+struct MAV_CMD_USER_4{
+public struct param_1{
+ public const string description = @"User defined";
+
+}
+public struct param_2{
+ public const string description = @"User defined";
+
+}
+public struct param_3{
+ public const string description = @"User defined";
+
+}
+public struct param_4{
+ public const string description = @"User defined";
+
+}
+public struct param_5{
+ public const string description = @"User defined";
+
+}
+public struct param_6{
+ public const string description = @"User defined";
+
+}
+public struct param_7{
+ public const string description = @"User defined";
+
+}
+
+ public const string description = @"User defined command. Ground Station will not show the Vehicle as flying through this item. Example: MAV_CMD_DO_SET_PARAMETER
+item.";
+
+}
+struct MAV_CMD_USER_5{
+public struct param_1{
+ public const string description = @"User defined";
+
+}
+public struct param_2{
+ public const string description = @"User defined";
+
+}
+public struct param_3{
+ public const string description = @"User defined";
+
+}
+public struct param_4{
+ public const string description = @"User defined";
+
+}
+public struct param_5{
+ public const string description = @"User defined";
+
+}
+public struct param_6{
+ public const string description = @"User defined";
+
+}
+public struct param_7{
+ public const string description = @"User defined";
+
+}
+
+ public const string description = @"User defined command. Ground Station will not show the Vehicle as flying through this item. Example: MAV_CMD_DO_SET_PARAMETER
+item.";
+
+}
+struct MAV_CMD_CAN_FORWARD{
+public struct param_1{
 public const string label = "bus";
  public const string description = @"Bus number (0 to disable forwarding, 1 for first bus, 2 for 2nd bus, 3 for 3rd bus).";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"Empty.";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"Empty.";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"Empty.";
 
 }
-public class param_5{
+public struct param_5{
  public const string description = @"Empty.";
 
 }
-public class param_6{
+public struct param_6{
  public const string description = @"Empty.";
 
 }
-public class param_7{
+public struct param_7{
  public const string description = @"Empty.";
 
 }
 
- public const string description = @"Request forwarding of CAN packets from the given CAN bus to this component. CAN Frames are sent using
-CAN_FRAME and CANFD_FRAME messages";
+ public const string description = @"Request forwarding of CAN packets from the given CAN bus to this component via this MAVLink channel. CAN
+Frames are sent using CAN_FRAME and CANFD_FRAME messages";
 
 }
-class MAV_CMD_PRS_SET_ARM{
-public class param_1{
+struct MAV_CMD_PRS_SET_ARM{
+public struct param_1{
 public const string label = "ARM status";
  public const string description = @"PRS arm statuses";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"User defined";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"User defined";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"User defined";
 
 }
-public class param_5{
+public struct param_5{
  public const string description = @"User defined";
 
 }
-public class param_6{
+public struct param_6{
  public const string description = @"User defined";
 
 }
-public class param_7{
+public struct param_7{
  public const string description = @"User defined";
 
 }
@@ -24658,32 +27583,32 @@ public class param_7{
  public const string description = @"AVSS defined command. Set PRS arm statuses.";
 
 }
-class MAV_CMD_PRS_GET_ARM{
-public class param_1{
+struct MAV_CMD_PRS_GET_ARM{
+public struct param_1{
  public const string description = @"User defined";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"User defined";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"User defined";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"User defined";
 
 }
-public class param_5{
+public struct param_5{
  public const string description = @"User defined";
 
 }
-public class param_6{
+public struct param_6{
  public const string description = @"User defined";
 
 }
-public class param_7{
+public struct param_7{
  public const string description = @"User defined";
 
 }
@@ -24691,32 +27616,32 @@ public class param_7{
  public const string description = @"AVSS defined command. Gets PRS arm statuses";
 
 }
-class MAV_CMD_PRS_GET_BATTERY{
-public class param_1{
+struct MAV_CMD_PRS_GET_BATTERY{
+public struct param_1{
  public const string description = @"User defined";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"User defined";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"User defined";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"User defined";
 
 }
-public class param_5{
+public struct param_5{
  public const string description = @"User defined";
 
 }
-public class param_6{
+public struct param_6{
  public const string description = @"User defined";
 
 }
-public class param_7{
+public struct param_7{
  public const string description = @"User defined";
 
 }
@@ -24724,32 +27649,32 @@ public class param_7{
  public const string description = @"AVSS defined command.  Get the PRS battery voltage in millivolts";
 
 }
-class MAV_CMD_PRS_GET_ERR{
-public class param_1{
+struct MAV_CMD_PRS_GET_ERR{
+public struct param_1{
  public const string description = @"User defined";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"User defined";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"User defined";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"User defined";
 
 }
-public class param_5{
+public struct param_5{
  public const string description = @"User defined";
 
 }
-public class param_6{
+public struct param_6{
  public const string description = @"User defined";
 
 }
-public class param_7{
+public struct param_7{
  public const string description = @"User defined";
 
 }
@@ -24757,33 +27682,33 @@ public class param_7{
  public const string description = @"AVSS defined command. Get the PRS error statuses.";
 
 }
-class MAV_CMD_PRS_SET_ARM_ALTI{
-public class param_1{
+struct MAV_CMD_PRS_SET_ARM_ALTI{
+public struct param_1{
 public const string label = "Altitude";
  public const string description = @"ATS arming altitude";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"User defined";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"User defined";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"User defined";
 
 }
-public class param_5{
+public struct param_5{
  public const string description = @"User defined";
 
 }
-public class param_6{
+public struct param_6{
  public const string description = @"User defined";
 
 }
-public class param_7{
+public struct param_7{
  public const string description = @"User defined";
 
 }
@@ -24791,32 +27716,32 @@ public class param_7{
  public const string description = @"AVSS defined command. Set the ATS arming altitude in meters.";
 
 }
-class MAV_CMD_PRS_GET_ARM_ALTI{
-public class param_1{
+struct MAV_CMD_PRS_GET_ARM_ALTI{
+public struct param_1{
  public const string description = @"User defined";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"User defined";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"User defined";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"User defined";
 
 }
-public class param_5{
+public struct param_5{
  public const string description = @"User defined";
 
 }
-public class param_6{
+public struct param_6{
  public const string description = @"User defined";
 
 }
-public class param_7{
+public struct param_7{
  public const string description = @"User defined";
 
 }
@@ -24824,32 +27749,32 @@ public class param_7{
  public const string description = @"AVSS defined command. Get the ATS arming altitude in meters.";
 
 }
-class MAV_CMD_PRS_SHUTDOWN{
-public class param_1{
+struct MAV_CMD_PRS_SHUTDOWN{
+public struct param_1{
  public const string description = @"User defined";
 
 }
-public class param_2{
+public struct param_2{
  public const string description = @"User defined";
 
 }
-public class param_3{
+public struct param_3{
  public const string description = @"User defined";
 
 }
-public class param_4{
+public struct param_4{
  public const string description = @"User defined";
 
 }
-public class param_5{
+public struct param_5{
  public const string description = @"User defined";
 
 }
-public class param_6{
+public struct param_6{
  public const string description = @"User defined";
 
 }
-public class param_7{
+public struct param_7{
  public const string description = @"User defined";
 
 }
@@ -24859,250 +27784,29 @@ public class param_7{
 }
 
 }
-       /**
-       <see cref = 'InTS'/>
-       <see cref = 'InJAVA'/>
-       <see cref = 'InCS'/>
-       <see cref = 'InCPP'/>
-       <see cref = 'InGO'/>
-       <see cref = 'InRS'/>
-       */
-       struct GroundControl : Host{
-           public interface ToMicroAirVehicle :_<ACTUATOR_CONTROL_TARGET>,
-                                               _<ACTUATOR_OUTPUT_STATUS>,
-                                               _<ADSB_VEHICLE>,
-                                               _<AIS_VESSEL>,
-                                               _<ALTITUDE>,
-                                               _<ATTITUDE>,
-                                               _<ATTITUDE_QUATERNION>,
-                                               _<ATTITUDE_QUATERNION_COV>,
-                                               _<ATTITUDE_TARGET>,
-                                               _<ATT_POS_MOCAP>,
-                                               _<AUTH_KEY>,
-                                               _<AUTOPILOT_STATE_FOR_GIMBAL_DEVICE>,
-                                               _<AUTOPILOT_VERSION>,
-                                               _<AVSS_DRONE_IMU>,
-                                               _<AVSS_DRONE_OPERATION_MODE>,
-                                               _<AVSS_DRONE_POSITION>,
-                                               _<AVSS_PRS_SYS_STATUS>,
-                                               _<BATTERY_STATUS>,
-                                               _<BUTTON_CHANGE>,
-                                               _<CAMERA_CAPTURE_STATUS>,
-                                               _<CAMERA_FOV_STATUS>,
-                                               _<CAMERA_IMAGE_CAPTURED>,
-                                               _<CAMERA_INFORMATION>,
-                                               _<CAMERA_SETTINGS>,
-                                               _<CAMERA_TRACKING_GEO_STATUS>,
-                                               _<CAMERA_TRACKING_IMAGE_STATUS>,
-                                               _<CAMERA_TRIGGER>,
-                                               _<CANFD_FRAME>,
-                                               _<CAN_FILTER_MODIFY>,
-                                               _<CAN_FRAME>,
-                                               _<CELLULAR_CONFIG>,
-                                               _<CELLULAR_STATUS>,
-                                               _<CHANGE_OPERATOR_CONTROL>,
-                                               _<CHANGE_OPERATOR_CONTROL_ACK>,
-                                               _<COLLISION>,
-                                               _<COMMAND_ACK>,
-                                               _<COMMAND_CANCEL>,
-                                               _<COMMAND_INT>,
-                                               _<COMMAND_LONG>,
-                                               _<COMPONENT_INFORMATION>,
-                                               _<CONTROL_SYSTEM_STATE>,
-                                               _<CURRENT_EVENT_SEQUENCE>,
-                                               _<DATA_STREAM>,
-                                               _<DATA_TRANSMISSION_HANDSHAKE>,
-                                               _<DEBUG>,
-                                               _<DEBUG_FLOAT_ARRAY>,
-                                               _<DEBUG_VECT>,
-                                               _<DISTANCE_SENSOR>,
-                                               _<EFI_STATUS>,
-                                               _<ENCAPSULATED_DATA>,
-                                               _<ESC_INFO>,
-                                               _<ESC_STATUS>,
-                                               _<ESTIMATOR_STATUS>,
-                                               _<EVENT>,
-                                               _<EXTENDED_SYS_STATE>,
-                                               _<FENCE_STATUS>,
-                                               _<FILE_TRANSFER_PROTOCOL>,
-                                               _<FLIGHT_INFORMATION>,
-                                               _<FOLLOW_TARGET>,
-                                               _<GENERATOR_STATUS>,
-                                               _<GIMBAL_DEVICE_ATTITUDE_STATUS>,
-                                               _<GIMBAL_DEVICE_INFORMATION>,
-                                               _<GIMBAL_DEVICE_SET_ATTITUDE>,
-                                               _<GIMBAL_MANAGER_INFORMATION>,
-                                               _<GIMBAL_MANAGER_SET_ATTITUDE>,
-                                               _<GIMBAL_MANAGER_SET_MANUAL_CONTROL>,
-                                               _<GIMBAL_MANAGER_SET_PITCHYAW>,
-                                               _<GIMBAL_MANAGER_STATUS>,
-                                               _<GLOBAL_POSITION_INT>,
-                                               _<GLOBAL_POSITION_INT_COV>,
-                                               _<GLOBAL_VISION_POSITION_ESTIMATE>,
-                                               _<GPS2_RAW>,
-                                               _<GPS2_RTK>,
-                                               _<GPS_GLOBAL_ORIGIN>,
-                                               _<GPS_INJECT_DATA>,
-                                               _<GPS_INPUT>,
-                                               _<GPS_RAW_INT>,
-                                               _<GPS_RTCM_DATA>,
-                                               _<GPS_RTK>,
-                                               _<GPS_STATUS>,
-                                               _<HEARTBEAT>,
-                                               _<HIGHRES_IMU>,
-                                               _<HIGH_LATENCY2>,
-                                               _<HIGH_LATENCY>,
-                                               _<HIL_ACTUATOR_CONTROLS>,
-                                               _<HIL_CONTROLS>,
-                                               _<HIL_GPS>,
-                                               _<HIL_OPTICAL_FLOW>,
-                                               _<HIL_RC_INPUTS_RAW>,
-                                               _<HIL_SENSOR>,
-                                               _<HIL_STATE>,
-                                               _<HIL_STATE_QUATERNION>,
-                                               _<HOME_POSITION>,
-                                               _<HYGROMETER_SENSOR>,
-                                               _<ISBD_LINK_STATUS>,
-                                               _<LANDING_TARGET>,
-                                               _<LINK_NODE_STATUS>,
-                                               _<LOCAL_POSITION_NED>,
-                                               _<LOCAL_POSITION_NED_COV>,
-                                               _<LOCAL_POSITION_NED_SYSTEM_GLOBAL_OFFSET>,
-                                               _<LOGGING_ACK>,
-                                               _<LOGGING_DATA>,
-                                               _<LOGGING_DATA_ACKED>,
-                                               _<LOG_DATA>,
-                                               _<LOG_ENTRY>,
-                                               _<LOG_ERASE>,
-                                               _<LOG_REQUEST_DATA>,
-                                               _<LOG_REQUEST_END>,
-                                               _<LOG_REQUEST_LIST>,
-                                               _<MAG_CAL_REPORT>,
-                                               _<MANUAL_CONTROL>,
-                                               _<MANUAL_SETPOINT>,
-                                               _<MEMORY_VECT>,
-                                               _<MESSAGE_INTERVAL>,
-                                               _<MISSION_ACK>,
-                                               _<MISSION_CLEAR_ALL>,
-                                               _<MISSION_COUNT>,
-                                               _<MISSION_CURRENT>,
-                                               _<MISSION_ITEM>,
-                                               _<MISSION_ITEM_INT>,
-                                               _<MISSION_ITEM_REACHED>,
-                                               _<MISSION_REQUEST>,
-                                               _<MISSION_REQUEST_INT>,
-                                               _<MISSION_REQUEST_LIST>,
-                                               _<MISSION_REQUEST_PARTIAL_LIST>,
-                                               _<MISSION_SET_CURRENT>,
-                                               _<MISSION_WRITE_PARTIAL_LIST>,
-                                               _<MOUNT_ORIENTATION>,
-                                               _<NAMED_VALUE_FLOAT>,
-                                               _<NAMED_VALUE_INT>,
-                                               _<NAV_CONTROLLER_OUTPUT>,
-                                               _<OBSTACLE_DISTANCE>,
-                                               _<ODOMETRY>,
-                                               _<ONBOARD_COMPUTER_STATUS>,
-                                               _<OPEN_DRONE_ID_AUTHENTICATION>,
-                                               _<OPEN_DRONE_ID_BASIC_ID>,
-                                               _<OPEN_DRONE_ID_LOCATION>,
-                                               _<OPEN_DRONE_ID_MESSAGE_PACK>,
-                                               _<OPEN_DRONE_ID_OPERATOR_ID>,
-                                               _<OPEN_DRONE_ID_SELF_ID>,
-                                               _<OPEN_DRONE_ID_SYSTEM>,
-                                               _<OPTICAL_FLOW>,
-                                               _<OPTICAL_FLOW_RAD>,
-                                               _<ORBIT_EXECUTION_STATUS>,
-                                               _<PARAM_EXT_ACK>,
-                                               _<PARAM_EXT_REQUEST_LIST>,
-                                               _<PARAM_EXT_REQUEST_READ>,
-                                               _<PARAM_EXT_SET>,
-                                               _<PARAM_EXT_VALUE>,
-                                               _<PARAM_MAP_RC>,
-                                               _<PARAM_REQUEST_LIST>,
-                                               _<PARAM_REQUEST_READ>,
-                                               _<PARAM_SET>,
-                                               _<PARAM_VALUE>,
-                                               _<PING>,
-                                               _<PLAY_TUNE>,
-                                               _<PLAY_TUNE_V2>,
-                                               _<POSITION_TARGET_GLOBAL_INT>,
-                                               _<POSITION_TARGET_LOCAL_NED>,
-                                               _<POWER_STATUS>,
-                                               _<PROTOCOL_VERSION>,
-                                               _<RADIO_STATUS>,
-                                               _<RAW_IMU>,
-                                               _<RAW_PRESSURE>,
-                                               _<RAW_RPM>,
-                                               _<RC_CHANNELS>,
-                                               _<RC_CHANNELS_OVERRIDE>,
-                                               _<RC_CHANNELS_RAW>,
-                                               _<RC_CHANNELS_SCALED>,
-                                               _<REQUEST_DATA_STREAM>,
-                                               _<REQUEST_EVENT>,
-                                               _<RESOURCE_REQUEST>,
-                                               _<RESPONSE_EVENT_ERROR>,
-                                               _<SAFETY_ALLOWED_AREA>,
-                                               _<SAFETY_SET_ALLOWED_AREA>,
-                                               _<SCALED_IMU2>,
-                                               _<SCALED_IMU3>,
-                                               _<SCALED_IMU>,
-                                               _<SCALED_PRESSURE2>,
-                                               _<SCALED_PRESSURE3>,
-                                               _<SCALED_PRESSURE>,
-                                               _<SERIAL_CONTROL>,
-                                               _<SERVO_OUTPUT_RAW>,
-                                               _<SETUP_SIGNING>,
-                                               _<SET_ACTUATOR_CONTROL_TARGET>,
-                                               _<SET_ATTITUDE_TARGET>,
-                                               _<SET_GPS_GLOBAL_ORIGIN>,
-                                               _<SET_HOME_POSITION>,
-                                               _<SET_MODE>,
-                                               _<SET_POSITION_TARGET_GLOBAL_INT>,
-                                               _<SET_POSITION_TARGET_LOCAL_NED>,
-                                               _<SIM_STATE>,
-                                               _<SMART_BATTERY_INFO>,
-                                               _<STATUSTEXT>,
-                                               _<STORAGE_INFORMATION>,
-                                               _<SUPPORTED_TUNES>,
-                                               _<SYSTEM_TIME>,
-                                               _<SYS_STATUS>,
-                                               _<TERRAIN_CHECK>,
-                                               _<TERRAIN_DATA>,
-                                               _<TERRAIN_REPORT>,
-                                               _<TERRAIN_REQUEST>,
-                                               _<TIMESYNC>,
-                                               _<TIME_ESTIMATE_TO_TARGET>,
-                                               _<TRAJECTORY_REPRESENTATION_BEZIER>,
-                                               _<TRAJECTORY_REPRESENTATION_WAYPOINTS>,
-                                               _<TUNNEL>,
-                                               _<UAVCAN_NODE_INFO>,
-                                               _<UAVCAN_NODE_STATUS>,
-                                               _<UTM_GLOBAL_POSITION>,
-                                               _<V2_EXTENSION>,
-                                               _<VFR_HUD>,
-                                               _<VIBRATION>,
-                                               _<VICON_POSITION_ESTIMATE>,
-                                               _<VIDEO_STREAM_INFORMATION>,
-                                               _<VIDEO_STREAM_STATUS>,
-                                               _<VISION_POSITION_ESTIMATE>,
-                                               _<VISION_SPEED_ESTIMATE>,
-                                               _<WHEEL_DISTANCE>,
-                                               _<WIFI_CONFIG_AP>,
-                                               _<WINCH_STATUS>,
-                                               _<WIND_COV>           {}
-}
-       /**
-       <see cref = 'InTS'/>
-       <see cref = 'InJAVA'/>
-       <see cref = 'InCS'/>
-       <see cref = 'InCPP'/>
-       <see cref = 'InGO'/>
-       <see cref = 'InRS'/>
-       */
-       struct MicroAirVehicle : Host {
-           public interface ToGroundControl : GroundControl.ToMicroAirVehicle  {}
-       }
-		interface CommunicationChannel : Communication_Channel_Of <GroundControl.ToMicroAirVehicle, MicroAirVehicle.ToGroundControl > {}
+        /**
+        <see cref = 'InTS'/>
+        <see cref = 'InJAVA'/>
+        <see cref = 'InCS'/>
+        <see cref = 'InCPP'/>
+        <see cref = 'InGO'/>
+        <see cref = 'InRS'/>
+        */
+        struct GroundControl : Host { }
+        /**
+        <see cref = 'InTS'/>
+        <see cref = 'InJAVA'/>
+        <see cref = 'InCS'/>
+        <see cref = 'InCPP'/>
+        <see cref = 'InGO'/>
+        <see cref = 'InRS'/>
+        */
+        struct MicroAirVehicle : Host { }
 
-}
+        // Either side can send any MAVLink message — non-transitional, no Master.
+        interface CommunicationChannel : Connects<GroundControl, MicroAirVehicle> {
+            [_____lr_____<@AVSSUAS>]
+            struct Start { }
+        }
+    }
 }

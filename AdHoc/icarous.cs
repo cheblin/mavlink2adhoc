@@ -1,8 +1,15 @@
 using System;
 using org.unirail.Meta;
- namespace org.mavlink {
-public interface icarous{
- enum ICAROUS_TRACK_BAND_TYPES{
+
+namespace org.mavlink {
+
+    /**
+        <see cref = 'ICAROUS_HEARTBEAT' id = '42000'/>
+        <see cref = 'ICAROUS_KINEMATIC_BANDS' id = '42001'/>
+    */
+    public interface icarous {
+[Flags]
+enum ICAROUS_TRACK_BAND_TYPES{
 ICAROUS_TRACK_BAND_TYPE_NONE = 0, 
 ICAROUS_TRACK_BAND_TYPE_NEAR = 1, 
 ICAROUS_TRACK_BAND_TYPE_RECOVERY = 2, 
@@ -248,30 +255,29 @@ struct SI_Unit
         {
             const string cm_3 = "cm^3"; // cubic centimetres
         }
-    }       /**
-       <see cref = 'InTS'/>
-       <see cref = 'InJAVA'/>
-       <see cref = 'InCS'/>
-       <see cref = 'InCPP'/>
-       <see cref = 'InGO'/>
-       <see cref = 'InRS'/>
-       */
-       struct GroundControl : Host{
-           public interface ToMicroAirVehicle :_<ICAROUS_HEARTBEAT>,
-                                               _<ICAROUS_KINEMATIC_BANDS>           {}
-}
-       /**
-       <see cref = 'InTS'/>
-       <see cref = 'InJAVA'/>
-       <see cref = 'InCS'/>
-       <see cref = 'InCPP'/>
-       <see cref = 'InGO'/>
-       <see cref = 'InRS'/>
-       */
-       struct MicroAirVehicle : Host {
-           public interface ToGroundControl : GroundControl.ToMicroAirVehicle  {}
-       }
-		interface CommunicationChannel : Communication_Channel_Of <GroundControl.ToMicroAirVehicle, MicroAirVehicle.ToGroundControl > {}
+    }        /**
+        <see cref = 'InTS'/>
+        <see cref = 'InJAVA'/>
+        <see cref = 'InCS'/>
+        <see cref = 'InCPP'/>
+        <see cref = 'InGO'/>
+        <see cref = 'InRS'/>
+        */
+        struct GroundControl : Host { }
+        /**
+        <see cref = 'InTS'/>
+        <see cref = 'InJAVA'/>
+        <see cref = 'InCS'/>
+        <see cref = 'InCPP'/>
+        <see cref = 'InGO'/>
+        <see cref = 'InRS'/>
+        */
+        struct MicroAirVehicle : Host { }
 
-}
+        // Either side can send any MAVLink message — non-transitional, no Master.
+        interface CommunicationChannel : Connects<GroundControl, MicroAirVehicle> {
+            [_____lr_____<@icarous>]
+            struct Start { }
+        }
+    }
 }
